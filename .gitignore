@@ -1,2 +1,8 @@
 *.out
-*.o
+*.*o
+bitmanip_masks
+hello
+my_program
+pointers_arrays
+repl
+structs_unions
