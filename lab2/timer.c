@@ -3,6 +3,10 @@
 #include <lcom/timer.h>
 #include <stdint.h>
 
+
+extern int32_t timer_subscription_id;
+extern uint32_t num_interrupts;
+
 int(timer_set_frequency)(uint8_t timer, uint32_t freq) {
   uint8_t old_config;
   if (timer_get_conf(timer, &old_config))
@@ -61,22 +65,17 @@ int(timer_set_frequency)(uint8_t timer, uint32_t freq) {
 }
 
 int(timer_subscribe_int)(uint8_t *bit_no) {
-  /* To be implemented by the students */
-  printf("%s is not yet implemented!\n", __func__);
-
-  return 1;
+  if (!bit_no) return 1;
+  *bit_no = BIT(timer_subscription_id);
+  return sys_irqsetpolicy(TIMER0_IRQ, IRQ_REENABLE, &timer_subscription_id);
 }
 
 int(timer_unsubscribe_int)() {
-  /* To be implemented by the students */
-  printf("%s is not yet implemented!\n", __func__);
-
-  return 1;
+  return sys_irqrmpolicy(&timer_subscription_id);
 }
 
 void(timer_int_handler)() {
-  /* To be implemented by the students */
-  printf("%s is not yet implemented!\n", __func__);
+  num_interrupts++;
 }
 
 int(timer_get_conf)(uint8_t timer, uint8_t *st) {
