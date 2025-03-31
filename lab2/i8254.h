@@ -23,6 +23,8 @@
 
 /* Timer control */
 
+#define TIMER_COUNTING_MODE 0x7
+
 /* Timer selection: bits 7 and 6 */
 
 #define TIMER_SEL0   0x00              /**< @brief Control Word for Timer 0 */
@@ -43,14 +45,15 @@
 
 /* Counting mode: bit 0 */
 
-#define TIMER_BCD 0x01 /**< @brief Count in BCD */
-#define TIMER_BIN 0x00 /**< @brief Count in binary */
+#define TIMER_BCD 0x1 /**< @brief Count in BCD */
+#define TIMER_BIN 0x0 /**< @brief Count in binary */
 
 /* READ-BACK COMMAND FORMAT */
 
 #define TIMER_RB_COUNT_  BIT(5)
 #define TIMER_RB_STATUS_ BIT(4)
 #define TIMER_RB_SEL(n)  BIT((n) + 1)
+#define TIMER_RB_COMMAND (BIT(6) | BIT(7))
 
 /**@}*/
 

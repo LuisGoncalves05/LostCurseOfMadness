@@ -1,6 +1,8 @@
 #include <lcom/lcf.h>
 #include <stdint.h>
 
+uint32_t sys_inb_counter = 0;
+
 int(util_get_LSB)(uint16_t val, uint8_t *lsb) {
   if (!lsb)
     return 1;
@@ -16,7 +18,10 @@ int(util_get_MSB)(uint16_t val, uint8_t *msb) {
 }
 
 int(util_sys_inb)(int port, uint8_t *value) {
-  u32_t val;
+  #ifdef LAB3
+  sys_inb_counter++;
+  #endif
+  uint32_t val;
   int ret = sys_inb(port, &val);
   *value = val & 0xFF;
   return ret;

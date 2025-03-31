@@ -3,8 +3,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-int32_t timer_subscription_id = 0;
-uint32_t num_interrupts = 0;
+extern uint32_t interrupt_counter;
 
 int main(int argc, char *argv[]) {
   // sets the language of LCF messages (can be either EN-US or PT-PT)
@@ -12,11 +11,11 @@ int main(int argc, char *argv[]) {
 
   // enables to log function invocations that are being "wrapped" by LCF
   // [comment this out if you don't want/need it]
-  lcf_trace_calls("/home/lcom/labs/lab2/trace.txt");
+  // lcf_trace_calls("/home/lcom/labs/lab2/trace.txt");
 
   // enables to save the output of printf function calls on a file
   // [comment this out if you don't want/need it]
-  lcf_log_output("/home/lcom/labs/lab2/output.txt");
+  // lcf_log_output("/home/lcom/labs/lab2/output.txt");
 
   // handles control over to LCF
   // [LCF handles command line arguments and invokes the right function]
@@ -30,23 +29,27 @@ int main(int argc, char *argv[]) {
   return 0;
 }
 
-int(timer_test_read_config)(uint8_t timer, enum timer_status_field field) {
-  uint8_t st;
-  if (timer_get_conf(timer, &st))
+
+int (timer_test_read_config)(uint8_t timer, enum timer_status_field field) {
+  uint8_t status;
+  if (timer_get_conf(timer, &status))
     return 1;
-  return timer_display_conf(timer, st, field);
+
+  return timer_display_conf(timer, status, field);
 }
 
-int(timer_test_time_base)(uint8_t timer, uint32_t freq) {
+
+int (timer_test_time_base)(uint8_t timer, uint32_t freq) {
   return timer_set_frequency(timer, freq);
 }
 
-int(timer_test_int)(uint8_t time) {
+
+int (timer_test_int)(uint8_t time) {
   uint8_t timer_line_bit;
   if (timer_subscribe_int(&timer_line_bit))
     return 1;
 
-  while (num_interrupts < 60 * time) {
+  while (interrupt_counter < 60 * time) {
     /* Get a request message. */
     message msg;
     int ret, ipc_status;
@@ -59,7 +62,7 @@ int(timer_test_int)(uint8_t time) {
         case HARDWARE:                                    /* hardware interrupt notification */
           if (msg.m_notify.interrupts & timer_line_bit) { /* subscribed interrupt */
             timer_int_handler();
-            if (num_interrupts % 60 == 0)
+            if (interrupt_counter % 60 == 0) /* Every 60 interrupts a second passes */
               timer_print_elapsed_time();
           }
           break;
