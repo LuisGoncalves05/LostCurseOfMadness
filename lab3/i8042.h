@@ -6,10 +6,11 @@
 /** @defgroup i8042 i8042
  * @{
  *
- * Constants for programming the i8042 Keyboard.
+ * Constants for programming the i8042 KBC
  */
 
 #define KBD_IRQ 1
+#define MOUSE_IRQ 12
 
 #define KBC_STATUS_REGISTER 0x64
 #define KBC_COMMAND_REGISTER 0x64
@@ -17,21 +18,40 @@
 #define KBC_ARGUMENT_REGISTER 0x60
 #define KBC_RETURN_REGISTER 0x60
 
-#define TWO_BYTE_SCANCODE 0xE0
-#define ESC_BREAK_CODE 0x81
-#define BREAK BIT(7)
-
 #define KBC_PARITY_BIT BIT(7)
 #define KBC_TIMEOUT_BIT BIT(6)
 #define KBC_OUTPUT_BUFFER_FULL BIT(0)
 #define KBC_INPUT_BUFFER_FULL BIT(1)
 
-#define KBD_INTERRUPTS_ON BIT(0)
-
 #define KBC_READ_COMMAND_BYTE 0x20
 #define KBC_WRITE_COMMAND_BYTE 0x60
 
-#define READ_ATTEMPT_LIMIT 20
+#define KBD_INTERRUPTS_ON BIT(0)
+#define TWO_BYTE_SCANCODE 0xE0
+#define ESC_BREAK_CODE 0x81
+#define BREAK BIT(7)
+
+#define MOUSE_WRITE_COMMAND 0xD4
+#define MOUSE_FIRST_BYTE_ID BIT(3)
+#define MOUSE_ENABLE_DATA_REPORTING 0xF4
+#define MOUSE_DISABLE_DATA_REPORTING 0xF5
+#define MOUSE_OK 0xFA
+#define MOUSE_ERROR_RETRY 0xFE
+#define MOUSE_ERROR_FATAL 0xFC
+#define MOUSE_DATA BIT(5)
+
+#define POW2(n) BIT(n)
+
+#define MOUSE_LB BIT(0)
+#define MOUSE_RB BIT(1)
+#define MOUSE_MB BIT(2)
+
+#define MOUSE_DX_MSB BIT(4)
+#define MOUSE_DY_MSB BIT(5)
+#define MOUSE_DX_OVERFLOW BIT(6)
+#define MOUSE_DY_OVERFLOW BIT(7)
+
+#define READ_ATTEMPT_LIMIT 5
 
 /**@}*/
 

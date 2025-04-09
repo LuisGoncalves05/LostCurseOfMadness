@@ -1,6 +1,7 @@
 #include "i8042.h"
 #include "kbc.h"
-#include "../lab2/i8254.h"
+#include "keyboard.h"
+#include <lcom/timer.h>
 #include <lcom/lcf.h>
 #include <stdbool.h>
 #include <stdint.h>
@@ -60,8 +61,7 @@ int (kbd_test_scan)() {
         default:
           break; /* no other notifications expected: do nothing */
       }
-    }
-    else { /* received a standard message, not a notification */
+    } else { /* received a standard message, not a notification */
            /* no standard messages expected: do nothing */
     }
   }
@@ -87,7 +87,7 @@ int (kbd_test_poll)() {
     return 1;
   
   uint8_t command_byte;
-  if (kbc_read_command_return(&command_byte))
+  if (kbc_read_command_return(&command_byte, false))
     return 1;
 
   command_byte |= KBD_INTERRUPTS_ON;
@@ -109,7 +109,7 @@ int (kbd_test_timed_scan)(uint8_t n) {
 
   uint8_t scan_codes[2] = {0, 0};
   kbd_continue = true;
-  while (kbd_continue && interrupt_counter < 60 * n) {
+  while (kbd_continue && interrupt_counter < sys_hz() * n) {
     /* Get a request message. */
     message msg;
     int ret, ipc_status;
@@ -120,18 +120,18 @@ int (kbd_test_timed_scan)(uint8_t n) {
     if (is_ipc_notify(ipc_status)) { /* received notification */
       switch (_ENDPOINT_P(msg.m_source)) {
         case HARDWARE:                                  /* hardware interrupt notification */
+          if (msg.m_notify.interrupts & timer_line_bit) { /* subscribed interrupt */
+            timer_int_handler();
+          }
           if (msg.m_notify.interrupts & kbd_line_bit) { /* subscribed interrupt */
             kbd_int_handler();
             kbd_handle_scan_code(scan_codes, true);
-          } else if (msg.m_notify.interrupts & timer_line_bit) { /* subscribed interrupt */
-            timer_int_handler();
           }
           break;
         default:
           break; /* no other notifications expected: do nothing */
       }
-    }
-    else { /* received a standard message, not a notification */
+    } else { /* received a standard message, not a notification */
            /* no standard messages expected: do nothing */
     }
   }
