@@ -5,7 +5,6 @@
 #include <stdint.h>
 #include "i8042.h"
 
-#define DELAY_US 20000
 extern int32_t kbd_subscription_id;
 
 /** @defgroup kbc kbc

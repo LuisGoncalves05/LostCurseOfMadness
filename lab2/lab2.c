@@ -1,7 +1,4 @@
-#include <lcom/lab2.h>
 #include <lcom/lcf.h>
-#include <stdbool.h>
-#include <stdint.h>
 
 extern uint32_t interrupt_counter;
 
@@ -49,7 +46,7 @@ int (timer_test_int)(uint8_t time) {
   if (timer_subscribe_int(&timer_line_bit))
     return 1;
 
-  while (interrupt_counter < 60 * time) {
+  while (interrupt_counter < sys_hz() * time) {
     /* Get a request message. */
     message msg;
     int ret, ipc_status;
@@ -62,7 +59,7 @@ int (timer_test_int)(uint8_t time) {
         case HARDWARE:                                    /* hardware interrupt notification */
           if (msg.m_notify.interrupts & timer_line_bit) { /* subscribed interrupt */
             timer_int_handler();
-            if (interrupt_counter % 60 == 0) /* Every 60 interrupts a second passes */
+            if (interrupt_counter % sys_hz() == 0) /* Every HZ interrupts a second passes */
               timer_print_elapsed_time();
           }
           break;

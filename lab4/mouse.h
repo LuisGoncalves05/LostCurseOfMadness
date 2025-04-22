@@ -1,12 +1,10 @@
 #ifndef MOUSE_H
 #define MOUSE_H
 
-#include <stdbool.h>
-#include <stdint.h>
-#include "../lab3/i8042.h"
+#include "../lab3/kbc.h"
 
-#define DELAY_US 20000
 extern int32_t kbd_subscription_id;
+
 
 /** @defgroup mouse mouse
  * @{
@@ -31,12 +29,18 @@ int (mouse_subscribe_int)(uint8_t *bit_no);
 int (mouse_unsubscribe_int)(void);
 
 /**
- * @brief Keyboard interrupt handler
+ * @brief Mouse interrupt handler
  * 
- * Tries to read a packet byte from the kbc, if any error 
- * occurs tries again until READ_ATTEMPT_LIMIT
+ * Tries to read a packet byte from the kbc, if any error occurs tries again until READ_ATTEMPT_LIMIT
  */
-void mouse_int_handler(void);
+void (mouse_int_handler)(void);
+
+/**
+ * @brief Wrapper of mouse_int_handler
+ * 
+ * Used to pass tests, should not be used so that IH names are coherent
+ */
+void (mouse_ih)(void);
 
 /**
  * @brief Reads packets from the Mouse

@@ -1,13 +1,10 @@
 #include <lcom/lcf.h>
-#include <stdint.h>
-#include <stdio.h>
 
 #include "../lab3/i8042.h"
 #include "../lab3/kbc.h"
 #include "mouse.h"
 
 uint8_t packet_byte;
-uint8_t packet_idx = 0;
 extern uint32_t interrupt_counter;
 
 
@@ -45,6 +42,8 @@ int (mouse_test_packet)(uint32_t count) {
       return 1;
   
   uint8_t packet[3] = {0, 0, 0};
+  uint8_t packet_idx = 0;
+
   while (count) {
     /* Get a request message. */
     message msg;
@@ -71,7 +70,7 @@ int (mouse_test_packet)(uint32_t count) {
             break; /* no other notifications expected: do nothing */
       }
     } else { /* received a standard message, not a notification */
-              /* no standard messages expected: do nothing */
+             /* no standard messages expected: do nothing */
     }
   }
   
@@ -95,6 +94,8 @@ int (mouse_test_async)(uint8_t idle_time) {
       return 1;
   
   uint8_t packet[3] = {0, 0, 0};
+  uint8_t packet_idx = 0;
+
   while (interrupt_counter < sys_hz() * idle_time) {
     /* Get a request message. */
     message msg;
@@ -123,7 +124,7 @@ int (mouse_test_async)(uint8_t idle_time) {
         default:
             break; /* no other notifications expected: do nothing */
       }
-    } else { /* received a standard message, not a notification */
+    } else {  /* received a standard message, not a notification */
               /* no standard messages expected: do nothing */
     }
   }
@@ -139,14 +140,12 @@ int (mouse_test_async)(uint8_t idle_time) {
 
 
 int (mouse_test_gesture)(uint8_t x_len, uint8_t tolerance) {
-    /* To be completed */
-    printf("%s: under construction\n", __func__);
-    return 1;
+  return 1;
 }
 
 
 int (mouse_test_remote)(uint16_t period, uint8_t cnt) {
-    /* This year you need not implement this. */
-    printf("%s(%u, %u): under construction\n", __func__, period, cnt);
-    return 1;
+  /* This year you need not implement this. */
+  printf("%s(%u, %u): under construction\n", __func__, period, cnt);
+  return 1;
 }

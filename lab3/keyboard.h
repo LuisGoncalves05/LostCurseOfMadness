@@ -1,12 +1,10 @@
 #ifndef KEYBOARD_H
 #define KEYBOARD_H
 
-#include <stdbool.h>
-#include <stdint.h>
-#include "i8042.h"
+#include "kbc.h"
 
-#define DELAY_US 20000
 extern int32_t kbd_subscription_id;
+
 
 /** @defgroup keyboard keyboard
  * @{
@@ -53,7 +51,6 @@ int (kbd_read_scan_code)(void);
  * @param timed If set to true resets interrupt_counter 
  */
 void (kbd_handle_scan_code)(uint8_t* scan_codes, bool timed);
-
 
 #endif /* __KBC_H */
 

@@ -1,10 +1,8 @@
+#include <lcom/lcf.h>
+
 #include "i8042.h"
 #include "kbc.h"
 #include "keyboard.h"
-#include <lcom/timer.h>
-#include <lcom/lcf.h>
-#include <stdbool.h>
-#include <stdint.h>
 
 bool kbd_continue;
 uint8_t scan_code;
