@@ -1,12 +1,12 @@
-#ifndef _LCOM_I8254_H_
-#define _LCOM_I8254_H_
+#ifndef I8254_H
+#define I8254_H
 
 #include <lcom/lcf.h>
 
 /** @defgroup i8254 i8254
  * @{
  *
- * Constants for programming the i8254 Timer.
+ * Constants for programming the i8254 Timers.
  */
 
 /** @name Timer Frequency & IRQ Line */
@@ -45,14 +45,14 @@
 
 /** @name Operating Mode: bits 3, 2 and 1 */
 /**@{*/
-#define TIMER_RATE_GEN BIT(2)                         /**< @brief Mode 2: Rate generator */
-#define TIMER_SQR_WAVE (BIT(2) | BIT(1))              /**< @brief Mode 3: Square wave generator */
+#define TIMER_RATE_GEN BIT(2)            /**< @brief Mode 2: Rate generator */
+#define TIMER_SQR_WAVE (BIT(2) | BIT(1)) /**< @brief Mode 3: Square wave generator */
 /**@}*/
 
 /** @name Counting Mode: bit 0 */
 /**@{*/
-#define TIMER_BIN 0x0 /**< @brief Binary counting mode (16-bit) */
-#define TIMER_BCD 0x1 /**< @brief BCD counting mode (4-digit BCD) */
+#define TIMER_BIN 0x00 /**< @brief Binary counting mode (16-bit) */
+#define TIMER_BCD 0x01 /**< @brief BCD counting mode (4-digit BCD) */
 /**@}*/
 
 /** @name Read-Back Command Format */
@@ -65,4 +65,4 @@
 
 /**@}*/ // End of i8254 group
 
-#endif /* _LCOM_I8254_H_ */
+#endif /* LCOM_I8254_H */

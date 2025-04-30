@@ -10,61 +10,51 @@ extern int32_t kbd_subscription_id;
 /** @defgroup kbc kbc
  * @{
  *
- * Functions for using the i8042 KBC
+ * Functions for using the i8042 kbc.
  */
 
 /**
- * @brief Writes byte in KBC port
+ * @brief Writes byte in KBC port.
  *
- * @param port KBC port to write command into
- * 
- * @param byte Byte to write in port
- * 
- * @return Return 0 upon success and non-zero otherwise
+ * @param port KBC port to write command into.
+ * @param byte Byte to write in port.
+ * @return Return 0 upon success and non-zero otherwise.
  */
 int (kbc_write_byte)(uint8_t port, uint8_t byte);
 
 /**
- * @brief Writes command to KBC_COMMAND_REGISTER
+ * @brief Writes command to KBC_COMMAND_REGISTER.
  * 
- * @param command Command to be written in port
- * 
- * @return Return 0 upon success and non-zero otherwise
+ * @param command Command to be written in port.
+ * @return Return 0 upon success and non-zero otherwise.
  */
 int (kbc_write_command)(uint8_t command);
 
 /**
- * @brief Writes a command's argument to KBC_ARGUMENT_REGISTER
+ * @brief Writes a command's argument to KBC_ARGUMENT_REGISTER.
  * 
- * @param argument Argument to be written
- * 
- * @return Return 0 upon success and non-zero otherwise
+ * @param argument Argument to be written.
+ * @return Return 0 upon success and non-zero otherwise.
  */
 int (kbc_write_command_arguments)(uint8_t argument);
 
 /**
- * @brief Reads byte from KBC port
+ * @brief Reads byte from KBC port.
  * 
- * @param port KBC port to read command from
- * 
- * @param byte Will hold the value read from port
- * 
- * @param mouse Reading for mouse if true else for keyboard
- *
- * @return Return 0 upon success and non-zero otherwise
+ * @param port KBC port to read command from.
+ * @param byte Will hold the value read from port.
+ * @param mouse Reading for mouse if true else for keyboard.
+ * @return Return 0 upon success and non-zero otherwise.
  */
 int (kbc_read_byte)(uint8_t port, uint8_t* byte, bool mouse);
 
 /**
- * @brief Reads a command's return value
+ * @brief Reads a command's return value.
+ * Reads the return value of a command from KBC_RETURN_REGISTER to retv.
  * 
- * Reads the return value of a command from KBC_RETURN_REGISTER to retv
- * 
- * @param retv Will hold the value returned by command
- * 
- * @param mouse Reading for mouse if true else for keyboard
- *
- * @return Return 0 upon success and non-zero otherwise
+ * @param retv Will hold the value returned by command.
+ * @param mouse Reading for mouse if true else for keyboard.
+ * @return Return 0 upon success and non-zero otherwise.
  */
 int (kbc_read_command_return)(uint8_t* retv, bool mouse);
 

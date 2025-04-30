@@ -26,8 +26,7 @@ int main(int argc, char *argv[]) {
   return 0;
 }
 
-
-int (timer_test_read_config)(uint8_t timer, enum timer_status_field field) {
+int(timer_test_read_config)(uint8_t timer, enum timer_status_field field) {
   uint8_t status;
   if (timer_get_conf(timer, &status))
     return 1;
@@ -35,13 +34,11 @@ int (timer_test_read_config)(uint8_t timer, enum timer_status_field field) {
   return timer_display_conf(timer, status, field);
 }
 
-
-int (timer_test_time_base)(uint8_t timer, uint32_t freq) {
+int(timer_test_time_base)(uint8_t timer, uint32_t freq) {
   return timer_set_frequency(timer, freq);
 }
 
-
-int (timer_test_int)(uint8_t time) {
+int(timer_test_int)(uint8_t time) {
   uint8_t timer_line_bit;
   if (timer_subscribe_int(&timer_line_bit))
     return 1;

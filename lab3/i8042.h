@@ -1,5 +1,5 @@
-#ifndef _LCOM_I8042_H_
-#define _LCOM_I8042_H_
+#ifndef LCOM_I8042_H
+#define LCOM_I8042_H
 
 #include <lcom/lcf.h>
 
@@ -84,4 +84,4 @@
 
 /**@}*/ // End of i8042 group
 
-#endif /* _LCOM_I8042_H_ */
+#endif /* LCOM_I8042_H */
