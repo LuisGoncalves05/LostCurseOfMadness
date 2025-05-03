@@ -33,7 +33,7 @@ int(util_sys_inb)(int port, uint8_t *value) {
 
   uint32_t val;
   if (sys_inb(port, &val) != 0) {
-    fprintf(stderr, "util_sys_inb: sys_inb failed.\n", port);
+    fprintf(stderr, "util_sys_inb: sys_inb failed.\n");
     return 1;
   }
 

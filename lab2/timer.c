@@ -49,6 +49,21 @@ int(timer_set_frequency)(uint8_t timer, uint32_t freq) {
 
   uint16_t frequency = TIMER_FREQ / freq;
 
+  switch (timer) {
+    case 0:
+      selected_timer = TIMER_0;
+      break;
+    case 1:
+      selected_timer = TIMER_1;
+      break;
+    case 2:
+      selected_timer = TIMER_2;
+      break;
+    default:
+      return 1;
+  }
+
+
   uint8_t lsb;
   if (util_get_LSB(frequency, &lsb)) {
     fprintf(stderr, "timer_set_frequency: util_get_LSB failed.\n");
