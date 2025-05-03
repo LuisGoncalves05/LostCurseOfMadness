@@ -1,7 +1,7 @@
 #ifndef GPU_H
 #define GPU_H
 
-#include <lcom/vbe.h>
+#include <lcom/lcf.h>
 #include <stdbool.h>
 #include <stdint.h>
 

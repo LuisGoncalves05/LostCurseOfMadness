@@ -63,7 +63,6 @@ int(timer_set_frequency)(uint8_t timer, uint32_t freq) {
       return 1;
   }
 
-
   uint8_t lsb;
   if (util_get_LSB(frequency, &lsb)) {
     fprintf(stderr, "timer_set_frequency: util_get_LSB failed.\n");
