@@ -139,7 +139,6 @@ int(mouse_test_async)(uint8_t idle_time) {
   return timer_unsubscribe_int();
 }
 
-
 typedef enum { INITIAL,
                LINE_UP,
                TOP,
@@ -280,8 +279,7 @@ void (*event_handlers[])(uint8_t x_len, uint8_t tolerance, struct packet *pp) = 
   r_up_handler,
   l_down_handler,
   l_up_handler,
-  move_handler
-};
+  move_handler};
 
 int(mouse_test_gesture)(uint8_t x_len, uint8_t tolerance) {
   uint8_t mouse_line_bit;

@@ -2,8 +2,8 @@
 #define GPU_H
 
 #include <lcom/vbe.h>
-#include <stdint.h>
 #include <stdbool.h>
+#include <stdint.h>
 
 /**
  * @defgroup gpu gpu

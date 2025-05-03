@@ -1,7 +1,7 @@
-#include <lcom/lcf.h>
 #include "i8042.h"
 #include "kbc.h"
 #include "keyboard.h"
+#include <lcom/lcf.h>
 
 extern bool esc_detected;
 extern bool two_byte;

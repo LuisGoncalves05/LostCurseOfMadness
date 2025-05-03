@@ -1,5 +1,5 @@
-#include <lcom/lcf.h>
 #include "keyboard.h"
+#include <lcom/lcf.h>
 
 int32_t kbd_hook_id = KBD_IRQ;
 uint8_t scan_code;

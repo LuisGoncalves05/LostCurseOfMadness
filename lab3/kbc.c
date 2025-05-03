@@ -1,6 +1,5 @@
-#include <lcom/lcf.h>
 #include "kbc.h"
-
+#include <lcom/lcf.h>
 
 int kbc_write_byte(uint8_t port, uint8_t byte) {
   uint8_t attempts = 0;
@@ -81,7 +80,6 @@ int kbc_read_byte(uint8_t port, uint8_t *byte, bool mouse) {
   fprintf(stderr, "Timed out while trying to read from port 0x%X.\n", port);
   return 1;
 }
-
 
 int kbc_read_command_return(uint8_t *retv, bool mouse) {
   return kbc_read_byte(KBC_RETURN_REGISTER, retv, mouse);

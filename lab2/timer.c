@@ -1,6 +1,6 @@
+#include "i8254.h"
 #include <lcom/lcf.h>
 #include <stdint.h>
-#include "i8254.h"
 
 int32_t timer_hook_id = TIMER0_IRQ;
 uint32_t interrupt_counter = 0;
@@ -9,7 +9,7 @@ int(timer_set_frequency)(uint8_t timer, uint32_t freq) {
   uint8_t old_config;
 
   if (timer_get_conf(timer, &old_config)) {
-    fprintf(stderr, "Failed to get timer configuration.\n");
+    fprintf(stderr, "timer_set_frequency: timer_get_conf failed.\n");
     return 1;
   }
 
@@ -32,39 +32,41 @@ int(timer_set_frequency)(uint8_t timer, uint32_t freq) {
   /* Construct control word: preserve lower 4 bits, set new mode. */
   uint8_t new_config = selected_timer | TIMER_LSB_MSB | (old_config & 0x0F);
   if (sys_outb(TIMER_CTRL, new_config)) {
-    fprintf(stderr, "Error writing new configuration to timer %d.\n", timer);
+    fprintf(stderr, "timer_set_frequency: sys_outb failed.\n");
     return 1;
   }
 
-  /* 
+  /*
   Frequency must be stored in a 16 bit unsigned integer so it cannot be more than 0xFFFF
-  and it must also be positive. Therefore, 
+  and it must also be positive. Therefore,
   TIMER_FREQ / freq > 0xFFFF <=> freq < TIMER_FREQ / 0xFFFF <=> freq < 18.2
-  TIMER_FREQ / freq < 1 <=> freq > TIMER_FREQ 
+  TIMER_FREQ / freq < 1 <=> freq > TIMER_FREQ
   */
   if (freq < 19 || freq > TIMER_FREQ) {
-    fprintf(stderr, "Invalid frequency %d, not in range [19:1193182].\n", freq);
+    fprintf(stderr, "timer_set_frequency: invalid frequency %d, not in range [19:1193182].\n", freq);
     return 1;
   }
 
   uint16_t frequency = TIMER_FREQ / freq;
 
   uint8_t lsb;
-  if (util_get_LSB(frequency, &lsb))
+  if (util_get_LSB(frequency, &lsb)) {
+    fprintf(stderr, "timer_set_frequency: util_get_LSB failed.\n");
     return 1;
-  
+  }
+
   if (sys_outb(selected_timer, lsb)) {
-    fprintf(stderr, "Error writing LSB to timer %d.\n", timer);
+    fprintf(stderr, "timer_set_frequency: sys_outb failed.\n");
     return 1;
   }
 
   uint8_t msb;
   if (util_get_MSB(frequency, &msb)) {
-    fprintf(stderr, "Failed to get MSB from frequency.\n");
+    fprintf(stderr, "timer_set_frequency: util_get_MSB failed.\n");
     return 1;
   }
   if (sys_outb(selected_timer, msb)) {
-    fprintf(stderr, "Error writing MSB to timer %d.\n", timer);
+    fprintf(stderr, "timer_set_frequency: sys_outb failed.\n");
     return 1;
   }
 
@@ -73,7 +75,7 @@ int(timer_set_frequency)(uint8_t timer, uint32_t freq) {
 
 int(timer_subscribe_int)(uint8_t *bit_no) {
   if (bit_no == NULL) {
-    fprintf(stderr, "Invalid argument: bit_no is NULL.\n");
+    fprintf(stderr, "timer_subscribe_int: NULL pointer provided.\n");
     return 1;
   }
 
@@ -91,13 +93,13 @@ void(timer_int_handler)() {
 
 int(timer_get_conf)(uint8_t timer, uint8_t *status) {
   if (status == NULL) {
-    fprintf(stderr, "Invalid argument: status is NULL.\n");
+    fprintf(stderr, "timer_get_conf: NULL pointer provided.\n");
     return 1;
   }
 
   uint8_t ctrl = TIMER_RB_SEL(timer) | TIMER_RB_COUNT_ | TIMER_RB_COMMAND;
   if (sys_outb(TIMER_CTRL, ctrl)) {
-    fprintf(stderr, "Error sending Read-Back Command.\n");
+    fprintf(stderr, "timer_get_conf: sys_outb failed.\n");
     return 1;
   }
 
@@ -113,7 +115,7 @@ int(timer_get_conf)(uint8_t timer, uint8_t *status) {
       timer_count_register = TIMER_2;
       break;
     default:
-      fprintf(stderr, "Invalid timer number for get_conf.\n");
+      fprintf(stderr, "timer_get_conf: invalid timer number.\n");
       return 1;
   }
 
@@ -135,7 +137,7 @@ int(timer_display_conf)(uint8_t timer, uint8_t status, enum timer_status_field f
     case tsf_base:
       val.in_mode = (status & TIMER_BCD) ? TIMER_BCD : TIMER_BIN;
       break;
-    
+
     case tsf_initial:
       switch (status & TIMER_LSB_MSB) {
         case 0:
@@ -153,7 +155,7 @@ int(timer_display_conf)(uint8_t timer, uint8_t status, enum timer_status_field f
   }
 
   if (timer_print_config(timer, field, val)) {
-    fprintf(stderr, "Error printing timer configuration.\n");
+    fprintf(stderr, "timer_display_conf: timer_print_config failed.\n");
     return 1;
   }
 

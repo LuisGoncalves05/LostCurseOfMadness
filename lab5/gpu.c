@@ -1,6 +1,6 @@
+#include "gpu.h"
 #include <lcom/lcf.h>
 #include <machine/int86.h>
-#include "gpu.h"
 
 static vbe_mode_info_t vg_mode_info;
 static uint8_t bytes_per_pixel;
@@ -48,8 +48,8 @@ void *(vg_init) (uint16_t mode) {
     return NULL;
   }
 
-  struct minix_mem_range mr; /* physical memory range */
-  phys_bytes vram_base = vg_mode_info.PhysBasePtr; /* VRAM’s physical addresss */
+  struct minix_mem_range mr;                             /* physical memory range */
+  phys_bytes vram_base = vg_mode_info.PhysBasePtr;       /* VRAM’s physical addresss */
   bytes_per_pixel = (vg_mode_info.BitsPerPixel + 7) / 8; /* bits_per_pixel / 8 + ((bits_per_pixel % 8) != 0) */
   x_res = vg_mode_info.XResolution;
   y_res = vg_mode_info.YResolution;
@@ -69,8 +69,8 @@ void *(vg_init) (uint16_t mode) {
   if (vg_set_vbe_mode(mode)) {
     fprintf(stderr, "vg_init: vg_set_vbe_mode failed.\n");
     return NULL;
-  } 
-  
+  }
+
   return video_mem;
 }
 
@@ -109,7 +109,8 @@ int(vg_draw_rectangle)(uint16_t x, uint16_t y, uint16_t width, uint16_t height, 
   if (retv) {
     fprintf(stderr, "vg_draw_rectangle: vg_draw_hline failed.\n");
     return 1;
-  } else 
+  }
+  else
     return 0;
 }
 
@@ -131,7 +132,8 @@ int(vg_draw_pattern)(uint8_t no_rectangles, uint32_t first, uint8_t step) {
   if (retv) {
     fprintf(stderr, "vg_draw_pattern: vg_draw_rectangle failed.\n");
     return 1;
-  } else 
+  }
+  else
     return 0;
 }
 

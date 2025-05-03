@@ -17,9 +17,9 @@
 
 /** @name Timer I/O Port Addresses */
 /**@{*/
-#define TIMER_0    0x40 /**< @brief Timer 0 count register */
-#define TIMER_1    0x41 /**< @brief Timer 1 count register */
-#define TIMER_2    0x42 /**< @brief Timer 2 count register */
+#define TIMER_0 0x40    /**< @brief Timer 0 count register */
+#define TIMER_1 0x41    /**< @brief Timer 1 count register */
+#define TIMER_2 0x42    /**< @brief Timer 2 count register */
 #define TIMER_CTRL 0x43 /**< @brief Timer control register */
 /**@}*/
 
@@ -30,16 +30,16 @@
 
 /** @name Timer Selection: bits 7 and 6 */
 /**@{*/
-#define TIMER_SEL0   0x00       /**< @brief Select Timer 0 */
-#define TIMER_SEL1   BIT(6)     /**< @brief Select Timer 1 */
-#define TIMER_SEL2   BIT(7)     /**< @brief Select Timer 2 */
+#define TIMER_SEL0 0x00                /**< @brief Select Timer 0 */
+#define TIMER_SEL1 BIT(6)              /**< @brief Select Timer 1 */
+#define TIMER_SEL2 BIT(7)              /**< @brief Select Timer 2 */
 #define TIMER_RB_CMD (BIT(7) | BIT(6)) /**< @brief Read-back command */
 /**@}*/
 
 /** @name Register Selection: bits 5 and 4 */
 /**@{*/
-#define TIMER_LSB     BIT(4)                  /**< @brief Access mode: LSB only */
-#define TIMER_MSB     BIT(5)                  /**< @brief Access mode: MSB only */
+#define TIMER_LSB BIT(4)                      /**< @brief Access mode: LSB only */
+#define TIMER_MSB BIT(5)                      /**< @brief Access mode: MSB only */
 #define TIMER_LSB_MSB (TIMER_LSB | TIMER_MSB) /**< @brief Access mode: LSB followed by MSB */
 /**@}*/
 
@@ -57,9 +57,9 @@
 
 /** @name Read-Back Command Format */
 /**@{*/
-#define TIMER_RB_COUNT_  BIT(5) /**< @brief Read-back: request count value */
-#define TIMER_RB_STATUS_ BIT(4) /**< @brief Read-back: request status */
-#define TIMER_RB_SEL(n)  BIT((n) + 1) /**< @brief Select timer n (0-2) for read-back */
+#define TIMER_RB_COUNT_ BIT(5)             /**< @brief Read-back: request count value */
+#define TIMER_RB_STATUS_ BIT(4)            /**< @brief Read-back: request status */
+#define TIMER_RB_SEL(n) BIT((n) + 1)       /**< @brief Select timer n (0-2) for read-back */
 #define TIMER_RB_COMMAND (BIT(7) | BIT(6)) /**< @brief Read-back command mask */
 /**@}*/
 
