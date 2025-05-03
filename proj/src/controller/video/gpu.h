@@ -17,6 +17,7 @@
 #define VBE_MODE_INFO 0x4F01       /**< Request VBE mode information. */
 #define VBE_MODE_SET 0x4F02        /**< Set a VBE graphics mode. */
 #define BIOS_VIDEO_MODE_SET 0x0003 /**< Reset to Minix default text mode. */
+#define BIOS_VIDEOCARD_SERV 0x10 /**< BIOS video services. */
 /** @} */
 
 /** @name Supported VBE Modes */
@@ -48,7 +49,9 @@
  * @param mode VBE mode number to set (e.g., VBE_MODE1).
  * @return 0 on success, non-zero on failure.
  */
-int(vg_set_vbe_mode)(uint16_t mode);
+int(set_graphic_mode)(uint16_t mode);
+
+int(set_frame_buffer)(uint16_t mode);
 
 /**
  * @brief Returns a pointer to the video memory location of a specific pixel.
@@ -128,13 +131,6 @@ uint32_t(indexed_mode)(uint8_t no_rectangles, uint16_t i, uint16_t j, uint8_t st
  */
 int(vg_draw_xpm)(xpm_map_t xpm, uint16_t x, uint16_t y);
 
-/**
- * @brief Renders a previously loaded sprite at its current position.
- *
- * @param sprite Pointer to sprite.
- * @return 0 on success, non-zero on failure.
- */
-int(vg_draw_sprite)(Sprite *sprite);
 
 /**
  * @brief Calculates direction of movement between two coordinates.
