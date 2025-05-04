@@ -13,6 +13,7 @@
 /**@{*/
 #define TIMER_FREQ 1193182 /**< @brief Clock frequency for timer in PC and AT (Hz) */
 #define TIMER0_IRQ 0       /**< @brief Timer 0 IRQ line (IRQ 0) */
+#define TIMER 0         /**< @brief Timer 0 (used for the game) */
 /**@}*/
 
 /** @name Timer I/O Port Addresses */

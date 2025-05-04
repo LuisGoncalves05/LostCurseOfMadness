@@ -3,6 +3,7 @@
 
 int32_t mouse_hook_id = 2;
 uint8_t packet_byte;
+uint8_t packet[3];
 
 int(mouse_subscribe_int)(uint8_t *bit_no) {
   if (bit_no == NULL) {
