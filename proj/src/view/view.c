@@ -13,3 +13,10 @@ int draw_sprite_xpm(Sprite *sprite, int x, int y) {
     return 0; 
 }
 
+int draw_text(char *text, uint16_t x, uint16_t y, uint32_t color) {
+  
+  return 0;
+}
+
+
+
