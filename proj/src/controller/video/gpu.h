@@ -4,6 +4,7 @@
 #include <lcom/lcf.h>
 #include <stdbool.h>
 #include <stdint.h>
+#include "../../model/Sprite.h"
 
 /**
  * @defgroup gpu gpu

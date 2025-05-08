@@ -7,7 +7,7 @@
 #include "view/view.h"
 #include "config.h"
 #include <time.h>
-#include "maze.h"
+#include "model/game/maze.h"
 
 uint8_t timer_mask;
 uint8_t keyboard_mask;
@@ -94,7 +94,6 @@ int (proj_main_loop)(int argc, char *argv[]) {
   open_maze(maze, 30);
   print_maze(maze);
 
-  if (setup() != 0) return teardown();
 
   // Tratamento das interrupções
   int ipc_status;

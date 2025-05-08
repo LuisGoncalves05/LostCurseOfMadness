@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.embeddedhtml": "html",
+        "player.h": "c",
+        "animsprite.h": "c"
+    }
+}
