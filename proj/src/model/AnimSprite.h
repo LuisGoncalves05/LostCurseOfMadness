@@ -14,7 +14,7 @@ typedef struct {
 } AnimSprite;
 
 // AnimSprite functions
-AnimSprite *create_anim_sprite(Sprite *sprite, int aspeed, int num_fig, char **map);
+AnimSprite *create_animSprite(uint8_t no_pic, char ***pics);
 void destroy_anim_sprite(AnimSprite *anim);
 
 

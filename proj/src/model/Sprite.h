@@ -1,6 +1,8 @@
 #ifndef SPRITE_H
 #define SPRITE_H
 
+#include <stdint.h>
+
 // Basic Sprite structure
 typedef struct {
     int x, y;           // Current position
