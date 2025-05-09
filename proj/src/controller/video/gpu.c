@@ -3,13 +3,11 @@
 #include <lcom/lcf.h>
 #include <machine/int86.h>
 
-static vbe_mode_info_t vg_mode_info;
-static uint8_t bytes_per_pixel;
-static uint16_t x_res, y_res;
-static uint8_t *video_mem;
+vbe_mode_info_t vg_mode_info;
+uint8_t bytes_per_pixel;
+uint16_t x_res, y_res;
+uint8_t *main_frame_buffer; 
 extern uint32_t interrupt_counter;
-
-
 
 int (set_graphic_mode)(uint16_t mode){
   reg86_t reg86;
@@ -20,7 +18,6 @@ int (set_graphic_mode)(uint16_t mode){
   sys_int86(&reg86); // call BIOS interrupt
   return 0;
 }
-
 
 int (set_frame_buffer)(uint16_t mode){
   memset(&vg_mode_info, 0, sizeof(vg_mode_info));
@@ -34,16 +31,13 @@ int (set_frame_buffer)(uint16_t mode){
 
   sys_privctl(SELF, SYS_PRIV_ADD_MEM, &physic_addresses); // add memory range to process
      
-  video_mem = vm_map_phys(SELF, (void *)physic_addresses.mr_base, size); // map memory range to process
+  main_frame_buffer = vm_map_phys(SELF, (void *)physic_addresses.mr_base, size); // map memory range to process
 
   return 0;
 }
 
-
-
-
 inline uint8_t *(get_position) (uint16_t x, uint16_t y) {
-  return video_mem + (x + x_res * y) * bytes_per_pixel;
+  return main_frame_buffer + (x + x_res * y) * bytes_per_pixel; // Updated to use main_frame_buffer
 }
 
 int(vg_draw_pixel)(uint16_t x, uint16_t y, uint32_t color) {
