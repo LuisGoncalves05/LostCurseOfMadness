@@ -1,6 +1,5 @@
 #include "i8254.h"
 #include <lcom/lcf.h>
-#include "../utils.c"
 #include <stdint.h>
 
 int32_t timer_hook_id = TIMER;

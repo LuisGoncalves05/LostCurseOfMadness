@@ -1,5 +1,4 @@
 #include <lcom/lcf.h>
-#include "controller/timer/timer.c"
 #include "controller/timer/i8254.h"
 #include "controller/video/gpu.h"
 #include "controller/keyboard/keyboard.h"
@@ -132,5 +131,3 @@ int (proj_main_loop)(int argc, char *argv[]) {
 
   return 0;
 }
-
-
