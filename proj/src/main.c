@@ -13,8 +13,9 @@ uint8_t timer_mask;
 uint8_t keyboard_mask;
 uint8_t mouse_mask;
 
-
+extern uint8_t scan_code;
 extern uint8_t packet_byte;
+extern uint8_t packet[3];
 struct packet pp;
 uint8_t packet_idx = 0;
 
@@ -51,7 +52,7 @@ int setup() {
   // Atualização da frequência
   if (timer_set_frequency(TIMER, GAME_FREQUENCY) != 0) return 1;
 
-  if (set_frame_buffer(VIDEO_MODE) != 0) return 1;
+  if (set_frame_buffers(VIDEO_MODE) != 0) return 1;
 
   // Inicialização do modo gráfico
   if (set_graphic_mode(VIDEO_MODE) != 0) return 1;
@@ -95,10 +96,9 @@ int (proj_main_loop)(int argc, char *argv[]) {
   print_maze(maze);
 
 
-  // Tratamento das interrupções
   int ipc_status;
   message msg;
-  while (true) {
+  while (scan_code != ESC_BREAK_CODE) {
     
     if (driver_receive(ANY, &msg, &ipc_status) != 0) {
       printf("Error");
@@ -117,6 +117,10 @@ int (proj_main_loop)(int argc, char *argv[]) {
           }
           if (msg.m_notify.interrupts & mouse_mask){
             mouse_int_handler();
+            mouse_sync_packets(packet, &packet_idx, packet_byte);
+            if(packet_idx == 3){
+              mouse_build_packet(packet, &packet_idx, &pp);
+            }
             break;
           }
         }

@@ -18,7 +18,7 @@
 #define VBE_MODE_INFO 0x4F01       /**< Request VBE mode information. */
 #define VBE_MODE_SET 0x4F02        /**< Set a VBE graphics mode. */
 #define BIOS_VIDEO_MODE_SET 0x0003 /**< Reset to Minix default text mode. */
-#define BIOS_VIDEOCARD_SERV 0x10 /**< BIOS video services. */
+#define BIOS_VIDEOCARD_SERV 0x10   /**< BIOS video services. */
 /** @} */
 
 /** @name Supported VBE Modes */
@@ -42,8 +42,6 @@
 #define DIRECT_MODE 6              /**< Direct color memory model identifier. */
 #define BACKGROUND_COLOR 0         /**< Default background color used for clearing screen or erasing sprites. */
 
-
-
 /**
  * @brief Sets the VBE graphics mode.
  *
@@ -59,11 +57,10 @@ int(set_frame_buffer)(uint16_t mode);
  *
  * @param x X-coordinate.
  * @param y Y-coordinate.
+ * @param frame_buffer Pointer to the frame buffer.
  * @return Pointer to the memory location for pixel (x, y).
  */
-static inline uint8_t *(get_position) (uint16_t x, uint16_t y);
-
-int8_t(get_direction)(int16_t i, int16_t f);
+inline uint8_t *(get_position)(uint16_t x, uint16_t y, uint8_t *frame_buffer);
 
 /**
  * @brief Draws a single pixel of a specified color at (x, y).
@@ -71,21 +68,36 @@ int8_t(get_direction)(int16_t i, int16_t f);
  * @param x X-coordinate.
  * @param y Y-coordinate.
  * @param color Color to draw.
+ * @param frame_buffer Pointer to the frame buffer.
  * @return 0 on success, non-zero on failure.
  */
-int(vg_draw_pixel)(uint16_t x, uint16_t y, uint32_t color);
+int(vg_draw_pixel)(uint16_t x, uint16_t y, uint32_t color, uint8_t *frame_buffer);
 
 /**
- * @brief Draws a full pattern using colored rectangles.
+ * @brief Draws a horizontal line of a specified color.
  *
- * Uses either indexed or direct color mode depending on the video mode.
- *
- * @param no_rectangles Number of rectangles per row/column.
- * @param first Base color.
- * @param step Color increment step.
+ * @param x X-coordinate of the starting point.
+ * @param y Y-coordinate of the line.
+ * @param len Length of the line.
+ * @param color Color to draw.
+ * @param frame_buffer Pointer to the frame buffer.
  * @return 0 on success, non-zero on failure.
  */
-int(vg_draw_pattern)(uint8_t no_rectangles, uint32_t first, uint8_t step);
+int(vga_draw_hline)(uint16_t x, uint16_t y, uint16_t len, uint32_t color, uint8_t *frame_buffer);
+
+/**
+ * @brief Draws a rectangle of a specified color.
+ *
+ * @param x X-coordinate of the top-left corner.
+ * @param y Y-coordinate of the top-left corner.
+ * @param width Width of the rectangle.
+ * @param height Height of the rectangle.
+ * @param color Color to draw.
+ * @param frame_buffer Pointer to the frame buffer.
+ * @return 0 on success, non-zero on failure.
+ */
+int(vga_draw_rectangle)(uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint32_t color, uint8_t *frame_buffer);
+
 
 /**
  * @brief Extracts a specific color component from a full 32-bit color value.
@@ -119,43 +131,6 @@ uint32_t(direct_mode)(uint16_t i, uint16_t j, uint8_t step, uint32_t first);
  * @return Computed color.
  */
 uint32_t(indexed_mode)(uint8_t no_rectangles, uint16_t i, uint16_t j, uint8_t step, uint32_t first);
-
-/**
- * @brief Draws an XPM image at a specific screen position.
- *
- * Internally converts to sprite and draws it.
- *
- * @param xpm Pointer to XPM image.
- * @param x X-coordinate.
- * @param y Y-coordinate.
- * @return 0 on success, non-zero on failure.
- */
-int(vg_draw_xpm)(xpm_map_t xpm, uint16_t x, uint16_t y);
-
-
-/**
- * @brief Calculates direction of movement between two coordinates.
- *
- * @param i Initial coordinate.
- * @param f Final coordinate.
- * @return -1 (negative direction), 1 (positive direction), or 0 (no movement).
- */
-int8_t(get_direction)(int16_t i, int16_t f);
-
-/**
- * @brief Updates the position of a sprite and redraws it accordingly.
- *
- * Handles both fixed-speed and frame-based motion (positive and negative speed).
- *
- * @param sprite Pointer to sprite.
- * @param xf Final x coordinate.
- * @param yf Final y coordinate.
- * @param speed Movement speed (pixels/frame if positive; frames/pixel if negative).
- * @param dir Direction of movement (-1 or 1).
- * @param movement_x True if moving horizontally, false if vertically.
- * @return 0 on success, non-zero on failure.
- */
-int(vg_update_sprite)(Sprite *sprite, uint16_t xf, uint16_t yf, int16_t speed, int8_t dir, bool movement_x);
 
 /** @} */
 #endif /* GPU_H */

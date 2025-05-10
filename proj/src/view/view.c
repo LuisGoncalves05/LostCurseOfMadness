@@ -15,7 +15,7 @@ int draw_sprite_xpm(Sprite *sprite, int x, int y) {
     for (int h = 0 ; h < height ; h++) {
       for (int w = 0 ; w < width ; w++) {
         current_color = sprite->map[w + h*width];
-        if (vg_draw_pixel(x + w, y + h, current_color) != 0) return 1;
+        if (vg_draw_pixel(x + w, y + h, current_color, sec_frame_buffer) != 0) return 1;
       }
     }
     return 0; 

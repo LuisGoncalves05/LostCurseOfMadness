@@ -36,21 +36,21 @@ int (set_frame_buffer)(uint16_t mode){
   return 0;
 }
 
-inline uint8_t *(get_position) (uint16_t x, uint16_t y) {
-  return main_frame_buffer + (x + x_res * y) * bytes_per_pixel; // Updated to use main_frame_buffer
+inline uint8_t *(get_position)(uint16_t x, uint16_t y, uint8_t *frame_buffer) {
+  return frame_buffer + (x + x_res * y) * bytes_per_pixel; 
 }
 
-int(vg_draw_pixel)(uint16_t x, uint16_t y, uint32_t color) {
-  return vg_draw_hline(x, y, 1, color);
+int(vg_draw_pixel)(uint16_t x, uint16_t y, uint32_t color, uint8_t *frame_buffer) {
+  return vga_draw_hline(x, y, 1, color, frame_buffer);
 }
 
-int(vg_draw_hline)(uint16_t x, uint16_t y, uint16_t len, uint32_t color) {
+int(vga_draw_hline)(uint16_t x, uint16_t y, uint16_t len, uint32_t color, uint8_t *frame_buffer) {
   if (len == 0 || x >= x_res || y >= y_res) {
     fprintf(stderr, "vg_draw_hline: invalid coordinates/dimensions, x:%u y:%u len:%u.\n", x, y, len);
     return 1;
   }
 
-  uint8_t *address = get_position(x, y);
+  uint8_t *address = get_position(x, y, frame_buffer);
   for (uint16_t i = 0; i < len && x + i < x_res; i++, address += bytes_per_pixel) {
     memcpy(address, &color, bytes_per_pixel);
   }
@@ -58,7 +58,7 @@ int(vg_draw_hline)(uint16_t x, uint16_t y, uint16_t len, uint32_t color) {
   return 0;
 }
 
-int(vg_draw_rectangle)(uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint32_t color) {
+int(vga_draw_rectangle)(uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint32_t color, uint8_t *frame_buffer) {
   if (width == 0 || height == 0 || x >= x_res || y >= y_res) {
     fprintf(stderr, "vg_draw_rectangle: invalid coordinates/dimensions, x:%u y:%u width:%u height:%u.\n", x, y, width, height);
     return 1;
@@ -66,14 +66,14 @@ int(vg_draw_rectangle)(uint16_t x, uint16_t y, uint16_t width, uint16_t height, 
 
   int retv = 0;
   for (uint16_t i = 0; i < height && y + i < y_res; i++)
-    retv |= vg_draw_hline(x, y + i, width, color);
+    retv |= vga_draw_hline(x, y + i, width, color, frame_buffer);
 
   if (retv) {
     fprintf(stderr, "vg_draw_rectangle: vg_draw_hline failed.\n");
     return 1;
-  }
-  else
+  } else {
     return 0;
+  }
 }
 
 uint32_t(direct_mode)(uint16_t i, uint16_t j, uint8_t step, uint32_t first) {

@@ -6,3 +6,4 @@ typedef enum {
     Running,
     Finish,
 } GameState;
+

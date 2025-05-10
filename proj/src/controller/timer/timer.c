@@ -3,7 +3,7 @@
 #include "../utils.c"
 #include <stdint.h>
 
-int32_t timer_hook_id = TIMER0_IRQ;
+int32_t timer_hook_id = TIMER;
 uint32_t interrupt_counter = 0;
 
 int(timer_set_frequency)(uint8_t timer, uint32_t freq) {
