@@ -1,7 +1,7 @@
 #ifndef MOUSE_H
 #define MOUSE_H
 
-#include "../lab3/kbc.h"
+#include "../keyboard/kbc.h"
 
 extern int32_t kbd_subscription_id;
 

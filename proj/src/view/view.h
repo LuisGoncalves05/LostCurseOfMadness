@@ -10,6 +10,6 @@
 
 int draw_sprite_xpm(Sprite *sprite, int x, int y);
 int draw_text(char *text, uint16_t x, uint16_t y, uint32_t color);
-
-
+int set_frame_buffers(uint16_t mode);
+int copy_frame_buffer();
 #endif

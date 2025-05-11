@@ -1,5 +1,5 @@
 #include "mouse.h"
-#include "../lab3/kbc.h"
+#include "../keyboard/kbc.h"
 
 int32_t mouse_hook_id = 2;
 uint8_t packet_byte;

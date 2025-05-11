@@ -6,12 +6,11 @@
 // Player structure
 typedef struct {
     int health;         // Player health
-    int speed_x, speed_y;   // Player speed
     AnimSprite *sprite;     // Player animated sprite
 } Player;
 
 // Player functions
-Player *create_player(int health, int speed_x, int speed_y, AnimSprite *sprite);
+Player *create_player(int health, AnimSprite *sprite);
 void destroy_player(Player *player);
 
 #endif

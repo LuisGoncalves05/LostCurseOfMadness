@@ -3,13 +3,11 @@
 #include <lcom/lcf.h>
 #include <machine/int86.h>
 
-static vbe_mode_info_t vg_mode_info;
-static uint8_t bytes_per_pixel;
-static uint16_t x_res, y_res;
-static uint8_t *video_mem;
+vbe_mode_info_t vg_mode_info;
+uint8_t bytes_per_pixel;
+uint16_t x_res, y_res;
+uint8_t *main_frame_buffer; 
 extern uint32_t interrupt_counter;
-
-
 
 int (set_graphic_mode)(uint16_t mode){
   reg86_t reg86;
@@ -21,7 +19,6 @@ int (set_graphic_mode)(uint16_t mode){
   return 0;
 }
 
-
 int (set_frame_buffer)(uint16_t mode){
   memset(&vg_mode_info, 0, sizeof(vg_mode_info));
   vbe_get_mode_info(mode, &vg_mode_info); // get mode info
@@ -29,34 +26,31 @@ int (set_frame_buffer)(uint16_t mode){
   unsigned int size = vg_mode_info.XResolution * vg_mode_info.YResolution * ((vg_mode_info.BitsPerPixel+7) / 8); // calculate size of framebuffer
 
   struct minix_mem_range physic_addresses;
-  physic_addresses.mr_base = mode_info.PhysBasePtr; // início físico do buffer
+  physic_addresses.mr_base = vg_mode_info.PhysBasePtr; // início físico do buffer
   physic_addresses.mr_limit = physic_addresses.mr_base + size; // fim físico do buffer
 
   sys_privctl(SELF, SYS_PRIV_ADD_MEM, &physic_addresses); // add memory range to process
      
-  video_mem = vm_map_phys(SELF, (void *)physic_addresses.mr_base, size); // map memory range to process
+  main_frame_buffer = vm_map_phys(SELF, (void *)physic_addresses.mr_base, size); // map memory range to process
 
   return 0;
 }
 
-
-
-
-inline uint8_t *(get_position) (uint16_t x, uint16_t y) {
-  return video_mem + (x + x_res * y) * bytes_per_pixel;
+inline uint8_t *(get_position)(uint16_t x, uint16_t y, uint8_t *frame_buffer) {
+  return frame_buffer + (x + x_res * y) * bytes_per_pixel; 
 }
 
-int(vg_draw_pixel)(uint16_t x, uint16_t y, uint32_t color) {
-  return vg_draw_hline(x, y, 1, color);
+int(vg_draw_pixel)(uint16_t x, uint16_t y, uint32_t color, uint8_t *frame_buffer) {
+  return vga_draw_hline(x, y, 1, color, frame_buffer);
 }
 
-int(vg_draw_hline)(uint16_t x, uint16_t y, uint16_t len, uint32_t color) {
+int(vga_draw_hline)(uint16_t x, uint16_t y, uint16_t len, uint32_t color, uint8_t *frame_buffer) {
   if (len == 0 || x >= x_res || y >= y_res) {
     fprintf(stderr, "vg_draw_hline: invalid coordinates/dimensions, x:%u y:%u len:%u.\n", x, y, len);
     return 1;
   }
 
-  uint8_t *address = get_position(x, y);
+  uint8_t *address = get_position(x, y, frame_buffer);
   for (uint16_t i = 0; i < len && x + i < x_res; i++, address += bytes_per_pixel) {
     memcpy(address, &color, bytes_per_pixel);
   }
@@ -64,7 +58,7 @@ int(vg_draw_hline)(uint16_t x, uint16_t y, uint16_t len, uint32_t color) {
   return 0;
 }
 
-int(vg_draw_rectangle)(uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint32_t color) {
+int(vga_draw_rectangle)(uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint32_t color, uint8_t *frame_buffer) {
   if (width == 0 || height == 0 || x >= x_res || y >= y_res) {
     fprintf(stderr, "vg_draw_rectangle: invalid coordinates/dimensions, x:%u y:%u width:%u height:%u.\n", x, y, width, height);
     return 1;
@@ -72,14 +66,14 @@ int(vg_draw_rectangle)(uint16_t x, uint16_t y, uint16_t width, uint16_t height, 
 
   int retv = 0;
   for (uint16_t i = 0; i < height && y + i < y_res; i++)
-    retv |= vg_draw_hline(x, y + i, width, color);
+    retv |= vga_draw_hline(x, y + i, width, color, frame_buffer);
 
   if (retv) {
     fprintf(stderr, "vg_draw_rectangle: vg_draw_hline failed.\n");
     return 1;
-  }
-  else
+  } else {
     return 0;
+  }
 }
 
 uint32_t(direct_mode)(uint16_t i, uint16_t j, uint8_t step, uint32_t first) {
@@ -106,67 +100,4 @@ uint32_t(indexed_mode)(uint8_t no_rectangles, uint16_t i, uint16_t j, uint8_t st
   return (first + (i * no_rectangles + j) * step) % (1 << vg_mode_info.BitsPerPixel);
 }
 
-int(vg_draw_xpm)(xpm_map_t xpm, uint16_t x, uint16_t y) {
-  Sprite *sprite = create_sprite(xpm, x, y);
-  if (sprite == NULL) {
-    fprintf(stderr, "vg_draw_xpm: create_sprite failed.\n");
-    return 1;
-  }
 
-  if (vg_draw_sprite(sprite)) {
-    fprintf(stderr, "vg_draw_xpm: vg_draw_sprite failed.\n");
-    return 1;
-  }
-
-  return 0;
-}
-
-
-
-
-int(vg_update_sprite)(Sprite *sprite, uint16_t xf, uint16_t yf, int16_t speed, int8_t dir, bool movement_x) {
-  if (sprite == NULL) {
-    fprintf(stderr, "vg_update_sprite: NULL pointer provided.\n");
-    return 1;
-  }
-
-  if (sprite->x >= x_res || sprite->y >= y_res) {
-    fprintf(stderr, "vg_update_sprite: invalid position x:%hu y:%hu.\n", sprite->x, sprite->y);
-    return 1;
-  }
-
-  if (speed == 0 || dir == 0) {
-    fprintf(stderr, "vg_update_sprite: invalid speed or direction (0).\n");
-    return 1;
-  }
-
-  if (vg_draw_rectangle(sprite->x, sprite->y, sprite->width, sprite->height, BACKGROUND_COLOR)) { /* erase sprite from the previous place */
-    fprintf(stderr, "vg_update_sprite: vg_draw_rectangle failed.\n");
-    return 1;
-  }
-
-  if (speed > 0) {
-    sprite->x += speed * movement_x * dir;
-    sprite->y += speed * !movement_x * dir;
-  }
-  else if (speed < 0) {
-    sprite->x += (interrupt_counter % -speed == 0) * movement_x * dir;
-    sprite->y += (interrupt_counter % -speed == 0) * !movement_x * dir;
-  }
-
-  if (dir > 0) {
-    sprite->x = MIN(sprite->x, xf);
-    sprite->y = MIN(sprite->y, yf);
-  }
-  else if (dir < 0) {
-    sprite->x = MAX(sprite->x, xf);
-    sprite->y = MAX(sprite->y, yf);
-  }
-
-  if (vg_draw_sprite(sprite)) {
-    fprintf(stderr, "vg_update_sprite: vg_draw_sprite failed.\n");
-    return 1;
-  }
-
-  return 0;
-}
