@@ -12,7 +12,7 @@
 * as xpm_map_t (has const protectors)
 * @return NULL on invalid pixmap.
 */
-Sprite *create_sprite(const char *pic[], 
+Sprite *create_sprite(xpm_map_t xpm, 
     int x, int y, int xspeed, int yspeed) {
     // allocate space for the "object"
     Sprite *sp = (Sprite *) malloc(sizeof(Sprite));
@@ -20,7 +20,7 @@ Sprite *create_sprite(const char *pic[],
     if (sp == NULL)
     return NULL;
     // read the sprite pixmap
-    sp->map = xpm_load(pic, XPM_INDEXED, &img);
+    sp->map = xpm_load(xpm, XPM_INDEXED, &img);
     if (sp->map == NULL) {
         free(sp);
         return NULL;

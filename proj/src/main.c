@@ -5,8 +5,10 @@
 #include "controller/mouse/mouse.h"
 #include "view/view.h"
 #include "config.h"
+#include "model/game/game.h"
 #include <time.h>
 #include "model/game/maze.h"
+
 
 typedef enum {
     MENU,        // Main menu state
@@ -18,13 +20,16 @@ uint8_t timer_mask;
 uint8_t keyboard_mask;
 uint8_t mouse_mask;
 
+extern uint8_t *sec_frame_buffer;
+extern uint8_t *main_frame_buffer;
+
 extern uint8_t scan_code;
 extern uint8_t packet_byte;
 extern uint8_t packet[3];
 struct packet pp;
 uint8_t packet_idx = 0;
 
-State state = MENU;
+State state = GAME;
 
 
 int main(int argc, char *argv[]) {
@@ -115,7 +120,7 @@ int (proj_main_loop)(int argc, char *argv[]) {
         case HARDWARE: 
           if (msg.m_notify.interrupts & timer_mask){
             if(state == GAME){
-              
+             main_game_loop();
             }
             else if(state == MENU){
               

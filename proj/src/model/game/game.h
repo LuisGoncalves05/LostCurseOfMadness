@@ -7,3 +7,8 @@ typedef enum {
     Finish,
 } GameState;
 
+
+void main_game_loop();
+
+int draw_player();
+

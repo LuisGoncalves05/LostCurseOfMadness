@@ -1,6 +1,7 @@
 #ifndef SPRITE_H
 #define SPRITE_H
 
+#include "lcom/lcf.h"
 #include <stdint.h>
 #include <stdint.h>
 
@@ -13,7 +14,7 @@ typedef struct {
 } Sprite;
 
 // Sprite function declarations
-Sprite *create_sprite(const char *pic[], int x, int y, int xspeed, int yspeed);
+Sprite *create_sprite(xpm_map_t xpm, int x, int y, int xspeed, int yspeed);
 void destroy_sprite(Sprite *sp);
 
 
