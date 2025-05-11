@@ -20,7 +20,7 @@ void destroy_player(Player *player) {
     if (!player) return;
 
     if (player->sprite) {
-        destroy_anim_sprite(player->sprite);
+        destroy_sprite(player->sprite);
     }
     free(player);
 }

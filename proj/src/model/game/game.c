@@ -13,14 +13,16 @@ extern uint8_t *main_frame_buffer;
 
 
 void main_game_loop(){
-    //Sprite *sprite = create_sprite();
-    //Player *player = create_player(3, sprite);
+    Sprite *sprite = create_sprite((xpm_map_t) player, 50, 50, 0, 0);
+    Player *player = create_player(3, sprite);
+    printf("Player created with health: %d\n", player->health);
+    draw_sprite_xpm(player->sprite, 0, 0);
     draw_player();
 }
 
 int draw_player(){
     
-    vga_draw_rectangle(50, 50, 20, 20, 0xFF, sec_frame_buffer);
+    
     copy_frame_buffer();
     return 0;
 }

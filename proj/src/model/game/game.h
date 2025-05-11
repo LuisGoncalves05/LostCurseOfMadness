@@ -1,5 +1,6 @@
 #include "lcom/lcf.h"
 #include "Player.h"
+#include "player.xpm"
 
 typedef enum {
     Waiting,
