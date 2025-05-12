@@ -120,7 +120,7 @@ int (proj_main_loop)(int argc, char *argv[]) {
         case HARDWARE: 
           if (msg.m_notify.interrupts & timer_mask){
             if(state == GAME){
-             main_game_loop();
+              main_game_loop();
             }
             else if(state == MENU){
               
@@ -128,8 +128,9 @@ int (proj_main_loop)(int argc, char *argv[]) {
           }
           if (msg.m_notify.interrupts & keyboard_mask){
             kbd_int_handler();
+
             if(state == GAME){
-              
+              keyboard_handler();
             }
             else if(state == MENU){
               
