@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 // Create a new player
-Player *create_player(int health, AnimSprite *sprite) {
+Player *create_player(int health, Sprite *sprite) {
     Player *player = (Player *)malloc(sizeof(Player));
     if (!player) return NULL;
     player->health = health;
@@ -11,6 +11,7 @@ Player *create_player(int health, AnimSprite *sprite) {
         return NULL; // Invalid health
     }
     player->sprite = sprite;
+    player->moved = 0;
     return player;
 }
 
@@ -19,7 +20,7 @@ void destroy_player(Player *player) {
     if (!player) return;
 
     if (player->sprite) {
-        destroy_anim_sprite(player->sprite);
+        destroy_sprite(player->sprite);
     }
     free(player);
 }

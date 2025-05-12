@@ -23,6 +23,10 @@ int (set_frame_buffer)(uint16_t mode){
   memset(&vg_mode_info, 0, sizeof(vg_mode_info));
   vbe_get_mode_info(mode, &vg_mode_info); // get mode info
 
+  x_res = vg_mode_info.XResolution; // get x resolution
+  y_res = vg_mode_info.YResolution; // get y resolution
+  bytes_per_pixel = (vg_mode_info.BitsPerPixel + 7) / 8; // calculate bytes per pixel
+
   unsigned int size = vg_mode_info.XResolution * vg_mode_info.YResolution * ((vg_mode_info.BitsPerPixel+7) / 8); // calculate size of framebuffer
 
   struct minix_mem_range physic_addresses;

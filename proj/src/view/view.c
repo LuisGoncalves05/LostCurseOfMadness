@@ -44,5 +44,9 @@ int copy_frame_buffer(){
   return 0;
 }
 
+int(clear)(uint8_t *frame_buffer) {
+    return memset(frame_buffer, 0, x_res*y_res* bytes_per_pixel) == NULL;
+}
+
 
 
