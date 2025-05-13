@@ -96,12 +96,7 @@ int (proj_main_loop)(int argc, char *argv[]) {
       switch(_ENDPOINT_P(msg.m_source)) {
         case HARDWARE: 
           if (msg.m_notify.interrupts & timer_mask){
-            if(state == LEVEL){
-              main_game_loop();
-            }
-            else if(state == MENU){
-              printf("in menu\n");
-            }
+            game_timer_handler(game);
           }
           if (msg.m_notify.interrupts & keyboard_mask){
             kbd_int_handler();

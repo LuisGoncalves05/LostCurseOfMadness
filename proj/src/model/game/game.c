@@ -109,3 +109,35 @@ void main_game_loop(){
     game_over_keyboard_handler,
     exit_keyboard_handler
 };
+
+static void menu_timer_handler(Game* game) {
+    printf("in menu\n");    
+}
+
+static void level_timer_handler(Game* game) {
+    main_game_loop();    
+}
+
+static void victory_timer_handler(Game* game) {
+    printf("Win!\n");    
+}
+
+static void game_over_timer_handler(Game* game) {
+    printf("GAME OVER\n");    
+}
+
+static void exit_timer_handler(Game* game) {
+    printf("exiting\n");    
+}
+
+static void (*game_timer_handlers[])(Game *game) = {
+    menu_timer_handler,
+    level_timer_handler,
+    victory_timer_handler,
+    game_over_timer_handler,
+    exit_timer_handler
+};
+
+void game_timer_handler(Game* game) {
+    game_timer_handlers[game->state](game);
+}
