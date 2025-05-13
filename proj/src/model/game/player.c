@@ -44,7 +44,6 @@ int draw_player(){
     if(player == NULL){
         player_sprite = create_sprite((xpm_map_t) penguin, 200, 200, 10, 10);
         player = create_player(HEALTH, player_sprite);
-        vga_draw_rectangle(0, 0, 100, 100, 0x01, sec_frame_buffer);
     }
 
     draw_sprite_xpm(player->sprite, player->sprite->x, player->sprite->y);

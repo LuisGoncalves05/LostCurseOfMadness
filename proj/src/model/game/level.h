@@ -10,4 +10,7 @@ typedef struct {
   Player* player;
 } Level;
 
+Level *create_level(uint8_t number);
+void destroy_level(Level *level);
+
 #endif

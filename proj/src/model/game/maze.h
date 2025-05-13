@@ -1,3 +1,6 @@
+#ifndef MAZE_H
+#define MAZE_H
+
 #include <lcom/lcf.h>
 
 typedef struct {
@@ -16,3 +19,5 @@ int open_maze(Maze* maze, uint8_t percentage);
 void dfs(Maze* maze, int x, int y);
 
 void shuffle(int* arr, int n);
+
+#endif

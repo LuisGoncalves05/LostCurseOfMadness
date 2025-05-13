@@ -5,24 +5,24 @@
 #include "controller/mouse/mouse.h"
 #include "view/view.h"
 #include "config.h"
+
 #include "model/game/game.h"
-#include <time.h>
+#include "model/game/maze.h"
+#include "model/game/player.h"
+#include "model/game/level.h"
 
 uint8_t timer_mask;
 uint8_t keyboard_mask;
 uint8_t mouse_mask;
 
-extern uint8_t *sec_frame_buffer;
 extern uint8_t *main_frame_buffer;
+extern uint8_t *sec_frame_buffer;
 
 extern uint8_t scan_code;
 extern uint8_t packet_byte;
 extern uint8_t packet[3];
 struct packet pp;
 uint8_t packet_idx = 0;
-
-State state = LEVEL;
-
 
 int main(int argc, char *argv[]) {
   // sets the language of LCF messages (can be either EN-US or PT-PT)
@@ -79,22 +79,14 @@ int reset() {
 }
 
 int (proj_main_loop)(int argc, char *argv[]) {
-  srand(time(NULL));
-  Maze* maze = malloc(sizeof(Maze));
-  if (initialize_maze(maze, 31, 11))
-      return 1;
-  
-  print_maze(maze);
-  printf("---------------------------------\n");
-  open_maze(maze, 30);
-  print_maze(maze);
+  Game *game = create_game();
 
   setup();
 
   int ipc_status;
   message msg;
   while (scan_code != ESC_BREAK_CODE) {
-    
+    State state = get_state(game);
     if (driver_receive(ANY, &msg, &ipc_status) != 0) {
       printf("Error");
       continue;
@@ -132,7 +124,7 @@ int (proj_main_loop)(int argc, char *argv[]) {
   }
   
   if (reset() != 0) return 1;
-  free_maze(maze);
 
+  destroy_game(game);
   return 0;
 }

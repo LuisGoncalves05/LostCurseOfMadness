@@ -2,7 +2,6 @@
 #define GAME_H
 
 #include "level.h"
-#include "player.h"
 
 typedef enum {
     MENU,
@@ -12,12 +11,14 @@ typedef enum {
     EXIT
 } State;
 
-typedef struct  {
-    State state;
-    uint8_t level_number;
-    Level level;
-} Game;
+typedef struct Game Game;
 
+Game *create_game();
+void destroy_game(Game *game);
 void main_game_loop();
+
+State get_state(Game *game);
+
+int handle_keyboards();
 
 #endif
