@@ -6,8 +6,6 @@
 #define KEY_S 0x1F
 #define KEY_D 0x20
 
-#define HEALTH 3
-
 
 typedef enum {
     Waiting,
@@ -17,8 +15,6 @@ typedef enum {
 
 
 void main_game_loop();
-
-int draw_player();
 
 void keyboard_handler();
 void mouse_handler(struct packet pp);
