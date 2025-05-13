@@ -12,6 +12,7 @@ extern uint8_t *main_frame_buffer;
 
 #include "controller/keyboard/i8042.h"
 extern uint8_t scan_code;
+extern struct packet pp;
 
 struct Game {
     State state;
@@ -94,6 +95,37 @@ static void set_state(Game* game, State new_state) {
     state_init(game);
 }
 
+static void menu_timer_handler(Game* game) {
+}
+
+static void level_timer_handler(Game* game) {
+    main_game_loop();    
+}
+
+static void victory_timer_handler(Game* game) {
+    printf("Win!\n");    
+}
+
+static void game_over_timer_handler(Game* game) {
+    printf("GAME OVER\n");    
+}
+
+static void exit_timer_handler(Game* game) {
+    printf("exiting\n");    
+}
+
+static void (*game_timer_handlers[])(Game *game) = {
+    menu_timer_handler,
+    level_timer_handler,
+    victory_timer_handler,
+    game_over_timer_handler,
+    exit_timer_handler
+};
+
+void game_timer_handler(Game* game) {
+    game_timer_handlers[game->state](game);
+}
+
 static void menu_keyboard_handler(Game* game) {
     if (scan_code == ESC_BREAK_CODE) set_state(game, EXIT);
 }
@@ -127,35 +159,36 @@ void game_keyboard_handler(Game* game) {
     game_keyboard_handlers[game->state](game);
 }
 
-static void menu_timer_handler(Game* game) {
+static void menu_mouse_handler(Game* game) {
+    printf("menu_mouse_handler: To be implemented\n");    
 }
 
-static void level_timer_handler(Game* game) {
-    main_game_loop();    
+static void level_mouse_handler(Game* game) {
+    mouse_handler(pp);
 }
 
-static void victory_timer_handler(Game* game) {
-    printf("Win!\n");    
+static void victory_mouse_handler(Game* game) {
+    printf("victory_mouse_handler: To be implemented\n");    
 }
 
-static void game_over_timer_handler(Game* game) {
-    printf("GAME OVER\n");    
+static void game_over_mouse_handler(Game* game) {
+    printf("game_over_mouse_handler: To be implemented\n");    
 }
 
-static void exit_timer_handler(Game* game) {
-    printf("exiting\n");    
+static void exit_mouse_handler(Game* game) {
+    printf("This function should never be called\n");    
 }
 
-static void (*game_timer_handlers[])(Game *game) = {
-    menu_timer_handler,
-    level_timer_handler,
-    victory_timer_handler,
-    game_over_timer_handler,
-    exit_timer_handler
+static void (*game_mouse_handlers[])(Game *game) = {
+    menu_mouse_handler,
+    level_mouse_handler,
+    victory_mouse_handler,
+    game_over_mouse_handler,
+    exit_mouse_handler
 };
 
-void game_timer_handler(Game* game) {
-    game_timer_handlers[game->state](game);
+void game_mouse_handler(Game* game) {
+    game_mouse_handlers[game->state](game);
 }
 
 /* public functions */

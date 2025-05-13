@@ -108,8 +108,8 @@ int (proj_main_loop)(int argc, char *argv[]) {
               mouse_build_packet(packet, &packet_idx, &pp);
               packet_idx = 0;
             }
-            break;
           }
+          break;
         }
     }
   }

@@ -21,5 +21,6 @@ State get_state(Game *game);
 
 void game_timer_handler(Game* game);
 void game_keyboard_handler(Game* game);
+void game_mouse_handler(Game* game);
 
 #endif
