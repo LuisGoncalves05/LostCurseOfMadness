@@ -1,7 +1,5 @@
 #include "level.h"
 
-#include <time.h>
-
 extern Sprite *player_sprite;
 
 Level *create_level(uint8_t number) {
@@ -9,15 +7,7 @@ Level *create_level(uint8_t number) {
     if (!level) return NULL;
 
     level->number = number;
-    level->maze = (Maze *)malloc(sizeof(Maze));
-    srand(time(NULL));
-    Maze* maze = malloc(sizeof(Maze));
-    if (initialize_maze(maze, 31, 11)) {
-        free(level);
-        return NULL;
-    }
-    open_maze(maze, 30);
-    print_maze(maze);
+    level->maze = create_maze(31, 11);
     if (!level->maze) {
         free(level);
         return NULL;
