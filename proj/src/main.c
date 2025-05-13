@@ -61,7 +61,7 @@ int setup() {
   
 
   // Atualização da frequência
-  if (timer_set_frequency(TIMER, GAME_FREQUENCY) != 0) return 1;
+  //if (timer_set_frequency(TIMER, GAME_FREQUENCY) != 0) return 1;
 
   if (set_frame_buffers(VIDEO_MODE) != 0) return 1;
 
@@ -148,7 +148,7 @@ int (proj_main_loop)(int argc, char *argv[]) {
             }
 
             if(state == GAME){
-              
+              mouse_handler(pp);
             }
             else if(state == MENU){
               
