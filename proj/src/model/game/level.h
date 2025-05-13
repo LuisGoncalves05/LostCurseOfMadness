@@ -4,11 +4,7 @@
 #include "maze.h"
 #include "player.h"
 
-typedef struct {
-  uint8_t number;
-  Maze* maze;
-  Player* player;
-} Level;
+typedef struct Level Level;
 
 Level *create_level(uint8_t number);
 void destroy_level(Level *level);

@@ -1,5 +1,11 @@
 #include "level.h"
 
+struct Level {
+    uint8_t number;
+    Maze* maze;
+    Player* player;
+};
+
 extern Sprite *player_sprite;
 
 Level *create_level(uint8_t number) {
