@@ -16,59 +16,33 @@ extern uint8_t scan_code;
 struct Game {
     State state;
     uint8_t level_number;
+    uint8_t score;
     Level *level;
 };
 
-Game *create_game() {
-    Game *game = (Game *)malloc(sizeof(Game));
-    if (!game) return NULL;
+static void menu_init(Game *game) {
+    printf("in menu\n");
+}
 
-    game->state = LEVEL;
-    game->level_number = 0;
+static void level_init(Game *game) {
     game->level = create_level(game->level_number);
-
-    return game;
 }
 
-void destroy_game(Game *game) {
-    if (game) {
-        destroy_level(game->level);
-        free(game);
-    }
+static void victory_init(Game *game) {
+    game->score = game->level_number;
+    game->level_number++;
 }
 
-State get_state(Game *game) {
-    return game->state;
+static void game_over_init(Game *game) {
+    game->score = game->level_number;    
+    game->level_number = 0;
 }
 
-void main_game_loop(){
-    clear(sec_frame_buffer);
-    draw_player();
-    copy_frame_buffer();
+static void exit_init(Game *game) {
+    printf("exiting game\n");
 }
 
-
-/* static */ void menu_init() {
-    printf("To be implemented\n");    
-}
-
-/* static */ void level_init() {
-    printf("To be implemented\n");    
-}
-
-/* static */ void victory_init() {
-    printf("To be implemented\n");    
-}
-
-/* static */ void game_over_init() {
-    printf("To be implemented\n");    
-}
-
-/* static */ void exit_init() {
-    printf("To be implemented\n");    
-}
-
-/* static */ void (*game_init[])() = {
+static void (*game_init[])(Game *game) = {
     menu_init,
     level_init,
     victory_init,
@@ -76,33 +50,72 @@ void main_game_loop(){
     exit_init
 };
 
-// destroy state functions
-
-/* static */ void set_state(Game* game, State new_state) {
-    printf("Changing state from %d to %d\n", game->state, new_state);
+static void state_init(Game* game) {
+    game_init[game->state](game);
 }
 
-/* static */ void menu_keyboard_handler(Game* game) {
-    printf("To be implemented\n");    
+static void menu_destroy(Game* game) {
+    printf("exiting menu\n");
 }
 
-/* static */ void level_keyboard_handler(Game* game) {
+static void level_destroy(Game* game) {
+    printf("exiting level\n");
+    destroy_level(game->level);
+}
+
+static void victory_destroy(Game* game) {
+    printf("exiting victory state\n");    
+}
+
+static void game_over_destroy(Game* game) {
+    printf("exiting game over state\n");    
+}
+
+static void exit_destroy(Game* game) {
+    printf("This function should never be called\n");    
+}
+
+static void (*game_destroy[])(Game *game) = {
+    menu_destroy,
+    level_destroy,
+    victory_destroy,
+    game_over_destroy,
+    exit_destroy
+};
+
+static void state_destroy(Game* game) {
+    game_destroy[game->state](game);
+}
+
+static void set_state(Game* game, State new_state) {
+    // printf("Changing state from %d to %d\n", game->state, new_state);
+    state_destroy(game);
+    game->state = new_state;
+    state_init(game);
+}
+
+static void menu_keyboard_handler(Game* game) {
     if (scan_code == ESC_BREAK_CODE) set_state(game, EXIT);
 }
 
-/* static */ void victory_keyboard_handler(Game* game) {
-    printf("To be implemented\n");    
+static void level_keyboard_handler(Game* game) {
+    keyboard_handler();
+    if (scan_code == ESC_BREAK_CODE) set_state(game, EXIT);
 }
 
-/* static */ void game_over_keyboard_handler(Game* game) {
-    printf("To be implemented\n");    
+static void victory_keyboard_handler(Game* game) {
+    printf("victory_keyboard_handler: To be implemented\n");    
 }
 
-/* static */ void exit_keyboard_handler(Game* game) {
-    printf("To be implemented\n");    
+static void game_over_keyboard_handler(Game* game) {
+    printf("game_over_keyboard_hanlder: To be implemented\n");    
 }
 
-/* static */ void (*game_keyboard_handlers[])(Game *game) = {
+static void exit_keyboard_handler(Game* game) {
+    printf("This function should never be called\n");    
+}
+
+static void (*game_keyboard_handlers[])(Game *game) = {
     menu_keyboard_handler,
     level_keyboard_handler,
     victory_keyboard_handler,
@@ -110,8 +123,11 @@ void main_game_loop(){
     exit_keyboard_handler
 };
 
+void game_keyboard_handler(Game* game) {
+    game_keyboard_handlers[game->state](game);
+}
+
 static void menu_timer_handler(Game* game) {
-    printf("in menu\n");    
 }
 
 static void level_timer_handler(Game* game) {
@@ -140,4 +156,36 @@ static void (*game_timer_handlers[])(Game *game) = {
 
 void game_timer_handler(Game* game) {
     game_timer_handlers[game->state](game);
+}
+
+/* public functions */
+
+Game *create_game() {
+    Game *game = (Game *)malloc(sizeof(Game));
+    if (!game) return NULL;
+
+    game->level_number = 0;
+    game->score = 0;
+
+    game->state = LEVEL;
+    state_init(game);
+
+    return game;
+}
+
+void destroy_game(Game *game) {
+    if (game) {
+        if (game->state == LEVEL) destroy_level(game->level);
+        free(game);
+    }
+}
+
+State get_state(Game *game) {
+    return game->state;
+}
+
+void main_game_loop(){
+    clear(sec_frame_buffer);
+    draw_player();
+    copy_frame_buffer();
 }

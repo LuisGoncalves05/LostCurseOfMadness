@@ -36,7 +36,7 @@ Level *create_level(uint8_t number) {
 void destroy_level(Level *level) {
     if (level) {
         destroy_player(level->player);
-        free(level->maze);
+        free_maze(level->maze);
         free(level);
     }
 }

@@ -20,6 +20,6 @@ void main_game_loop();
 State get_state(Game *game);
 
 void game_timer_handler(Game* game);
-int handle_keyboards();
+void game_keyboard_handler(Game* game);
 
 #endif

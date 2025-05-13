@@ -30,11 +30,11 @@ int main(int argc, char *argv[]) {
 
   // enables to log function invocations that are being "wrapped" by LCF
   // [comment this out if you don't want/need/ it]
-  // lcf_trace_calls("/home/lcom/labs/lab4/trace.txt");
+  lcf_trace_calls("/home/lcom/labs/proj/src/trace.txt");
 
   // enables to save the output of printf function calls on a file
   // [comment this out if you don't want/need it]
-  // lcf_log_output("/home/lcom/labs/lab4/output.txt");
+  lcf_log_output("/home/lcom/labs/proj/src/output.txt");
 
   // handles control over to LCF
   // [LCF handles command line arguments and invokes the right function]
@@ -85,8 +85,7 @@ int (proj_main_loop)(int argc, char *argv[]) {
 
   int ipc_status;
   message msg;
-  while (scan_code != ESC_BREAK_CODE) {
-    State state = get_state(game);
+  while (get_state(game) != EXIT) {
     if (driver_receive(ANY, &msg, &ipc_status) != 0) {
       printf("Error");
       continue;
@@ -100,10 +99,7 @@ int (proj_main_loop)(int argc, char *argv[]) {
           }
           if (msg.m_notify.interrupts & keyboard_mask){
             kbd_int_handler();
-            if(state == LEVEL){
-              keyboard_handler();
-            }
-            break;
+            game_keyboard_handler(game);
           }
           if (msg.m_notify.interrupts & mouse_mask){
             mouse_int_handler();
