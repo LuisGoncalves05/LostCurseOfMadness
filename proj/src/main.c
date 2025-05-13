@@ -7,7 +7,6 @@
 #include "config.h"
 #include "model/game/game.h"
 #include <time.h>
-#include "model/game/maze.h"
 
 uint8_t timer_mask;
 uint8_t keyboard_mask;
@@ -22,7 +21,7 @@ extern uint8_t packet[3];
 struct packet pp;
 uint8_t packet_idx = 0;
 
-State state = MENU;
+State state = LEVEL;
 
 
 int main(int argc, char *argv[]) {

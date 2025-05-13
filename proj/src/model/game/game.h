@@ -1,12 +1,8 @@
-#include "lcom/lcf.h"
-#include "Player.h"
+#ifndef GAME_H
+#define GAME_H
 
-#define KEY_W 0x11
-#define KEY_A 0x1E
-#define KEY_S 0x1F
-#define KEY_D 0x20
-
-#define HEALTH 3
+#include "level.h"
+#include "player.h"
 
 typedef enum {
     MENU,
@@ -16,9 +12,12 @@ typedef enum {
     EXIT
 } State;
 
+typedef struct  {
+    State state;
+    uint8_t level_number;
+    Level level;
+} Game;
+
 void main_game_loop();
 
-int draw_player();
-
-void keyboard_handler();
-void mouse_handler(struct packet pp);
+#endif
