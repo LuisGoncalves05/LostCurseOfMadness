@@ -8,13 +8,13 @@
 
 #define HEALTH 3
 
-
 typedef enum {
-    Waiting,
-    Running,
-    Finish,
-} GameState;
-
+    MENU,
+    LEVEL,
+    VICTORY,
+    GAME_OVER,
+    EXIT
+} State;
 
 void main_game_loop();
 

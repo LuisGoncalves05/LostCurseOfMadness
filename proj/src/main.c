@@ -9,13 +9,6 @@
 #include <time.h>
 #include "model/game/maze.h"
 
-
-typedef enum {
-    MENU,        // Main menu state
-    GAME,       // Game state
-    EXIT         // Exit and cleanup state
-} State;
-
 uint8_t timer_mask;
 uint8_t keyboard_mask;
 uint8_t mouse_mask;
@@ -29,7 +22,7 @@ extern uint8_t packet[3];
 struct packet pp;
 uint8_t packet_idx = 0;
 
-State state = GAME;
+State state = MENU;
 
 
 int main(int argc, char *argv[]) {
@@ -58,34 +51,27 @@ int main(int argc, char *argv[]) {
 
 
 int setup() {
-  
-
-  // Atualização da frequência
-  if (timer_set_frequency(TIMER, GAME_FREQUENCY) != 0) return 1;
-
+  // set graphic mode
   if (set_frame_buffers(VIDEO_MODE) != 0) return 1;
-
-  // Inicialização do modo gráfico
   if (set_graphic_mode(VIDEO_MODE) != 0) return 1;
-
   
-
-  // Ativação das interrupções dos dispositivos
+  // subscribe to interrupts
+  if (timer_set_frequency(TIMER, GAME_FREQUENCY) != 0) return 1;
   if (timer_subscribe_int(&timer_mask) != 0) return 1;
-  if (kbd_subscribe_int(&keyboard_mask) != 0) return 1;
-  if (mouse_subscribe_int(&mouse_mask) != 0) return 1;
 
+  if (kbd_subscribe_int(&keyboard_mask) != 0) return 1;
+  
+  if (mouse_subscribe_int(&mouse_mask) != 0) return 1;
   if(mouse_set_data_reporting(true) != 0) return 1;
 
   return 0;
 }
 
 int reset() {
-
-  // Volta ao modo de texto
+  // set text mode
   if (vg_exit() != 0) return 1;
 
-  // Desativa todas as interrupções
+  // unsubscribe from interrupts
   if (timer_unsubscribe_int() != 0) return 1;
   if (kbd_unsubscribe_int() != 0) return 1;
   if (mouse_unsubscribe_int() != 0) return 1;
@@ -119,41 +105,27 @@ int (proj_main_loop)(int argc, char *argv[]) {
       switch(_ENDPOINT_P(msg.m_source)) {
         case HARDWARE: 
           if (msg.m_notify.interrupts & timer_mask){
-            if(state == GAME){
+            if(state == LEVEL){
               main_game_loop();
             }
             else if(state == MENU){
-              
+              printf("in menu\n");
             }
           }
           if (msg.m_notify.interrupts & keyboard_mask){
             kbd_int_handler();
-
-            if(state == GAME){
+            if(state == LEVEL){
               keyboard_handler();
-            }
-            else if(state == MENU){
-              
             }
             break;
           }
           if (msg.m_notify.interrupts & mouse_mask){
             mouse_int_handler();
-
             mouse_sync_packets(packet, &packet_idx, packet_byte);
-            
             if(packet_idx == 3){
               mouse_build_packet(packet, &packet_idx, &pp);
               packet_idx = 0;
             }
-
-            if(state == GAME){
-              
-            }
-            else if(state == MENU){
-              
-            }
-
             break;
           }
         }
