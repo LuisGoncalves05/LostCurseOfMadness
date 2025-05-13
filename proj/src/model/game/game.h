@@ -1,20 +1,25 @@
-#include "lcom/lcf.h"
-#include "Player.h"
+#ifndef GAME_H
+#define GAME_H
 
-#define KEY_W 0x11
-#define KEY_A 0x1E
-#define KEY_S 0x1F
-#define KEY_D 0x20
-
+#include "level.h"
 
 typedef enum {
-    Waiting,
-    Running,
-    Finish,
-} GameState;
+    MENU,
+    LEVEL,
+    VICTORY,
+    GAME_OVER,
+    EXIT
+} State;
 
+typedef struct Game Game;
 
-void main_game_loop();
+Game *create_game();
+void destroy_game(Game *game);
 
-void keyboard_handler();
-void mouse_handler(struct packet pp);
+State get_state(Game *game);
+
+void game_timer_handler(Game* game);
+void game_keyboard_handler(Game* game);
+void game_mouse_handler(Game* game);
+
+#endif
