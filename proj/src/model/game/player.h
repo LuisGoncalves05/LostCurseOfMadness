@@ -10,7 +10,7 @@
 #define KEY_A 0x1E
 #define KEY_S 0x1F
 #define KEY_D 0x20
-
+#define KEY_X 0x2D
 #define HEALTH 3
 
 #define PLAYER_MAX_SPEED 7
