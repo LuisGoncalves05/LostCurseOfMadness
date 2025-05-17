@@ -101,6 +101,7 @@ static void menu_timer_handler(Game* game) {
 static void level_timer_handler(Game* game) {
     clear(sec_frame_buffer);
     draw_player(get_player(game->level));
+    game_draw_cursor();
     copy_frame_buffer();
 }
 
@@ -109,7 +110,8 @@ static void victory_timer_handler(Game* game) {
 }
 
 static void game_over_timer_handler(Game* game) {
-    printf("GAME OVER\n");    
+    printf("GAME OVER\n");
+
 }
 
 static void exit_timer_handler(Game* game) {
