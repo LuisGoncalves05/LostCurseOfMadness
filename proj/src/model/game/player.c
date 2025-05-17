@@ -5,6 +5,7 @@
 #include <stdlib.h>
 
 extern uint8_t scan_code;
+extern uint8_t *sec_frame_buffer;
 
 /* static */ void playerIsAtMaxSpeed(Player *player){
     if(player->sprite->xspeed >= player->max_speed){
@@ -46,8 +47,7 @@ void destroy_player(Player *player) {
 }
 
 int draw_player(Player *player) {
-    draw_sprite_xpm(player->sprite, player->sprite->x, player->sprite->y);
-    
+    draw_sprite_pos_to_delta(player->sprite, delta, sec_frame_buffer);
     return 0;
 }
 
@@ -128,3 +128,4 @@ void mouse_handler(Player *player, struct packet pp){
 void game_draw_cursor() {
     draw_xpm_at_pos((xpm_map_t) cross, (int) x_mouse, (int) y_mouse, sec_frame_buffer);
 }
+
