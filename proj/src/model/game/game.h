@@ -2,6 +2,13 @@
 #define GAME_H
 
 #include "level.h"
+#include <math.h>
+
+double	delta;
+double	direction;
+
+double	x_mouse;
+double	y_mouse;
 
 typedef enum {
     MENU,
