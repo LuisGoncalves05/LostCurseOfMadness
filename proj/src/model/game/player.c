@@ -6,14 +6,6 @@
 
 extern uint8_t scan_code;
 
-struct Player {
-    int health;         // Player health
-    int max_speed;
-    int acceleration;
-    Sprite *sprite;     // Player animated sprite
-    int moved;       // Player moved flag
-};
-
 /* static */ void playerIsAtMaxSpeed(Player *player){
     if(player->sprite->xspeed >= player->max_speed){
         player->sprite->xspeed = player->max_speed;
@@ -59,29 +51,80 @@ int draw_player(Player *player) {
     return 0;
 }
 
-void keyboard_handler(Player *player){
-    bool moved =0;
-    if(scan_code == KEY_W){
-        player->sprite->y -= player->sprite->yspeed;
-        moved = 1;
-        
+void keyboard_handler(Player *player) {
+    
+    double x_changer = 0;
+    double y_changer = 0;
+
+    if (player == NULL) return; // Avoid NULL dereference
+
+    bool moved = 0;
+
+    switch (scan_code) {
+        case KEY_W:
+          x_changer = cos(delta);
+          y_changer = sin(delta);
+          direction = delta;
+          moved = 1;
+        break;
+
+        case KEY_A:
+          x_changer = sin(delta);
+          y_changer = -cos(delta);
+          direction = delta - M_PI / 2;
+          moved = 1;
+          break;
+
+        case KEY_S:
+          x_changer = -cos(delta);
+          y_changer = -sin(delta);
+          direction = delta + M_PI;
+          moved = 1;
+          break;
+
+        case KEY_D:
+          x_changer = -sin(delta);
+          y_changer = cos(delta);
+          direction = delta + M_PI / 2;
+          moved = 1;
+          break;
+
+        case KEY_X:
+          player->sprite->x = x_mouse;
+          player->sprite->y = y_mouse;
+          moved = 0;
+        default:
+          break;
     }
-    else if(scan_code == KEY_A){
-        player->sprite->x -=  player->sprite->xspeed;
-        moved = 1;
-    }
-    else if(scan_code == KEY_S){
-        player->sprite->y +=  player->sprite->yspeed;
-        moved = 1;
-    }
-    else if(scan_code == KEY_D){
-        player->sprite->x +=  player->sprite->xspeed;
-        moved = 1;
+    if (moved){
+    	player->sprite->xspeed += player->acceleration;
+    	player->sprite->yspeed += player->acceleration;
+    	playerIsAtMaxSpeed(player);
+    	player->sprite->y += y_changer * player->sprite->yspeed;
+    	player->sprite->x += x_changer * player->sprite->xspeed;
+    	printf("collision check");
     }
     player->moved = moved;
+    playerStopped(player);
+}
+
+void game_update_delta(Player *player)
+{
+    double player_center_x = player->sprite->x + player->sprite->width/2.0;
+    double player_center_y = player->sprite->y + player->sprite->height/2.0;
     
+    double dx = x_mouse - player_center_x;
+    double dy = y_mouse - player_center_y;
+    
+    delta = atan2(dy, dx);
 }
 
 void mouse_handler(Player *player, struct packet pp){
+	x_mouse += pp.delta_x * 0.5;
+	y_mouse -= pp.delta_y * 0.5;
+	game_update_delta(player);
+}
 
+void game_draw_cursor() {
+    draw_xpm_at_pos((xpm_map_t) cross, (int) x_mouse, (int) y_mouse, sec_frame_buffer);
 }
