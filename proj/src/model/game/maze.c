@@ -1,62 +1,275 @@
 #include "maze.h"
 #include <stdlib.h>
 
+// Adicione estas estruturas no início do arquivo maze.c, logo após os includes:
+
 struct Maze {
-    int width;
-    int height;
+    uint8_t width;
+    uint8_t height;
     uint8_t** cells;
+    Line* lines;           // Array de linhas que compõem o labirinto
+    int line_count;        // Número de linhas no labirinto
 };
 
-// Layout do labirinto predefinido
-static const uint8_t MAZE_LAYOUT[] = {
-    1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-    1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-    1,0,1,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,1,
-    1,0,1,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,1,
-    1,0,1,1,1,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1,0,1,
-    1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1,0,1,
-    1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1,0,1,
-    1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,1,
-    1,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,1,1,1,1,
-    1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-    1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
-};
+// add line
+static void add_line(Maze* maze, int x1, int y1, int x2, int y2, int* line_index) {
+    if (*line_index >= maze->line_count) {
+        maze->line_count *= 2;
+        maze->lines = (Line*) realloc(maze->lines, maze->line_count * sizeof(Line));
+        if (!maze->lines) {
+            printf("Erro ao realocar memória para linhas\n");
+            return;
+        }
+    }
+    
+    maze->lines[*line_index].x1 = x1;
+    maze->lines[*line_index].y1 = y1;
+    maze->lines[*line_index].x2 = x2;
+    maze->lines[*line_index].y2 = y2;
+    (*line_index)++;
+}
 
-Maze* create_maze(int width, int height) {
-    Maze* maze = (Maze*)malloc(sizeof(Maze));
+// Implementação da função que desenha uma linha no labirinto
+void draw_line(int x1, int y1, int x2, int y2, uint32_t color, uint8_t* frame_buffer) {
+    vga_draw_line(x1, y1, x2, y2, color, frame_buffer);
+}
+
+// Função auxiliar para verificar colisão com uma linha
+bool check_line_collision(int x, int y, int width, int height, Line line) {
+    // Retângulo do objeto
+    int left = x;
+    int right = x + width;
+    int top = y;
+    int bottom = y + height;
+    
+    // Expandir a linha com a margem de colisão
+    int margin = LINE_COLLISION_MARGIN;
+    
+    // Verifica se a linha está completamente fora do retângulo
+    if ((line.x1 < left - margin && line.x2 < left - margin) ||
+        (line.x1 > right + margin && line.x2 > right + margin) ||
+        (line.y1 < top - margin && line.y2 < top - margin) ||
+        (line.y1 > bottom + margin && line.y2 > bottom + margin)) {
+        return false;
+    }
+    
+    // Algoritmo de interseção linha-retângulo usando o algoritmo Cohen-Sutherland modificado
+    // Calcula os parâmetros da equação da linha: y = mx + b
+    double dx = line.x2 - line.x1;
+    double dy = line.y2 - line.y1;
+    
+    // Se a linha é vertical (caso especial)
+    if (dx == 0) {
+        if (line.x1 >= left - margin && line.x1 <= right + margin) {
+            // Verifica se a linha cruza o retângulo verticalmente
+            int min_y = (line.y1 < line.y2) ? line.y1 : line.y2;
+            int max_y = (line.y1 > line.y2) ? line.y1 : line.y2;
+            return !(max_y < top - margin || min_y > bottom + margin);
+        }
+        return false;
+    }
+    
+    // Se a linha é horizontal (caso especial)
+    if (dy == 0) {
+        if (line.y1 >= top - margin && line.y1 <= bottom + margin) {
+            // Verifica se a linha cruza o retângulo horizontalmente
+            int min_x = (line.x1 < line.x2) ? line.x1 : line.x2;
+            int max_x = (line.x1 > line.x2) ? line.x1 : line.x2;
+            return !(max_x < left - margin || min_x > right + margin);
+        }
+        return false;
+    }
+    
+    // Linha diagonal - verificar interseção com cada lado do retângulo
+    double m = dy / dx;
+    double b = line.y1 - m * line.x1;
+    
+    // Expandir o retângulo com a margem
+    left -= margin;
+    right += margin;
+    top -= margin;
+    bottom += margin;
+    
+    // Verificar interseção com cada lado do retângulo expandido
+    // Lado esquerdo: x = left
+    double y_left = m * left + b;
+    if (y_left >= top && y_left <= bottom && 
+        ((line.x1 <= left && line.x2 >= left) || (line.x1 >= left && line.x2 <= left))) {
+        return true;
+    }
+    
+    // Lado direito: x = right
+    double y_right = m * right + b;
+    if (y_right >= top && y_right <= bottom && 
+        ((line.x1 <= right && line.x2 >= right) || (line.x1 >= right && line.x2 <= right))) {
+        return true;
+    }
+    
+    // Lado superior: y = top
+    double x_top = (top - b) / m;
+    if (x_top >= left && x_top <= right && 
+        ((line.y1 <= top && line.y2 >= top) || (line.y1 >= top && line.y2 <= top))) {
+        return true;
+    }
+    
+    // Lado inferior: y = bottom
+    double x_bottom = (bottom - b) / m;
+    if (x_bottom >= left && x_bottom <= right && 
+        ((line.y1 <= bottom && line.y2 >= bottom) || (line.y1 >= bottom && line.y2 <= bottom))) {
+        return true;
+    }
+    
+    return false;
+}
+
+
+static void shuffle(int* arr, int n) {
+  for (int i = n - 1; i > 0; i--) {
+    int j = rand() % (i + 1);
+    int tmp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = tmp;
+  }
+}
+
+
+static void dfs(Maze* maze, int x, int y) {
+  maze->cells[y][x] = 0;
+
+  int dx[] = {2, -2, 0, 0};
+  int dy[] = {0, 0, 2, -2};
+  int dirs[] = {0, 1, 2, 3};
+  shuffle(dirs, 4);
+
+  for (int i = 0; i < 4; i++) {
+    int dir = dirs[i];
+    int new_x = x + dx[dir];
+    int new_y = y + dy[dir];
+
+    if (new_x >= 0 && new_x <= maze->width - 1 && new_y >= 0 && new_y <= maze->height - 1 && maze->cells[new_y][new_x] == 1) { // Position inside the maze and there is a wall
+      maze->cells[y + dy[dir] / 2][x + dx[dir] / 2] = 0;  // Remove wall
+      dfs(maze, new_x, new_y);
+    }
+  }
+}
+
+static int open_maze(Maze* maze, uint8_t percentage) {
+  if (maze == NULL)
+    return 1;
+
+  uint16_t wall_area = 2 * (maze->width / 2 + 1) * (maze->height / 2 + 1) - 1; // 2 times O - 1 (V + E on spanning tree on a graph that passes through every other position)
+  uint16_t visited = 0;
+  uint16_t attempts = 0;
+
+  uint16_t max_attempts = 255*255;
+  while (visited < wall_area * percentage / 100.0 && attempts < max_attempts) {
+    int random_x = rand() % maze->width;
+    int random_y = rand() % maze->height;
+
+    if (maze->cells[random_y][random_x] == 1) {
+      maze->cells[random_y][random_x] = 0;
+      visited++;
+    }
+
+    attempts++;
+  }
+
+  return 0;
+}
+
+static int initialize_maze(Maze* maze, uint8_t width, uint8_t height) {
+  if (maze == NULL)
+    return 1;
+
+  if ((width % 2 == 0) || (height % 2 == 0))
+    return 1;
+
+  maze->width = width;
+  maze->height = height;
+
+  uint8_t** mz = (uint8_t**) malloc(height * sizeof(uint8_t*));
+  if (mz == NULL)
+    return 1;
+
+  for (uint16_t i = 0; i < height; i++) {
+    mz[i] = (uint8_t*) malloc(width * sizeof(uint8_t));
+    if (mz[i] == NULL) {
+      for (uint16_t j = i-1; j >= 0; j--) {
+        free(mz[j]);
+      }
+      free(mz);
+      return 1;
+    }
+    memset(mz[i], 1, width);
+  }
+  mz[0][0] = 0;
+  maze->cells = mz;
+  dfs(maze, 0, 0);
+
+  return 0;
+}
+
+/* public functions */
+Maze *create_maze(uint8_t width, uint8_t height) {
+    srand(time(NULL));
+    Maze* maze = (Maze *)malloc(sizeof(Maze));
     if (!maze) return NULL;
-
-    maze->width = width;
-    maze->height = height;
-
-    // Aloca memória para a matriz do labirinto
-    maze->cells = (uint8_t**)malloc(height * sizeof(uint8_t*));
-    if (!maze->cells) {
+    
+    if (initialize_maze(maze, 31, 21)) {
         free(maze);
         return NULL;
     }
-
-    for (int i = 0; i < height; i++) {
-        maze->cells[i] = (uint8_t*)malloc(width * sizeof(uint8_t));
-        if (!maze->cells[i]) {
-            for (int j = 0; j < i; j++) {
-                free(maze->cells[j]);
-            }
-            free(maze->cells);
-            free(maze);
-            return NULL;
-        }
-
-        // Inicializa o labirinto com o layout predefinido
-        for (int j = 0; j < width && j < 31; j++) {
-            if (i < 11) {
-                maze->cells[i][j] = MAZE_LAYOUT[i * 31 + j];
-            } else {
-                maze->cells[i][j] = 0;  // Se estiver fora dos limites do layout, define como caminho
+    
+    open_maze(maze, 30);
+    
+    // Estimar o número máximo de linhas que podemos precisar
+    // No pior caso, cada célula de parede cria 4 linhas
+    int max_lines = maze->width * maze->height * 2;
+    maze->line_count = max_lines;
+    maze->lines = (Line*) malloc(max_lines * sizeof(Line));
+    if (!maze->lines) {
+        printf("Erro ao alocar memória para linhas\n");
+        free_maze(maze);
+        return NULL;
+    }
+    
+    int line_index = 0;
+    
+    // Converter a matriz de células para um conjunto de linhas
+    for (int y = 0; y < maze->height; y++) {
+        for (int x = 0; x < maze->width; x++) {
+            if (maze->cells[y][x] == 1) {
+                // Verificar se há paredes adjacentes e criar linhas
+                
+                // Verificar parede à direita
+                if (x < maze->width - 1 && maze->cells[y][x+1] == 1) {
+                    add_line(maze, x, y, x+1, y, &line_index);
+                }
+                
+                // Verificar parede abaixo
+                if (y < maze->height - 1 && maze->cells[y+1][x] == 1) {
+                    add_line(maze, x, y, x, y+1, &line_index);
+                }
+                
+                // Verificar parede à esquerda (se não houver ligação)
+                if (x > 0 && maze->cells[y][x-1] != 1) {
+                    // Linha isolada - criar um ponto
+                    add_line(maze, x, y, x, y, &line_index);
+                }
+                
+                // Verificar parede acima (se não houver ligação)
+                if (y > 0 && maze->cells[y-1][x] != 1 &&
+                    !(x > 0 && maze->cells[y][x-1] == 1)) {
+                    // Linha isolada - criar um ponto
+                    add_line(maze, x, y, x, y, &line_index);
+                }
             }
         }
     }
-
+    
+    // Atualizar o número real de linhas
+    maze->line_count = line_index;
+    
     return maze;
 }
 
@@ -69,6 +282,11 @@ void free_maze(Maze* maze) {
         }
         free(maze->cells);
     }
+    
+    if (maze->lines) {
+        free(maze->lines);
+    }
+    
     free(maze);
 }
 
@@ -78,23 +296,38 @@ int draw_maze(Maze* maze, uint8_t* frame_buffer) {
         return 1;
     }
 
-    printf("Drawing maze: width=%d, height=%d\n", maze->width, maze->height);
+    printf("Drawing maze: width=%d, height=%d, lines=%d\n", 
+           maze->width, maze->height, maze->line_count);
 
     // Offset para centralizar o labirinto na tela
-    int offset_x = (800 - (maze->width * CELL_SIZE)) / 2;  // Assumindo largura da tela de 800
-    int offset_y = (600 - (maze->height * CELL_SIZE)) / 2; // Assumindo altura da tela de 600
+    int offset_x = (WIDTH - (maze->width * CELL_SIZE)) / 2;  // Assumindo largura da tela de WIDTH
+    int offset_y = (HEIGHT - (maze->height * CELL_SIZE)) / 2; // Assumindo altura da tela de HEIGHT
 
-    for (int y = 0; y < maze->height; y++) {
-        for (int x = 0; x < maze->width; x++) {
-            if (maze->cells[y][x] == 1) {
-                // Calcula a posição na tela
-                int screen_x = offset_x + (x * CELL_SIZE);
-                int screen_y = offset_y + (y * CELL_SIZE);
-
-                // Desenha a parede
-                vga_draw_rectangle(screen_x, screen_y,
-                                  CELL_SIZE, CELL_SIZE,
-                                  WALL_COLOR, frame_buffer);
+    // Desenhar cada linha do labirinto
+    for (int i = 0; i < maze->line_count; i++) {
+        int x1 = offset_x + maze->lines[i].x1 * CELL_SIZE;
+        int y1 = offset_y + maze->lines[i].y1 * CELL_SIZE;
+        int x2 = offset_x + maze->lines[i].x2 * CELL_SIZE;
+        int y2 = offset_y + maze->lines[i].y2 * CELL_SIZE;
+        
+        // Desenhar uma linha grossa (2 pixels de largura)
+        if (x1 == x2 && y1 == y2) {
+            // Ponto isolado - desenhar como um quadrado pequeno
+            vga_draw_rectangle(x1, y1, WALL_WIDTH, WALL_WIDTH, WALL_COLOR, frame_buffer);
+        } else {
+            // Linha - usar algoritmo de Bresenham com espessura 2
+            draw_line(x1, y1, x2, y2, WALL_COLOR, frame_buffer);
+            
+            // Desenhar linha paralela para criar espessura
+            if (x1 == x2) {
+                // Linha vertical
+                draw_line(x1 + 1, y1, x2 + 1, y2, WALL_COLOR, frame_buffer);
+            } else if (y1 == y2) {
+                // Linha horizontal
+                draw_line(x1, y1 + 1, x2, y2 + 1, WALL_COLOR, frame_buffer);
+            } else {
+                // Linha diagonal - não tratamos aqui, mas poderia ser implementado
+                // para garantir consistência visual
             }
         }
     }
@@ -105,28 +338,22 @@ int draw_maze(Maze* maze, uint8_t* frame_buffer) {
 bool check_collision(Maze* maze, int x, int y, int width, int height) {
     if (!maze) return false;
 
-    // Offset para centralizar o labirinto na tela
-    int offset_x = (800 - (maze->width * CELL_SIZE)) / 2;
-    int offset_y = (600 - (maze->height * CELL_SIZE)) / 2;
-
-    // Converte as coordenadas do pixel para coordenadas do labirinto
-    int cell_x = (x - offset_x) / CELL_SIZE;
-    int cell_y = (y - offset_y) / CELL_SIZE;
-
-    // Adiciona margem para detectar colisões com mais precisão
-    int end_cell_x = (x + width - offset_x) / CELL_SIZE;
-    int end_cell_y = (y + height - offset_y) / CELL_SIZE;
-
-    // Verifica se há colisão com alguma parede
-    for (int check_y = cell_y; check_y <= end_cell_y; check_y++) {
-        for (int check_x = cell_x; check_x <= end_cell_x; check_x++) {
-            if (check_x >= 0 && check_x < maze->width &&
-                check_y >= 0 && check_y < maze->height) {
-                if (maze->cells[check_y][check_x] == 1) {
-                    return true;  // Colisão detectada
-                }
-            }
+    // Verificar colisão com todas as linhas do labirinto
+    for (int i = 0; i < maze->line_count; i++) {
+        // Converter coordenadas das linhas para coordenadas da tela
+        int offset_x = (WIDTH - (maze->width * CELL_SIZE)) / 2;
+        int offset_y = (HEIGHT - (maze->height * CELL_SIZE)) / 2;
+        
+        Line line;
+        line.x1 = offset_x + maze->lines[i].x1 * CELL_SIZE;
+        line.y1 = offset_y + maze->lines[i].y1 * CELL_SIZE;
+        line.x2 = offset_x + maze->lines[i].x2 * CELL_SIZE;
+        line.y2 = offset_y + maze->lines[i].y2 * CELL_SIZE;
+        
+        if (check_line_collision(x, y, width, height, line)) {
+            return true;
         }
     }
-    return false;  // Sem colisão
+    
+    return false;
 }
