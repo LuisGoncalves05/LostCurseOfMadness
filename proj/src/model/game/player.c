@@ -130,8 +130,8 @@ void keyboard_handler(Player *player, Maze* maze) {
         default:
           break;
     }
-    if (fov_angle < 10) fov_angle = 10;
-    if (fov_angle > 180) fov_angle = 180;
+    if (fov_angle < 30) fov_angle = 30;
+    if (fov_angle > 120) fov_angle = 120;
 
     if (moved) {
         player->sprite->xspeed += player->acceleration;
