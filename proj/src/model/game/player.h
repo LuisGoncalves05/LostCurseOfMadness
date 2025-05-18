@@ -11,12 +11,26 @@
 #define KEY_S 0x1F
 #define KEY_D 0x20
 #define KEY_X 0x2D
+#define KEY_C 0x2E
+#define KEY_SPACE 0x39
 #define HEALTH 3
 
 #define PLAYER_MAX_SPEED 7
 #define PLAYER_ACCELERATION 2
 #define PLAYER_HEALTH 3
 #define PLAYER_DEFAULT_SPEED 5
+
+#define FOV_RADIUS 600
+//#define FOV_ANGLE 75.0      // Ângulo do cone de visão em graus
+extern double fov_angle;
+
+xpm_image_t	img;
+extern double	delta;
+extern double	direction;
+
+extern double	x_mouse;
+extern double	y_mouse;
+
 
 xpm_image_t	img;
 extern double	delta;
@@ -42,4 +56,10 @@ int draw_player(Player *player);
 void keyboard_handler(Player *player, Maze *maze);
 void mouse_handler(Player *player, struct packet pp);
 void game_draw_cursor();
+void game_draw_fov_cone(Player *player, Maze* maze);
+void init_maze_buffer();
+void free_maze_buffer();
+
+
 #endif
+
