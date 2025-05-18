@@ -39,7 +39,7 @@ struct Player {
 Player *create_player(Sprite *sprite);
 void destroy_player(Player *player);
 int draw_player(Player *player);
-void keyboard_handler(Player *player);
+void keyboard_handler(Player *player, Maze *maze);
 void mouse_handler(Player *player, struct packet pp);
 void game_draw_cursor();
 #endif
