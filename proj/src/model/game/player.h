@@ -4,7 +4,6 @@
 #include "../Sprite.h"
 #include "game.h"
 #include "../../controller/video/gpu.h"
-#include "../../images/font/cursor.xpm"
 
 #define KEY_W 0x11
 #define KEY_A 0x1E
@@ -17,6 +16,14 @@
 #define PLAYER_ACCELERATION 2
 #define PLAYER_HEALTH 3
 #define PLAYER_DEFAULT_SPEED 5
+
+enum player_state {
+	PLAYER_IDLE,
+	PLAYER_WALKING,
+	PLAYER_AIMING,
+	PLAYER_SHOOTING,
+	PLAYER_DYING,
+};
 
 xpm_image_t	img;
 extern double	delta;
@@ -42,4 +49,6 @@ int draw_player(Player *player);
 void keyboard_handler(Player *player);
 void mouse_handler(Player *player, struct packet pp);
 void game_draw_cursor();
+void update_player_state(Player *player, struct packet pp);
+void cursor_check_bound();
 #endif

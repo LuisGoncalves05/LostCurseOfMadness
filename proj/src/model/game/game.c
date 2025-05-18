@@ -99,8 +99,10 @@ static void menu_timer_handler(Game* game) {
 }
 
 static void level_timer_handler(Game* game) {
+    cursor_check_bound();
     clear(sec_frame_buffer);
     draw_player(get_player(game->level));
+    update_player_state(get_player(game->level), pp);
     game_draw_cursor();
     copy_frame_buffer();
 }

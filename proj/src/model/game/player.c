@@ -6,6 +6,9 @@
 
 extern uint8_t scan_code;
 extern uint8_t *sec_frame_buffer;
+extern vbe_mode_info_t vg_mode_info;
+
+enum player_state state = PLAYER_IDLE;
 
 /* static */ void playerIsAtMaxSpeed(Player *player){
     if(player->sprite->xspeed >= player->max_speed){
@@ -47,6 +50,29 @@ void destroy_player(Player *player) {
 }
 
 int draw_player(Player *player) {
+    
+    Sprite *new_sprite;
+
+    switch (state) {
+        case PLAYER_IDLE:
+            new_sprite = create_sprite((xpm_map_t) penguin, player->sprite->x, player->sprite->y, player->sprite->xspeed, player->sprite->yspeed);
+            break;
+        case PLAYER_WALKING:
+            new_sprite = create_sprite((xpm_map_t) penguin, player->sprite->x, player->sprite->y, player->sprite->xspeed, player->sprite->yspeed);
+            break;
+        case PLAYER_AIMING:
+            new_sprite = create_sprite((xpm_map_t) cross, player->sprite->x, player->sprite->y, player->sprite->xspeed, player->sprite->yspeed);
+            break;
+        case PLAYER_SHOOTING:
+            new_sprite = create_sprite((xpm_map_t) penguin, player->sprite->x, player->sprite->y, player->sprite->xspeed, player->sprite->yspeed);
+            break;
+        case PLAYER_DYING:
+            new_sprite = create_sprite((xpm_map_t) penguin, player->sprite->x, player->sprite->y, player->sprite->xspeed, player->sprite->yspeed);
+            break;
+        default:
+            break;
+    }
+    player->sprite = new_sprite;
     draw_sprite_pos_to_delta(player->sprite, delta, sec_frame_buffer);
     return 0;
 }
@@ -129,3 +155,31 @@ void game_draw_cursor() {
     draw_xpm_at_pos((xpm_map_t) cross, (int) x_mouse, (int) y_mouse, sec_frame_buffer);
 }
 
+
+void update_player_state(Player *player, struct packet pp){
+    if (player == NULL) return; // Avoid NULL dereference
+
+    if (player->moved == 1) {
+        state = PLAYER_WALKING;
+        
+    } else {
+        state = PLAYER_IDLE;
+    }
+
+    if(pp.lb == 0 && pp.rb == 1){
+        state = PLAYER_AIMING;
+    }else if(pp.lb == 1 && pp.rb == 0){
+        state = PLAYER_SHOOTING;
+    }
+}
+
+void cursor_check_bound() {
+    if (x_mouse > vg_mode_info.XResolution)
+        x_mouse = vg_mode_info.XResolution;
+    if (y_mouse > vg_mode_info.YResolution)
+        y_mouse = vg_mode_info.YResolution;
+    if (x_mouse < 0)
+        x_mouse = 0;
+    if (y_mouse < 0)
+        y_mouse = 0;
+}
