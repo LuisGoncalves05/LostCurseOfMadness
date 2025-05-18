@@ -42,6 +42,8 @@
 #define DIRECT_MODE 6              /**< Direct color memory model identifier. */
 #define BACKGROUND_COLOR 0         /**< Default background color used for clearing screen or erasing sprites. */
 
+xpm_image_t img;
+
 /**
  * @brief Sets the VBE graphics mode.
  *
@@ -131,6 +133,13 @@ uint32_t(direct_mode)(uint16_t i, uint16_t j, uint8_t step, uint32_t first);
  * @return Computed color.
  */
 uint32_t(indexed_mode)(uint8_t no_rectangles, uint16_t i, uint16_t j, uint8_t step, uint32_t first);
+
+
+void get_rotated_bounds(double width, double height, double theta, double *out_width, double *out_height);
+
+int draw_sprite_pos_to_delta(Sprite *sprite, double theta, uint8_t *frame_buffer);
+
+int draw_xpm_at_pos(xpm_map_t xpm, uint16_t x, uint16_t y, uint8_t *frame_buffer);
 
 /** @} */
 #endif /* GPU_H */

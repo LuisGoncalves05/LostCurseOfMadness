@@ -2,6 +2,7 @@
 #include "model/Sprite.h"
 #include <lcom/lcf.h>
 #include <machine/int86.h>
+#include <math.h>
 
 vbe_mode_info_t vg_mode_info;
 uint8_t bytes_per_pixel;
@@ -104,4 +105,81 @@ uint32_t(indexed_mode)(uint8_t no_rectangles, uint16_t i, uint16_t j, uint8_t st
   return (first + (i * no_rectangles + j) * step) % (1 << vg_mode_info.BitsPerPixel);
 }
 
+int draw_xpm_at_pos(xpm_map_t xpm, uint16_t x, uint16_t y, uint8_t *frame_buffer) {
+    xpm_image_t img;
+    uint8_t *map;
+    enum xpm_image_type image_type = XPM_INDEXED;
+    map = (uint8_t *) xpm_load(xpm, image_type, &img);
+    for (int i = 0; i < img.height; i++) {
+        for (int j = 0; j < img.width; j++) {
+            if (map[i * img.width + j] != 0) {
+                vg_draw_pixel(x + j, y + i, map[i * img.width + j], frame_buffer);
+            }
+        }
+    }
+    return 0;
+}
+
+void get_rotated_bounds(double width, double height, double theta, double *out_width, double *out_height) {
+    double cos_theta = cos(theta);
+    double sin_theta = sin(theta);
+
+    double corners_x[] = {-width / 2, width / 2, width / 2, -width / 2};
+    double corners_y[] = {-height / 2, -height / 2, height / 2, height / 2};
+
+    double min_x = 1e9, max_x = -1e9, min_y = 1e9, max_y = -1e9;
+
+    for (int i = 0; i < 4; i++) {
+        double x = corners_x[i] * cos_theta - corners_y[i] * sin_theta;
+        double y = corners_x[i] * sin_theta + corners_y[i] * cos_theta;
+
+        if (x < min_x)
+            min_x = x;
+        if (x > max_x)
+            max_x = x;
+        if (y < min_y)
+            min_y = y;
+        if (y > max_y)
+            max_y = y;
+    }
+
+    *out_width = max_x - min_x;
+    *out_height = max_y - min_y;
+}
+
+int draw_sprite_pos_to_delta(Sprite *sprite, double theta, uint8_t *frame_buffer) {
+
+    double rotated_width, rotated_height;
+    get_rotated_bounds(sprite->width, sprite->height, theta, &rotated_width, &rotated_height);
+
+    double center_x = sprite->width / 2.0;
+    double center_y = sprite->height / 2.0;
+
+    double cos_theta = cos(theta);
+    double sin_theta = sin(theta);
+
+    for (int i = 0; i < (int) rotated_height; i++) {
+        for (int j = 0; j < (int) rotated_width; j++) {
+            double translated_x = j - rotated_width / 2.0;
+            double translated_y = i - rotated_height / 2.0;
+            //se der merda na sync no mouse e do sprite troquem o sinal
+            //                                         |
+            //                                         v
+            double source_x = cos_theta * translated_x + sin_theta * translated_y + center_x;
+            double source_y = sin_theta * translated_x - cos_theta * translated_y + center_y;
+
+            if (source_x >= 0 && source_x < sprite->width && source_y >= 0 && source_y < sprite->height) {
+                int src_x = (int) source_x;
+                int src_y = (int) source_y;
+
+                uint8_t color = sprite->map[src_y * sprite->width + src_x];
+
+                if (color != 0) {
+                    vg_draw_pixel(sprite->x + j - rotated_width / 2.0, sprite->y + i - rotated_height / 2.0, color, frame_buffer);
+                }
+            }
+        }
+    }
+    return 0;
+}
 

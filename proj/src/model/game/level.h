@@ -9,6 +9,6 @@ typedef struct Level Level;
 Level *create_level(uint8_t number);
 void destroy_level(Level *level);
 
-Player *get_player(Level *level);
+struct Player *get_player(Level *level);
 
 #endif
