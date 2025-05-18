@@ -4,11 +4,7 @@
 #include <machine/int86.h>
 #include <math.h>
 
-vbe_mode_info_t vg_mode_info;
-uint8_t bytes_per_pixel;
-uint16_t x_res, y_res;
-uint8_t *main_frame_buffer; 
-extern uint32_t interrupt_counter;
+
 
 int (set_graphic_mode)(uint16_t mode){
   reg86_t reg86;
@@ -39,10 +35,6 @@ int (set_frame_buffer)(uint16_t mode){
   main_frame_buffer = vm_map_phys(SELF, (void *)physic_addresses.mr_base, size); // map memory range to process
 
   return 0;
-}
-
-inline uint8_t *(get_position)(uint16_t x, uint16_t y, uint8_t *frame_buffer) {
-  return frame_buffer + (x + x_res * y) * bytes_per_pixel; 
 }
 
 int(vg_draw_pixel)(uint16_t x, uint16_t y, uint32_t color, uint8_t *frame_buffer) {
