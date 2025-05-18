@@ -100,24 +100,23 @@ static void menu_timer_handler(Game* game) {
 }
 
 static void level_timer_handler(Game* game) {
+    Level* current_level = game->level;
+    if (!current_level) return;
+    
+    Player* player = get_player(game->level);
+    Maze* maze = get_maze(current_level);
+    if (!player || !maze) return;
+    
+    // Limpa o buffer secundário
     clear(sec_frame_buffer);
     
-    if (game && game->level) {
-        Maze* maze = get_maze(game->level);
-        if (maze) {
-            printf("Drawing maze in level_timer_handler\n");
-            draw_maze(maze, sec_frame_buffer);
-        } else {
-            printf("Maze is NULL in level_timer_handler\n");
-        }
-        
-        Player* player = get_player(game->level);
-        if (player) {
-            draw_player(player);
-        }
-    }
-    
+    clear(maze_buffer);
+    draw_maze(maze, maze_buffer);
+    game_draw_fov_cone(player, maze);
+    draw_player(player);
     game_draw_cursor();
+    
+    // Copia o buffer secundário para o buffer principal
     copy_frame_buffer();
 }
 
