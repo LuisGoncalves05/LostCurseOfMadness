@@ -39,3 +39,5 @@ void destroy_level(Level *level) {
 struct Player *get_player(Level *level) {
     return level->player;
 }
+
+Maze *get_maze(Level *level){return level->maze;}
