@@ -51,22 +51,21 @@ int draw_player(Player *player) {
     return 0;
 }
 
-void keyboard_handler(Player *player) {
-    
+void keyboard_handler(Player *player, Maze* maze) {
     double x_changer = 0;
     double y_changer = 0;
 
-    if (player == NULL) return; // Avoid NULL dereference
+    if (player == NULL) return;
 
     bool moved = 0;
 
     switch (scan_code) {
         case KEY_W:
-          x_changer = cos(delta);
-          y_changer = sin(delta);
-          direction = delta;
-          moved = 1;
-        break;
+            x_changer = cos(delta);
+            y_changer = sin(delta);
+            direction = delta;
+            moved = 1;
+            break;
 
         case KEY_A:
           x_changer = sin(delta);
@@ -93,17 +92,28 @@ void keyboard_handler(Player *player) {
           player->sprite->x = x_mouse;
           player->sprite->y = y_mouse;
           moved = 0;
+
         default:
           break;
     }
-    if (moved){
-    	player->sprite->xspeed += player->acceleration;
-    	player->sprite->yspeed += player->acceleration;
-    	playerIsAtMaxSpeed(player);
-    	player->sprite->y += y_changer * player->sprite->yspeed;
-    	player->sprite->x += x_changer * player->sprite->xspeed;
-    	printf("collision check");
+
+    if (moved) {
+        player->sprite->xspeed += player->acceleration;
+        player->sprite->yspeed += player->acceleration;
+        playerIsAtMaxSpeed(player);
+
+        // Calcula a nova posição
+        double new_x = player->sprite->x + x_changer * player->sprite->xspeed;
+        double new_y = player->sprite->y + y_changer * player->sprite->yspeed;
+
+        // Verifica colisão antes de atualizar a posição
+        if (!check_collision(maze, new_x, new_y, 
+                           player->sprite->width, player->sprite->height)) {
+            player->sprite->x = new_x;
+            player->sprite->y = new_y;
+        }
     }
+
     player->moved = moved;
     playerStopped(player);
 }
@@ -128,4 +138,3 @@ void mouse_handler(Player *player, struct packet pp){
 void game_draw_cursor() {
     draw_xpm_at_pos((xpm_map_t) cross, (int) x_mouse, (int) y_mouse, sec_frame_buffer);
 }
-
