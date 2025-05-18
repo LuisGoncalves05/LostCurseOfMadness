@@ -43,6 +43,11 @@
 #define BACKGROUND_COLOR 0         /**< Default background color used for clearing screen or erasing sprites. */
 
 xpm_image_t img;
+vbe_mode_info_t vg_mode_info;
+uint8_t bytes_per_pixel;
+uint16_t x_res, y_res;
+uint8_t *main_frame_buffer;
+extern uint32_t interrupt_counter;
 
 /**
  * @brief Sets the VBE graphics mode.
@@ -62,7 +67,10 @@ int(set_frame_buffer)(uint16_t mode);
  * @param frame_buffer Pointer to the frame buffer.
  * @return Pointer to the memory location for pixel (x, y).
  */
-inline uint8_t *(get_position)(uint16_t x, uint16_t y, uint8_t *frame_buffer);
+static inline uint8_t *(get_position)(uint16_t x, uint16_t y, uint8_t *frame_buffer) {
+  return frame_buffer + (x + x_res * y) * bytes_per_pixel;
+}
+
 
 /**
  * @brief Draws a single pixel of a specified color at (x, y).
