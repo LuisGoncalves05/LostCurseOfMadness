@@ -4,11 +4,7 @@
 #include <machine/int86.h>
 #include <math.h>
 
-vbe_mode_info_t vg_mode_info;
-uint8_t bytes_per_pixel;
-uint16_t x_res, y_res;
-uint8_t *main_frame_buffer; 
-extern uint32_t interrupt_counter;
+
 
 int (set_graphic_mode)(uint16_t mode){
   reg86_t reg86;
@@ -41,10 +37,6 @@ int (set_frame_buffer)(uint16_t mode){
   return 0;
 }
 
-inline uint8_t *(get_position)(uint16_t x, uint16_t y, uint8_t *frame_buffer) {
-  return frame_buffer + (x + x_res * y) * bytes_per_pixel; 
-}
-
 int(vg_draw_pixel)(uint16_t x, uint16_t y, uint32_t color, uint8_t *frame_buffer) {
   return vga_draw_hline(x, y, 1, color, frame_buffer);
 }
@@ -58,6 +50,37 @@ int(vga_draw_hline)(uint16_t x, uint16_t y, uint16_t len, uint32_t color, uint8_
   uint8_t *address = get_position(x, y, frame_buffer);
   for (uint16_t i = 0; i < len && x + i < x_res; i++, address += bytes_per_pixel) {
     memcpy(address, &color, bytes_per_pixel);
+  }
+
+  return 0;
+}
+
+int(vga_draw_line)(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint32_t color, uint8_t *frame_buffer) {
+  int dx = abs(x2 - x1);
+  int dy = abs(y2 - y1);
+  int sx = (x1 < x2) ? 1 : -1;
+  int sy = (y1 < y2) ? 1 : -1;
+  int err = dx - dy;
+  int e2;
+
+  while (true) {
+    // Desenhar o pixel na posição atual
+    if (x1 >= 0 && x1 < x_res && y1 >= 0 && y1 < y_res) {
+      vg_draw_pixel(x1, y1, color, frame_buffer);
+    }
+
+    // Verificar se chegamos ao ponto final
+    if (x1 == x2 && y1 == y2) break;
+
+    e2 = 2 * err;
+    if (e2 > -dy) {
+      err -= dy;
+      x1 += sx;
+    }
+    if (e2 < dx) {
+      err += dx;
+      y1 += sy;
+    }
   }
 
   return 0;

@@ -17,7 +17,7 @@ Level *create_level(uint8_t number) {
         return NULL;
     }
 
-    Sprite *player_sprite = create_sprite((xpm_map_t) penguin, 400, 400, 3, 3);
+    Sprite *player_sprite = create_sprite((xpm_map_t) cross, 400, 400, 3, 3);
     level->player = create_player(player_sprite);
     if (!level->player) {
         free(level->maze);
@@ -39,3 +39,5 @@ void destroy_level(Level *level) {
 struct Player *get_player(Level *level) {
     return level->player;
 }
+
+Maze *get_maze(Level *level){return level->maze;}

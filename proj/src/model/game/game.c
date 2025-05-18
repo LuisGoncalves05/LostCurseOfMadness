@@ -6,6 +6,7 @@
 #include "controller/timer/i8254.h"
 #include "view/view.h"
 #include "model/Sprite.h"
+#include "model/game/level.h"
 
 extern uint8_t *sec_frame_buffer;
 extern uint8_t *main_frame_buffer;
@@ -18,7 +19,7 @@ struct Game {
     State state;
     uint8_t level_number;
     uint8_t score;
-    Level *level;
+    struct Level *level;
 };
 
 static void menu_init(Game *game) {
@@ -99,9 +100,23 @@ static void menu_timer_handler(Game* game) {
 }
 
 static void level_timer_handler(Game* game) {
+    Level* current_level = game->level;
+    if (!current_level) return;
+    
+    Player* player = get_player(game->level);
+    Maze* maze = get_maze(current_level);
+    if (!player || !maze) return;
+    
+    // Limpa o buffer secundário
     clear(sec_frame_buffer);
-    draw_player(get_player(game->level));
+    
+    clear(maze_buffer);
+    draw_maze(maze, maze_buffer);
+    game_draw_fov_cone(player, maze);
+    draw_player(player);
     game_draw_cursor();
+    
+    // Copia o buffer secundário para o buffer principal
     copy_frame_buffer();
 }
 
@@ -135,7 +150,7 @@ static void menu_keyboard_handler(Game* game) {
 }
 
 static void level_keyboard_handler(Game* game) {
-    keyboard_handler(get_player(game->level));
+    keyboard_handler(get_player(game->level), get_maze(game->level));
     if (scan_code == ESC_BREAK_CODE) set_state(game, EXIT);
 }
 
