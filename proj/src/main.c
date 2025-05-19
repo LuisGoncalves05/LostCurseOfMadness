@@ -62,6 +62,8 @@ int setup() {
   
   if (mouse_subscribe_int(&mouse_mask) != 0) return 1;
   if(mouse_set_data_reporting(true) != 0) return 1;
+  init_maze_buffer();
+
 
   return 0;
 }
@@ -74,6 +76,8 @@ int reset() {
   if (timer_unsubscribe_int() != 0) return 1;
   if (kbd_unsubscribe_int() != 0) return 1;
   if (mouse_unsubscribe_int() != 0) return 1;
+  free_maze_buffer();
+
 
   return 0;
 }

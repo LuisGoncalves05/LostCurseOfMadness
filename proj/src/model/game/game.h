@@ -4,6 +4,8 @@
 #include "level.h"
 #include <math.h>
 
+extern uint8_t *maze_buffer;
+
 double	delta;
 double	direction;
 
