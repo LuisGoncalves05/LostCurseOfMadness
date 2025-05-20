@@ -2,7 +2,7 @@
 #define GAME_H
 
 #include "level.h"
-#include "game_over.h"
+#include "model/menu/game_over.h"
 #include <math.h>
 
 #include "model/keys.h"

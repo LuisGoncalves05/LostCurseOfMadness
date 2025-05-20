@@ -45,6 +45,5 @@ GameOverButton game_over_click_handler(GameOver *game_over, double x_mouse, doub
         game_over->button = BUTTON_EXIT;
         return BUTTON_EXIT;
     }
-    printf("none at %d,%d!\n", x_mouse, y_mouse);
     return NONE;
 }

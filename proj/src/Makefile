@@ -5,6 +5,7 @@ PROG=proj
 .PATH: ${.CURDIR}/controller
 .PATH: ${.CURDIR}/model
 .PATH: ${.CURDIR}/model/game
+.PATH: ${.CURDIR}/model/menu
 .PATH: ${.CURDIR}/controller/keyboard
 .PATH: ${.CURDIR}/controller/mouse
 .PATH: ${.CURDIR}/controller/timer
