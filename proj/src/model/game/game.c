@@ -20,6 +20,9 @@ struct Game {
     uint8_t level_number;
     uint8_t score;
     struct Level *level;
+    union {
+        struct GameOver *game_over;
+    } menu;
 };
 
 static void menu_init(Game *game) {
@@ -38,6 +41,8 @@ static void victory_init(Game *game) {
 static void game_over_init(Game *game) {
     game->score = game->level_number;    
     game->level_number = 0;
+
+    game->menu.game_over = create_game_over();
 }
 
 static void exit_init(Game *game) {
@@ -70,7 +75,7 @@ static void victory_destroy(Game* game) {
 }
 
 static void game_over_destroy(Game* game) {
-    printf("exiting game over state\n");    
+    destroy_game_over(game->menu.game_over);
 }
 
 static void exit_destroy(Game* game) {
@@ -125,12 +130,14 @@ static void victory_timer_handler(Game* game) {
 }
 
 static void game_over_timer_handler(Game* game) {
-    printf("GAME OVER\n");
+    clear(sec_frame_buffer);
+    draw_game_over(game->menu.game_over, sec_frame_buffer);
 
+    copy_frame_buffer();
 }
 
 static void exit_timer_handler(Game* game) {
-    printf("exiting\n");    
+    printf("This function should never be called\n");    
 }
 
 static void (*game_timer_handlers[])(Game *game) = {
@@ -159,7 +166,7 @@ static void victory_keyboard_handler(Game* game) {
 }
 
 static void game_over_keyboard_handler(Game* game) {
-    printf("game_over_keyboard_hanlder: To be implemented\n");    
+    if (scan_code == ESC_BREAK_CODE) set_state(game, EXIT);  
 }
 
 static void exit_keyboard_handler(Game* game) {
@@ -219,7 +226,7 @@ Game *create_game() {
     game->level_number = 0;
     game->score = 0;
 
-    game->state = LEVEL;
+    game->state = GAME_OVER;
     state_init(game);
 
     return game;
@@ -227,7 +234,6 @@ Game *create_game() {
 
 void destroy_game(Game *game) {
     if (game) {
-        if (game->state == LEVEL) destroy_level(game->level);
         free(game);
     }
 }

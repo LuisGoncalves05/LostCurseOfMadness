@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include "level.h"
+#include "game_over.h"
 #include <math.h>
 
 extern uint8_t *maze_buffer;
