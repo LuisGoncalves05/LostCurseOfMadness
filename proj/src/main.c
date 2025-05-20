@@ -30,11 +30,11 @@ int main(int argc, char *argv[]) {
 
   // enables to log function invocations that are being "wrapped" by LCF
   // [comment this out if you don't want/need/ it]
-  lcf_trace_calls("/home/lcom/labs/proj/src/trace.txt");
+  lcf_trace_calls("/home/lcom/labs/grupo_2leic03_3/proj/src/trace.txt");
 
   // enables to save the output of printf function calls on a file
   // [comment this out if you don't want/need it]
-  lcf_log_output("/home/lcom/labs/proj/src/output.txt");
+  lcf_log_output("/home/lcom/labs/grupo_2leic03_3/proj/src/output.txt");
 
   // handles control over to LCF
   // [LCF handles command line arguments and invokes the right function]
@@ -75,6 +75,7 @@ int reset() {
   // unsubscribe from interrupts
   if (timer_unsubscribe_int() != 0) return 1;
   if (kbd_unsubscribe_int() != 0) return 1;
+  if(mouse_set_data_reporting(false) != 0) return 1;
   if (mouse_unsubscribe_int() != 0) return 1;
   free_maze_buffer();
 
