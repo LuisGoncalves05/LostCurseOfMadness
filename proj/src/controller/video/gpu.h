@@ -1,10 +1,10 @@
 #ifndef GPU_H
 #define GPU_H
 
+#include "../../model/Sprite.h"
 #include <lcom/lcf.h>
 #include <stdbool.h>
 #include <stdint.h>
-#include "../../model/Sprite.h"
 
 /**
  * @defgroup gpu gpu
@@ -52,7 +52,6 @@ extern uint32_t interrupt_counter;
  */
 int(set_graphic_mode)(uint16_t mode);
 
-
 /**
  * @brief Initializes the frame buffers.
  *
@@ -69,7 +68,7 @@ int(set_frame_buffers)(uint16_t mode);
  * @param frame_buffer Pointer to the frame buffer.
  * @return Pointer to the memory location for pixel (x, y).
  */
-inline uint8_t *(get_position)(uint16_t x, uint16_t y, uint8_t *frame_buffer);
+uint8_t *(get_position) (uint16_t x, uint16_t y, uint8_t *frame_buffer);
 
 /**
  * @brief Draws a single pixel of a specified color at (x, y).
@@ -107,7 +106,6 @@ int(vga_draw_hline)(uint16_t x, uint16_t y, uint16_t len, uint32_t color, uint8_
  */
 int(vga_draw_line)(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint32_t color, uint8_t *frame_buffer);
 
-
 /**
  * @brief Draws a rectangle of a specified color.
  *
@@ -120,7 +118,6 @@ int(vga_draw_line)(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint32_t 
  * @return 0 on success, non-zero on failure.
  */
 int(vga_draw_rectangle)(uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint32_t color, uint8_t *frame_buffer);
-
 
 /**
  * @brief Extracts a specific color component from a full 32-bit color value.
@@ -155,12 +152,11 @@ uint32_t(direct_mode)(uint16_t i, uint16_t j, uint8_t step, uint32_t first);
  */
 uint32_t(indexed_mode)(uint8_t no_rectangles, uint16_t i, uint16_t j, uint8_t step, uint32_t first);
 
-
 void get_rotated_bounds(double width, double height, double theta, double *out_width, double *out_height);
 
-int draw_sprite_pos_to_delta(Sprite *sprite, double theta, uint8_t *frame_buffer);
+int draw_sprite(Sprite *sprite, uint8_t *frame_buffer);
 
-int draw_xpm_at_pos(xpm_map_t xpm, uint16_t x, uint16_t y, uint8_t *frame_buffer);
+int draw_sprite_rotated(Sprite *sprite, double theta, uint8_t *frame_buffer);
 
 /** @} */
 #endif /* GPU_H */

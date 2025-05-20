@@ -14,11 +14,11 @@ uint8_t *sec_frame_buffer;
 
 int(set_graphic_mode)(uint16_t mode) {
   reg86_t reg86;
-  memset(&reg86, 0, sizeof(reg86_t));   // por a estrutura a 0
-  reg86.intno = BIOS_VIDEOCARD_SERV;    // BIOS video services
-  reg86.ax = VBE_MODE_SET;              // set video mode function
-  reg86.bx = mode | LINEAR_FRAMEBUFFER; // set the mode and linear framebuffer
-  sys_int86(&reg86);                    // call BIOS interrupt
+  memset(&reg86, 0, sizeof(reg86_t));
+  reg86.intno = BIOS_VIDEOCARD_SERV;
+  reg86.ax = VBE_MODE_SET;
+  reg86.bx = mode | LINEAR_FRAMEBUFFER;
+  sys_int86(&reg86);
   return 0;
 }
 
@@ -141,21 +141,6 @@ uint32_t(indexed_mode)(uint8_t no_rectangles, uint16_t i, uint16_t j, uint8_t st
   return (first + (i * no_rectangles + j) * step) % (1 << vg_mode_info.BitsPerPixel);
 }
 
-int draw_xpm_at_pos(xpm_map_t xpm, uint16_t x, uint16_t y, uint8_t *frame_buffer) {
-  xpm_image_t img;
-  uint8_t *map;
-  enum xpm_image_type image_type = XPM_INDEXED;
-  map = (uint8_t *) xpm_load(xpm, image_type, &img);
-  for (int i = 0; i < img.height; i++) {
-    for (int j = 0; j < img.width; j++) {
-      if (map[i * img.width + j] != 0) {
-        vga_draw_pixel(x + j, y + i, map[i * img.width + j], frame_buffer);
-      }
-    }
-  }
-  return 0;
-}
-
 void get_rotated_bounds(double width, double height, double theta, double *out_width, double *out_height) {
   double cos_theta = cos(theta);
   double sin_theta = sin(theta);
@@ -183,7 +168,28 @@ void get_rotated_bounds(double width, double height, double theta, double *out_w
   *out_height = max_y - min_y;
 }
 
-int draw_sprite_pos_to_delta(Sprite *sprite, double theta, uint8_t *frame_buffer) {
+int(draw_sprite)(Sprite *sprite, uint8_t *frame_buffer) {
+  if (sprite == NULL) {
+    printf("draw_sprite: NULL pointer provided.\n");
+    return 1;
+  }
+
+  if (sprite->x >= x_res || sprite->y >= y_res) {
+    printf("draw_sprite: invalid sprite position, x:%hu, y:%hu.\n", sprite->x, sprite->y);
+    return 1;
+  }
+
+  uint8_t *map = sprite->map;
+
+  for (int h = 0; h < sprite->height && sprite->y + h < y_res; h++)
+    for (int w = 0; w < sprite->width && sprite->x + w < x_res; w++, map++)
+      if (*map != BACKGROUND_COLOR)
+        vga_draw_pixel(sprite->x + w, sprite->y + h, *map, frame_buffer);
+      
+  return 0;
+}
+
+int draw_sprite_rotated(Sprite *sprite, double theta, uint8_t *frame_buffer) {
 
   double rotated_width, rotated_height;
   get_rotated_bounds(sprite->width, sprite->height, theta, &rotated_width, &rotated_height);
@@ -210,7 +216,7 @@ int draw_sprite_pos_to_delta(Sprite *sprite, double theta, uint8_t *frame_buffer
 
         uint8_t color = sprite->map[src_y * sprite->width + src_x];
 
-        if (color != 0) {
+        if (color != BACKGROUND_COLOR) {
           vga_draw_pixel(sprite->x + j - rotated_width / 2.0, sprite->y + i - rotated_height / 2.0, color, frame_buffer);
         }
       }

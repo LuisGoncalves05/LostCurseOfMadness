@@ -1,4 +1,5 @@
 #include "view.h"
+#include "../controller/video/gpu.h"
 
 extern vbe_mode_info_t vg_mode_info;
 extern uint8_t bytes_per_pixel;
@@ -6,20 +7,6 @@ extern uint16_t x_res, y_res;
 extern uint8_t *sec_frame_buffer;
 extern uint8_t *main_frame_buffer;
 extern uint32_t frame_size;
-
-int draw_sprite_xpm(Sprite *sprite, int x, int y) {
-  uint16_t height = sprite->height;
-  uint16_t width = sprite->width;
-  uint32_t current_color;
-  for (int h = 0; h < height; h++) {
-    for (int w = 0; w < width; w++) {
-      current_color = sprite->map[w + h * width];
-      if (vga_draw_pixel(x + w, y + h, current_color, sec_frame_buffer) != 0)
-        return 1;
-    }
-  }
-  return 0;
-}
 
 int copy_frame_buffer() {
   memcpy(main_frame_buffer, sec_frame_buffer, frame_size);

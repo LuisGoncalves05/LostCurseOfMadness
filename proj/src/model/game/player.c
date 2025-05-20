@@ -54,7 +54,7 @@ void destroy_player(Player *player) {
 }
 
 int draw_player(Player *player) {
-  draw_sprite_pos_to_delta(player->sprite, delta, sec_frame_buffer);
+  draw_sprite_rotated(player->sprite, delta, sec_frame_buffer);
   return 0;
 }
 
@@ -189,7 +189,8 @@ void mouse_handler(Player *player, struct packet pp) {
 }
 
 void game_draw_cursor() {
-  draw_xpm_at_pos((xpm_map_t) cross, (int) x_mouse, (int) y_mouse, sec_frame_buffer);
+  Sprite *mouse = create_sprite(cross, x_mouse, y_mouse, 0, 0);
+  draw_sprite(mouse, sec_frame_buffer);
 }
 
 void game_draw_fov_cone(Player *player, Maze *maze) {
