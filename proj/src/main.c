@@ -82,7 +82,9 @@ int(reset)() {
 }
 
 int(proj_main_loop)(int argc, char *argv[]) {
-  setup();
+  if (setup() != 0)
+    return 1;
+
   Game *game = create_game();
 
   int ipc_status;
@@ -119,6 +121,7 @@ int(proj_main_loop)(int argc, char *argv[]) {
   }
   
   destroy_game(game);
+  
   if (reset() != 0)
     return 1;
   
