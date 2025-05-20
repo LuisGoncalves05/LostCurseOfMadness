@@ -3,6 +3,7 @@
 
 #include "level.h"
 #include "model/menu/game_over.h"
+#include "model/menu/main_menu.h"
 #include <math.h>
 
 #include "model/keys.h"

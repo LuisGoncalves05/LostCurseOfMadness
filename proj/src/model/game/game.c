@@ -13,11 +13,12 @@ struct Game {
     struct Level *level;
     union {
         struct GameOver *game_over;
+        struct MainMenu *main_menu;
     } menu;
 };
 
 static void menu_init(Game *game) {
-    printf("in menu\n");
+    game->menu.main_menu = create_main_menu();
 }
 
 static void level_init(Game *game) {
@@ -53,7 +54,7 @@ static void state_init(Game* game) {
 }
 
 static void menu_destroy(Game* game) {
-    printf("exiting menu\n");
+    destroy_main_menu(game->menu.main_menu);
 }
 
 static void level_destroy(Game* game) {
@@ -97,6 +98,11 @@ static void draw_cursor() {
 }
 
 static void menu_timer_handler(Game* game) {
+    clear(sec_frame_buffer);
+    draw_main_menu(game->menu.main_menu, sec_frame_buffer);
+    draw_cursor();
+
+    copy_frame_buffer();
 }
 
 static void level_timer_handler(Game* game) {
@@ -209,7 +215,7 @@ static void victory_mouse_handler(Game* game) {
 
 static void game_over_mouse_handler(Game* game) {
     game_over_set_button(game->menu.game_over, BUTTON_NONE);
-    GameOverButton button = BUTTON_NONE;
+    Button button = BUTTON_NONE;
     if (pp.lb) button = game_over_click_handler(game->menu.game_over, x_mouse, y_mouse); 
     if (button == BUTTON_MENU) {
         set_state(game, MENU);
@@ -245,7 +251,7 @@ Game *create_game() {
     game->level_number = 0;
     game->score = 0;
 
-    game->state = GAME_OVER;
+    game->state = MENU;
     state_init(game);
 
     return game;
