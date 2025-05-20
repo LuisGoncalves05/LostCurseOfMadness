@@ -4,46 +4,57 @@
 #include <machine/int86.h>
 #include <math.h>
 
+xpm_image_t img;
+vbe_mode_info_t vg_mode_info;
+uint8_t bytes_per_pixel;
+uint16_t x_res, y_res;
+uint32_t frame_size;
+uint8_t *main_frame_buffer;
+uint8_t *sec_frame_buffer;
 
-
-int (set_graphic_mode)(uint16_t mode){
+int(set_graphic_mode)(uint16_t mode) {
   reg86_t reg86;
-  memset(&reg86, 0, sizeof(reg86_t)); // por a estrutura a 0
-  reg86.intno = BIOS_VIDEOCARD_SERV; // BIOS video services
-  reg86.ax = VBE_MODE_SET; // set video mode function
+  memset(&reg86, 0, sizeof(reg86_t));   // por a estrutura a 0
+  reg86.intno = BIOS_VIDEOCARD_SERV;    // BIOS video services
+  reg86.ax = VBE_MODE_SET;              // set video mode function
   reg86.bx = mode | LINEAR_FRAMEBUFFER; // set the mode and linear framebuffer
-  sys_int86(&reg86); // call BIOS interrupt
+  sys_int86(&reg86);                    // call BIOS interrupt
   return 0;
 }
 
-int (set_frame_buffer)(uint16_t mode){
+int(set_frame_buffers)(uint16_t mode) {
   memset(&vg_mode_info, 0, sizeof(vg_mode_info));
   vbe_get_mode_info(mode, &vg_mode_info); // get mode info
 
-  x_res = vg_mode_info.XResolution; // get x resolution
-  y_res = vg_mode_info.YResolution; // get y resolution
+  x_res = vg_mode_info.XResolution;                      // get x resolution
+  y_res = vg_mode_info.YResolution;                      // get y resolution
   bytes_per_pixel = (vg_mode_info.BitsPerPixel + 7) / 8; // calculate bytes per pixel
 
-  unsigned int size = vg_mode_info.XResolution * vg_mode_info.YResolution * ((vg_mode_info.BitsPerPixel+7) / 8); // calculate size of framebuffer
+  frame_size = vg_mode_info.XResolution * vg_mode_info.YResolution * bytes_per_pixel; // calculate size of framebuffer
 
   struct minix_mem_range physic_addresses;
-  physic_addresses.mr_base = vg_mode_info.PhysBasePtr; // início físico do buffer
-  physic_addresses.mr_limit = physic_addresses.mr_base + size; // fim físico do buffer
+  physic_addresses.mr_base = vg_mode_info.PhysBasePtr;                   // início físico do buffer
+  physic_addresses.mr_limit = physic_addresses.mr_base + 2 * frame_size; // fim físico do buffer
 
   sys_privctl(SELF, SYS_PRIV_ADD_MEM, &physic_addresses); // add memory range to process
-     
-  main_frame_buffer = vm_map_phys(SELF, (void *)physic_addresses.mr_base, size); // map memory range to process
+
+  main_frame_buffer = vm_map_phys(SELF, (void *) physic_addresses.mr_base, 2 * frame_size); // map memory range to process
+  sec_frame_buffer = main_frame_buffer + frame_size;
 
   return 0;
 }
 
-int(vg_draw_pixel)(uint16_t x, uint16_t y, uint32_t color, uint8_t *frame_buffer) {
+uint8_t *(get_position) (uint16_t x, uint16_t y, uint8_t *frame_buffer) {
+  return frame_buffer + (x + x_res * y) * bytes_per_pixel;
+}
+
+int(vga_draw_pixel)(uint16_t x, uint16_t y, uint32_t color, uint8_t *frame_buffer) {
   return vga_draw_hline(x, y, 1, color, frame_buffer);
 }
 
 int(vga_draw_hline)(uint16_t x, uint16_t y, uint16_t len, uint32_t color, uint8_t *frame_buffer) {
   if (len == 0 || x >= x_res || y >= y_res) {
-    fprintf(stderr, "vg_draw_hline: invalid coordinates/dimensions, x:%u y:%u len:%u.\n", x, y, len);
+    printf("vg_draw_hline: invalid coordinates/dimensions, x:%u y:%u len:%u.\n", x, y, len);
     return 1;
   }
 
@@ -66,11 +77,12 @@ int(vga_draw_line)(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint32_t 
   while (true) {
     // Desenhar o pixel na posição atual
     if (x1 >= 0 && x1 < x_res && y1 >= 0 && y1 < y_res) {
-      vg_draw_pixel(x1, y1, color, frame_buffer);
+      vga_draw_pixel(x1, y1, color, frame_buffer);
     }
 
     // Verificar se chegamos ao ponto final
-    if (x1 == x2 && y1 == y2) break;
+    if (x1 == x2 && y1 == y2)
+      break;
 
     e2 = 2 * err;
     if (e2 > -dy) {
@@ -88,7 +100,7 @@ int(vga_draw_line)(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint32_t 
 
 int(vga_draw_rectangle)(uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint32_t color, uint8_t *frame_buffer) {
   if (width == 0 || height == 0 || x >= x_res || y >= y_res) {
-    fprintf(stderr, "vg_draw_rectangle: invalid coordinates/dimensions, x:%u y:%u width:%u height:%u.\n", x, y, width, height);
+    // printf("vg_draw_rectangle: invalid coordinates/dimensions, x:%u y:%u width:%u height:%u.\n", x, y, width, height);
     return 1;
   }
 
@@ -97,9 +109,10 @@ int(vga_draw_rectangle)(uint16_t x, uint16_t y, uint16_t width, uint16_t height,
     retv |= vga_draw_hline(x, y + i, width, color, frame_buffer);
 
   if (retv) {
-    fprintf(stderr, "vg_draw_rectangle: vg_draw_hline failed.\n");
+    printf("vg_draw_rectangle: vg_draw_hline failed.\n");
     return 1;
-  } else {
+  }
+  else {
     return 0;
   }
 }
@@ -129,80 +142,79 @@ uint32_t(indexed_mode)(uint8_t no_rectangles, uint16_t i, uint16_t j, uint8_t st
 }
 
 int draw_xpm_at_pos(xpm_map_t xpm, uint16_t x, uint16_t y, uint8_t *frame_buffer) {
-    xpm_image_t img;
-    uint8_t *map;
-    enum xpm_image_type image_type = XPM_INDEXED;
-    map = (uint8_t *) xpm_load(xpm, image_type, &img);
-    for (int i = 0; i < img.height; i++) {
-        for (int j = 0; j < img.width; j++) {
-            if (map[i * img.width + j] != 0) {
-                vg_draw_pixel(x + j, y + i, map[i * img.width + j], frame_buffer);
-            }
-        }
+  xpm_image_t img;
+  uint8_t *map;
+  enum xpm_image_type image_type = XPM_INDEXED;
+  map = (uint8_t *) xpm_load(xpm, image_type, &img);
+  for (int i = 0; i < img.height; i++) {
+    for (int j = 0; j < img.width; j++) {
+      if (map[i * img.width + j] != 0) {
+        vga_draw_pixel(x + j, y + i, map[i * img.width + j], frame_buffer);
+      }
     }
-    return 0;
+  }
+  return 0;
 }
 
 void get_rotated_bounds(double width, double height, double theta, double *out_width, double *out_height) {
-    double cos_theta = cos(theta);
-    double sin_theta = sin(theta);
+  double cos_theta = cos(theta);
+  double sin_theta = sin(theta);
 
-    double corners_x[] = {-width / 2, width / 2, width / 2, -width / 2};
-    double corners_y[] = {-height / 2, -height / 2, height / 2, height / 2};
+  double corners_x[] = {-width / 2, width / 2, width / 2, -width / 2};
+  double corners_y[] = {-height / 2, -height / 2, height / 2, height / 2};
 
-    double min_x = 1e9, max_x = -1e9, min_y = 1e9, max_y = -1e9;
+  double min_x = 1e9, max_x = -1e9, min_y = 1e9, max_y = -1e9;
 
-    for (int i = 0; i < 4; i++) {
-        double x = corners_x[i] * cos_theta - corners_y[i] * sin_theta;
-        double y = corners_x[i] * sin_theta + corners_y[i] * cos_theta;
+  for (int i = 0; i < 4; i++) {
+    double x = corners_x[i] * cos_theta - corners_y[i] * sin_theta;
+    double y = corners_x[i] * sin_theta + corners_y[i] * cos_theta;
 
-        if (x < min_x)
-            min_x = x;
-        if (x > max_x)
-            max_x = x;
-        if (y < min_y)
-            min_y = y;
-        if (y > max_y)
-            max_y = y;
-    }
+    if (x < min_x)
+      min_x = x;
+    if (x > max_x)
+      max_x = x;
+    if (y < min_y)
+      min_y = y;
+    if (y > max_y)
+      max_y = y;
+  }
 
-    *out_width = max_x - min_x;
-    *out_height = max_y - min_y;
+  *out_width = max_x - min_x;
+  *out_height = max_y - min_y;
 }
 
 int draw_sprite_pos_to_delta(Sprite *sprite, double theta, uint8_t *frame_buffer) {
 
-    double rotated_width, rotated_height;
-    get_rotated_bounds(sprite->width, sprite->height, theta, &rotated_width, &rotated_height);
+  double rotated_width, rotated_height;
+  get_rotated_bounds(sprite->width, sprite->height, theta, &rotated_width, &rotated_height);
 
-    double center_x = sprite->width / 2.0;
-    double center_y = sprite->height / 2.0;
+  double center_x = sprite->width / 2.0;
+  double center_y = sprite->height / 2.0;
 
-    double cos_theta = cos(theta);
-    double sin_theta = sin(theta);
+  double cos_theta = cos(theta);
+  double sin_theta = sin(theta);
 
-    for (int i = 0; i < (int) rotated_height; i++) {
-        for (int j = 0; j < (int) rotated_width; j++) {
-            double translated_x = j - rotated_width / 2.0;
-            double translated_y = i - rotated_height / 2.0;
-            //se der merda na sync no mouse e do sprite troquem o sinal
-            //                                         |
-            //                                         v
-            double source_x = cos_theta * translated_x + sin_theta * translated_y + center_x;
-            double source_y = sin_theta * translated_x - cos_theta * translated_y + center_y;
+  for (int i = 0; i < (int) rotated_height; i++) {
+    for (int j = 0; j < (int) rotated_width; j++) {
+      double translated_x = j - rotated_width / 2.0;
+      double translated_y = i - rotated_height / 2.0;
+      // se der merda na sync no mouse e do sprite troquem o sinal
+      //                                          |
+      //                                          v
+      double source_x = cos_theta * translated_x + sin_theta * translated_y + center_x;
+      double source_y = sin_theta * translated_x - cos_theta * translated_y + center_y;
 
-            if (source_x >= 0 && source_x < sprite->width && source_y >= 0 && source_y < sprite->height) {
-                int src_x = (int) source_x;
-                int src_y = (int) source_y;
+      if (source_x >= 0 && source_x < sprite->width && source_y >= 0 && source_y < sprite->height) {
+        int src_x = (int) source_x;
+        int src_y = (int) source_y;
 
-                uint8_t color = sprite->map[src_y * sprite->width + src_x];
+        uint8_t color = sprite->map[src_y * sprite->width + src_x];
 
-                if (color != 0) {
-                    vg_draw_pixel(sprite->x + j - rotated_width / 2.0, sprite->y + i - rotated_height / 2.0, color, frame_buffer);
-                }
-            }
+        if (color != 0) {
+          vga_draw_pixel(sprite->x + j - rotated_width / 2.0, sprite->y + i - rotated_height / 2.0, color, frame_buffer);
         }
+      }
     }
-    return 0;
+  }
+  return 0;
 }
-
