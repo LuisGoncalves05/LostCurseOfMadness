@@ -1,19 +1,20 @@
-#include <lcom/lcf.h>
-#include "controller/timer/i8254.h"
-#include "controller/video/gpu.h"
+#include "config.h"
 #include "controller/keyboard/keyboard.h"
 #include "controller/mouse/mouse.h"
-#include "view/view.h"
-#include "config.h"
-
+#include "controller/timer/i8254.h"
+#include "controller/video/gpu.h"
 #include "model/game/game.h"
+#include "model/game/level.h"
 #include "model/game/maze.h"
 #include "model/game/player.h"
-#include "model/game/level.h"
+#include "view/view.h"
+#include <lcom/lcf.h>
 
 uint8_t timer_mask;
 uint8_t keyboard_mask;
 uint8_t mouse_mask;
+
+extern uint32_t interrupt_counter;
 
 extern uint8_t *main_frame_buffer;
 extern uint8_t *sec_frame_buffer;
@@ -48,41 +49,43 @@ int main(int argc, char *argv[]) {
   return 0;
 }
 
+int(setup)() {
+  if (set_frame_buffers(VIDEO_MODE) != 0)
+    return 1;
+  if (set_graphic_mode(VIDEO_MODE) != 0)
+    return 1;
+  if (timer_subscribe_int(&timer_mask) != 0)
+    return 1;
+  if (kbd_subscribe_int(&keyboard_mask) != 0)
+    return 1;
+  if (mouse_subscribe_int(&mouse_mask) != 0)
+    return 1;
+  if (mouse_set_data_reporting(true) != 0)
+    return 1;
 
-int setup() {
-  // set graphic mode
-  if (set_frame_buffers(VIDEO_MODE) != 0) return 1;
-  if (set_graphic_mode(VIDEO_MODE) != 0) return 1;
-  
-  // subscribe to interrupts
-  if (timer_set_frequency(TIMER, GAME_FREQUENCY) != 0) return 1;
-  if (timer_subscribe_int(&timer_mask) != 0) return 1;
-
-  if (kbd_subscribe_int(&keyboard_mask) != 0) return 1;
-  
-  if (mouse_subscribe_int(&mouse_mask) != 0) return 1;
-  if(mouse_set_data_reporting(true) != 0) return 1;
   init_maze_buffer();
 
-
   return 0;
 }
 
-int reset() {
-  // set text mode
-  if (vg_exit() != 0) return 1;
+int(reset)() {
+  if (vg_exit() != 0)
+    return 1;
+  if (timer_unsubscribe_int() != 0)
+    return 1;
+  if (kbd_unsubscribe_int() != 0)
+    return 1;
+  if (mouse_unsubscribe_int() != 0)
+    return 1;
+  if (mouse_set_data_reporting(false) != 0)
+    return 1;
 
-  // unsubscribe from interrupts
-  if (timer_unsubscribe_int() != 0) return 1;
-  if (kbd_unsubscribe_int() != 0) return 1;
-  if (mouse_unsubscribe_int() != 0) return 1;
   free_maze_buffer();
 
-
   return 0;
 }
 
-int (proj_main_loop)(int argc, char *argv[]) {
+int(proj_main_loop)(int argc, char *argv[]) {
   Game *game = create_game();
 
   setup();
@@ -96,30 +99,32 @@ int (proj_main_loop)(int argc, char *argv[]) {
     }
 
     if (is_ipc_notify(ipc_status)) {
-      switch(_ENDPOINT_P(msg.m_source)) {
-        case HARDWARE: 
-          if (msg.m_notify.interrupts & timer_mask){
-            game_timer_handler(game);
+      switch (_ENDPOINT_P(msg.m_source)) {
+        case HARDWARE:
+          if (msg.m_notify.interrupts & timer_mask) {
+            if ((interrupt_counter % sys_hz() / GAME_FREQUENCY) == 0)
+              game_timer_handler(game);
           }
-          if (msg.m_notify.interrupts & keyboard_mask){
+          if (msg.m_notify.interrupts & keyboard_mask) {
             kbd_int_handler();
             game_keyboard_handler(game);
           }
-          if (msg.m_notify.interrupts & mouse_mask){
+          if (msg.m_notify.interrupts & mouse_mask) {
             mouse_int_handler();
             mouse_sync_packets(packet, &packet_idx, packet_byte);
-            if(packet_idx == 3){
+            if (packet_idx == 3) {
               mouse_build_packet(packet, &packet_idx, &pp);
               packet_idx = 0;
             }
             game_mouse_handler(game);
           }
           break;
-        }
+      }
     }
   }
-  
-  if (reset() != 0) return 1;
+
+  if (reset() != 0)
+    return 1;
 
   destroy_game(game);
   return 0;

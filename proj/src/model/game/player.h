@@ -4,7 +4,6 @@
 #include "../Sprite.h"
 #include "game.h"
 #include "../../controller/video/gpu.h"
-#include "../../images/font/cursor.xpm"
 
 #define KEY_W 0x11
 #define KEY_A 0x1E
