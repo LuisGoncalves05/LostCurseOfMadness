@@ -23,6 +23,7 @@ extern uint8_t packet_byte;
 extern uint8_t packet[3];
 struct packet pp;
 uint8_t packet_idx = 0;
+int frame_counter = 0;
 
 int main(int argc, char *argv[]) {
   // sets the language of LCF messages (can be either EN-US or PT-PT)
@@ -99,6 +100,7 @@ int (proj_main_loop)(int argc, char *argv[]) {
       switch(_ENDPOINT_P(msg.m_source)) {
         case HARDWARE: 
           if (msg.m_notify.interrupts & timer_mask){
+            frame_counter++;
             game_timer_handler(game);
           }
           if (msg.m_notify.interrupts & keyboard_mask){

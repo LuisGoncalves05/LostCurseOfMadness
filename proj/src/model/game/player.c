@@ -8,6 +8,7 @@
 extern uint8_t scan_code;
 extern uint8_t *sec_frame_buffer;
 extern vbe_mode_info_t vg_mode_info;
+extern int frame_counter;
 
 uint8_t *maze_buffer = NULL;
 
@@ -58,13 +59,33 @@ void destroy_player(Player *player) {
 int draw_player(Player *player) {
     
     Sprite *new_sprite;
+    if(frame_counter > 16){
+        frame_counter = 0;
+    }
 
     switch (state) {
         case PLAYER_IDLE:
-            new_sprite = create_sprite((xpm_map_t) penguin, player->sprite->x, player->sprite->y, player->sprite->xspeed, player->sprite->yspeed);
+            if(frame_counter <= 4){
+                new_sprite = create_sprite((xpm_map_t) pic1, player->sprite->x, player->sprite->y, player->sprite->xspeed, player->sprite->yspeed);
+            }else if(frame_counter <= 8){
+                new_sprite = create_sprite((xpm_map_t) penguin, player->sprite->x, player->sprite->y, player->sprite->xspeed, player->sprite->yspeed);
+            }else if(frame_counter <= 12){
+                new_sprite = create_sprite((xpm_map_t) pic1, player->sprite->x, player->sprite->y, player->sprite->xspeed, player->sprite->yspeed);
+            }else{
+                new_sprite = create_sprite((xpm_map_t) penguin, player->sprite->x, player->sprite->y, player->sprite->xspeed, player->sprite->yspeed);
+            }
+            
             break;
         case PLAYER_WALKING:
-            new_sprite = create_sprite((xpm_map_t) penguin, player->sprite->x, player->sprite->y, player->sprite->xspeed, player->sprite->yspeed);
+            if(frame_counter <= 4){
+                new_sprite = create_sprite((xpm_map_t) pic1, player->sprite->x, player->sprite->y, player->sprite->xspeed, player->sprite->yspeed);
+            }else if(frame_counter <= 8){
+                new_sprite = create_sprite((xpm_map_t) pic1, player->sprite->x, player->sprite->y, player->sprite->xspeed, player->sprite->yspeed);
+            }else if(frame_counter <= 12){
+                new_sprite = create_sprite((xpm_map_t) pic1, player->sprite->x, player->sprite->y, player->sprite->xspeed, player->sprite->yspeed);
+            }else{
+                new_sprite = create_sprite((xpm_map_t) pic1, player->sprite->x, player->sprite->y, player->sprite->xspeed, player->sprite->yspeed);
+            }
             break;
         case PLAYER_AIMING:
             new_sprite = create_sprite((xpm_map_t) cross, player->sprite->x, player->sprite->y, player->sprite->xspeed, player->sprite->yspeed);
@@ -211,7 +232,7 @@ void mouse_handler(Player *player, struct packet pp) {
 }
 
 void game_draw_cursor() {
-    draw_xpm_at_pos((xpm_map_t) cross, (int) x_mouse, (int) y_mouse, sec_frame_buffer);
+    draw_xpm_at_pos((xpm_map_t) cursor_xpm, (int) x_mouse, (int) y_mouse, sec_frame_buffer);
 }
 
 void game_draw_fov_cone(Player *player, Maze* maze) {
@@ -284,7 +305,7 @@ void update_player_state(Player *player, struct packet pp){
 
     if(pp.lb == 0 && pp.rb == 1){
         state = PLAYER_AIMING;
-    }else if(pp.lb == 1 && pp.rb == 0){
+    }else if(pp.lb == 1 && pp.rb == 1){
         state = PLAYER_SHOOTING;
     }
 }
