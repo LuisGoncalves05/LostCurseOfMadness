@@ -107,17 +107,15 @@ static void level_timer_handler(Game *game) {
   if (!player || !maze)
     return;
 
-  // Limpa o buffer secundário
   clear(sec_frame_buffer);
-
   clear(maze_buffer);
+
   draw_maze(maze, maze_buffer);
   game_draw_fov_cone(player, maze);
   draw_player(player);
   game_draw_cursor();
 
-  // Copia o buffer secundário para o buffer principal
-  copy_frame_buffer();
+  vga_flip_pages();
 }
 
 static void victory_timer_handler(Game *game) {

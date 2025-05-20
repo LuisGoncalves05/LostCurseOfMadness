@@ -14,11 +14,12 @@
 
 /** @name VBE BIOS Function Codes */
 /** @{ */
-#define VBE_CONTROLLER_INFO 0x4F00 /**< Request VBE controller information. */
-#define VBE_MODE_INFO 0x4F01       /**< Request VBE mode information. */
-#define VBE_MODE_SET 0x4F02        /**< Set a VBE graphics mode. */
-#define BIOS_VIDEO_MODE_SET 0x0003 /**< Reset to Minix default text mode. */
-#define BIOS_VIDEOCARD_SERV 0x10   /**< BIOS video services. */
+#define VBE_CONTROLLER_INFO 0x4F00   /**< Request VBE controller information. */
+#define VBE_MODE_INFO 0x4F01         /**< Request VBE mode information. */
+#define VBE_MODE_SET 0x4F02          /**< Set a VBE graphics mode. */
+#define VBE_DISPLAY_START_SET 0x4F07 /**< Set a vram region to display. */
+#define BIOS_VIDEO_MODE_SET 0x0003   /**< Reset to Minix default text mode. */
+#define BIOS_VIDEOCARD_SERV 0x10     /**< BIOS video services. */
 /** @} */
 
 /** @name Supported VBE Modes */
@@ -38,6 +39,7 @@
 /** @} */
 
 #define LINEAR_FRAMEBUFFER BIT(14) /**< Enable linear framebuffer mode. */
+#define VERTICAL_RETRACE 0x0080    /**< Set display start during vertical retrace. */
 #define VBE 0x10                   /**< BIOS video interrupt number. */
 #define DIRECT_MODE 6              /**< Direct color memory model identifier. */
 #define BACKGROUND_COLOR 0         /**< Default background color used for clearing screen or erasing sprites. */
@@ -157,6 +159,12 @@ void get_rotated_bounds(double width, double height, double theta, double *out_w
 int draw_sprite(Sprite *sprite, uint8_t *frame_buffer);
 
 int draw_sprite_rotated(Sprite *sprite, double theta, uint8_t *frame_buffer);
+
+int(clear)(uint8_t *frame_buffer);
+
+void(set_display_start)();
+
+void vga_flip_pages();
 
 /** @} */
 #endif /* GPU_H */

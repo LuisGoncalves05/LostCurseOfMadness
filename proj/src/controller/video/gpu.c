@@ -9,6 +9,7 @@ vbe_mode_info_t vg_mode_info;
 uint8_t bytes_per_pixel;
 uint16_t x_res, y_res;
 uint32_t frame_size;
+bool frame_start = true;
 uint8_t *main_frame_buffer;
 uint8_t *sec_frame_buffer;
 
@@ -42,6 +43,29 @@ int(set_frame_buffers)(uint16_t mode) {
   sec_frame_buffer = main_frame_buffer + frame_size;
 
   return 0;
+}
+
+int(clear)(uint8_t *frame_buffer) {
+  return memset(frame_buffer, 0, x_res * y_res * bytes_per_pixel) == NULL;
+}
+
+void(set_display_start)() {
+  reg86_t reg86;
+  memset(&reg86, 0, sizeof(reg86_t));
+  reg86.intno = BIOS_VIDEOCARD_SERV;
+  reg86.ax = VBE_DISPLAY_START_SET;
+  reg86.bx = VERTICAL_RETRACE;
+  reg86.cx = 0;
+  reg86.dx = frame_start ? 0 : y_res;
+  sys_int86(&reg86);
+}
+
+void vga_flip_pages() {
+  frame_start = !frame_start;
+  set_display_start();
+  uint8_t *tmp = main_frame_buffer;
+  main_frame_buffer = sec_frame_buffer;
+  sec_frame_buffer = tmp;
 }
 
 uint8_t *(get_position) (uint16_t x, uint16_t y, uint8_t *frame_buffer) {
@@ -224,3 +248,4 @@ int draw_sprite_rotated(Sprite *sprite, double theta, uint8_t *frame_buffer) {
   }
   return 0;
 }
+

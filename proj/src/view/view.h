@@ -9,8 +9,4 @@
 
 int draw_text(char *text, uint16_t x, uint16_t y, uint32_t color);
 
-int copy_frame_buffer();
-
-int(clear)(uint8_t *frame_buffer);
-
 #endif
