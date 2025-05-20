@@ -5,6 +5,16 @@
 #include "game_over.h"
 #include <math.h>
 
+#include "model/keys.h"
+#include "controller/video/gpu.h"
+#include "controller/keyboard/i8042.h"
+#include "controller/keyboard/keyboard.h"
+#include "controller/mouse/mouse.h"
+#include "controller/timer/i8254.h"
+#include "view/view.h"
+#include "model/Sprite.h"
+#include "model/game/level.h"
+
 extern uint8_t *maze_buffer;
 
 double	delta;

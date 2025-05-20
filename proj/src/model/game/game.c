@@ -1,17 +1,8 @@
 #include "game.h"
 
-#include "controller/video/gpu.h"
-#include "controller/keyboard/keyboard.h"
-#include "controller/mouse/mouse.h"
-#include "controller/timer/i8254.h"
-#include "view/view.h"
-#include "model/Sprite.h"
-#include "model/game/level.h"
-
 extern uint8_t *sec_frame_buffer;
 extern uint8_t *main_frame_buffer;
 
-#include "controller/keyboard/i8042.h"
 extern uint8_t scan_code;
 extern struct packet pp;
 
@@ -101,6 +92,10 @@ static void set_state(Game* game, State new_state) {
     state_init(game);
 }
 
+static void draw_cursor() {
+    draw_xpm_at_pos((xpm_map_t) cross, (int) x_mouse, (int) y_mouse, sec_frame_buffer);
+}
+
 static void menu_timer_handler(Game* game) {
 }
 
@@ -119,7 +114,7 @@ static void level_timer_handler(Game* game) {
     draw_maze(maze, maze_buffer);
     game_draw_fov_cone(player, maze);
     draw_player(player);
-    game_draw_cursor();
+    draw_cursor();
     
     // Copia o buffer secundário para o buffer principal
     copy_frame_buffer();
@@ -132,6 +127,7 @@ static void victory_timer_handler(Game* game) {
 static void game_over_timer_handler(Game* game) {
     clear(sec_frame_buffer);
     draw_game_over(game->menu.game_over, sec_frame_buffer);
+    draw_cursor();
 
     copy_frame_buffer();
 }
@@ -167,6 +163,20 @@ static void victory_keyboard_handler(Game* game) {
 
 static void game_over_keyboard_handler(Game* game) {
     if (scan_code == ESC_BREAK_CODE) set_state(game, EXIT);  
+    if (scan_code == KEY_W || scan_code == KEY_S || scan_code == KEY_A || scan_code == KEY_D) {
+        if (game_over_get_button(game->menu.game_over) == BUTTON_MENU) {
+            game_over_set_button(game->menu.game_over, BUTTON_EXIT);
+        } else {
+            game_over_set_button(game->menu.game_over, BUTTON_MENU);
+        }
+    }
+    if (scan_code == KEY_ENTER) {
+        if (game_over_get_button(game->menu.game_over) == BUTTON_MENU) {
+            set_state(game, MENU);
+        } else if (game_over_get_button(game->menu.game_over) == BUTTON_EXIT) {
+            set_state(game, EXIT);
+        }
+    }
 }
 
 static void exit_keyboard_handler(Game* game) {
@@ -190,7 +200,7 @@ static void menu_mouse_handler(Game* game) {
 }
 
 static void level_mouse_handler(Game* game) {
-    mouse_handler(get_player(game->level), pp);
+    player_mouse_handler(get_player(game->level), pp);
 }
 
 static void victory_mouse_handler(Game* game) {
@@ -198,7 +208,14 @@ static void victory_mouse_handler(Game* game) {
 }
 
 static void game_over_mouse_handler(Game* game) {
-    printf("game_over_mouse_handler: To be implemented\n");    
+    game_over_set_button(game->menu.game_over, BUTTON_NONE);
+    GameOverButton button = BUTTON_NONE;
+    if (pp.lb) button = game_over_click_handler(game->menu.game_over, x_mouse, y_mouse); 
+    if (button == BUTTON_MENU) {
+        set_state(game, MENU);
+    } else if (button == BUTTON_EXIT) {
+        set_state(game, EXIT);
+    }
 }
 
 static void exit_mouse_handler(Game* game) {
@@ -214,6 +231,8 @@ static void (*game_mouse_handlers[])(Game *game) = {
 };
 
 void game_mouse_handler(Game* game) {
+    x_mouse += pp.delta_x * 0.5;
+    y_mouse -= pp.delta_y * 0.5;
     game_mouse_handlers[game->state](game);
 }
 

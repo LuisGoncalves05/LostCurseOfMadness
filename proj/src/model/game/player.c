@@ -31,7 +31,6 @@ double fov_angle = 60.0; // Valor inicial de 60 graus
 
 // Create a new player
 Player *create_player(Sprite *sprite) {
-    
     Player *player = (Player *)malloc(sizeof(Player));
     if (!player) return NULL;
     player->health = PLAYER_HEALTH;
@@ -164,10 +163,7 @@ void game_update_delta(Player *player)
     delta = atan2(dy, dx);
 }
 
-void mouse_handler(Player *player, struct packet pp) {
-    x_mouse += pp.delta_x * 0.5;
-    y_mouse -= pp.delta_y * 0.5;
-    
+void player_mouse_handler(Player *player, struct packet pp) {
     uint16_t screen_width = vg_mode_info.XResolution;
     uint16_t screen_height = vg_mode_info.YResolution;
     
@@ -182,10 +178,6 @@ void mouse_handler(Player *player, struct packet pp) {
         y_mouse = screen_height - CURSOR_HEIGHT;
     
     game_update_delta(player);
-}
-
-void game_draw_cursor() {
-    draw_xpm_at_pos((xpm_map_t) cross, (int) x_mouse, (int) y_mouse, sec_frame_buffer);
 }
 
 void game_draw_fov_cone(Player *player, Maze* maze) {
