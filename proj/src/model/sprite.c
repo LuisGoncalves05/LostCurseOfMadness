@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "Sprite.h"
+#include "sprite.h"
 #include <lcom/lcf.h>
 
 /**

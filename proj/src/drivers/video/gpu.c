@@ -1,5 +1,5 @@
 #include "gpu.h"
-#include "model/Sprite.h"
+#include "model/sprite.h"
 #include <lcom/lcf.h>
 #include <machine/int86.h>
 #include <math.h>

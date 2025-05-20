@@ -1,6 +1,6 @@
 #include "player.h"
 #include "../../view/view.h"
-#include "../Sprite.h"
+#include "../sprite.h"
 #include "lcom/lcf.h"
 #include <math.h>
 #include <stdlib.h>

@@ -6,18 +6,18 @@
 
 extern uint8_t *maze_buffer;
 
-double	delta;
-double	direction;
+double delta;
+double direction;
 
-double	x_mouse;
-double	y_mouse;
+double x_mouse;
+double y_mouse;
 
 typedef enum {
-    MENU,
-    LEVEL,
-    VICTORY,
-    GAME_OVER,
-    EXIT
+  MENU,
+  LEVEL,
+  VICTORY,
+  GAME_OVER,
+  EXIT
 } State;
 
 typedef struct Game Game;
@@ -27,8 +27,8 @@ void destroy_game(Game *game);
 
 State get_state(Game *game);
 
-void game_timer_handler(Game* game);
-void game_keyboard_handler(Game* game);
-void game_mouse_handler(Game* game);
+void game_timer_handler(Game *game);
+void game_keyboard_handler(Game *game);
+void game_mouse_handler(Game *game);
 
 #endif

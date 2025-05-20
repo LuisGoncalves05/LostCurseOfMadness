@@ -1,7 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "../Sprite.h"
+#include "../sprite.h"
 #include "game.h"
 #include "../../controller/video/gpu.h"
 

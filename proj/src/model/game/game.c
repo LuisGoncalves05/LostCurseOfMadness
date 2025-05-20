@@ -4,7 +4,7 @@
 #include "controller/mouse/mouse.h"
 #include "controller/timer/i8254.h"
 #include "controller/video/gpu.h"
-#include "model/Sprite.h"
+#include "model/sprite.h"
 #include "model/game/level.h"
 #include "view/view.h"
 
