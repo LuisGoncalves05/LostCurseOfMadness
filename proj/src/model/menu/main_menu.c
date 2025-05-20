@@ -21,6 +21,8 @@ void destroy_main_menu(MainMenu *main_menu) {
 
 void draw_main_menu(MainMenu *main_menu, uint8_t *frame_buffer) {
     draw_xpm_at_pos_with_color((xpm_map_t) lcom_xpm, 112, 184, 4, frame_buffer);
+    draw_button(BUTTON_PLAY, main_menu->button == BUTTON_PLAY, BUTTON_MENU_START_X, MAIN_MENU_BUTTON_START_Y, frame_buffer);
+    draw_button(BUTTON_EXIT, main_menu->button == BUTTON_EXIT, BUTTON_EXIT_START_X, MAIN_MENU_BUTTON_START_Y, frame_buffer);
 }
 
 void main_menu_set_button(MainMenu *main_menu, Button button) {

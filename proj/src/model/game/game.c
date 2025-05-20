@@ -251,7 +251,7 @@ Game *create_game() {
     game->level_number = 0;
     game->score = 0;
 
-    game->state = MENU;
+    game->state = GAME_OVER;
     state_init(game);
 
     return game;
