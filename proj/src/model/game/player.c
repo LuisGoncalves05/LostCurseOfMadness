@@ -35,7 +35,6 @@ enum player_state state = PLAYER_IDLE;
 
 // Create a new player
 Player *create_player(Sprite *sprite) {
-    
     Player *player = (Player *)malloc(sizeof(Player));
     if (!player) return NULL;
     player->health = PLAYER_HEALTH;
@@ -211,10 +210,7 @@ void game_update_delta(Player *player)
     delta = atan2(dy, dx);
 }
 
-void mouse_handler(Player *player, struct packet pp) {
-    x_mouse += pp.delta_x * 0.5;
-    y_mouse -= pp.delta_y * 0.5;
-    
+void player_mouse_handler(Player *player, struct packet pp) {
     uint16_t screen_width = vg_mode_info.XResolution;
     uint16_t screen_height = vg_mode_info.YResolution;
     

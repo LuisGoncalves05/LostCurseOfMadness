@@ -162,6 +162,7 @@ void get_rotated_bounds(double width, double height, double theta, double *out_w
 int draw_sprite_pos_to_delta(Sprite *sprite, double theta, uint8_t *frame_buffer);
 
 int draw_xpm_at_pos(xpm_map_t xpm, uint16_t x, uint16_t y, uint8_t *frame_buffer);
+int draw_xpm_at_pos_with_color(xpm_map_t xpm, uint16_t x, uint16_t y, uint32_t color, uint8_t *frame_buffer);
 
 /** @} */
 #endif /* GPU_H */

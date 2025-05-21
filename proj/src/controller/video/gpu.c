@@ -143,6 +143,22 @@ int draw_xpm_at_pos(xpm_map_t xpm, uint16_t x, uint16_t y, uint8_t *frame_buffer
     return 0;
 }
 
+int draw_xpm_at_pos_with_color(xpm_map_t xpm, uint16_t x, uint16_t y, uint32_t color, uint8_t *frame_buffer) {
+  xpm_image_t img;
+  uint8_t *map;
+  enum xpm_image_type image_type = XPM_INDEXED;
+  map = (uint8_t *) xpm_load(xpm, image_type, &img);
+  for (int i = 0; i < img.height; i++) {
+      for (int j = 0; j < img.width; j++) {
+          if (map[i * img.width + j] != 0) {
+              uint8_t current_color = map[i * img.width + j];
+              if (current_color != 0) vg_draw_pixel(x + j, y + i, color, frame_buffer);
+          }
+      }
+  }
+  return 0;
+}
+
 void get_rotated_bounds(double width, double height, double theta, double *out_width, double *out_height) {
     double cos_theta = cos(theta);
     double sin_theta = sin(theta);

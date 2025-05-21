@@ -3,16 +3,11 @@
 
 #include "../Sprite.h"
 #include "game.h"
+#include "model/keys.h"
 #include "../../controller/video/gpu.h"
+// #include "../../images/font/cursor.xpm"
 #include "img/cursor.xpm"
 
-#define KEY_W 0x11
-#define KEY_A 0x1E
-#define KEY_S 0x1F
-#define KEY_D 0x20
-#define KEY_X 0x2D
-#define KEY_C 0x2E
-#define KEY_SPACE 0x39
 #define HEALTH 3
 
 #define PLAYER_MAX_SPEED 7
@@ -62,12 +57,10 @@ Player *create_player(Sprite *sprite);
 void destroy_player(Player *player);
 int draw_player(Player *player);
 void keyboard_handler(Player *player, Maze *maze);
-void mouse_handler(Player *player, struct packet pp);
-void game_draw_cursor();
+void player_mouse_handler(Player *player, struct packet pp);
 void game_draw_fov_cone(Player *player, Maze* maze);
 void init_maze_buffer();
 void free_maze_buffer();
-
 
 void update_player_state(Player *player, struct packet pp);
 void cursor_check_bound();

@@ -146,6 +146,6 @@ int(mouse_set_data_reporting)(bool b) {
     attempts++;
   }
 
-  fprintf(stderr, "mouse_set_data_reporting: Timed out after %d attempts.\n", READ_ATTEMPT_LIMIT);
+  printf("mouse_set_data_reporting: Timed out after %d attempts.\n", READ_ATTEMPT_LIMIT);
   return 1;
 }
