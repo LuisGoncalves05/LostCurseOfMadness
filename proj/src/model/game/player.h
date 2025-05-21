@@ -6,6 +6,7 @@
 #include "model/keys.h"
 #include "../../controller/video/gpu.h"
 // #include "../../images/font/cursor.xpm"
+#include "img/cursor.xpm"
 
 #define HEALTH 3
 
@@ -25,6 +26,14 @@ extern double	direction;
 extern double	x_mouse;
 extern double	y_mouse;
 
+
+enum player_state {
+	PLAYER_IDLE,
+	PLAYER_WALKING,
+	PLAYER_AIMING,
+	PLAYER_SHOOTING,
+	PLAYER_DYING,
+};
 
 xpm_image_t	img;
 extern double	delta;
@@ -53,5 +62,7 @@ void game_draw_fov_cone(Player *player, Maze* maze);
 void init_maze_buffer();
 void free_maze_buffer();
 
+void update_player_state(Player *player, struct packet pp);
+void cursor_check_bound();
 #endif
 

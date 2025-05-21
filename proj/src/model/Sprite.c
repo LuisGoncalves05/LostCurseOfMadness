@@ -21,6 +21,7 @@ Sprite *create_sprite(xpm_map_t xpm,
         return NULL;
     // read the sprite pixmap
     sp->map = xpm_load(xpm, XPM_INDEXED, &img);
+    printf("xpm_load: Success\n");
     if (sp->map == NULL) {
         free(sp);
         return NULL;

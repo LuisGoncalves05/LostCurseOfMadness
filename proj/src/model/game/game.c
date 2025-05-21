@@ -93,7 +93,7 @@ static void set_state(Game* game, State new_state) {
 }
 
 static void draw_cursor() {
-    draw_xpm_at_pos((xpm_map_t) cross, (int) x_mouse, (int) y_mouse, sec_frame_buffer);
+    draw_xpm_at_pos((xpm_map_t) cursor_xpm, (int) x_mouse, (int) y_mouse, sec_frame_buffer);
 }
 
 static void menu_timer_handler(Game* game) {
@@ -108,12 +108,15 @@ static void level_timer_handler(Game* game) {
     if (!player || !maze) return;
     
     // Limpa o buffer secundário
+    cursor_check_bound();
     clear(sec_frame_buffer);
     
     clear(maze_buffer);
     draw_maze(maze, maze_buffer);
     game_draw_fov_cone(player, maze);
     draw_player(player);
+    draw_player(get_player(game->level));
+    update_player_state(get_player(game->level), pp);
     draw_cursor();
     
     // Copia o buffer secundário para o buffer principal

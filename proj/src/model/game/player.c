@@ -8,10 +8,14 @@
 extern uint8_t scan_code;
 extern uint8_t *sec_frame_buffer;
 extern vbe_mode_info_t vg_mode_info;
+extern int frame_counter;
 
 uint8_t *maze_buffer = NULL;
 
 double fov_angle = 60.0; // Valor inicial de 60 graus
+extern vbe_mode_info_t vg_mode_info;
+
+enum player_state state = PLAYER_IDLE;
 
 /* static */ void playerIsAtMaxSpeed(Player *player){
     if(player->sprite->xspeed >= player->max_speed){
@@ -52,6 +56,49 @@ void destroy_player(Player *player) {
 }
 
 int draw_player(Player *player) {
+    
+    Sprite *new_sprite;
+    if(frame_counter > 16){
+        frame_counter = 0;
+    }
+
+    switch (state) {
+        case PLAYER_IDLE:
+            if(frame_counter <= 4){
+                new_sprite = create_sprite((xpm_map_t) pic1, player->sprite->x, player->sprite->y, player->sprite->xspeed, player->sprite->yspeed);
+            }else if(frame_counter <= 8){
+                new_sprite = create_sprite((xpm_map_t) penguin, player->sprite->x, player->sprite->y, player->sprite->xspeed, player->sprite->yspeed);
+            }else if(frame_counter <= 12){
+                new_sprite = create_sprite((xpm_map_t) pic1, player->sprite->x, player->sprite->y, player->sprite->xspeed, player->sprite->yspeed);
+            }else{
+                new_sprite = create_sprite((xpm_map_t) penguin, player->sprite->x, player->sprite->y, player->sprite->xspeed, player->sprite->yspeed);
+            }
+            
+            break;
+        case PLAYER_WALKING:
+            if(frame_counter <= 4){
+                new_sprite = create_sprite((xpm_map_t) pic1, player->sprite->x, player->sprite->y, player->sprite->xspeed, player->sprite->yspeed);
+            }else if(frame_counter <= 8){
+                new_sprite = create_sprite((xpm_map_t) pic1, player->sprite->x, player->sprite->y, player->sprite->xspeed, player->sprite->yspeed);
+            }else if(frame_counter <= 12){
+                new_sprite = create_sprite((xpm_map_t) pic1, player->sprite->x, player->sprite->y, player->sprite->xspeed, player->sprite->yspeed);
+            }else{
+                new_sprite = create_sprite((xpm_map_t) pic1, player->sprite->x, player->sprite->y, player->sprite->xspeed, player->sprite->yspeed);
+            }
+            break;
+        case PLAYER_AIMING:
+            new_sprite = create_sprite((xpm_map_t) cross, player->sprite->x, player->sprite->y, player->sprite->xspeed, player->sprite->yspeed);
+            break;
+        case PLAYER_SHOOTING:
+            new_sprite = create_sprite((xpm_map_t) penguin, player->sprite->x, player->sprite->y, player->sprite->xspeed, player->sprite->yspeed);
+            break;
+        case PLAYER_DYING:
+            new_sprite = create_sprite((xpm_map_t) penguin, player->sprite->x, player->sprite->y, player->sprite->xspeed, player->sprite->yspeed);
+            break;
+        default:
+            break;
+    }
+    player->sprite = new_sprite;
     draw_sprite_pos_to_delta(player->sprite, delta, sec_frame_buffer);
     return 0;
 }
@@ -180,6 +227,10 @@ void player_mouse_handler(Player *player, struct packet pp) {
     game_update_delta(player);
 }
 
+void game_draw_cursor() {
+    draw_xpm_at_pos((xpm_map_t) cursor_xpm, (int) x_mouse, (int) y_mouse, sec_frame_buffer);
+}
+
 void game_draw_fov_cone(Player *player, Maze* maze) {
     if (!player || !maze) return;
 
@@ -236,4 +287,32 @@ void game_draw_fov_cone(Player *player, Maze* maze) {
             }
         }
     }
+}
+
+void update_player_state(Player *player, struct packet pp){
+    if (player == NULL) return; // Avoid NULL dereference
+
+    if (player->moved == 1) {
+        state = PLAYER_WALKING;
+        
+    } else {
+        state = PLAYER_IDLE;
+    }
+
+    if(pp.lb == 0 && pp.rb == 1){
+        state = PLAYER_AIMING;
+    }else if(pp.lb == 1 && pp.rb == 1){
+        state = PLAYER_SHOOTING;
+    }
+}
+
+void cursor_check_bound() {
+    if (x_mouse > vg_mode_info.XResolution)
+        x_mouse = vg_mode_info.XResolution;
+    if (y_mouse > vg_mode_info.YResolution)
+        y_mouse = vg_mode_info.YResolution;
+    if (x_mouse < 0)
+        x_mouse = 0;
+    if (y_mouse < 0)
+        y_mouse = 0;
 }
