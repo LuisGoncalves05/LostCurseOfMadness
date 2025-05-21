@@ -93,7 +93,7 @@ static void set_state(Game* game, State new_state) {
 }
 
 static void draw_cursor() {
-    draw_xpm_at_pos((xpm_map_t) cross, (int) x_mouse, (int) y_mouse, sec_frame_buffer);
+    draw_xpm_at_pos((xpm_map_t) cursor_xpm, (int) x_mouse, (int) y_mouse, sec_frame_buffer);
 }
 
 static void menu_timer_handler(Game* game) {
@@ -117,7 +117,6 @@ static void level_timer_handler(Game* game) {
     draw_player(player);
     draw_player(get_player(game->level));
     update_player_state(get_player(game->level), pp);
-    game_draw_cursor();
     draw_cursor();
     
     // Copia o buffer secundário para o buffer principal
