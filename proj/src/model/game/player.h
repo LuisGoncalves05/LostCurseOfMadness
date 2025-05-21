@@ -2,8 +2,6 @@
 #define PLAYER_H
 
 #include "../sprite.h"
-#include "game.h"
-#include "../../controller/video/gpu.h"
 
 #define KEY_W 0x11
 #define KEY_A 0x1E
@@ -19,46 +17,19 @@
 #define PLAYER_HEALTH 3
 #define PLAYER_DEFAULT_SPEED 5
 
-#define FOV_RADIUS 600
-//#define FOV_ANGLE 75.0      // Ângulo do cone de visão em graus
-extern double fov_angle;
-
-xpm_image_t	img;
-extern double	delta;
-extern double	direction;
-
-extern double	x_mouse;
-extern double	y_mouse;
-
-
-xpm_image_t	img;
-extern double	delta;
-extern double	direction;
-
-extern double	x_mouse;
-extern double	y_mouse;
-
 typedef struct Player Player;
 
-struct Player {
-	unsigned char health;
-	int max_speed;
-	int acceleration;
-	Sprite *sprite;
-	bool moved;
-};
+void playerIsAtMaxSpeed(Player *player);
+void playerStopped(Player *player);
 
-// Player functions
 Player *create_player(Sprite *sprite);
 void destroy_player(Player *player);
-int draw_player(Player *player);
-void keyboard_handler(Player *player, Maze *maze);
-void mouse_handler(Player *player, struct packet pp);
-void game_draw_cursor();
-void game_draw_fov_cone(Player *player, Maze* maze);
-void init_maze_buffer();
-void free_maze_buffer();
 
+Sprite *get_sprite(Player *player);
+unsigned char get_health(Player *player);
+int get_max_speed(Player *player);
+int get_acceleration(Player *player);
+bool get_moved(Player *player);
+void set_moved(Player *player, bool moved);
 
 #endif
-

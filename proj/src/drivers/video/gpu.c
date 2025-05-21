@@ -199,7 +199,7 @@ int(draw_sprite)(Sprite *sprite, uint8_t *frame_buffer) {
   }
 
   if (sprite->x >= x_res || sprite->y >= y_res) {
-    printf("draw_sprite: invalid sprite position, x:%hu, y:%hu.\n", sprite->x, sprite->y);
+    printf("draw_sprite: invalid sprite position, x:%d, y:%d.\n", sprite->x, sprite->y);
     return 1;
   }
 

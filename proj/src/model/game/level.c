@@ -37,7 +37,7 @@ void destroy_level(Level *level) {
   }
 }
 
-struct Player *get_player(Level *level) {
+Player *get_player(Level *level) {
   return level->player;
 }
 

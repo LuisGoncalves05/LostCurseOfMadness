@@ -1,16 +1,22 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "level.h"
-#include <math.h>
+#include <stdint.h>
+
+#define FOV_RADIUS 600
 
 extern uint8_t *maze_buffer;
+extern uint8_t *sec_frame_buffer;
+extern uint8_t *main_frame_buffer;
+extern uint8_t bytes_per_pixel;
+extern uint16_t x_res;
+extern uint16_t y_res;
+extern uint32_t frame_size;
 
-double delta;
-double direction;
+extern uint8_t scan_code;
+extern struct packet pp;
 
-double x_mouse;
-double y_mouse;
+typedef struct Game Game;
 
 typedef enum {
   MENU,
@@ -19,8 +25,6 @@ typedef enum {
   GAME_OVER,
   EXIT
 } State;
-
-typedef struct Game Game;
 
 Game *create_game();
 void destroy_game(Game *game);

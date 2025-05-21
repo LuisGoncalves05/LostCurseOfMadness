@@ -1,13 +1,12 @@
 #include "config.h"
-#include "controller/keyboard/keyboard.h"
-#include "controller/mouse/mouse.h"
-#include "controller/timer/i8254.h"
-#include "controller/video/gpu.h"
+#include "drivers/keyboard/keyboard.h"
+#include "drivers/mouse/mouse.h"
+#include "drivers/timer/i8254.h"
+#include "drivers/video/gpu.h"
 #include "model/game/game.h"
 #include "model/game/level.h"
 #include "model/game/maze.h"
 #include "model/game/player.h"
-#include "view/view.h"
 #include <lcom/lcf.h>
 
 uint8_t timer_mask;
