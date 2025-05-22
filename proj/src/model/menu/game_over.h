@@ -11,7 +11,7 @@
 
 #include <lcom/lcf.h>
 #include <stdint.h>
-#include "controller/video/gpu.h"
+#include "drivers/video/gpu.h"
 #include "assets/xpm/game_over_indexed.xpm"
 #include "assets/xpm/menu_button.xpm"
 #include "assets/xpm/exit_button.xpm"

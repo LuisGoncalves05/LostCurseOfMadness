@@ -6,18 +6,20 @@ PROG=proj
 .PATH: ${.CURDIR}/model
 .PATH: ${.CURDIR}/model/game
 .PATH: ${.CURDIR}/model/menu
-.PATH: ${.CURDIR}/controller/keyboard
-.PATH: ${.CURDIR}/controller/mouse
-.PATH: ${.CURDIR}/controller/timer
-.PATH: ${.CURDIR}/controller/video
-.PATH: ${.CURDIR}/view
+
+.PATH: ${.CURDIR}/drivers
+.PATH: ${.CURDIR}/drivers/keyboard
+.PATH: ${.CURDIR}/drivers/mouse
+.PATH: ${.CURDIR}/drivers/timer
+.PATH: ${.CURDIR}/drivers/video
 
 # source code files to be compiled
-SRCS = main.c utils.c timer.c keyboard.c mouse.c gpu.c Sprite.c kbc.c view.c game.c player.c level.c maze.c game_over.c
+SRCS = main.c utils.c timer.c keyboard.c mouse.c gpu.c sprite.c kbc.c game.c player.c level.c maze.c game_over.c
 
 # additional compilation flags
 # "-Wall -Wextra -Werror -I . -std=c11 -Wno-unused-parameter" are already set
 CFLAGS += -pedantic
+CFLAGS += -ferror-limit=9999
 
 # list of library dependencies (for Lab 2, only LCF library)
 DPADD += ${LIBLCF}

@@ -7,12 +7,12 @@ uint8_t packet[3];
 
 int(mouse_subscribe_int)(uint8_t *bit_no) {
   if (bit_no == NULL) {
-    fprintf(stderr, "mouse_subscribe_int: NULL pointer provided.\n");
+    printf("mouse_subscribe_int: NULL pointer provided.\n");
     return 1;
   }
   *bit_no = BIT(mouse_hook_id);
   if (sys_irqsetpolicy(MOUSE_IRQ, IRQ_REENABLE | IRQ_EXCLUSIVE, &mouse_hook_id)) {
-    fprintf(stderr, "mouse_subscribe_int: Failed to set IRQ policy.\n");
+    printf("mouse_subscribe_int: Failed to set IRQ policy.\n");
     return 1;
   }
   return 0;
@@ -20,7 +20,7 @@ int(mouse_subscribe_int)(uint8_t *bit_no) {
 
 int(mouse_unsubscribe_int)(void) {
   if (sys_irqrmpolicy(&mouse_hook_id)) {
-    fprintf(stderr, "mouse_unsubscribe_int: Failed to remove IRQ policy.\n");
+    printf("mouse_unsubscribe_int: Failed to remove IRQ policy.\n");
     return 1;
   }
   return 0;
@@ -34,7 +34,7 @@ void(mouse_int_handler)(void) {
     tickdelay(micros_to_ticks(DELAY_US));
     attempts++;
   }
-  fprintf(stderr, "mouse_int_handler: Timed out reading mouse packet.\n");
+  printf("mouse_int_handler: Timed out reading mouse packet.\n");
 }
 
 void(mouse_ih)(void) {
@@ -44,22 +44,22 @@ void(mouse_ih)(void) {
 int(mouse_read_packet)(void) {
   uint8_t status;
   if (util_sys_inb(KBC_STATUS_REGISTER, &status)) {
-    fprintf(stderr, "mouse_read_packet: Failed to read KBC status.\n");
+    printf("mouse_read_packet: Failed to read KBC status.\n");
     return 1;
   }
 
   if (kbc_read_command_return(&packet_byte, true)) {
-    fprintf(stderr, "mouse_read_packet: Failed to read return byte from mouse.\n");
+    printf("mouse_read_packet: Failed to read return byte from mouse.\n");
     return 1;
   }
 
   if (!(status & KBC_OUTPUT_BUFFER_FULL)) {
-    fprintf(stderr, "mouse_read_packet: Output buffer not full.\n");
+    printf("mouse_read_packet: Output buffer not full.\n");
     return 1;
   }
 
   if (status & (KBC_TIMEOUT_BIT | KBC_PARITY_BIT)) {
-    fprintf(stderr, "mouse_read_packet: Parity or timeout error.\n");
+    printf("mouse_read_packet: Parity or timeout error.\n");
     return 1;
   }
 
@@ -68,12 +68,12 @@ int(mouse_read_packet)(void) {
 
 int(mouse_sync_packets)(uint8_t *packet, uint8_t *packet_idx, uint8_t packet_byte) {
   if (packet == NULL || packet_idx == NULL) {
-    fprintf(stderr, "mouse_sync_packets: NULL pointer provided.\n");
+    printf("mouse_sync_packets: NULL pointer provided.\n");
     return 1;
   }
 
   if (*packet_idx > 2) {
-    fprintf(stderr, "mouse_sync_packets: Invalid packet_idx value %u.\n", *packet_idx);
+    printf("mouse_sync_packets: Invalid packet_idx value %u.\n", *packet_idx);
     return 1;
   }
 
@@ -93,7 +93,7 @@ int(mouse_sync_packets)(uint8_t *packet, uint8_t *packet_idx, uint8_t packet_byt
 
 int(mouse_build_packet)(uint8_t *packet, uint8_t *packet_idx, struct packet *pp) {
   if (packet == NULL || packet_idx == NULL) {
-    fprintf(stderr, "mouse_build_packet: NULL pointer provided.\n");
+    printf("mouse_build_packet: NULL pointer provided.\n");
     return 1;
   }
 
@@ -123,12 +123,12 @@ int(mouse_set_data_reporting)(bool b) {
 
   while (attempts < READ_ATTEMPT_LIMIT) {
     if (kbc_write_command(MOUSE_WRITE_COMMAND)) {
-      fprintf(stderr, "mouse_set_data_reporting: Failed to write MOUSE_WRITE_COMMAND.\n");
+      printf("mouse_set_data_reporting: Failed to write MOUSE_WRITE_COMMAND.\n");
       return 1;
     }
 
     if (kbc_write_command_arguments(b ? MOUSE_ENABLE_DATA_REPORTING : MOUSE_DISABLE_DATA_REPORTING)) {
-      fprintf(stderr, "mouse_set_data_reporting: Failed to write data reporting command.\n");
+      printf("mouse_set_data_reporting: Failed to write data reporting command.\n");
       return 1;
     }
 
@@ -136,7 +136,7 @@ int(mouse_set_data_reporting)(bool b) {
 
     uint8_t status;
     if (kbc_read_command_return(&status, true)) {
-      fprintf(stderr, "mouse_set_data_reporting: Failed to read ACK from mouse.\n");
+      printf("mouse_set_data_reporting: Failed to read ACK from mouse.\n");
       return 1;
     }
 

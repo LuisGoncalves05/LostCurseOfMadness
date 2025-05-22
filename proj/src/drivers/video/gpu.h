@@ -1,10 +1,10 @@
 #ifndef GPU_H
 #define GPU_H
 
+#include "../../model/sprite.h"
 #include <lcom/lcf.h>
 #include <stdbool.h>
 #include <stdint.h>
-#include "../../model/Sprite.h"
 
 /**
  * @defgroup gpu gpu
@@ -14,11 +14,12 @@
 
 /** @name VBE BIOS Function Codes */
 /** @{ */
-#define VBE_CONTROLLER_INFO 0x4F00 /**< Request VBE controller information. */
-#define VBE_MODE_INFO 0x4F01       /**< Request VBE mode information. */
-#define VBE_MODE_SET 0x4F02        /**< Set a VBE graphics mode. */
-#define BIOS_VIDEO_MODE_SET 0x0003 /**< Reset to Minix default text mode. */
-#define BIOS_VIDEOCARD_SERV 0x10   /**< BIOS video services. */
+#define VBE_CONTROLLER_INFO 0x4F00   /**< Request VBE controller information. */
+#define VBE_MODE_INFO 0x4F01         /**< Request VBE mode information. */
+#define VBE_MODE_SET 0x4F02          /**< Set a VBE graphics mode. */
+#define VBE_DISPLAY_START_SET 0x4F07 /**< Set a vram region to display. */
+#define BIOS_VIDEO_MODE_SET 0x0003   /**< Reset to Minix default text mode. */
+#define BIOS_VIDEOCARD_SERV 0x10     /**< BIOS video services. */
 /** @} */
 
 /** @name Supported VBE Modes */
@@ -38,15 +39,11 @@
 /** @} */
 
 #define LINEAR_FRAMEBUFFER BIT(14) /**< Enable linear framebuffer mode. */
+#define VERTICAL_RETRACE 0x0080    /**< Set display start during vertical retrace. */
 #define VBE 0x10                   /**< BIOS video interrupt number. */
 #define DIRECT_MODE 6              /**< Direct color memory model identifier. */
 #define BACKGROUND_COLOR 0         /**< Default background color used for clearing screen or erasing sprites. */
 
-xpm_image_t img;
-vbe_mode_info_t vg_mode_info;
-uint8_t bytes_per_pixel;
-uint16_t x_res, y_res;
-uint8_t *main_frame_buffer;
 extern uint32_t interrupt_counter;
 
 /**
@@ -57,7 +54,13 @@ extern uint32_t interrupt_counter;
  */
 int(set_graphic_mode)(uint16_t mode);
 
-int(set_frame_buffer)(uint16_t mode);
+/**
+ * @brief Initializes the frame buffers.
+ *
+ * @param mode VBE mode to be used.
+ * @return 0 on success, non-zero on failure.
+ */
+int(set_frame_buffers)(uint16_t mode);
 
 /**
  * @brief Returns a pointer to the video memory location of a specific pixel.
@@ -67,10 +70,7 @@ int(set_frame_buffer)(uint16_t mode);
  * @param frame_buffer Pointer to the frame buffer.
  * @return Pointer to the memory location for pixel (x, y).
  */
-static inline uint8_t *(get_position)(uint16_t x, uint16_t y, uint8_t *frame_buffer) {
-  return frame_buffer + (x + x_res * y) * bytes_per_pixel;
-}
-
+uint8_t *(get_position) (uint16_t x, uint16_t y, uint8_t *frame_buffer);
 
 /**
  * @brief Draws a single pixel of a specified color at (x, y).
@@ -81,7 +81,7 @@ static inline uint8_t *(get_position)(uint16_t x, uint16_t y, uint8_t *frame_buf
  * @param frame_buffer Pointer to the frame buffer.
  * @return 0 on success, non-zero on failure.
  */
-int(vg_draw_pixel)(uint16_t x, uint16_t y, uint32_t color, uint8_t *frame_buffer);
+int(vga_draw_pixel)(uint16_t x, uint16_t y, uint32_t color, uint8_t *frame_buffer);
 
 /**
  * @brief Draws a horizontal line of a specified color.
@@ -108,7 +108,6 @@ int(vga_draw_hline)(uint16_t x, uint16_t y, uint16_t len, uint32_t color, uint8_
  */
 int(vga_draw_line)(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint32_t color, uint8_t *frame_buffer);
 
-
 /**
  * @brief Draws a rectangle of a specified color.
  *
@@ -121,7 +120,6 @@ int(vga_draw_line)(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint32_t 
  * @return 0 on success, non-zero on failure.
  */
 int(vga_draw_rectangle)(uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint32_t color, uint8_t *frame_buffer);
-
 
 /**
  * @brief Extracts a specific color component from a full 32-bit color value.
@@ -156,13 +154,19 @@ uint32_t(direct_mode)(uint16_t i, uint16_t j, uint8_t step, uint32_t first);
  */
 uint32_t(indexed_mode)(uint8_t no_rectangles, uint16_t i, uint16_t j, uint8_t step, uint32_t first);
 
-
 void get_rotated_bounds(double width, double height, double theta, double *out_width, double *out_height);
 
-int draw_sprite_pos_to_delta(Sprite *sprite, double theta, uint8_t *frame_buffer);
+int draw_sprite(Sprite *sprite, uint8_t *frame_buffer);
+int draw_sprite_rotated(Sprite *sprite, double theta, uint8_t *frame_buffer);
 
-int draw_xpm_at_pos(xpm_map_t xpm, uint16_t x, uint16_t y, uint8_t *frame_buffer);
-int draw_xpm_at_pos_with_color(xpm_map_t xpm, uint16_t x, uint16_t y, uint32_t color, uint8_t *frame_buffer);
+int draw_xpm(xpm_map_t xpm, uint16_t x, uint16_t y, uint8_t *frame_buffer);
+int draw_xpm_with_color(xpm_map_t xpm, uint16_t x, uint16_t y, uint32_t color, uint8_t *frame_buffer);
+
+int(clear)(uint8_t *frame_buffer);
+
+void(set_display_start)();
+
+void vga_flip_pages();
 
 /** @} */
 #endif /* GPU_H */

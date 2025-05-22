@@ -20,9 +20,9 @@ void destroy_game_over(GameOver *game_over) {
 }
 
 void draw_game_over(GameOver *game_over, uint8_t *frame_buffer) {
-    draw_xpm_at_pos_with_color((xpm_map_t) game_over_indexed_xpm, 154, 262, 4, frame_buffer);
-    draw_xpm_at_pos_with_color((xpm_map_t) menu_button, 212, 400, game_over->button == 0? 4 : 28, frame_buffer);
-    draw_xpm_at_pos_with_color((xpm_map_t) exit_button, 522, 400, game_over->button == 1? 4 : 28, frame_buffer);
+    draw_xpm_with_color((xpm_map_t) game_over_indexed_xpm, 154, 262, 4, frame_buffer);
+    draw_xpm_with_color((xpm_map_t) menu_button, 212, 400, game_over->button == 0? 4 : 28, frame_buffer);
+    draw_xpm_with_color((xpm_map_t) exit_button, 522, 400, game_over->button == 1? 4 : 28, frame_buffer);
 }
 
 void game_over_set_button(GameOver *game_over, GameOverButton button) {
