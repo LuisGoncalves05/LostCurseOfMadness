@@ -54,8 +54,10 @@ void button_set_selected(Button *button, bool selected) {
 }
 
 bool button_is_clicked(Button *button, uint16_t x, uint16_t y) {
-    return (x >= button->x && x <= button->x + button->width &&
-            y >= button->y && y <= button->y + button->height);
+    bool clicked = (x >= button->x && x <= button->x + button->width &&
+                    y >= button->y && y <= button->y + button->height);
+    if (clicked) button->selected = true;
+    return clicked;
 }
 
 void draw_button(Button *button, uint8_t *frame_buffer) {

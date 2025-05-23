@@ -405,8 +405,8 @@ void game_keyboard_handler(Game *game) {
 static void menu_mouse_handler(Game* game) {
     ButtonType button = BUTTON_NONE;
     if (pp.lb) button = main_menu_click_handler(game->menu.main_menu, cursor_get_x(game->cursor), cursor_get_y(game->cursor)); 
-    if (button == BUTTON_MENU) {
-        set_state(game, MENU);
+    if (button == BUTTON_PLAY) {
+        set_state(game, LEVEL);
     } else if (button == BUTTON_EXIT) {
         set_state(game, EXIT);
     } 
