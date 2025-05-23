@@ -20,6 +20,6 @@ void draw_game_over(GameOver *game_over, uint8_t *frame_buffer);
 
 void game_over_change_button(GameOver *game_over);
 ButtonType game_over_get_button(GameOver *game_over);
-ButtonType game_over_click_handler(GameOver *game_over, double x_mouse, double y_mouse);
+ButtonType game_over_click_handler(GameOver *game_over, uint16_t x, uint16_t y);
 
 #endif

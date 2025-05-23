@@ -52,10 +52,10 @@ ButtonType game_over_get_button(GameOver *game_over) {
     return BUTTON_NONE;
 }
 
-ButtonType game_over_click_handler(GameOver *game_over, double x_mouse, double y_mouse) {
+ButtonType game_over_click_handler(GameOver *game_over, uint16_t x, uint16_t y) {
     if (game_over == NULL) return BUTTON_NONE;
-    if (button_is_clicked(game_over->menuButton, x_mouse, y_mouse)) return BUTTON_MENU;
-    if (button_is_clicked(game_over->exitButton, x_mouse, y_mouse)) return BUTTON_EXIT;
+    if (button_is_clicked(game_over->menuButton, x, y)) return BUTTON_MENU;
+    if (button_is_clicked(game_over->exitButton, x, y)) return BUTTON_EXIT;
     return BUTTON_NONE;
 }
 

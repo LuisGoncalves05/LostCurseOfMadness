@@ -9,12 +9,11 @@ struct Game {
         struct GameOver *game_over;
         struct MainMenu *main_menu;
     } menu;
+    Cursor *cursor;
 };
 
 double delta;
 double direction;
-double x_mouse = 0;
-double y_mouse = 0;
 double fov_angle = 60.0;
 extern int frame_counter;
 extern enum player_state state;
@@ -99,15 +98,10 @@ static void game_update_delta(Game *game) {
   double player_center_x = player_sprite->x + player_sprite->width / 2.0;
   double player_center_y = player_sprite->y + player_sprite->height / 2.0;
 
-  double dx = x_mouse - player_center_x;
-  double dy = y_mouse - player_center_y;
+  double dx = cursor_get_x(game->cursor) - player_center_x;
+  double dy = cursor_get_y(game->cursor) - player_center_y;
 
   delta = atan2(dy, dx);
-}
-
-static void game_draw_cursor() {
-  Sprite *mouse = create_sprite((xpm_map_t) cursor, x_mouse, y_mouse, 0, 0);
-  draw_sprite(mouse, sec_frame_buffer);
 }
 
 static void game_draw_fov_cone(Game *game) {
@@ -221,7 +215,7 @@ static int game_draw_player(Game *game) {
 static void menu_timer_handler(Game* game) {
   clear(sec_frame_buffer);
   draw_main_menu(game->menu.main_menu, sec_frame_buffer);
-  game_draw_cursor();
+  draw_cursor(game->cursor, sec_frame_buffer);
 
   vga_flip_pages();
 }
@@ -243,7 +237,7 @@ static void level_timer_handler(Game *game) {
   update_player_state(get_player(game->level), pp);
   game_draw_fov_cone(game);
   game_draw_player(game);
-  game_draw_cursor();
+  draw_cursor(game->cursor, sec_frame_buffer);
 
   vga_flip_pages();
 }
@@ -255,7 +249,7 @@ static void victory_timer_handler(Game *game) {
 static void game_over_timer_handler(Game *game) {
   clear(sec_frame_buffer);
   draw_game_over(game->menu.game_over, sec_frame_buffer);
-  game_draw_cursor();
+  draw_cursor(game->cursor, sec_frame_buffer);
 
   vga_flip_pages();
 }
@@ -331,8 +325,8 @@ static void level_keyboard_handler(Game *game) {
       break;
 
     case KEY_X:
-      player_sprite->x = x_mouse;
-      player_sprite->y = y_mouse;
+      player_sprite->x = cursor_get_x(game->cursor);
+      player_sprite->y = cursor_get_y(game->cursor);
       moved = 0;
       break;
 
@@ -410,7 +404,7 @@ void game_keyboard_handler(Game *game) {
 
 static void menu_mouse_handler(Game* game) {
     ButtonType button = BUTTON_NONE;
-    if (pp.lb) button = main_menu_click_handler(game->menu.main_menu, x_mouse, y_mouse); 
+    if (pp.lb) button = main_menu_click_handler(game->menu.main_menu, cursor_get_x(game->cursor), cursor_get_y(game->cursor)); 
     if (button == BUTTON_MENU) {
         set_state(game, MENU);
     } else if (button == BUTTON_EXIT) {
@@ -419,21 +413,6 @@ static void menu_mouse_handler(Game* game) {
 }
 
 static void level_mouse_handler(Game *game) {
-  x_mouse += pp.delta_x * 0.5;
-  y_mouse -= pp.delta_y * 0.5;
-
-  const int CURSOR_WIDTH = 16;
-  const int CURSOR_HEIGHT = 16;
-
-  if (x_mouse < 0)
-    x_mouse = 0;
-  if (y_mouse < 0)
-    y_mouse = 0;
-  if (x_mouse > y_res - CURSOR_WIDTH)
-    x_mouse = y_res - CURSOR_WIDTH;
-  if (y_mouse > x_res - CURSOR_HEIGHT)
-    y_mouse = x_res - CURSOR_HEIGHT;
-
   game_update_delta(game);
 }
 
@@ -443,7 +422,7 @@ static void victory_mouse_handler(Game *game) {
 
 static void game_over_mouse_handler(Game* game) {
     ButtonType button = BUTTON_NONE;
-    if (pp.lb) button = game_over_click_handler(game->menu.game_over, x_mouse, y_mouse); 
+    if (pp.lb) button = game_over_click_handler(game->menu.game_over, cursor_get_x(game->cursor), cursor_get_y(game->cursor)); 
     if (button == BUTTON_MENU) {
         set_state(game, MENU);
     } else if (button == BUTTON_EXIT) {
@@ -464,8 +443,7 @@ static void (*game_mouse_handlers[])(Game *game) = {
 };
 
 void game_mouse_handler(Game *game) {
-  x_mouse += pp.delta_x * 0.5;
-  y_mouse -= pp.delta_y * 0.5;
+  cursor_update(game->cursor, pp.delta_x * 0.5, -pp.delta_y * 0.5);
   game_mouse_handlers[game->state](game);
 }
 
@@ -479,6 +457,7 @@ Game *create_game() {
   game->level_number = 0;
   game->score = 0;
   game->state = GAME_OVER;
+  game->cursor = create_cursor((xpm_map_t) cursor);
   state_init(game);
 
   return game;
@@ -494,15 +473,4 @@ void destroy_game(Game *game) {
 
 State get_state(Game *game) {
   return game->state;
-}
-
-void cursor_check_bound() {
-  if (x_mouse > x_res)
-    x_mouse = x_res;
-  if (y_mouse > y_res)
-    y_mouse = y_res;
-  if (x_mouse < 0)
-    x_mouse = 0;
-  if (y_mouse < 0)
-    y_mouse = 0;
 }

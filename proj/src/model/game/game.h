@@ -6,6 +6,7 @@
 #include <stdint.h>
 
 #include "level.h"
+#include "model/cursor.h"
 #include "model/game/maze.h"
 #include "model/game/level.h"
 #include "model/game/player.h"
