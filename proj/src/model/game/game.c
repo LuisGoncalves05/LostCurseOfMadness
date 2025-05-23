@@ -168,12 +168,14 @@ static void victory_keyboard_handler(Game* game) {
 }
 
 static void game_over_keyboard_handler(Game* game) {
+    printf("game_over_keyboard_handler: Interrupt\n");
     if (scan_code == ESC_BREAK_CODE) set_state(game, EXIT);  
     if (scan_code == KEY_W || scan_code == KEY_S || scan_code == KEY_A || scan_code == KEY_D) game_over_change_button(game->menu.game_over);
     if (scan_code == KEY_ENTER) {
-        if (game_over_click_handler(game->menu.game_over, x_mouse, y_mouse) == BUTTON_MENU) {
+        ButtonType button = game_over_get_button(game->menu.game_over);
+        if (button == BUTTON_MENU) {
             set_state(game, MENU);
-        } else if (game_over_click_handler(game->menu.game_over, x_mouse, y_mouse) == BUTTON_EXIT) {
+        } else if (button == BUTTON_EXIT) {
             set_state(game, EXIT);
         }
     }

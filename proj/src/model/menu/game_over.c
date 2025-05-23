@@ -45,8 +45,16 @@ void game_over_change_button(GameOver *game_over) {
     }
 }
 
+ButtonType game_over_get_button(GameOver *game_over) {
+    if (game_over == NULL) return BUTTON_NONE;
+    if (button_get_selected(game_over->menuButton)) return BUTTON_MENU;
+    if (button_get_selected(game_over->exitButton)) return BUTTON_EXIT;
+    return BUTTON_NONE;
+}
+
 ButtonType game_over_click_handler(GameOver *game_over, double x_mouse, double y_mouse) {
     if (game_over == NULL) return BUTTON_NONE;
+    printf("here!\n");
     if (button_is_clicked(game_over->menuButton, x_mouse, y_mouse)) return BUTTON_MENU;
     if (button_is_clicked(game_over->exitButton, x_mouse, y_mouse)) return BUTTON_EXIT;
     return BUTTON_NONE;
