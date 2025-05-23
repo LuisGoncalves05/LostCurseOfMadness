@@ -1,9 +1,13 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include <lcom/lcf.h>
+#include <stdlib.h>
+#include <math.h>
 #include "../Sprite.h"
 #include "game.h"
 #include "model/keys.h"
+#include "../../view/view.h"
 #include "../../controller/video/gpu.h"
 // #include "../../images/font/cursor.xpm"
 

@@ -1,6 +1,8 @@
 #ifndef LEVEL_H
 #define LEVEL_H
 
+#include <lcom/lcf.h>
+
 #include "maze.h"
 #include "player.h"
 

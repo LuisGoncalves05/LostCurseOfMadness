@@ -7,9 +7,6 @@
 #include "config.h"
 
 #include "model/game/game.h"
-#include "model/game/maze.h"
-#include "model/game/player.h"
-#include "model/game/level.h"
 
 uint8_t timer_mask;
 uint8_t keyboard_mask;

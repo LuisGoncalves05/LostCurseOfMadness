@@ -1,5 +1,6 @@
-#ifndef _LCOM_MENU_H_
-#define _LCOM_MENU_H_
+#ifndef _GAME_H_
+#define _GAME_H_
+
 
 #include <minix/sysutil.h>
 #include <lcom/lcf.h>
@@ -13,4 +14,5 @@ int draw_text(char *text, uint16_t x, uint16_t y, uint32_t color);
 int set_frame_buffers(uint16_t mode);
 int copy_frame_buffer();
 int(clear)(uint8_t *frame_buffer);
+
 #endif

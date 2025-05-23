@@ -169,24 +169,18 @@ static void victory_keyboard_handler(Game* game) {
 
 static void game_over_keyboard_handler(Game* game) {
     if (scan_code == ESC_BREAK_CODE) set_state(game, EXIT);  
-    if (scan_code == KEY_W || scan_code == KEY_S || scan_code == KEY_A || scan_code == KEY_D) {
-        if (game_over_get_button(game->menu.game_over) == BUTTON_MENU) {
-            game_over_set_button(game->menu.game_over, BUTTON_EXIT);
-        } else {
-            game_over_set_button(game->menu.game_over, BUTTON_MENU);
-        }
-    }
+    if (scan_code == KEY_W || scan_code == KEY_S || scan_code == KEY_A || scan_code == KEY_D) game_over_change_button(game->menu.game_over);
     if (scan_code == KEY_ENTER) {
-        if (game_over_get_button(game->menu.game_over) == BUTTON_MENU) {
+        if (game_over_click_handler(game->menu.game_over, x_mouse, y_mouse) == BUTTON_MENU) {
             set_state(game, MENU);
-        } else if (game_over_get_button(game->menu.game_over) == BUTTON_EXIT) {
+        } else if (game_over_click_handler(game->menu.game_over, x_mouse, y_mouse) == BUTTON_EXIT) {
             set_state(game, EXIT);
         }
     }
 }
 
 static void exit_keyboard_handler(Game* game) {
-    printf("This function should never be called\n");    
+    printf("This function should never be called\n");
 }
 
 static void (*game_keyboard_handlers[])(Game *game) = {
@@ -214,8 +208,7 @@ static void victory_mouse_handler(Game* game) {
 }
 
 static void game_over_mouse_handler(Game* game) {
-    game_over_set_button(game->menu.game_over, BUTTON_NONE);
-    Button button = BUTTON_NONE;
+    ButtonType button = BUTTON_NONE;
     if (pp.lb) button = game_over_click_handler(game->menu.game_over, x_mouse, y_mouse); 
     if (button == BUTTON_MENU) {
         set_state(game, MENU);

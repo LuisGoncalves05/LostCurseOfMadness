@@ -1,18 +1,67 @@
 #include "button.h"
 
-void draw_button(Button button, bool selected, uint16_t x, uint16_t y, uint8_t *frame_buffer) {
-    uint32_t color = selected? 4 : 28;
-    switch (button) {
-        case BUTTON_PLAY:
-            draw_xpm_at_pos_with_color((xpm_map_t)play_button, x, y, color, frame_buffer);
-            break;
-        case BUTTON_MENU:
-            draw_xpm_at_pos_with_color((xpm_map_t)menu_button, x, y, color, frame_buffer);
-            break;
-        case BUTTON_EXIT:
-            draw_xpm_at_pos_with_color((xpm_map_t)exit_button, x, y, color, frame_buffer);
-            break;
-        default:
-            return; // Invalid button
+struct Button {
+    bool selected;
+    Sprite *sprite;
+    Sprite *selected_sprite;
+    uint16_t x;
+    uint16_t y;
+    uint16_t width;
+    uint16_t height;
+};
+
+Button* create_button(xpm_map_t xpm, xpm_map_t xpm_selected, uint16_t x, uint16_t y) {
+    Button* button = (Button*) malloc(sizeof(Button));
+    if (!button) return NULL;
+
+    button->selected = false;
+    button->x = x;
+    button->y = y;
+    button->width = BUTTON_WIDTH;
+    button->height = BUTTON_HEIGHT;
+
+    button->sprite = create_sprite(xpm, x, y, 0, 0);
+    if (!button->sprite) {
+        free(button);
+        return NULL;
+    }
+
+    button->selected_sprite = create_sprite(xpm_selected, x, y, 0, 0);
+    if (!button->selected_sprite) {
+        destroy_sprite(button->sprite);
+        free(button);
+        return NULL;
+    }
+
+    return button;
+}
+
+void destroy_button(Button *button) {
+    if (button == NULL) return;
+    destroy_sprite(button->sprite);
+    destroy_sprite(button->selected_sprite);
+    free(button);
+}
+
+bool button_get_selected(Button *button) {
+    if (button == NULL) return false;
+    return button->selected;
+}
+
+void button_set_selected(Button *button, bool selected) {
+    if (button == NULL) return;
+    button->selected = selected;
+}
+
+bool button_is_clicked(Button *button, uint16_t x, uint16_t y) {
+    return (x >= button->x && x <= button->x + button->width &&
+            y >= button->y && y <= button->y + button->height);
+}
+
+void draw_button(Button *button, uint8_t *frame_buffer) {
+    if (button->selected) {
+        draw_sprite_pos_to_delta(button->selected_sprite, 0, frame_buffer);
+    } else {
+        draw_sprite_pos_to_delta(button->sprite, 0, frame_buffer);
     }
 }

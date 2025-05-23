@@ -1,9 +1,5 @@
 #include "player.h"
-#include "lcom/lcf.h"
-#include "../Sprite.h"
-#include "../../view/view.h"
-#include <stdlib.h>
-#include <math.h>
+
 
 extern uint8_t scan_code;
 extern uint8_t *sec_frame_buffer;

@@ -1,49 +1,59 @@
 #include "game_over.h"
 
 struct GameOver {
-    Button button;
+    Button *menuButton;
+    Button *exitButton;
 };
 
 GameOver *create_game_over() {
     GameOver *game_over = (GameOver *) malloc(sizeof(GameOver));
-    if (game_over == NULL) {
+    if (game_over == NULL) return NULL;
+
+    game_over->menuButton = create_button((xpm_map_t) menu_button, (xpm_map_t) menu_button_selected, BUTTON_MENU_START_X, GAME_OVER_BUTTON_START_Y);
+    if (game_over->menuButton == NULL) {
+        free(game_over);
         return NULL;
     }
-    game_over->button = BUTTON_NONE;
+
+    game_over->exitButton = create_button((xpm_map_t) exit_button, (xpm_map_t) exit_button_selected, BUTTON_EXIT_START_X, GAME_OVER_BUTTON_START_Y);
+    if (game_over->exitButton == NULL) {
+        destroy_button(game_over->menuButton);
+        free(game_over);
+        return NULL;
+    }
 
     return game_over;
 }
 
 void destroy_game_over(GameOver *game_over) {
     if (game_over == NULL) return;
+    destroy_button(game_over->menuButton);
+    destroy_button(game_over->exitButton);
     free(game_over);
+}
+
+void game_over_change_button(GameOver *game_over) {
+    if (game_over == NULL) return;
+    bool menu_selected = button_get_selected(game_over->menuButton);
+    bool exit_selected = button_get_selected(game_over->exitButton);
+    if (menu_selected == exit_selected) { // no button selected
+        button_set_selected(game_over->menuButton, true);
+        button_set_selected(game_over->exitButton, false);
+    } else { // one button selected
+        button_set_selected(game_over->menuButton, !menu_selected);
+        button_set_selected(game_over->exitButton, !exit_selected);
+    }
+}
+
+ButtonType game_over_click_handler(GameOver *game_over, double x_mouse, double y_mouse) {
+    if (game_over == NULL) return BUTTON_NONE;
+    if (button_is_clicked(game_over->menuButton, x_mouse, y_mouse)) return BUTTON_MENU;
+    if (button_is_clicked(game_over->exitButton, x_mouse, y_mouse)) return BUTTON_EXIT;
+    return BUTTON_NONE;
 }
 
 void draw_game_over(GameOver *game_over, uint8_t *frame_buffer) {
     draw_xpm_at_pos_with_color((xpm_map_t) game_over_xpm, 154, 262, 4, frame_buffer);
-    draw_button(BUTTON_MENU, game_over->button == BUTTON_MENU, BUTTON_MENU_START_X, GAME_OVER_BUTTON_START_Y, frame_buffer);
-    draw_button(BUTTON_EXIT, game_over->button == BUTTON_EXIT, BUTTON_EXIT_START_X, GAME_OVER_BUTTON_START_Y, frame_buffer);
-}
-
-void game_over_set_button(GameOver *game_over, Button button) {
-    if (!game_over) return;
-    game_over->button = button;
-}
-
-Button game_over_get_button(GameOver *game_over) {
-    if (!game_over) return BUTTON_EXIT;
-    return game_over->button;
-}
-
-Button game_over_click_handler(GameOver *game_over, double x_mouse, double y_mouse) {
-    if (x_mouse >= BUTTON_MENU_START_X && x_mouse <= BUTTON_MENU_START_X + BUTTON_WIDTH &&
-        y_mouse >= GAME_OVER_BUTTON_START_Y && y_mouse <= GAME_OVER_BUTTON_START_Y + BUTTON_HEIGHT) {
-        game_over->button = BUTTON_MENU;
-        return BUTTON_MENU;
-    } else if (x_mouse >= BUTTON_EXIT_START_X && x_mouse <= BUTTON_EXIT_START_X + BUTTON_WIDTH &&
-               y_mouse >= GAME_OVER_BUTTON_START_Y && y_mouse <= GAME_OVER_BUTTON_START_Y + BUTTON_HEIGHT) {
-        game_over->button = BUTTON_EXIT;
-        return BUTTON_EXIT;
-    }
-    return BUTTON_NONE;
+    draw_button(game_over->menuButton, frame_buffer);
+    draw_button(game_over->exitButton, frame_buffer);
 }
