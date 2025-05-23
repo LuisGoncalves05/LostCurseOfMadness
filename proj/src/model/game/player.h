@@ -34,5 +34,6 @@ int get_acceleration(Player *player);
 bool get_moved(Player *player);
 void set_moved(Player *player, bool moved);
 void update_player_state(Player *player, struct packet pp);
+void set_sprite(Player *player, Sprite *sprite);
 
 #endif

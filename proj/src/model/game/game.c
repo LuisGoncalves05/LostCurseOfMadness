@@ -23,9 +23,11 @@ struct Game {
 
 double delta;
 double direction;
-double x_mouse;
-double y_mouse;
+double x_mouse =0;
+double y_mouse=0;
 double fov_angle = 60.0;
+extern int frame_counter;
+extern enum player_state state;
 
 static void menu_init(Game *game) {
   printf("in menu\n");
@@ -182,8 +184,48 @@ static void game_draw_fov_cone(Game *game) {
 
 static int game_draw_player(Game *game) {
   Player *player = get_player(game->level);
-  draw_sprite_rotated(get_sprite(player), delta, sec_frame_buffer);
-  return 0;
+  Sprite *player_sprite = get_sprite(player);
+  Sprite *new_sprite;
+    if(frame_counter > 16){
+        frame_counter = 0;
+    }
+    switch (state) {
+        case PLAYER_IDLE:
+            if(frame_counter <= 4){
+              new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
+            }else if(frame_counter <= 8){
+              new_sprite = create_sprite((xpm_map_t) pic2, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
+            }else{
+              new_sprite = create_sprite((xpm_map_t) cross, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
+            }
+            
+            break;
+        case PLAYER_WALKING:
+            if(frame_counter <= 4){
+              new_sprite = create_sprite((xpm_map_t) penguin, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
+            }else if(frame_counter <= 8){
+              new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
+            }else if(frame_counter <= 12){
+              new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
+            }else{
+              new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
+            }
+            break;
+        case PLAYER_AIMING:
+            new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
+            break;
+        case PLAYER_SHOOTING:
+            new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
+            break;
+        case PLAYER_DYING:
+            new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
+            break;
+        default:
+            break;
+    }
+    set_sprite(player, new_sprite);
+    draw_sprite_rotated(get_sprite(player), delta, sec_frame_buffer);
+    return 0;
 }
 
 static void menu_timer_handler(Game *game) {

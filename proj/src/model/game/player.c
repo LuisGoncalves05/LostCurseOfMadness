@@ -56,6 +56,17 @@ Sprite *get_sprite(Player *player) {
   return player->sprite;
 }
 
+void set_sprite(Player *player, Sprite *sprite) {
+  if (player == NULL)
+    return;
+
+  if (player->sprite != NULL) {
+    destroy_sprite(player->sprite);
+  }
+  player->sprite = sprite;
+}
+
+
 unsigned char get_health(Player *player) {
   return player->health;
 }
