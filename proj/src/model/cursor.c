@@ -9,8 +9,8 @@ extern uint16_t y_res;
 
 static void cursor_check_bound(Cursor* cursor) {
     if (cursor == NULL) return;
-    if (cursor->sprite->x > x_res) cursor->sprite->x = x_res;
-    if (cursor->sprite->y > y_res) cursor->sprite->y = y_res;
+    if (cursor->sprite->x > x_res - cursor->sprite->width) cursor->sprite->x = x_res - cursor->sprite->width;
+    if (cursor->sprite->y > y_res - cursor->sprite->height) cursor->sprite->y = y_res - cursor->sprite->height;
     if (cursor->sprite->x < 0) cursor->sprite->x = 0;
     if (cursor->sprite->y < 0) cursor->sprite->y = 0;
 }
