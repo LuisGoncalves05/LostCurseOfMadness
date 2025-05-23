@@ -5,11 +5,11 @@
 #include <stdint.h>
 #include "button.h"
 
-#include "assets/xpm/game_over.xpm"
-#include "assets/xpm/menu_button.xpm"
-#include "assets/xpm/menu_button_selected.xpm"
-#include "assets/xpm/exit_button.xpm"
-#include "assets/xpm/exit_button_selected.xpm"
+#include "assets/xpm/game_over/game_over.xpm"
+#include "assets/xpm/game_over/menu_button.xpm"
+#include "assets/xpm/game_over/menu_button_selected.xpm"
+#include "assets/xpm/game_over/exit_button.xpm"
+#include "assets/xpm/game_over/exit_button_selected.xpm"
 
 typedef struct GameOver GameOver;
 

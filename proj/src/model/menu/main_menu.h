@@ -5,9 +5,11 @@
 #include <stdint.h>
 #include "button.h"
 
-#include "assets/xpm/lcom.xpm"
-#include "assets/xpm/play_button.xpm"
-#include "assets/xpm/play_button_selected.xpm"
+#include "assets/xpm/main_menu/lcom.xpm"
+#include "assets/xpm/main_menu/play_button.xpm"
+#include "assets/xpm/main_menu/play_button_selected.xpm"
+#include "assets/xpm/main_menu/exit_button.xpm"
+#include "assets/xpm/main_menu/exit_button_selected.xpm"
 
 typedef struct MainMenu MainMenu;
 
@@ -16,7 +18,9 @@ void destroy_main_menu(MainMenu *main_menu);
 
 void draw_main_menu(MainMenu *main_menu, uint8_t *frame_buffer);
 void main_menu_set_button(MainMenu *main_menu, Button button);
+
 void main_menu_change_button(MainMenu *main_menu);
+ButtonType main_menu_get_button(MainMenu *main_menu);
 ButtonType main_menu_click_handler(MainMenu *main_menu, uint16_t x, uint16_t y);
 
 #endif

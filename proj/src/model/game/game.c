@@ -155,7 +155,16 @@ void game_timer_handler(Game* game) {
 }
 
 static void menu_keyboard_handler(Game* game) {
-    if (scan_code == ESC_BREAK_CODE) set_state(game, EXIT);
+    if (scan_code == ESC_BREAK_CODE) set_state(game, EXIT);  
+    if (scan_code == KEY_W || scan_code == KEY_S || scan_code == KEY_A || scan_code == KEY_D) main_menu_change_button(game->menu.main_menu);
+    if (scan_code == KEY_ENTER) {
+        ButtonType button = main_menu_get_button(game->menu.main_menu);
+        if (button == BUTTON_PLAY) {
+            set_state(game, LEVEL);
+        } else if (button == BUTTON_EXIT) {
+            set_state(game, EXIT);
+        }
+    }
 }
 
 static void level_keyboard_handler(Game* game) {
@@ -168,7 +177,6 @@ static void victory_keyboard_handler(Game* game) {
 }
 
 static void game_over_keyboard_handler(Game* game) {
-    printf("game_over_keyboard_handler: Interrupt\n");
     if (scan_code == ESC_BREAK_CODE) set_state(game, EXIT);  
     if (scan_code == KEY_W || scan_code == KEY_S || scan_code == KEY_A || scan_code == KEY_D) game_over_change_button(game->menu.game_over);
     if (scan_code == KEY_ENTER) {
@@ -198,7 +206,13 @@ void game_keyboard_handler(Game* game) {
 }
 
 static void menu_mouse_handler(Game* game) {
-    printf("menu_mouse_handler: To be implemented\n");    
+    ButtonType button = BUTTON_NONE;
+    if (pp.lb) button = main_menu_click_handler(game->menu.main_menu, x_mouse, y_mouse); 
+    if (button == BUTTON_MENU) {
+        set_state(game, MENU);
+    } else if (button == BUTTON_EXIT) {
+        set_state(game, EXIT);
+    } 
 }
 
 static void level_mouse_handler(Game* game) {
