@@ -1,11 +1,9 @@
 #include <lcom/lcf.h>
 #include <stdint.h>
 
-
-
 int(util_get_LSB)(uint16_t val, uint8_t *lsb) {
   if (lsb == NULL) {
-    fprintf(stderr, "util_get_LSB: NULL pointer provided.\n");
+    printf("util_get_LSB: NULL pointer provided.\n");
     return 1;
   }
   *lsb = val & 0xFF;
@@ -14,7 +12,7 @@ int(util_get_LSB)(uint16_t val, uint8_t *lsb) {
 
 int(util_get_MSB)(uint16_t val, uint8_t *msb) {
   if (msb == NULL) {
-    fprintf(stderr, "util_get_MSB: NULL pointer provided.\n");
+    printf("util_get_MSB: NULL pointer provided.\n");
     return 1;
   }
   *msb = (val >> 8) & 0xFF;
@@ -23,12 +21,12 @@ int(util_get_MSB)(uint16_t val, uint8_t *msb) {
 
 int(util_sys_inb)(int port, uint8_t *value) {
   if (value == NULL) {
-    fprintf(stderr, "util_sys_inb: NULL pointer provided.\n");
+    printf("util_sys_inb: NULL pointer provided.\n");
     return 1;
   }
   uint32_t val;
   if (sys_inb(port, &val) != 0) {
-    fprintf(stderr, "util_sys_inb: sys_inb failed.\n");
+    printf("util_sys_inb: sys_inb failed.\n");
     return 1;
   }
 

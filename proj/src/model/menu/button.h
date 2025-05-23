@@ -11,7 +11,7 @@
 #define BUTTON_HEIGHT 139
 
 #include <lcom/lcf.h>
-#include "controller/video/gpu.h"
+#include "drivers/video/gpu.h"
 
 typedef enum {
     BUTTON_NONE,

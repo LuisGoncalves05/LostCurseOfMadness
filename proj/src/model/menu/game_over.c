@@ -60,7 +60,7 @@ ButtonType game_over_click_handler(GameOver *game_over, double x_mouse, double y
 }
 
 void draw_game_over(GameOver *game_over, uint8_t *frame_buffer) {
-    draw_xpm_at_pos_with_color((xpm_map_t) game_over_xpm, 154, 262, 4, frame_buffer);
+    draw_xpm((xpm_map_t) game_over_xpm, 154, 262, frame_buffer);
     draw_button(game_over->menuButton, frame_buffer);
     draw_button(game_over->exitButton, frame_buffer);
 }

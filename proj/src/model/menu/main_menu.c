@@ -62,7 +62,7 @@ ButtonType main_menu_click_handler(MainMenu *main_menu, uint16_t x, uint16_t y) 
 }
 
 void draw_main_menu(MainMenu *main_menu, uint8_t *frame_buffer) {
-    draw_xpm_at_pos_with_color((xpm_map_t) lcom_xpm, 112, 184, 4, frame_buffer);
+    draw_xpm((xpm_map_t) lcom_xpm, 112, 184, frame_buffer);
     draw_button(main_menu->playButton, frame_buffer);
     draw_button(main_menu->exitButton, frame_buffer);
 }

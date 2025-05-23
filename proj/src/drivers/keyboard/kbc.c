@@ -7,7 +7,7 @@ int kbc_write_byte(uint8_t port, uint8_t byte) {
   while (attempts < READ_ATTEMPT_LIMIT) {
     uint8_t status;
     if (util_sys_inb(KBC_STATUS_REGISTER, &status)) {
-      fprintf(stderr, "Failed to read KBC status register.\n");
+      printf("Failed to read KBC status register.\n");
       return 1;
     }
 
@@ -15,7 +15,7 @@ int kbc_write_byte(uint8_t port, uint8_t byte) {
     if ((status & (KBC_TIMEOUT_BIT | KBC_PARITY_BIT)) == 0 &&
         (status & KBC_INPUT_BUFFER_FULL) == 0) {
       if (sys_outb(port, byte)) {
-        fprintf(stderr, "Failed to write byte 0x%X to port 0x%X.\n", byte, port);
+        printf("Failed to write byte 0x%X to port 0x%X.\n", byte, port);
         return 1;
       }
       return 0;
@@ -25,7 +25,7 @@ int kbc_write_byte(uint8_t port, uint8_t byte) {
     attempts++;
   }
 
-  fprintf(stderr, "Timed out while trying to write byte 0x%X to port 0x%X.\n", byte, port);
+  printf("Timed out while trying to write byte 0x%X to port 0x%X.\n", byte, port);
   return 1;
 }
 
@@ -39,7 +39,7 @@ int kbc_write_command_arguments(uint8_t argument) {
 
 int kbc_read_byte(uint8_t port, uint8_t *byte, bool mouse) {
   if (byte == NULL) {
-    fprintf(stderr, "Invalid argument: byte is NULL.\n");
+    printf("Invalid argument: byte is NULL.\n");
     return 1;
   }
 
@@ -49,7 +49,7 @@ int kbc_read_byte(uint8_t port, uint8_t *byte, bool mouse) {
     uint8_t status;
 
     if (util_sys_inb(KBC_STATUS_REGISTER, &status)) {
-      fprintf(stderr, "Failed to read KBC status register.");
+      printf("Failed to read KBC status register.");
       return 1;
     }
 
@@ -59,14 +59,14 @@ int kbc_read_byte(uint8_t port, uint8_t *byte, bool mouse) {
 
       // Check if request asks for the data from the same device it comes from
       if ((mouse && !(status & KBC_AUX_BIT)) || (!mouse && (status & KBC_AUX_BIT))) {
-        fprintf(stderr, "Device mismatch: expected %s, got %s.\n",
+        printf("Device mismatch: expected %s, got %s.\n",
                 mouse ? "mouse" : "keyboard",
                 mouse ? "keyboard" : "mouse");
         return 1;
       }
 
       if (util_sys_inb(port, byte)) {
-        fprintf(stderr, "Failed to read byte from port 0x%X.\n", port);
+        printf("Failed to read byte from port 0x%X.\n", port);
         return 1;
       }
 
@@ -77,7 +77,7 @@ int kbc_read_byte(uint8_t port, uint8_t *byte, bool mouse) {
     attempts++;
   }
 
-  fprintf(stderr, "Timed out while trying to read from port 0x%X.\n", port);
+  printf("Timed out while trying to read from port 0x%X.\n", port);
   return 1;
 }
 

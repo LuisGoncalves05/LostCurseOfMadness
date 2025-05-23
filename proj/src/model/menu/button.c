@@ -60,8 +60,8 @@ bool button_is_clicked(Button *button, uint16_t x, uint16_t y) {
 
 void draw_button(Button *button, uint8_t *frame_buffer) {
     if (button->selected) {
-        draw_sprite_pos_to_delta(button->selected_sprite, 0, frame_buffer);
+        draw_sprite(button->selected_sprite, frame_buffer);
     } else {
-        draw_sprite_pos_to_delta(button->sprite, 0, frame_buffer);
+        draw_sprite(button->sprite, frame_buffer);
     }
 }

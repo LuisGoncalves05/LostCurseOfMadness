@@ -2,47 +2,55 @@
 #define GAME_H
 
 #include <lcom/lcf.h>
+#include <math.h>
+#include <stdint.h>
 
 #include "level.h"
+#include "model/game/maze.h"
+#include "model/game/level.h"
+#include "model/game/player.h"
+#include "model/sprite.h"
 #include "model/menu/game_over.h"
 #include "model/menu/main_menu.h"
-#include <math.h>
-
 #include "model/keys.h"
-#include "controller/video/gpu.h"
-#include "controller/keyboard/i8042.h"
-#include "controller/keyboard/keyboard.h"
-#include "controller/mouse/mouse.h"
-#include "controller/timer/i8254.h"
-#include "view/view.h"
-#include "model/Sprite.h"
-#include "model/game/level.h"
+
+#include "drivers/keyboard/keyboard.h"
+#include "drivers/mouse/mouse.h"
+#include "drivers/timer/i8254.h"
+#include "drivers/video/gpu.h"
+
+#include "assets/xpm/cursor.xpm"
+
+#define FOV_RADIUS 600
 
 extern uint8_t *maze_buffer;
+extern uint8_t *sec_frame_buffer;
+extern uint8_t *main_frame_buffer;
+extern uint8_t bytes_per_pixel;
+extern uint16_t x_res;
+extern uint16_t y_res;
+extern uint32_t frame_size;
 
-double	delta;
-double	direction;
-
-double	x_mouse;
-double	y_mouse;
-
-typedef enum {
-    MENU,
-    LEVEL,
-    VICTORY,
-    GAME_OVER,
-    EXIT
-} State;
+extern uint8_t scan_code;
+extern struct packet pp;
 
 typedef struct Game Game;
+
+typedef enum {
+  MENU,
+  LEVEL,
+  VICTORY,
+  GAME_OVER,
+  EXIT
+} State;
 
 Game *create_game();
 void destroy_game(Game *game);
 
 State get_state(Game *game);
 
-void game_timer_handler(Game* game);
-void game_keyboard_handler(Game* game);
-void game_mouse_handler(Game* game);
+void game_timer_handler(Game *game);
+void game_keyboard_handler(Game *game);
+void game_mouse_handler(Game *game);
 
 #endif
