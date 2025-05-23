@@ -1,10 +1,11 @@
 #ifndef GPU_H
 #define GPU_H
 
-#include "../../model/sprite.h"
 #include <lcom/lcf.h>
 #include <stdbool.h>
 #include <stdint.h>
+
+#include "model/utils/sprite.h"
 
 /**
  * @defgroup gpu gpu

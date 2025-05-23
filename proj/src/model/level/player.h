@@ -6,8 +6,8 @@
 #include <math.h>
 
 // #include "game.h"
-#include "model/sprite.h"
-#include "model/keys.h"
+#include "model/utils/sprite.h"
+#include "model/utils/keys.h"
 #include "drivers/video/gpu.h"
 
 #define HEALTH 3

@@ -5,7 +5,7 @@
 #include <stdint.h>
 
 #include "drivers/video/gpu.h"
-#include "model/sprite.h"
+#include "model/utils/sprite.h"
 
 typedef struct Cursor Cursor;
 

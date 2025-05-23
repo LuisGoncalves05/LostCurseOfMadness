@@ -4,8 +4,9 @@ PROG=proj
 .PATH: ${.CURDIR}/assets/xpm
 .PATH: ${.CURDIR}/controller
 .PATH: ${.CURDIR}/model
-.PATH: ${.CURDIR}/model/game
+.PATH: ${.CURDIR}/model/level
 .PATH: ${.CURDIR}/model/menu
+.PATH: ${.CURDIR}/model/utils
 
 .PATH: ${.CURDIR}/drivers
 .PATH: ${.CURDIR}/drivers/keyboard

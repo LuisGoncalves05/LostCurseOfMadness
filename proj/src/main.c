@@ -3,7 +3,7 @@
 #include "drivers/mouse/mouse.h"
 #include "drivers/timer/i8254.h"
 #include "drivers/video/gpu.h"
-#include "model/game/game.h"
+#include "model/game.h"
 #include <lcom/lcf.h>
 
 uint8_t timer_mask;

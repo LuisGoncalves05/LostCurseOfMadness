@@ -456,7 +456,7 @@ Game *create_game() {
 
   game->level_number = 0;
   game->score = 0;
-  game->state = GAME_OVER;
+  game->state = LEVEL;
   game->cursor = create_cursor((xpm_map_t) cursor);
   state_init(game);
 

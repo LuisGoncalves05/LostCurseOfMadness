@@ -5,15 +5,12 @@
 #include <math.h>
 #include <stdint.h>
 
-#include "level.h"
-#include "model/cursor.h"
-#include "model/game/maze.h"
-#include "model/game/level.h"
-#include "model/game/player.h"
-#include "model/sprite.h"
+#include "model/level/level.h"
 #include "model/menu/game_over.h"
 #include "model/menu/main_menu.h"
-#include "model/keys.h"
+#include "model/utils/cursor.h"
+#include "model/utils/keys.h"
+#include "model/utils/sprite.h"
 
 #include "drivers/keyboard/keyboard.h"
 #include "drivers/mouse/mouse.h"
