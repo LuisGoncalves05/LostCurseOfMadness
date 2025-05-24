@@ -13,7 +13,6 @@ struct Game {
 };
 
 double direction;
-double fov_angle = 60.0;
 extern int frame_counter;
 
 static void menu_init(Game *game) {
@@ -90,66 +89,6 @@ static void set_state(Game *game, State new_state) {
   state_init(game);
 }
 
-static void game_draw_fov_cone(Game *game) {
-  double delta = get_delta(game->level);
-  Player *player = get_player(game->level);
-  Sprite *player_sprite = get_sprite(player);
-  Maze *maze = get_maze(game->level);
-  if (!player || !maze)
-    return;
-
-  double x = player_sprite->x + player_sprite->width / 2.0;
-  double y = player_sprite->y + player_sprite->height / 2.0;
-
-  double fov_radius = FOV_RADIUS;
-  double cone_half_angle = fov_angle * M_PI / 360.0; // Metade do ângulo do cone em radianos
-
-  // Precompute direção do vetor unitário
-  double dir_x = cos(delta);
-  double dir_y = sin(delta);
-
-  // Precompute cosseno para o produto escalar
-  double cos_half_angle = cos(cone_half_angle);
-  double cos_half_angle_sq = cos_half_angle * cos_half_angle;
-
-  // Apenas verifica pixels num quadrado ao redor do jogador (otimização massiva)
-  int x_start = (int) (x - fov_radius);
-  int x_end = (int) (x + fov_radius);
-  int y_start = (int) (y - fov_radius);
-  int y_end = (int) (y + fov_radius);
-
-  // Limita valores às bordas da tela
-  x_start = (x_start < 0) ? 0 : x_start;
-  x_end = (x_end >= x_res) ? x_res - 1 : x_end;
-  y_start = (y_start < 0) ? 0 : y_start;
-  y_end = (y_end >= y_res) ? y_res - 1 : y_end;
-
-  for (int y_pixel = y_start; y_pixel <= y_end; y_pixel++) {
-    for (int x_pixel = x_start; x_pixel <= x_end; x_pixel++) {
-      if (x_pixel == (int) x && y_pixel == (int) y) continue;
-
-      double dx = x_pixel - x;
-      double dy = y_pixel - y;
-
-      // Apenas multiplicações em vez de sqrt para melhor desempenho
-      double dist_sq = dx * dx + dy * dy;
-      if (dist_sq > fov_radius * fov_radius) continue;
-
-      double dot_product = dx * dir_x + dy * dir_y;
-      if (dot_product < 0) continue; // Atrás do jogador
-
-      // Verifica se está dentro do cone usando comparação de quadrados
-      if ((dot_product * dot_product) >= (dist_sq * cos_half_angle_sq)) {
-        uint32_t index = (x_res * y_pixel + x_pixel) * bytes_per_pixel;
-
-        if (index < frame_size) {
-          memcpy(&sec_frame_buffer[index], &maze_buffer[index], bytes_per_pixel);
-        }
-      }
-    }
-  }
-}
-
 static void menu_timer_handler(Game* game) {
   clear(sec_frame_buffer);
   draw_main_menu(game->menu.main_menu, sec_frame_buffer);
@@ -173,7 +112,7 @@ static void level_timer_handler(Game *game) {
 
   draw_maze(maze, maze_buffer);
   update_player_state(get_player(game->level), pp);
-  game_draw_fov_cone(game);
+  draw_fov_cone(game->level);
   draw_player(get_player(game->level), get_delta(game->level), sec_frame_buffer);
   draw_cursor(game->cursor, sec_frame_buffer);
 
@@ -269,6 +208,7 @@ static void level_keyboard_handler(Game *game) {
       moved = 0;
       break;
 
+    /*
     case KEY_SPACE:
       fov_angle += 10;
       break;
@@ -276,14 +216,17 @@ static void level_keyboard_handler(Game *game) {
     case KEY_C:
       fov_angle -= 10;
       break;
+    */
 
     default:
       break;
   }
+  /*
   if (fov_angle < 30)
     fov_angle = 30;
   if (fov_angle > 120)
-    fov_angle = 120;
+    fov_angle = 120;  
+  */
 
   if (moved) {
     int acceleration = get_acceleration(player);

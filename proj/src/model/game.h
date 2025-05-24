@@ -31,19 +31,6 @@
 
 #include "assets/xpm/cursor.xpm"
 
-/**
- * @brief Radius of the player's field of view.
- */
-#define FOV_RADIUS 600
-
-extern uint8_t *maze_buffer;
-extern uint8_t *sec_frame_buffer;
-extern uint8_t *main_frame_buffer;
-extern uint8_t bytes_per_pixel;
-extern uint16_t x_res;
-extern uint16_t y_res;
-extern uint32_t frame_size;
-
 extern uint8_t scan_code;
 extern struct packet pp;
 

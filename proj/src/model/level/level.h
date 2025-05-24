@@ -21,6 +21,18 @@
 typedef struct Level Level;
 
 /**
+ * @brief Radius of the player's field of view.
+ */
+ #define FOV_RADIUS 600
+
+extern uint8_t *maze_buffer;
+extern uint8_t *sec_frame_buffer;
+extern uint8_t *main_frame_buffer;
+extern uint8_t bytes_per_pixel;
+extern uint16_t x_res;
+extern uint16_t y_res;
+
+/**
  * @brief Creates a new level instance with a specified level number.
  *
  * @param number The identifier number for the level.
@@ -54,6 +66,8 @@ Player *get_player(Level *level);
 double get_delta(Level* level);
 
 void update_delta(Level *level, double mouse_x, double mouse_y);
+
+void draw_fov_cone(Level *level);
 
 #endif
 
