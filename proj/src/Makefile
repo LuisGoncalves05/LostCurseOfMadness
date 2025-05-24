@@ -15,7 +15,7 @@ PROG=proj
 .PATH: ${.CURDIR}/drivers/video
 
 # source code files to be compiled
-SRCS = main.c utils.c timer.c keyboard.c mouse.c gpu.c sprite.c kbc.c game.c cursor.c level.c player.c maze.c button.c main_menu.c game_over.c
+SRCS = main.c utils.c timer.c keyboard.c mouse.c gpu.c sprite.c kbc.c game.c cursor.c level.c player.c maze.c button.c main_menu.c game_over.c bullet.c
 
 # additional compilation flags
 # "-Wall -Wextra -Werror -I . -std=c11 -Wno-unused-parameter" are already set

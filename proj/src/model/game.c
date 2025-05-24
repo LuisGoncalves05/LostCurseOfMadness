@@ -1,4 +1,5 @@
 #include "game.h"
+#include "level/bullet.h"
 
 struct Game {
     State state;
@@ -17,6 +18,7 @@ double direction;
 double fov_angle = 60.0;
 extern int frame_counter;
 extern enum player_state state;
+extern int bullet_count;
 
 static void menu_init(Game *game) {
     game->menu.main_menu = create_main_menu();
@@ -237,6 +239,11 @@ static void level_timer_handler(Game *game) {
   update_player_state(get_player(game->level), pp);
   game_draw_fov_cone(game);
   game_draw_player(game);
+
+  if(bullet_count > 0) {
+    update_all_bullets(get_maze(game->level));
+    draw_all_bullets(sec_frame_buffer, delta);
+  }
   draw_cursor(game->cursor, sec_frame_buffer);
 
   vga_flip_pages();
@@ -414,6 +421,13 @@ static void menu_mouse_handler(Game* game) {
 
 static void level_mouse_handler(Game *game) {
   game_update_delta(game);
+  if(state == PLAYER_SHOOTING) {
+    Player *p = get_player(game->level);
+    Sprite *s = get_sprite(p);
+    int cx = s->x + s->width/2;
+    int cy = s->y + s->height/2;
+    create_bullet(cx, cy, delta); 
+  }
 }
 
 static void victory_mouse_handler(Game *game) {
