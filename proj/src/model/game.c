@@ -139,20 +139,17 @@ static void game_draw_fov_cone(Game *game) {
 
   for (int y_pixel = y_start; y_pixel <= y_end; y_pixel++) {
     for (int x_pixel = x_start; x_pixel <= x_end; x_pixel++) {
-      if (x_pixel == (int) x && y_pixel == (int) y)
-        continue;
+      if (x_pixel == (int) x && y_pixel == (int) y) continue;
 
       double dx = x_pixel - x;
       double dy = y_pixel - y;
 
       // Apenas multiplicações em vez de sqrt para melhor desempenho
       double dist_sq = dx * dx + dy * dy;
-      if (dist_sq > fov_radius * fov_radius)
-        continue;
+      if (dist_sq > fov_radius * fov_radius) continue;
 
       double dot_product = dx * dir_x + dy * dir_y;
-      if (dot_product < 0)
-        continue; // Atrás do jogador
+      if (dot_product < 0) continue; // Atrás do jogador
 
       // Verifica se está dentro do cone usando comparação de quadrados
       if ((dot_product * dot_product) >= (dist_sq * cos_half_angle_sq)) {
@@ -164,52 +161,6 @@ static void game_draw_fov_cone(Game *game) {
       }
     }
   }
-}
-
-static int game_draw_player(Game *game) {
-  Player *player = get_player(game->level);
-  Sprite *player_sprite = get_sprite(player);
-  Sprite *new_sprite;
-    if(frame_counter > 16){
-        frame_counter = 0;
-    }
-    switch (state) {
-        case PLAYER_IDLE:
-            if(frame_counter <= 4){
-              new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
-            }else if(frame_counter <= 8){
-              new_sprite = create_sprite((xpm_map_t) pic2, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
-            }else{
-              new_sprite = create_sprite((xpm_map_t) cross, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
-            }
-            
-            break;
-        case PLAYER_WALKING:
-            if(frame_counter <= 4){
-              new_sprite = create_sprite((xpm_map_t) penguin, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
-            }else if(frame_counter <= 8){
-              new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
-            }else if(frame_counter <= 12){
-              new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
-            }else{
-              new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
-            }
-            break;
-        case PLAYER_AIMING:
-            new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
-            break;
-        case PLAYER_SHOOTING:
-            new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
-            break;
-        case PLAYER_DYING:
-            new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
-            break;
-        default:
-            break;
-    }
-    set_sprite(player, new_sprite);
-    draw_sprite_rotated(get_sprite(player), delta, sec_frame_buffer);
-    return 0;
 }
 
 static void menu_timer_handler(Game* game) {
@@ -236,7 +187,7 @@ static void level_timer_handler(Game *game) {
   draw_maze(maze, maze_buffer);
   update_player_state(get_player(game->level), pp);
   game_draw_fov_cone(game);
-  game_draw_player(game);
+  draw_player(get_player(game->level));
   draw_cursor(game->cursor, sec_frame_buffer);
 
   vga_flip_pages();

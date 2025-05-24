@@ -18,8 +18,7 @@ Level *create_level(uint8_t number) {
     return NULL;
   }
 
-  Sprite *player_sprite = create_sprite((xpm_map_t) cross, 400, 400, 3, 3);
-  level->player = create_player(player_sprite);
+  level->player = create_player();
   if (!level->player) {
     free(level->maze);
     free(level);

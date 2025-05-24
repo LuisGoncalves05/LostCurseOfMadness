@@ -3,10 +3,11 @@
 enum player_state state = PLAYER_IDLE;
 
 struct Player {
+  PlayerState state;
+  Sprite *sprite;
   unsigned char health;
   int max_speed;
   int acceleration;
-  Sprite *sprite;
   bool moved;
 };
 
@@ -27,15 +28,15 @@ void playerStopped(Player *player) {
 }
 
 // Create a new player
-Player *create_player(Sprite *sprite) {
+Player *create_player() {
   Player *player = (Player *) malloc(sizeof(Player));
-  if (!player)
-    return NULL;
+  if (!player) return NULL;
+  player->state = PLAYER_IDLE; 
   player->health = PLAYER_HEALTH;
-  player->sprite = sprite;
+  player->sprite = create_sprite((xpm_map_t) cross, 400, 400, 3, 3);
   player->moved = 0;
-  player->max_speed = PLAYER_MAX_SPEED;       // Set default max speed
-  player->acceleration = PLAYER_ACCELERATION; // Set default acceleration
+  player->max_speed = PLAYER_MAX_SPEED;
+  player->acceleration = PLAYER_ACCELERATION;
   return player;
 }
 
@@ -95,4 +96,46 @@ void update_player_state(Player *player, struct packet pp) {
   else if (pp.lb == 1 && pp.rb == 1) {
     state = PLAYER_SHOOTING;
   }
+}
+
+void draw_player(Player *player) {
+  Sprite *player_sprite = player->sprite;
+  Sprite *new_sprite;
+  if(frame_counter > 16) frame_counter = 0;
+
+  switch (state) {
+    case PLAYER_IDLE:
+      if(frame_counter <= 4){
+        new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
+      }else if(frame_counter <= 8){
+        new_sprite = create_sprite((xpm_map_t) pic2, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
+      }else{
+        new_sprite = create_sprite((xpm_map_t) cross, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
+      }
+      break;
+    case PLAYER_WALKING:
+      if(frame_counter <= 4){
+      new_sprite = create_sprite((xpm_map_t) penguin, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
+      }else if(frame_counter <= 8){
+      new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
+      }else if(frame_counter <= 12){
+      new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
+      }else{
+      new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
+      }
+      break;  
+    case PLAYER_AIMING:
+      new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
+      break;
+    case PLAYER_SHOOTING:
+      new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
+      break;
+    case PLAYER_DYING:
+      new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
+      break;
+    default:
+      break;
+  }
+  set_sprite(player, new_sprite);
+  draw_sprite_rotated(get_sprite(player), delta, sec_frame_buffer);
 }

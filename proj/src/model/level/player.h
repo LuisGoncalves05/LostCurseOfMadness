@@ -29,13 +29,13 @@
 
 typedef struct Player Player;
 
-enum player_state {
+typedef enum {
 	PLAYER_IDLE,
 	PLAYER_WALKING,
 	PLAYER_AIMING,
 	PLAYER_SHOOTING,
 	PLAYER_DYING,
-};
+} PlayerState;
 
 /**
  * @brief function to prevent the player from moving faster than the maximum speed.
