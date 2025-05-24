@@ -51,6 +51,10 @@ Maze *get_maze(Level *level);
  */
 Player *get_player(Level *level);
 
+double get_delta(Level* level);
+
+void update_delta(Level *level, double mouse_x, double mouse_y);
+
 #endif
 
 /** @} */

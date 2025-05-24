@@ -1,7 +1,5 @@
 #include "player.h"
 
-enum player_state state = PLAYER_IDLE;
-
 struct Player {
   PlayerState state;
   Sprite *sprite;
@@ -84,43 +82,45 @@ void update_player_state(Player *player, struct packet pp) {
     return;
 
   if (player->moved == 1) {
-    state = PLAYER_WALKING;
+    player->state = PLAYER_WALKING;
   }
   else {
-    state = PLAYER_IDLE;
+    player->state = PLAYER_IDLE;
   }
 
   if (pp.lb == 0 && pp.rb == 1) {
-    state = PLAYER_AIMING;
+    player->state = PLAYER_AIMING;
   }
   else if (pp.lb == 1 && pp.rb == 1) {
-    state = PLAYER_SHOOTING;
+    player->state = PLAYER_SHOOTING;
   }
 }
 
-void draw_player(Player *player) {
+void draw_player(Player *player, double delta, uint8_t *frame_buffer) {
   Sprite *player_sprite = player->sprite;
   Sprite *new_sprite;
+
+  extern int frame_counter;
   if(frame_counter > 16) frame_counter = 0;
 
-  switch (state) {
+  switch (player->state) {
     case PLAYER_IDLE:
-      if(frame_counter <= 4){
+      if (frame_counter <= 4){
         new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
-      }else if(frame_counter <= 8){
+      } else if (frame_counter <= 8){
         new_sprite = create_sprite((xpm_map_t) pic2, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
-      }else{
+      } else {
         new_sprite = create_sprite((xpm_map_t) cross, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
       }
       break;
     case PLAYER_WALKING:
-      if(frame_counter <= 4){
+      if (frame_counter <= 4){
       new_sprite = create_sprite((xpm_map_t) penguin, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
-      }else if(frame_counter <= 8){
+      } else if (frame_counter <= 8){
       new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
-      }else if(frame_counter <= 12){
+      } else if (frame_counter <= 12){
       new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
-      }else{
+      } else {
       new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
       }
       break;  
@@ -137,5 +137,5 @@ void draw_player(Player *player) {
       break;
   }
   set_sprite(player, new_sprite);
-  draw_sprite_rotated(get_sprite(player), delta, sec_frame_buffer);
+  draw_sprite_rotated(get_sprite(player), delta, frame_buffer);
 }

@@ -12,11 +12,9 @@ struct Game {
     Cursor *cursor;
 };
 
-double delta;
 double direction;
 double fov_angle = 60.0;
 extern int frame_counter;
-extern enum player_state state;
 
 static void menu_init(Game *game) {
     game->menu.main_menu = create_main_menu();
@@ -92,19 +90,8 @@ static void set_state(Game *game, State new_state) {
   state_init(game);
 }
 
-static void game_update_delta(Game *game) {
-  Player *player = get_player(game->level);
-  Sprite *player_sprite = get_sprite(player);
-  double player_center_x = player_sprite->x + player_sprite->width / 2.0;
-  double player_center_y = player_sprite->y + player_sprite->height / 2.0;
-
-  double dx = cursor_get_x(game->cursor) - player_center_x;
-  double dy = cursor_get_y(game->cursor) - player_center_y;
-
-  delta = atan2(dy, dx);
-}
-
 static void game_draw_fov_cone(Game *game) {
+  double delta = get_delta(game->level);
   Player *player = get_player(game->level);
   Sprite *player_sprite = get_sprite(player);
   Maze *maze = get_maze(game->level);
@@ -187,7 +174,7 @@ static void level_timer_handler(Game *game) {
   draw_maze(maze, maze_buffer);
   update_player_state(get_player(game->level), pp);
   game_draw_fov_cone(game);
-  draw_player(get_player(game->level));
+  draw_player(get_player(game->level), get_delta(game->level), sec_frame_buffer);
   draw_cursor(game->cursor, sec_frame_buffer);
 
   vga_flip_pages();
@@ -234,6 +221,7 @@ static void menu_keyboard_handler(Game* game) {
 }
 
 static void level_keyboard_handler(Game *game) {
+  double delta = get_delta(game->level);
   Player *player = get_player(game->level);
   Sprite *player_sprite = get_sprite(player);
   Maze *maze = get_maze(game->level);
@@ -364,7 +352,7 @@ static void menu_mouse_handler(Game* game) {
 }
 
 static void level_mouse_handler(Game *game) {
-  game_update_delta(game);
+  update_delta(game->level, cursor_get_x(game->cursor), cursor_get_y(game->cursor));
 }
 
 static void victory_mouse_handler(Game *game) {

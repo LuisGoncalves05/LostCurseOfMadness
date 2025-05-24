@@ -48,7 +48,7 @@ void playerStopped(Player *player);
 /**
  * @brief constructs a player "object".
  */
-Player *create_player(Sprite *sprite);
+Player *create_player();
 /**
  * @brief Destroys the player "object" and frees its memory.
  */
@@ -86,7 +86,11 @@ void update_player_state(Player *player, struct packet pp);
  */
 void set_sprite(Player *player, Sprite *sprite);
 
-#endif
+/**
+ * @brief draws the player
+ */
+void draw_player(Player* player, double delta, uint8_t *frame_buffer);
 
+#endif
 
 /** @} */
