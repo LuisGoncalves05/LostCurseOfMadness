@@ -5,18 +5,14 @@ struct Maze {
   uint8_t width;
   uint8_t height;
   uint8_t **cells;
+  uint8_t mob_count;
   Line *lines;
   int line_count;
 };
 
-struct Line {
-  int x1, y1;
-  int x2, y2;
-};
-
 uint8_t *maze_buffer = NULL;
 
-static void add_line(Maze *maze, int x1, int y1, int x2, int y2, int *line_index) {
+static void (add_line)(Maze *maze, int x1, int y1, int x2, int y2, int *line_index) {
   if (*line_index >= maze->line_count) {
     maze->line_count *= 2;
     maze->lines = (Line *) realloc(maze->lines, maze->line_count * sizeof(Line));
@@ -33,7 +29,7 @@ static void add_line(Maze *maze, int x1, int y1, int x2, int y2, int *line_index
   (*line_index)++;
 }
 
-bool check_line_collision(int x, int y, int width, int height, Line line) {
+bool (check_line_collision)(int x, int y, int width, int height, Line line) {
   // Retângulo do objeto
   int left = x;
   int right = x + width;
@@ -120,7 +116,7 @@ bool check_line_collision(int x, int y, int width, int height, Line line) {
   return false;
 }
 
-static void shuffle(int *arr, int n) {
+static void (shuffle)(int *arr, int n) {
   for (int i = n - 1; i > 0; i--) {
     int j = rand() % (i + 1);
     int tmp = arr[i];
@@ -129,7 +125,7 @@ static void shuffle(int *arr, int n) {
   }
 }
 
-static void dfs(Maze *maze, int x, int y) {
+static void (dfs)(Maze *maze, int x, int y) {
   maze->cells[y][x] = 0;
 
   int dx[] = {2, -2, 0, 0};
@@ -149,7 +145,7 @@ static void dfs(Maze *maze, int x, int y) {
   }
 }
 
-static int open_maze(Maze *maze, uint8_t percentage) {
+static int (open_maze)(Maze *maze, uint8_t percentage) {
   if (maze == NULL)
     return 1;
 
@@ -162,8 +158,8 @@ static int open_maze(Maze *maze, uint8_t percentage) {
     int random_x = rand() % maze->width;
     int random_y = rand() % maze->height;
 
-    if (maze->cells[random_y][random_x] == 1) {
-      maze->cells[random_y][random_x] = 0;
+    if (maze->cells[random_y][random_x] == WALL) {
+      maze->cells[random_y][random_x] = EMPTY;
       visited++;
     }
 
@@ -173,7 +169,7 @@ static int open_maze(Maze *maze, uint8_t percentage) {
   return 0;
 }
 
-static int initialize_maze(Maze *maze, uint8_t width, uint8_t height) {
+static int (initialize_maze)(Maze *maze, uint8_t width, uint8_t height) {
   if (maze == NULL)
     return 1;
 
@@ -189,35 +185,52 @@ static int initialize_maze(Maze *maze, uint8_t width, uint8_t height) {
 
   for (uint16_t i = 0; i < height; i++) {
     mz[i] = (uint8_t *) malloc(width * sizeof(uint8_t));
+
     if (mz[i] == NULL) {
-      for (uint16_t j = i - 1; j >= 0; j--) {
+      for (int16_t j = i - 1; j >= 0; j--) {
         free(mz[j]);
       }
       free(mz);
       return 1;
     }
-    memset(mz[i], 1, width);
+    memset(mz[i], WALL, width);
   }
-  mz[0][0] = 0;
   maze->cells = mz;
+  mz[0][0] = EMPTY;
   dfs(maze, 0, 0);
 
   return 0;
 }
 
+static int (generate_mob_positions)(Maze *maze, uint8_t mob_count) {
+  int positions = 0;
+  while (positions < mob_count) {
+    int i = rand() % maze->width;
+    int j = rand() % maze->height;
+    if (i != 0 && j != 0 && maze->cells[j][i] == EMPTY) {
+      positions++;
+      maze->cells[j][i] = MOB;
+    }
+  }
+  maze->mob_count = mob_count;
+
+  return 0;
+}
+
 /* public functions */
-Maze *create_maze(uint8_t width, uint8_t height) {
+Maze *(create_maze)(uint8_t width, uint8_t height, uint8_t mob_count) {
   srand(time(NULL));
   Maze *maze = (Maze *) malloc(sizeof(Maze));
   if (!maze)
     return NULL;
 
-  if (initialize_maze(maze, 31, 21)) {
+  if (initialize_maze(maze, width, height)) {
     free(maze);
     return NULL;
   }
 
   open_maze(maze, 30);
+  generate_mob_positions(maze, mob_count);
 
   // Estimar o número máximo de linhas que podemos precisar
   // No pior caso, cada célula de parede cria 4 linhas
@@ -270,7 +283,7 @@ Maze *create_maze(uint8_t width, uint8_t height) {
   return maze;
 }
 
-void free_maze(Maze *maze) {
+void (free_maze)(Maze *maze) {
   if (!maze)
     return;
 
@@ -288,7 +301,7 @@ void free_maze(Maze *maze) {
   free(maze);
 }
 
-int draw_maze(Maze *maze, uint8_t *frame_buffer) {
+int (draw_maze)(Maze *maze, uint8_t *frame_buffer) {
   if (!maze || !frame_buffer) {
     printf("Error: Maze or frame buffer is NULL\n");
     return 1;
@@ -333,7 +346,7 @@ int draw_maze(Maze *maze, uint8_t *frame_buffer) {
   return 0;
 }
 
-bool check_collision(Maze *maze, int x, int y, int width, int height) {
+bool (check_collision)(Maze *maze, int x, int y, int width, int height) {
   if (!maze)
     return false;
 
@@ -357,7 +370,7 @@ bool check_collision(Maze *maze, int x, int y, int width, int height) {
   return false;
 }
 
-void init_maze_buffer() {
+void (init_maze_buffer)() {
   if (maze_buffer == NULL) {
     maze_buffer = (uint8_t *) malloc(frame_size);
     if (maze_buffer == NULL) {
@@ -366,21 +379,47 @@ void init_maze_buffer() {
   }
 }
 
-void free_maze_buffer() {
+void (free_maze_buffer)() {
   if (maze_buffer != NULL) {
     free(maze_buffer);
     maze_buffer = NULL;
   }
 }
 
-uint8_t get_width(Maze *maze) {
+uint8_t (get_width)(Maze *maze) {
   return maze->width;
 }
 
-uint8_t get_height(Maze *maze) {
+uint8_t (get_height)(Maze *maze) {
   return maze->width;
 }
 
-int get_line_count(Maze *maze) {
+int (get_line_count)(Maze *maze) {
   return maze->line_count; 
+}
+
+Point **(get_mob_positions)(Maze *maze) {
+  int point_no = 0;
+  Point **points = malloc(sizeof(Point *) * maze->mob_count);
+  
+  if (!points)
+    return NULL;
+  
+  for (int j = 0; j < maze->height; j++) {
+    for (int i = 0; i < maze->width; i++) {
+      if (maze->cells[j][i] == MOB) {
+        Point *p = malloc(sizeof(Point));
+        p->x = i;
+        p->y = j;
+        points[point_no] = p;
+        point_no++;
+      }
+    }
+  }
+ 
+  return points;
+}
+
+uint8_t (get_mob_count)(Maze *maze) {
+  return maze->mob_count;
 }

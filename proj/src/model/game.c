@@ -1,15 +1,15 @@
 #include "game.h"
 
 struct Game {
-    State state;
-    uint8_t level_number;
-    uint8_t score;
-    Level *level;
-    union {
-        struct GameOver *game_over;
-        struct MainMenu *main_menu;
-    } menu;
-    Cursor *cursor;
+  State state;
+  uint8_t level_number;
+  uint8_t score;
+  Level *level;
+  Cursor *cursor;
+  union {
+    struct GameOver *game_over;
+    struct MainMenu *main_menu;
+  } menu;
 };
 
 double delta;
@@ -19,27 +19,27 @@ extern int frame_counter;
 extern enum player_state state;
 
 static void menu_init(Game *game) {
-    game->menu.main_menu = create_main_menu();
+  game->menu.main_menu = create_main_menu();
 }
 
 static void level_init(Game *game) {
-    game->level = create_level(game->level_number);
+  game->level = create_level(game->level_number);
 }
 
 static void victory_init(Game *game) {
-    game->score = game->level_number;
-    game->level_number++;
+  game->score = game->level_number;
+  game->level_number++;
 }
 
 static void game_over_init(Game *game) {
-    game->score = game->level_number;
-    game->level_number = 0;
+  game->score = game->level_number;
+  game->level_number = 0;
 
-    game->menu.game_over = create_game_over();
+  game->menu.game_over = create_game_over();
 }
 
 static void exit_init(Game *game) {
-    printf("exiting game\n");
+  printf("exiting game\n");
 }
 
 static void (*game_init[])(Game *game) = {
@@ -53,8 +53,8 @@ static void state_init(Game *game) {
   game_init[game->state](game);
 }
 
-static void menu_destroy(Game* game) {
-    destroy_main_menu(game->menu.main_menu);
+static void menu_destroy(Game *game) {
+  destroy_main_menu(game->menu.main_menu);
 }
 
 static void level_destroy(Game *game) {
@@ -94,7 +94,7 @@ static void set_state(Game *game, State new_state) {
 
 static void game_update_delta(Game *game) {
   Player *player = get_player(game->level);
-  Sprite *player_sprite = get_sprite(player);
+  Sprite *player_sprite = player_get_sprite(player);
   double player_center_x = player_sprite->x + player_sprite->width / 2.0;
   double player_center_y = player_sprite->y + player_sprite->height / 2.0;
 
@@ -106,7 +106,7 @@ static void game_update_delta(Game *game) {
 
 static void game_draw_fov_cone(Game *game) {
   Player *player = get_player(game->level);
-  Sprite *player_sprite = get_sprite(player);
+  Sprite *player_sprite = player_get_sprite(player);
   Maze *maze = get_maze(game->level);
   if (!player || !maze)
     return;
@@ -168,52 +168,107 @@ static void game_draw_fov_cone(Game *game) {
 
 static int game_draw_player(Game *game) {
   Player *player = get_player(game->level);
-  Sprite *player_sprite = get_sprite(player);
+  Sprite *player_sprite = player_get_sprite(player);
   Sprite *new_sprite;
-    if(frame_counter > 16){
-        frame_counter = 0;
-    }
-    switch (state) {
-        case PLAYER_IDLE:
-            if(frame_counter <= 4){
-              new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
-            }else if(frame_counter <= 8){
-              new_sprite = create_sprite((xpm_map_t) pic2, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
-            }else{
-              new_sprite = create_sprite((xpm_map_t) cross, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
-            }
-            
-            break;
-        case PLAYER_WALKING:
-            if(frame_counter <= 4){
-              new_sprite = create_sprite((xpm_map_t) penguin, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
-            }else if(frame_counter <= 8){
-              new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
-            }else if(frame_counter <= 12){
-              new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
-            }else{
-              new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
-            }
-            break;
-        case PLAYER_AIMING:
-            new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
-            break;
-        case PLAYER_SHOOTING:
-            new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
-            break;
-        case PLAYER_DYING:
-            new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
-            break;
-        default:
-            break;
-    }
-    set_sprite(player, new_sprite);
-    draw_sprite_rotated(get_sprite(player), delta, sec_frame_buffer);
-    return 0;
+  if (frame_counter > 16) {
+    frame_counter = 0;
+  }
+  switch (state) {
+    case PLAYER_IDLE:
+      if (frame_counter <= 4) {
+        new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
+      }
+      else if (frame_counter <= 8) {
+        new_sprite = create_sprite((xpm_map_t) pic2, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
+      }
+      else {
+        new_sprite = create_sprite((xpm_map_t) cross, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
+      }
+
+      break;
+    case PLAYER_WALKING:
+      if (frame_counter <= 4) {
+        new_sprite = create_sprite((xpm_map_t) penguin, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
+      }
+      else if (frame_counter <= 8) {
+        new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
+      }
+      else if (frame_counter <= 12) {
+        new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
+      }
+      else {
+        new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
+      }
+      break;
+    case PLAYER_AIMING:
+      new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
+      break;
+    case PLAYER_SHOOTING:
+      new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
+      break;
+    case PLAYER_DYING:
+      new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
+      break;
+  }
+  player_set_sprite(player, new_sprite);
+  draw_sprite_rotated(player_get_sprite(player), delta, sec_frame_buffer);
+  return 0;
 }
 
-static void menu_timer_handler(Game* game) {
+static int game_draw_mobs(Game *game) {
+  uint8_t mob_count = get_mob_count(get_maze(game->level));
+  Mob **mobs = get_mobs(game->level);
+  for (int i = 0; i < mob_count; i++) {
+    Mob *mob = mobs[i];
+    Sprite *mob_sprite = get_sprite(mob);
+    Sprite *new_sprite;
+    if (frame_counter > 16) {
+      frame_counter = 0;
+    }
+    switch (mob_get_state(mob)) {
+      case MOB_IDLE:
+        if (frame_counter <= 4) {
+          new_sprite = create_sprite((xpm_map_t) pic1, mob_sprite->x, mob_sprite->y, mob_sprite->xspeed, mob_sprite->yspeed);
+        }
+        else if (frame_counter <= 8) {
+          new_sprite = create_sprite((xpm_map_t) pic2, mob_sprite->x, mob_sprite->y, mob_sprite->xspeed, mob_sprite->yspeed);
+        }
+        else {
+          new_sprite = create_sprite((xpm_map_t) cross, mob_sprite->x, mob_sprite->y, mob_sprite->xspeed, mob_sprite->yspeed);
+        }
+
+        break;
+      case MOB_WALKING:
+        if (frame_counter <= 4) {
+          new_sprite = create_sprite((xpm_map_t) penguin, mob_sprite->x, mob_sprite->y, mob_sprite->xspeed, mob_sprite->yspeed);
+        }
+        else if (frame_counter <= 8) {
+          new_sprite = create_sprite((xpm_map_t) pic1, mob_sprite->x, mob_sprite->y, mob_sprite->xspeed, mob_sprite->yspeed);
+        }
+        else if (frame_counter <= 12) {
+          new_sprite = create_sprite((xpm_map_t) pic1, mob_sprite->x, mob_sprite->y, mob_sprite->xspeed, mob_sprite->yspeed);
+        }
+        else {
+          new_sprite = create_sprite((xpm_map_t) pic1, mob_sprite->x, mob_sprite->y, mob_sprite->xspeed, mob_sprite->yspeed);
+        }
+        break;
+      case MOB_ATTACKING:
+        new_sprite = create_sprite((xpm_map_t) pic1, mob_sprite->x, mob_sprite->y, mob_sprite->xspeed, mob_sprite->yspeed);
+        break;
+      case MOB_DYING:
+        new_sprite = create_sprite((xpm_map_t) pic1, mob_sprite->x, mob_sprite->y, mob_sprite->xspeed, mob_sprite->yspeed);
+        break;
+    }
+    set_sprite(mob, new_sprite);
+    draw_sprite(mob_sprite, maze_buffer);
+  }
+  return 0;
+
+}
+
+static void menu_timer_handler(Game *game) {
   clear(sec_frame_buffer);
+
   draw_main_menu(game->menu.main_menu, sec_frame_buffer);
   draw_cursor(game->cursor, sec_frame_buffer);
 
@@ -230,11 +285,17 @@ static void level_timer_handler(Game *game) {
   if (!player || !maze)
     return;
 
+  uint8_t mob_count = get_mob_count(maze);
+  Mob **mobs = get_mobs(current_level);
   clear(sec_frame_buffer);
   clear(maze_buffer);
 
   draw_maze(maze, maze_buffer);
-  update_player_state(get_player(game->level), pp);
+  update_player_state(player, pp);
+  for (int i = 0; i < mob_count; i++) {
+    update_mob_state(mobs[i]);
+  }
+  game_draw_mobs(game);
   game_draw_fov_cone(game);
   game_draw_player(game);
   draw_cursor(game->cursor, sec_frame_buffer);
@@ -269,22 +330,25 @@ void game_timer_handler(Game *game) {
   game_timer_handlers[game->state](game);
 }
 
-static void menu_keyboard_handler(Game* game) {
-    if (scan_code == ESC_BREAK_CODE) set_state(game, EXIT);  
-    if (scan_code == KEY_W || scan_code == KEY_S || scan_code == KEY_A || scan_code == KEY_D) main_menu_change_button(game->menu.main_menu);
-    if (scan_code == KEY_ENTER) {
-        ButtonType button = main_menu_get_button(game->menu.main_menu);
-        if (button == BUTTON_PLAY) {
-            set_state(game, LEVEL);
-        } else if (button == BUTTON_EXIT) {
-            set_state(game, EXIT);
-        }
+static void menu_keyboard_handler(Game *game) {
+  if (scan_code == ESC_BREAK_CODE)
+    set_state(game, EXIT);
+  if (scan_code == KEY_W || scan_code == KEY_S || scan_code == KEY_A || scan_code == KEY_D)
+    main_menu_change_button(game->menu.main_menu);
+  if (scan_code == KEY_ENTER) {
+    ButtonType button = main_menu_get_button(game->menu.main_menu);
+    if (button == BUTTON_PLAY) {
+      set_state(game, LEVEL);
     }
+    else if (button == BUTTON_EXIT) {
+      set_state(game, EXIT);
+    }
+  }
 }
 
 static void level_keyboard_handler(Game *game) {
   Player *player = get_player(game->level);
-  Sprite *player_sprite = get_sprite(player);
+  Sprite *player_sprite = player_get_sprite(player);
   Maze *maze = get_maze(game->level);
 
   double x_changer = 0;
@@ -347,7 +411,7 @@ static void level_keyboard_handler(Game *game) {
     fov_angle = 120;
 
   if (moved) {
-    int acceleration = get_acceleration(player);
+    int acceleration = player_get_acceleration(player);
     player_sprite->xspeed += acceleration;
     player_sprite->yspeed += acceleration;
     playerIsAtMaxSpeed(player);
@@ -363,23 +427,26 @@ static void level_keyboard_handler(Game *game) {
     }
   }
 
-  set_moved(player, moved);
+  player_set_moved(player, moved);
   playerStopped(player);
 
   if (scan_code == ESC_BREAK_CODE)
     set_state(game, EXIT);
 }
 
-static void game_over_keyboard_handler(Game* game) {
-  if (scan_code == ESC_BREAK_CODE) set_state(game, EXIT);  
-  if (scan_code == KEY_W || scan_code == KEY_S || scan_code == KEY_A || scan_code == KEY_D) game_over_change_button(game->menu.game_over);
+static void game_over_keyboard_handler(Game *game) {
+  if (scan_code == ESC_BREAK_CODE)
+    set_state(game, EXIT);
+  if (scan_code == KEY_W || scan_code == KEY_S || scan_code == KEY_A || scan_code == KEY_D)
+    game_over_change_button(game->menu.game_over);
   if (scan_code == KEY_ENTER) {
-      ButtonType button = game_over_get_button(game->menu.game_over);
-      if (button == BUTTON_MENU) {
-          set_state(game, MENU);
-      } else if (button == BUTTON_EXIT) {
-          set_state(game, EXIT);
-      }
+    ButtonType button = game_over_get_button(game->menu.game_over);
+    if (button == BUTTON_MENU) {
+      set_state(game, MENU);
+    }
+    else if (button == BUTTON_EXIT) {
+      set_state(game, EXIT);
+    }
   }
 }
 
@@ -402,14 +469,16 @@ void game_keyboard_handler(Game *game) {
   game_keyboard_handlers[game->state](game);
 }
 
-static void menu_mouse_handler(Game* game) {
-    ButtonType button = BUTTON_NONE;
-    if (pp.lb) button = main_menu_click_handler(game->menu.main_menu, cursor_get_x(game->cursor), cursor_get_y(game->cursor)); 
-    if (button == BUTTON_PLAY) {
-        set_state(game, LEVEL);
-    } else if (button == BUTTON_EXIT) {
-        set_state(game, EXIT);
-    } 
+static void menu_mouse_handler(Game *game) {
+  ButtonType button = BUTTON_NONE;
+  if (pp.lb)
+    button = main_menu_click_handler(game->menu.main_menu, cursor_get_x(game->cursor), cursor_get_y(game->cursor));
+  if (button == BUTTON_PLAY) {
+    set_state(game, LEVEL);
+  }
+  else if (button == BUTTON_EXIT) {
+    set_state(game, EXIT);
+  }
 }
 
 static void level_mouse_handler(Game *game) {
@@ -420,14 +489,16 @@ static void victory_mouse_handler(Game *game) {
   printf("victory_mouse_handler: To be implemented\n");
 }
 
-static void game_over_mouse_handler(Game* game) {
-    ButtonType button = BUTTON_NONE;
-    if (pp.lb) button = game_over_click_handler(game->menu.game_over, cursor_get_x(game->cursor), cursor_get_y(game->cursor)); 
-    if (button == BUTTON_MENU) {
-        set_state(game, MENU);
-    } else if (button == BUTTON_EXIT) {
-        set_state(game, EXIT);
-    }
+static void game_over_mouse_handler(Game *game) {
+  ButtonType button = BUTTON_NONE;
+  if (pp.lb)
+    button = game_over_click_handler(game->menu.game_over, cursor_get_x(game->cursor), cursor_get_y(game->cursor));
+  if (button == BUTTON_MENU) {
+    set_state(game, MENU);
+  }
+  else if (button == BUTTON_EXIT) {
+    set_state(game, EXIT);
+  }
 }
 
 static void exit_mouse_handler(Game *game) {
@@ -439,8 +510,7 @@ static void (*game_mouse_handlers[])(Game *game) = {
   level_mouse_handler,
   victory_mouse_handler,
   game_over_mouse_handler,
-  exit_mouse_handler
-};
+  exit_mouse_handler};
 
 void game_mouse_handler(Game *game) {
   cursor_update(game->cursor, pp.delta_x * 0.5, -pp.delta_y * 0.5);
@@ -454,7 +524,7 @@ Game *create_game() {
   if (!game)
     return NULL;
 
-  game->level_number = 0;
+  game->level_number = 1;
   game->score = 0;
   game->state = LEVEL;
   game->cursor = create_cursor((xpm_map_t) cursor);

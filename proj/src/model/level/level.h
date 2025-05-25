@@ -17,6 +17,7 @@
 
 #include "maze.h"
 #include "player.h"
+#include "mob.h"
 
 typedef struct Level Level;
 
@@ -50,6 +51,15 @@ Maze *get_maze(Level *level);
  * @return Pointer to the Player structure.
  */
 Player *get_player(Level *level);
+
+/**
+ * @brief Returns the Mob array associated with the given level.
+ *
+ * @param level Pointer to the Level structure.
+ * @return Pointer to the Mob array.
+ */
+Mob **get_mobs(Level *level);
+
 
 #endif
 

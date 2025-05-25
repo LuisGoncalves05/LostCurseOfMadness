@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "*.embeddedhtml": "html",
+        "game.h": "c",
+        "level.h": "c",
+        "maze.h": "c",
+        "player.h": "c",
+        "mob.h": "c"
+    }
+}

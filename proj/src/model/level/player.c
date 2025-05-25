@@ -46,11 +46,11 @@ void destroy_player(Player *player) {
   free(player);
 }
 
-Sprite *get_sprite(Player *player) {
+Sprite *player_get_sprite(Player *player) {
   return player->sprite;
 }
 
-void set_sprite(Player *player, Sprite *sprite) {
+void player_set_sprite(Player *player, Sprite *sprite) {
   if (player == NULL) return;
   if (player->sprite != NULL) {
     destroy_sprite(player->sprite);
@@ -58,23 +58,23 @@ void set_sprite(Player *player, Sprite *sprite) {
   player->sprite = sprite;
 }
 
-unsigned char get_health(Player *player) {
+unsigned char player_get_health(Player *player) {
   return player->health;
 }
 
-int get_max_speed(Player *player) {
+int player_get_max_speed(Player *player) {
   return player->max_speed;
 }
 
-int get_acceleration(Player *player) {
+int player_get_acceleration(Player *player) {
   return player->acceleration;
 }
 
-bool get_moved(Player *player) {
+bool player_get_moved(Player *player) {
   return player->moved;
 }
 
-void set_moved(Player *player, bool moved) {
+void player_set_moved(Player *player, bool moved) {
   player->moved = moved;
 }
 

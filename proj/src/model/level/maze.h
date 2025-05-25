@@ -16,6 +16,10 @@
 #include "../../drivers/video/gpu.h"
 #include <lcom/lcf.h>
 
+#define EMPTY 0
+#define WALL 1
+#define MOB 2
+
 /**
  * @brief Color used for the walls of the maze.
  */
@@ -47,7 +51,15 @@
 #define HEIGHT 768
 
 typedef struct Maze Maze;
-typedef struct Line Line;
+
+typedef struct Line {
+  int x1, y1;
+  int x2, y2;
+} Line;
+
+typedef struct Point {
+  int x, y;
+} Point;
 
 extern uint32_t frame_size;
 
@@ -56,9 +68,10 @@ extern uint32_t frame_size;
  *
  * @param width Width of the maze in cells.
  * @param height Height of the maze in cells.
+ * @param mob_count Number of mobs in the maze.
  * @return Pointer to the created Maze structure.
  */
-Maze *create_maze(uint8_t width, uint8_t height);
+Maze *create_maze(uint8_t width, uint8_t height, uint8_t mob_count);
 
 /**
  * @brief Frees the memory associated with the maze.
@@ -133,6 +146,22 @@ uint8_t get_height(Maze *maze);
  * @return Number of lines in the maze.
  */
 int get_line_count(Maze *maze);
+
+/**
+ * @brief Returns the positions in the maze where there are mobs.
+ *
+ * @param maze Pointer to the Maze structure.
+ * @return Point array of mob positions;
+ */
+Point **get_mob_positions(Maze *maze);
+
+/**
+ * @brief Returns the number of mobs in the maze.
+ *
+ * @param maze Pointer to the Maze structure.
+ * @return Number of mobs in the maze.
+ */
+uint8_t get_mob_count(Maze *maze);
 
 #endif
 
