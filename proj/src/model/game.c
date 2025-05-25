@@ -12,7 +12,6 @@ struct Game {
     Cursor *cursor;
 };
 
-double direction;
 extern int frame_counter;
 
 static void menu_init(Game *game) {

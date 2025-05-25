@@ -34,6 +34,8 @@
 extern uint8_t scan_code;
 extern struct packet pp;
 
+extern int frame_counter;
+
 typedef struct Game Game;
 
 /**
