@@ -3,6 +3,8 @@
         "*.embeddedhtml": "html",
         "player.h": "c",
         "animsprite.h": "c",
-        "memory": "c"
+        "memory": "c",
+        "gpu.h": "c",
+        "random": "c"
     }
 }

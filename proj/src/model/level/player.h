@@ -92,6 +92,8 @@ void set_sprite(Player *player, Sprite *sprite);
  */
 void draw_player(Player* player, double delta, uint8_t *frame_buffer);
 
+PlayerState get_playerstate(Player *player);
+
 #endif
 
 /** @} */
