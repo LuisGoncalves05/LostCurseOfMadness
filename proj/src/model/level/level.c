@@ -6,6 +6,7 @@ struct Level {
   Player *player;
   double delta; // atan2 of the player - mouse_position
   double fov_angle;
+  Mob **mobs;
 };
 
 Level *create_level(uint8_t number) {
@@ -14,7 +15,8 @@ Level *create_level(uint8_t number) {
     return NULL;
 
   level->number = number;
-  level->maze = create_maze(31, 11);
+  uint8_t mob_count = 5 * (number + 1);
+  level->maze = create_maze(10 + 2 * (number + 1) + 1, 10 + 2 * (number + 1) + 1, mob_count);
   if (!level->maze) {
     free(level);
     return NULL;
@@ -29,6 +31,30 @@ Level *create_level(uint8_t number) {
 
   level->delta = 0;
   level->fov_angle = 60.0;
+  level->mobs = malloc(sizeof(Mob *) * mob_count);
+  if (!level->mobs) {
+    free(level->maze);
+    free(level->player);
+    free(level);
+    return NULL;
+  }
+
+  Point **mob_positions = get_mob_positions(level->maze);
+
+  for (int i = 0; i < mob_count; i++) {
+    Point *position = mob_positions[i];
+    Sprite *mob_sprite = create_sprite((xpm_map_t) cross, position->x * CELL_SIZE, position->y * CELL_SIZE, 0, 0);
+    level->mobs[i] = create_mob(mob_sprite);
+    if (!level->mobs[i]) {
+      for (int j = i - 1; j >= 0; j--) {
+        destroy_mob(level->mobs[j]);
+        free(level->maze);
+        free(level->player);
+        free(level);
+        return NULL;
+      }
+    }
+  }
 
   return level;
 }
@@ -37,27 +63,95 @@ void destroy_level(Level *level) {
   if (level != NULL) {
     destroy_player(level->player);
     free_maze(level->maze);
+    for (int i = 0; i < get_mob_count(get_maze(level)); i++) {
+      destroy_mob(level->mobs[i]);
+    }
     free(level);
   }
 }
 
 Player *get_player(Level *level) {
-  if (!level) return NULL;
+  if (!level)
+    return NULL;
   return level->player;
 }
 
 Maze *get_maze(Level *level) {
-  if (!level) return NULL;
+  if (!level)
+    return NULL;
   return level->maze;
 }
 
-double get_delta(Level* level) {
-  if (!level) return 0;
+double get_delta(Level *level) {
+  if (!level)
+    return 0;
   return level->delta;
 }
 
+static bool(check_mob_collisions)(Level *level) {
+  uint8_t mob_count = get_mob_count(get_maze(level));
+  Mob **mobs = get_mobs(level);
+  for (int i = 0; i < mob_count; i++) {
+    Sprite *player = player_get_sprite(get_player(level));
+    if (check_sprite_collision(mob_get_sprite(mobs[i]), player))
+      return true;
+  }
+
+  return false;
+}
+
+
+static int draw_mobs(Mob **mobs, uint8_t mob_count) {
+  extern int frame_counter;
+  for (int i = 0; i < mob_count; i++) {
+    Mob *mob = mobs[i];
+    Sprite *mob_sprite = mob_get_sprite(mob);
+    Sprite *new_sprite;
+    if (frame_counter > 16) {
+      frame_counter = 0;
+    }
+    switch (mob_get_state(mob)) {
+      case MOB_IDLE:
+        if (frame_counter <= 4) {
+          new_sprite = create_sprite((xpm_map_t) pic1, mob_sprite->x, mob_sprite->y, mob_sprite->xspeed, mob_sprite->yspeed);
+        }
+        else if (frame_counter <= 8) {
+          new_sprite = create_sprite((xpm_map_t) pic2, mob_sprite->x, mob_sprite->y, mob_sprite->xspeed, mob_sprite->yspeed);
+        }
+        else {
+          new_sprite = create_sprite((xpm_map_t) cross, mob_sprite->x, mob_sprite->y, mob_sprite->xspeed, mob_sprite->yspeed);
+        }
+
+        break;
+      case MOB_WALKING:
+        if (frame_counter <= 4) {
+          new_sprite = create_sprite((xpm_map_t) penguin, mob_sprite->x, mob_sprite->y, mob_sprite->xspeed, mob_sprite->yspeed);
+        }
+        else if (frame_counter <= 8) {
+          new_sprite = create_sprite((xpm_map_t) pic1, mob_sprite->x, mob_sprite->y, mob_sprite->xspeed, mob_sprite->yspeed);
+        }
+        else if (frame_counter <= 12) {
+          new_sprite = create_sprite((xpm_map_t) pic1, mob_sprite->x, mob_sprite->y, mob_sprite->xspeed, mob_sprite->yspeed);
+        }
+        else {
+          new_sprite = create_sprite((xpm_map_t) pic1, mob_sprite->x, mob_sprite->y, mob_sprite->xspeed, mob_sprite->yspeed);
+        }
+        break;
+      case MOB_ATTACKING:
+        new_sprite = create_sprite((xpm_map_t) pic1, mob_sprite->x, mob_sprite->y, mob_sprite->xspeed, mob_sprite->yspeed);
+        break;
+      case MOB_DYING:
+        new_sprite = create_sprite((xpm_map_t) pic1, mob_sprite->x, mob_sprite->y, mob_sprite->xspeed, mob_sprite->yspeed);
+        break;
+    }
+    mob_set_sprite(mob, new_sprite);
+    draw_sprite_rotated(mob_sprite, 0, maze_buffer);
+  }
+  return 0;
+}
+
 void update_delta(Level *level, double mouse_x, double mouse_y) {
-  Sprite *player_sprite = get_sprite(level->player);
+  Sprite *player_sprite = player_get_sprite(level->player);
   double player_center_x = player_sprite->x + player_sprite->width / 2.0;
   double player_center_y = player_sprite->y + player_sprite->height / 2.0;
 
@@ -68,24 +162,31 @@ void update_delta(Level *level, double mouse_x, double mouse_y) {
 }
 
 void level_update_position(Level *level, uint8_t scan_code) {
-  if (!level) return;
+  if (!level)
+    return;
   update_player_position(level->player, level->delta, scan_code);
 
-  Sprite *player_sprite = get_sprite(level->player);
+  Sprite *player_sprite = player_get_sprite(level->player);
   Maze *maze = level->maze;
   int new_x = 0, new_y = 0;
-  if (get_moved(level->player, &new_x, &new_y)) {
-    int acceleration = get_acceleration(level->player);
+  if (player_get_moved(level->player, &new_x, &new_y)) {
+    int acceleration = player_get_acceleration(level->player);
     player_sprite->xspeed += acceleration;
     player_sprite->yspeed += acceleration;
     player_limit_speed(level->player);
 
     // Verifica colisão antes de atualizar a posição
-    if (!check_collision(maze, new_x, new_y, player_sprite->width, player_sprite->height)) {
-      player_sprite->x = new_x;
-      player_sprite->y = new_y;
+    if (!check_rectangle_line_collision(maze, new_x, new_y, player_sprite->width, player_sprite->height)) {
+      if (!check_mob_collisions(level)) {
+        player_sprite->x = new_x;
+        player_sprite->y = new_y;
+      }
+      else {
+        player_set_health(level->player, player_get_health(level->player) - 1);
+      }
     }
-  } else {
+  }
+  else {
     player_sprite->xspeed = PLAYER_DEFAULT_SPEED;
     player_sprite->yspeed = PLAYER_DEFAULT_SPEED;
   }
@@ -93,9 +194,10 @@ void level_update_position(Level *level, uint8_t scan_code) {
 
 static void draw_fov_cone(Level *level) {
   double delta = level->delta;
-  Sprite *player_sprite = get_sprite(level->player);
+  Sprite *player_sprite = player_get_sprite(level->player);
   Maze *maze = level->maze;
-  if (!player_sprite || !maze) return;
+  if (!player_sprite || !maze)
+    return;
 
   double x = player_sprite->x + player_sprite->width / 2.0;
   double y = player_sprite->y + player_sprite->height / 2.0;
@@ -125,17 +227,20 @@ static void draw_fov_cone(Level *level) {
 
   for (int y_pixel = y_start; y_pixel <= y_end; y_pixel++) {
     for (int x_pixel = x_start; x_pixel <= x_end; x_pixel++) {
-      if (x_pixel == (int) x && y_pixel == (int) y) continue;
+      if (x_pixel == (int) x && y_pixel == (int) y)
+        continue;
 
       double dx = x_pixel - x;
       double dy = y_pixel - y;
 
       // Apenas multiplicações em vez de sqrt para melhor desempenho
       double dist_sq = dx * dx + dy * dy;
-      if (dist_sq > fov_radius * fov_radius) continue;
+      if (dist_sq > fov_radius * fov_radius)
+        continue;
 
       double dot_product = dx * dir_x + dy * dir_y;
-      if (dot_product < 0) continue; // Atrás do jogador
+      if (dot_product < 0)
+        continue; // Atrás do jogador
 
       // Verifica se está dentro do cone usando comparação de quadrados
       if ((dot_product * dot_product) >= (dist_sq * cos_half_angle_sq)) {
@@ -150,12 +255,24 @@ static void draw_fov_cone(Level *level) {
 }
 
 void draw_level(Level *level, struct packet pp) {
-  if (!level) return;
+  if (!level)
+    return;
+
+  Mob **mobs = get_mobs(level);
+  uint8_t mob_count = get_mob_count(level->maze);
 
   clear(maze_buffer);
   draw_maze(level->maze, maze_buffer);
 
   update_player_state(level->player, pp);
+  for (int i = 0; i < mob_count; i++) {
+    update_mob_state(mobs[i]);
+  }
+  draw_mobs(mobs, mob_count);
   draw_fov_cone(level);
   draw_player(level->player, level->delta, sec_frame_buffer);
+}
+
+Mob **get_mobs(Level *level) {
+  return level->mobs;
 }

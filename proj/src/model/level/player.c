@@ -30,32 +30,34 @@ Player *create_player() {
 
 // Destroy the player and free memory
 void destroy_player(Player *player) {
-  if (!player) return;
+  if (!player)
+    return;
   destroy_sprite(player->sprite);
   free(player);
 }
 
-Sprite *get_sprite(Player *player) {
+Sprite *player_get_sprite(Player *player) {
   return player->sprite;
 }
 
-void set_sprite(Player *player, Sprite *sprite) {
-  if (player == NULL) return;
+void player_set_sprite(Player *player, Sprite *sprite) {
+  if (player == NULL)
+    return;
   if (player->sprite != NULL) {
     destroy_sprite(player->sprite);
   }
   player->sprite = sprite;
 }
 
-unsigned char get_health(Player *player) {
+unsigned char player_get_health(Player *player) {
   return player->health;
 }
 
-int get_max_speed(Player *player) {
+int player_get_max_speed(Player *player) {
   return player->max_speed;
 }
 
-int get_acceleration(Player *player) {
+int player_get_acceleration(Player *player) {
   return player->acceleration;
 }
 
@@ -63,7 +65,7 @@ PlayerState get_playerstate(Player *player) {
   return player->state;
 }
 
-bool get_moved(Player *player, int *new_x, int *new_y) {
+bool player_get_moved(Player *player, int *new_x, int *new_y) {
   if (player->moved) {
     *new_x = player->new_x;
     *new_y = player->new_y;
@@ -73,7 +75,7 @@ bool get_moved(Player *player, int *new_x, int *new_y) {
   return player->moved;
 }
 
-void set_moved(Player *player, bool moved) {
+void player_set_moved(Player *player, bool moved) {
   player->moved = moved;
 }
 
@@ -86,11 +88,18 @@ void player_limit_speed(Player *player) {
   }
 }
 
+void player_set_health(Player *player, unsigned char health) {
+  player->health = health;
+}
+
 void update_player_state(Player *player, struct packet pp) {
   if (player == NULL)
     return;
 
-  if (player->moved == 1) {
+  if (player->health == 0) {
+    player->state = PLAYER_DYING;
+  }
+  else if (player->moved == 1) {
     player->state = PLAYER_WALKING;
   }
   else {
@@ -185,6 +194,6 @@ void draw_player(Player *player, double delta, uint8_t *frame_buffer) {
     default:
       break;
   }
-  set_sprite(player, new_sprite);
-  draw_sprite_rotated(get_sprite(player), delta, frame_buffer);
+  player_set_sprite(player, new_sprite);
+  draw_sprite_rotated(player_get_sprite(player), delta, frame_buffer);
 }

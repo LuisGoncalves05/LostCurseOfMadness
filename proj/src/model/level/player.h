@@ -15,8 +15,6 @@
 #include <lcom/lcf.h>
 #include <stdlib.h>
 #include <math.h>
-
-// #include "game.h"
 #include "model/utils/sprite.h"
 #include "model/utils/keys.h"
 #include "drivers/video/gpu.h"
@@ -48,27 +46,27 @@ void destroy_player(Player *player);
 /**
  * @brief returns the sprite associated with the player.
  */
-Sprite *get_sprite(Player *player);
+Sprite *player_get_sprite(Player *player);
 /**
  * @brief returns the current health of the player.
  */
-unsigned char get_health(Player *player);
+unsigned char player_get_health(Player *player);
 /**
  * @brief returns the maximum speed of the player.
  */
-int get_max_speed(Player *player);
+int player_get_max_speed(Player *player);
 /**
  * @brief returns the acceleration of the player.
  */
-int get_acceleration(Player *player);
+int player_get_acceleration(Player *player);
 /**
  * @brief returns true if the player moved, false otherwise. If true, provides the new position.
  */
-bool get_moved(Player *player, int *new_x, int *new_y);
+bool player_get_moved(Player *player, int *new_x, int *new_y);
 /**
  * @brief sets the flag if the player moved or not.
  */
-void set_moved(Player *player, bool moved);
+void player_set_moved(Player *player, bool moved);
 
 /**
  * @brief function to prevent the player from moving faster than the maximum speed.
@@ -79,13 +77,17 @@ void player_limit_speed(Player *player);
  */
 void update_player_position(Player *player, double delta, uint8_t scan_code);
 /**
+ * @brief sets the player's health.
+ */
+void player_set_health(Player *player, unsigned char health);
+/**
  * @brief updates the player state based on the packet received.
  */
 void update_player_state(Player *player, struct packet pp);
 /**
  * @brief sets the player with a new sprite.
  */
-void set_sprite(Player *player, Sprite *sprite);
+void player_set_sprite(Player *player, Sprite *sprite);
 
 /**
  * @brief draws the player

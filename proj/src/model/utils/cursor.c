@@ -20,7 +20,7 @@ Cursor* create_cursor(xpm_map_t xpm) {
     if (cursor == NULL) {
         return NULL;
     }
-    cursor->sprite = create_sprite(xpm, 0, 0, 0, 0);
+    cursor->sprite = create_sprite(xpm, x_res / 2, y_res / 2, 0, 0);
     if (cursor->sprite == NULL) {
         free(cursor);
         return NULL;

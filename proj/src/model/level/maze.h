@@ -16,6 +16,10 @@
 #include "../../drivers/video/gpu.h"
 #include <lcom/lcf.h>
 
+#define EMPTY 0
+#define WALL 1
+#define MOB 2
+
 /**
  * @brief Color used for the walls of the maze.
  */
@@ -47,7 +51,15 @@
 #define HEIGHT 768
 
 typedef struct Maze Maze;
-typedef struct Line Line;
+
+typedef struct Line {
+  int x1, y1;
+  int x2, y2;
+} Line;
+
+typedef struct Point {
+  int x, y;
+} Point;
 
 extern uint32_t frame_size;
 
@@ -56,9 +68,10 @@ extern uint32_t frame_size;
  *
  * @param width Width of the maze in cells.
  * @param height Height of the maze in cells.
+ * @param mob_count Number of mobs in the maze.
  * @return Pointer to the created Maze structure.
  */
-Maze *create_maze(uint8_t width, uint8_t height);
+Maze *create_maze(uint8_t width, uint8_t height, uint8_t mob_count);
 
 /**
  * @brief Frees the memory associated with the maze.
@@ -86,7 +99,7 @@ int draw_maze(Maze *maze, uint8_t *frame_buffer);
  * @param height Height of the rectangle.
  * @return true if there is a collision, false otherwise.
  */
-bool check_collision(Maze *maze, int x, int y, int width, int height);
+bool check_rectangle_line_collision(Maze *maze, int x, int y, int width, int height);
 
 /**
  * @brief Checks for collision between a rectangle and a specific maze wall line.
@@ -99,6 +112,16 @@ bool check_collision(Maze *maze, int x, int y, int width, int height);
  * @return true if there is a collision, false otherwise.
  */
 bool check_line_collision(int x, int y, int width, int height, Line line);
+
+/**
+ * @brief Checks for collision between two sprites (ignores rotation);
+ *
+ * @param a Sprite a.
+ * @param b Sprite b.
+ * @return true if there is a collision, false otherwise.
+ */
+bool (check_sprite_collision)(Sprite *a, Sprite *b);
+
 
 /**
  * @brief Initializes the buffer used for maze drawing.
@@ -133,6 +156,22 @@ uint8_t get_height(Maze *maze);
  * @return Number of lines in the maze.
  */
 int get_line_count(Maze *maze);
+
+/**
+ * @brief Returns the positions in the maze where there are mobs.
+ *
+ * @param maze Pointer to the Maze structure.
+ * @return Point array of mob positions;
+ */
+Point **get_mob_positions(Maze *maze);
+
+/**
+ * @brief Returns the number of mobs in the maze.
+ *
+ * @param maze Pointer to the Maze structure.
+ * @return Number of mobs in the maze.
+ */
+uint8_t get_mob_count(Maze *maze);
 
 #endif
 
