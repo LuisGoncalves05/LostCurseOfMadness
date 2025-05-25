@@ -59,6 +59,10 @@ int get_acceleration(Player *player) {
   return player->acceleration;
 }
 
+PlayerState get_playerstate(Player *player) {
+  return player->state;
+}
+
 bool get_moved(Player *player, int *new_x, int *new_y) {
   if (player->moved) {
     *new_x = player->new_x;

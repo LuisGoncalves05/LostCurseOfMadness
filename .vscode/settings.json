@@ -4,6 +4,7 @@
         "player.h": "c",
         "animsprite.h": "c",
         "memory": "c",
-        "gpu.h": "c"
+        "gpu.h": "c",
+        "random": "c"
     }
 }

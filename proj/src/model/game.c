@@ -14,7 +14,6 @@ struct Game {
 };
 
 extern int frame_counter;
-extern enum player_state state;
 extern int bullet_count;
 
 static void menu_init(Game *game) {
@@ -101,19 +100,14 @@ static void menu_timer_handler(Game* game) {
 
 static void level_timer_handler(Game *game) {
   clear(sec_frame_buffer);
-  clear(maze_buffer);
 
-  draw_maze(maze, maze_buffer);
-  update_player_state(get_player(game->level), pp);
-  game_draw_fov_cone(game);
-  game_draw_player(game);
+  draw_level(game->level, pp);
+  draw_cursor(game->cursor, sec_frame_buffer);
 
   if(bullet_count > 0) {
     update_all_bullets(get_maze(game->level));
-    draw_all_bullets(sec_frame_buffer, delta);
+    draw_all_bullets(sec_frame_buffer, get_delta(game->level));
   }
-  draw_level(game->level, pp);
-  draw_cursor(game->cursor, sec_frame_buffer);
 
   vga_flip_pages();
 }
@@ -207,12 +201,13 @@ static void menu_mouse_handler(Game* game) {
 
 static void level_mouse_handler(Game *game) {
   update_delta(game->level, cursor_get_x(game->cursor), cursor_get_y(game->cursor));
-  if(state == PLAYER_SHOOTING) {
-    Player *p = get_player(game->level);
+  Player *p = get_player(game->level);
+  if(get_playerstate(p) == PLAYER_SHOOTING) {
     Sprite *s = get_sprite(p);
     int cx = s->x + s->width/2;
     int cy = s->y + s->height/2;
-    create_bullet(cx, cy, delta); 
+    Level *level = game->level;
+    create_bullet(cx, cy, get_delta(level)); 
   }
 }
 
