@@ -334,8 +334,7 @@ int draw_maze(Maze *maze, uint8_t *frame_buffer) {
 }
 
 bool check_collision(Maze *maze, int x, int y, int width, int height) {
-  if (!maze)
-    return false;
+  if (!maze) return false;
 
   // Verificar colisão com todas as linhas do labirinto
   for (int i = 0; i < maze->line_count; i++) {

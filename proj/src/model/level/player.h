@@ -38,14 +38,6 @@ typedef enum {
 } PlayerState;
 
 /**
- * @brief function to prevent the player from moving faster than the maximum speed.
- */
-void playerIsAtMaxSpeed(Player *player);
-/**
- * @brief function to update the player velocity to default if he stops moving.
- */
-void playerStopped(Player *player);
-/**
  * @brief constructs a player "object".
  */
 Player *create_player();
@@ -70,13 +62,22 @@ int get_max_speed(Player *player);
  */
 int get_acceleration(Player *player);
 /**
- * @brief returns true if the player moved, false otherwise.
+ * @brief returns true if the player moved, false otherwise. If true, provides the new position.
  */
-bool get_moved(Player *player);
+bool get_moved(Player *player, int *new_x, int *new_y);
 /**
  * @brief sets the flag if the player moved or not.
  */
 void set_moved(Player *player, bool moved);
+
+/**
+ * @brief function to prevent the player from moving faster than the maximum speed.
+ */
+void player_limit_speed(Player *player);
+/**
+ * @brief updates the player's next position 
+ */
+void update_player_position(Player *player, double delta, uint8_t scan_code);
 /**
  * @brief updates the player state based on the packet received.
  */

@@ -67,6 +67,8 @@ double get_delta(Level* level);
 
 void update_delta(Level *level, double mouse_x, double mouse_y);
 
+void level_update_position(Level *level, uint8_t scan_code);
+
 void draw_level(Level *level, struct packet pp);
 
 #endif

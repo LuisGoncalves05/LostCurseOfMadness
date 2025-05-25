@@ -67,6 +67,30 @@ void update_delta(Level *level, double mouse_x, double mouse_y) {
   level->delta = atan2(dy, dx);
 }
 
+void level_update_position(Level *level, uint8_t scan_code) {
+  if (!level) return;
+  update_player_position(level->player, level->delta, scan_code);
+
+  Sprite *player_sprite = get_sprite(level->player);
+  Maze *maze = level->maze;
+  int new_x = 0, new_y = 0;
+  if (get_moved(level->player, &new_x, &new_y)) {
+    int acceleration = get_acceleration(level->player);
+    player_sprite->xspeed += acceleration;
+    player_sprite->yspeed += acceleration;
+    player_limit_speed(level->player);
+
+    // Verifica colisão antes de atualizar a posição
+    if (!check_collision(maze, new_x, new_y, player_sprite->width, player_sprite->height)) {
+      player_sprite->x = new_x;
+      player_sprite->y = new_y;
+    }
+  } else {
+    player_sprite->xspeed = PLAYER_DEFAULT_SPEED;
+    player_sprite->yspeed = PLAYER_DEFAULT_SPEED;
+  }
+}
+
 static void draw_fov_cone(Level *level) {
   double delta = level->delta;
   Sprite *player_sprite = get_sprite(level->player);
