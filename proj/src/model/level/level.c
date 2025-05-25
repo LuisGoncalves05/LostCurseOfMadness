@@ -67,7 +67,7 @@ void update_delta(Level *level, double mouse_x, double mouse_y) {
   level->delta = atan2(dy, dx);
 }
 
-void draw_fov_cone(Level *level) {
+static void draw_fov_cone(Level *level) {
   double delta = level->delta;
   Sprite *player_sprite = get_sprite(level->player);
   Maze *maze = level->maze;
@@ -123,4 +123,15 @@ void draw_fov_cone(Level *level) {
       }
     }
   }
+}
+
+void draw_level(Level *level, struct packet pp) {
+  if (!level) return;
+
+  clear(maze_buffer);
+  draw_maze(level->maze, maze_buffer);
+
+  update_player_state(level->player, pp);
+  draw_fov_cone(level);
+  draw_player(level->player, level->delta, sec_frame_buffer);
 }

@@ -67,7 +67,7 @@ double get_delta(Level* level);
 
 void update_delta(Level *level, double mouse_x, double mouse_y);
 
-void draw_fov_cone(Level *level);
+void draw_level(Level *level, struct packet pp);
 
 #endif
 

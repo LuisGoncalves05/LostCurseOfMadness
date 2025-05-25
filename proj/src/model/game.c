@@ -98,22 +98,8 @@ static void menu_timer_handler(Game* game) {
 }
 
 static void level_timer_handler(Game *game) {
-  Level *current_level = game->level;
-  if (!current_level)
-    return;
-
-  Player *player = get_player(game->level);
-  Maze *maze = get_maze(current_level);
-  if (!player || !maze)
-    return;
-
   clear(sec_frame_buffer);
-  clear(maze_buffer);
-
-  draw_maze(maze, maze_buffer);
-  update_player_state(get_player(game->level), pp);
-  draw_fov_cone(game->level);
-  draw_player(get_player(game->level), get_delta(game->level), sec_frame_buffer);
+  draw_level(game->level, pp);
   draw_cursor(game->cursor, sec_frame_buffer);
 
   vga_flip_pages();
