@@ -99,7 +99,7 @@ int draw_maze(Maze *maze, uint8_t *frame_buffer);
  * @param height Height of the rectangle.
  * @return true if there is a collision, false otherwise.
  */
-bool check_collision(Maze *maze, int x, int y, int width, int height);
+bool check_rectangle_collision(Maze *maze, int x, int y, int width, int height);
 
 /**
  * @brief Checks for collision between a rectangle and a specific maze wall line.

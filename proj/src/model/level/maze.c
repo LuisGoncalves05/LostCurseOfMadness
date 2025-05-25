@@ -12,7 +12,7 @@ struct Maze {
 
 uint8_t *maze_buffer = NULL;
 
-static void (add_line)(Maze *maze, int x1, int y1, int x2, int y2, int *line_index) {
+static void(add_line)(Maze *maze, int x1, int y1, int x2, int y2, int *line_index) {
   if (*line_index >= maze->line_count) {
     maze->line_count *= 2;
     maze->lines = (Line *) realloc(maze->lines, maze->line_count * sizeof(Line));
@@ -29,7 +29,7 @@ static void (add_line)(Maze *maze, int x1, int y1, int x2, int y2, int *line_ind
   (*line_index)++;
 }
 
-bool (check_line_collision)(int x, int y, int width, int height, Line line) {
+bool(check_line_collision)(int x, int y, int width, int height, Line line) {
   // Retângulo do objeto
   int left = x;
   int right = x + width;
@@ -116,7 +116,7 @@ bool (check_line_collision)(int x, int y, int width, int height, Line line) {
   return false;
 }
 
-static void (shuffle)(int *arr, int n) {
+static void(shuffle)(int *arr, int n) {
   for (int i = n - 1; i > 0; i--) {
     int j = rand() % (i + 1);
     int tmp = arr[i];
@@ -125,7 +125,7 @@ static void (shuffle)(int *arr, int n) {
   }
 }
 
-static void (dfs)(Maze *maze, int x, int y) {
+static void(dfs)(Maze *maze, int x, int y) {
   maze->cells[y][x] = 0;
 
   int dx[] = {2, -2, 0, 0};
@@ -145,7 +145,7 @@ static void (dfs)(Maze *maze, int x, int y) {
   }
 }
 
-static int (open_maze)(Maze *maze, uint8_t percentage) {
+static int(open_maze)(Maze *maze, uint8_t percentage) {
   if (maze == NULL)
     return 1;
 
@@ -169,7 +169,7 @@ static int (open_maze)(Maze *maze, uint8_t percentage) {
   return 0;
 }
 
-static int (initialize_maze)(Maze *maze, uint8_t width, uint8_t height) {
+static int(initialize_maze)(Maze *maze, uint8_t width, uint8_t height) {
   if (maze == NULL)
     return 1;
 
@@ -202,7 +202,7 @@ static int (initialize_maze)(Maze *maze, uint8_t width, uint8_t height) {
   return 0;
 }
 
-static int (generate_mob_positions)(Maze *maze, uint8_t mob_count) {
+static int(generate_mob_positions)(Maze *maze, uint8_t mob_count) {
   int positions = 0;
   while (positions < mob_count) {
     int i = rand() % maze->width;
@@ -218,7 +218,7 @@ static int (generate_mob_positions)(Maze *maze, uint8_t mob_count) {
 }
 
 /* public functions */
-Maze *(create_maze)(uint8_t width, uint8_t height, uint8_t mob_count) {
+Maze *(create_maze) (uint8_t width, uint8_t height, uint8_t mob_count) {
   srand(time(NULL));
   Maze *maze = (Maze *) malloc(sizeof(Maze));
   if (!maze)
@@ -283,7 +283,7 @@ Maze *(create_maze)(uint8_t width, uint8_t height, uint8_t mob_count) {
   return maze;
 }
 
-void (free_maze)(Maze *maze) {
+void(free_maze)(Maze *maze) {
   if (!maze)
     return;
 
@@ -301,7 +301,7 @@ void (free_maze)(Maze *maze) {
   free(maze);
 }
 
-int (draw_maze)(Maze *maze, uint8_t *frame_buffer) {
+int(draw_maze)(Maze *maze, uint8_t *frame_buffer) {
   if (!maze || !frame_buffer) {
     printf("Error: Maze or frame buffer is NULL\n");
     return 1;
@@ -346,7 +346,7 @@ int (draw_maze)(Maze *maze, uint8_t *frame_buffer) {
   return 0;
 }
 
-bool (check_collision)(Maze *maze, int x, int y, int width, int height) {
+bool(check_rectangle_collision)(Maze *maze, int x, int y, int width, int height) {
   if (!maze)
     return false;
 
@@ -370,7 +370,7 @@ bool (check_collision)(Maze *maze, int x, int y, int width, int height) {
   return false;
 }
 
-void (init_maze_buffer)() {
+void(init_maze_buffer)() {
   if (maze_buffer == NULL) {
     maze_buffer = (uint8_t *) malloc(frame_size);
     if (maze_buffer == NULL) {
@@ -379,32 +379,32 @@ void (init_maze_buffer)() {
   }
 }
 
-void (free_maze_buffer)() {
+void(free_maze_buffer)() {
   if (maze_buffer != NULL) {
     free(maze_buffer);
     maze_buffer = NULL;
   }
 }
 
-uint8_t (get_width)(Maze *maze) {
+uint8_t(get_width)(Maze *maze) {
   return maze->width;
 }
 
-uint8_t (get_height)(Maze *maze) {
+uint8_t(get_height)(Maze *maze) {
   return maze->width;
 }
 
-int (get_line_count)(Maze *maze) {
-  return maze->line_count; 
+int(get_line_count)(Maze *maze) {
+  return maze->line_count;
 }
 
-Point **(get_mob_positions)(Maze *maze) {
+Point **(get_mob_positions) (Maze * maze) {
   int point_no = 0;
   Point **points = malloc(sizeof(Point *) * maze->mob_count);
-  
+
   if (!points)
     return NULL;
-  
+
   for (int j = 0; j < maze->height; j++) {
     for (int i = 0; i < maze->width; i++) {
       if (maze->cells[j][i] == MOB) {
@@ -416,10 +416,10 @@ Point **(get_mob_positions)(Maze *maze) {
       }
     }
   }
- 
+
   return points;
 }
 
-uint8_t (get_mob_count)(Maze *maze) {
+uint8_t(get_mob_count)(Maze *maze) {
   return maze->mob_count;
 }

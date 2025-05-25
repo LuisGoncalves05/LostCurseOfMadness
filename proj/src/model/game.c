@@ -220,7 +220,7 @@ static int game_draw_mobs(Game *game) {
   Mob **mobs = get_mobs(game->level);
   for (int i = 0; i < mob_count; i++) {
     Mob *mob = mobs[i];
-    Sprite *mob_sprite = get_sprite(mob);
+    Sprite *mob_sprite = mob_get_sprite(mob);
     Sprite *new_sprite;
     if (frame_counter > 16) {
       frame_counter = 0;
@@ -420,7 +420,7 @@ static void level_keyboard_handler(Game *game) {
     double new_y = player_sprite->y + y_changer * player_sprite->yspeed;
 
     // Verifica colisão antes de atualizar a posição
-    if (!check_collision(maze, new_x, new_y,
+    if (!check_rectangle_collision(maze, new_x, new_y,
                          player_sprite->width, player_sprite->height)) {
       player_sprite->x = new_x;
       player_sprite->y = new_y;

@@ -14,13 +14,13 @@ Level *create_level(uint8_t number) {
 
   level->number = number;
   uint8_t mob_count = 5 * number;
-  level->maze = create_maze(30 * number + 1, 30 * number + 1, mob_count);
+  level->maze = create_maze(10 + 2 * number + 1, 10 + 2 * number + 1, mob_count);
   if (!level->maze) {
     free(level);
     return NULL;
   }
 
-  Sprite *player_sprite = create_sprite((xpm_map_t) cross, 400, 400, 3, 3);
+  Sprite *player_sprite = create_sprite((xpm_map_t) cross, 20, 20, 0, 0);
   level->player = create_player(player_sprite);
   if (!level->player) {
     free(level->maze);
@@ -40,7 +40,7 @@ Level *create_level(uint8_t number) {
 
   for (int i = 0; i < mob_count; i++) {
     Point *position = mob_positions[i];    
-    Sprite *mob_sprite = create_sprite((xpm_map_t) cross, position->x*10, position->y*10, 0 , 0);
+    Sprite *mob_sprite = create_sprite((xpm_map_t) cross, position->x*CELL_SIZE, position->y*CELL_SIZE, 0 , 0);
     level->mobs[i] = create_mob(mob_sprite);
     if (!level->mobs[i]) {
       for (int j = i-1; j >= 0; j--) {
@@ -61,7 +61,7 @@ void destroy_level(Level *level) {
     destroy_player(level->player);
     free_maze(level->maze);
     for (int i = 0; i < get_mob_count(get_maze(level)); i++) {
-      //destroy_mob(level->mobs[i]);
+      destroy_mob(level->mobs[i]);
     }
     free(level);
   }

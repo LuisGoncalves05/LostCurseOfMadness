@@ -49,27 +49,27 @@ void destroy_mob(Mob *mob);
 /**
  * @brief returns the sprite associated with the mob.
  */
-Sprite *get_sprite(Mob *mob);
+Sprite *mob_get_sprite(Mob *mob);
 /**
  * @brief returns the current health of the mob.
  */
-unsigned char get_health(Mob *mob);
+unsigned char mob_get_health(Mob *mob);
 /**
  * @brief returns the maximum speed of the mob.
  */
-int get_max_speed(Mob *mob);
+int mob_get_max_speed(Mob *mob);
 /**
  * @brief returns the acceleration of the mob.
  */
-int get_acceleration(Mob *mob);
+int mob_get_acceleration(Mob *mob);
 /**
  * @brief returns true if the mob moved, false otherwise.
  */
-bool get_moved(Mob *mob);
+bool mob_get_moved(Mob *mob);
 /**
  * @brief sets the flag if the mob moved or not.
  */
-void set_moved(Mob *mob, bool moved);
+void mob_set_moved(Mob *mob, bool moved);
 /**
  * @brief updates the mob state.
  */

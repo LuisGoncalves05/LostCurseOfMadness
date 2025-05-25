@@ -1,12 +1,12 @@
 #include "mob.h"
 
 struct Mob {
-    unsigned char health;
-    int max_speed;
-    int acceleration;
-    Sprite *sprite;
-    bool moved;
-    enum mob_state state;
+  unsigned char health;
+  int max_speed;
+  int acceleration;
+  Sprite *sprite;
+  bool moved;
+  enum mob_state state;
 };
 
 void mobIsAtMaxSpeed(Mob *mob) {
@@ -41,41 +41,47 @@ Mob *create_mob(Sprite *sprite) {
 
 // Destroy the mob and free memory
 void destroy_mob(Mob *mob) {
-  if (!mob) return;
+  if (!mob)
+    return;
   destroy_sprite(mob->sprite);
   free(mob);
 }
 
-Sprite *get_sprite(Mob *mob) {
+Sprite *mob_get_sprite(Mob *mob) {
   return mob->sprite;
 }
 
 void set_sprite(Mob *mob, Sprite *sprite) {
-  if (mob == NULL) return;
+  if (mob == NULL)
+    return;
   if (mob->sprite != NULL) {
     destroy_sprite(mob->sprite);
   }
   mob->sprite = sprite;
 }
 
-unsigned char get_health(Mob *mob) {
+unsigned char mob_get_health(Mob *mob) {
   return mob->health;
 }
 
-int get_max_speed(Mob *mob) {
+int mob_get_max_speed(Mob *mob) {
   return mob->max_speed;
 }
 
-int get_acceleration(Mob *mob) {
+int mob_get_acceleration(Mob *mob) {
   return mob->acceleration;
 }
 
-bool get_moved(Mob *mob) {
+bool mob_get_moved(Mob *mob) {
   return mob->moved;
 }
 
-void set_moved(Mob *mob, bool moved) {
+void mob_set_moved(Mob *mob, bool moved) {
   mob->moved = moved;
+}
+
+enum mob_state mob_get_state(Mob *mob) {
+  return mob->state;
 }
 
 void update_mob_state(Mob *mob) {
@@ -88,8 +94,4 @@ void update_mob_state(Mob *mob) {
   else {
     mob->state = MOB_IDLE;
   }
-}
-
-enum mob_state mob_get_state(Mob *mob) {
-  return mob->state;
 }
