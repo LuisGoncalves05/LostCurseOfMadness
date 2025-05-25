@@ -114,6 +114,16 @@ bool check_rectangle_collision(Maze *maze, int x, int y, int width, int height);
 bool check_line_collision(int x, int y, int width, int height, Line line);
 
 /**
+ * @brief Checks for collision between two sprites (ignores rotation);
+ *
+ * @param a Sprite a.
+ * @param b Sprite b.
+ * @return true if there is a collision, false otherwise.
+ */
+bool (check_sprite_collision)(Sprite *a, Sprite *b);
+
+
+/**
  * @brief Initializes the buffer used for maze drawing.
  */
 void init_maze_buffer();

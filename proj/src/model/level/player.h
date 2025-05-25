@@ -76,6 +76,10 @@ bool player_get_moved(Player *player);
  */
 void player_set_moved(Player *player, bool moved);
 /**
+ * @brief sets the player's health.
+ */
+void player_set_health(Player *player, unsigned char health);
+/**
  * @brief updates the player state based on the packet received.
  */
 void update_player_state(Player *player, struct packet pp);

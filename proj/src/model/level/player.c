@@ -41,7 +41,8 @@ Player *create_player(Sprite *sprite) {
 
 // Destroy the player and free memory
 void destroy_player(Player *player) {
-  if (!player) return;
+  if (!player)
+    return;
   destroy_sprite(player->sprite);
   free(player);
 }
@@ -51,7 +52,8 @@ Sprite *player_get_sprite(Player *player) {
 }
 
 void player_set_sprite(Player *player, Sprite *sprite) {
-  if (player == NULL) return;
+  if (player == NULL)
+    return;
   if (player->sprite != NULL) {
     destroy_sprite(player->sprite);
   }
@@ -78,11 +80,18 @@ void player_set_moved(Player *player, bool moved) {
   player->moved = moved;
 }
 
+void player_set_health(Player *player, unsigned char health) {
+  player->health = health;
+}
+
 void update_player_state(Player *player, struct packet pp) {
   if (player == NULL)
     return;
 
-  if (player->moved == 1) {
+  if (player->health == 0) {
+    state = PLAYER_DYING;
+  }
+  else if (player->moved == 1) {
     state = PLAYER_WALKING;
   }
   else {

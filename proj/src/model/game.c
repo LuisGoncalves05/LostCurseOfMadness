@@ -260,7 +260,7 @@ static int game_draw_mobs(Game *game) {
         break;
     }
     set_sprite(mob, new_sprite);
-    draw_sprite(mob_sprite, maze_buffer);
+    draw_sprite_rotated(mob_sprite, 0, maze_buffer);
   }
   return 0;
 
@@ -301,6 +301,9 @@ static void level_timer_handler(Game *game) {
   draw_cursor(game->cursor, sec_frame_buffer);
 
   vga_flip_pages();
+  if (state == PLAYER_DYING) {
+    set_state(game, GAME_OVER);
+  }
 }
 
 static void victory_timer_handler(Game *game) {
@@ -344,6 +347,18 @@ static void menu_keyboard_handler(Game *game) {
       set_state(game, EXIT);
     }
   }
+}
+
+static bool (check_mob_collisions)(Level *level) {
+  uint8_t mob_count = get_mob_count(get_maze(level));
+  Mob **mobs = get_mobs(level);
+  for (int i = 0; i < mob_count; i++) {
+    Sprite *player = player_get_sprite(get_player(level));
+    if (check_sprite_collision(mob_get_sprite(mobs[i]), player))
+      return true;
+  }
+
+  return false;
 }
 
 static void level_keyboard_handler(Game *game) {
@@ -420,10 +435,13 @@ static void level_keyboard_handler(Game *game) {
     double new_y = player_sprite->y + y_changer * player_sprite->yspeed;
 
     // Verifica colisão antes de atualizar a posição
-    if (!check_rectangle_collision(maze, new_x, new_y,
-                         player_sprite->width, player_sprite->height)) {
-      player_sprite->x = new_x;
-      player_sprite->y = new_y;
+    if (!check_rectangle_collision(maze, new_x, new_y, player_sprite->width, player_sprite->height)) {
+      if (!check_mob_collisions(game->level)) {
+        player_sprite->x = new_x;
+        player_sprite->y = new_y;
+      } else {
+        player_set_health(player, player_get_health(player) - 1);
+      }
     }
   }
 

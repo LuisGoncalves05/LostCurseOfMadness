@@ -116,6 +116,20 @@ bool(check_line_collision)(int x, int y, int width, int height, Line line) {
   return false;
 }
 
+bool (check_sprite_collision)(Sprite *a, Sprite *b) {
+  if (!a || !b) {
+    printf("check_sprite_collision: NULL provided");
+    return false;
+  }
+
+  return !(
+    a->x + a->width < b->x ||  // a to the left of b 
+    a->x > b->x + b->width ||  // b to the left of a
+    a->y + a->height < b->y || // in normal people coordinates, a above b
+    a->y > b->y + b->height    // in normal people coordinates, b above a
+  );
+}
+
 static void(shuffle)(int *arr, int n) {
   for (int i = n - 1; i > 0; i--) {
     int j = rand() % (i + 1);
