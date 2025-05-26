@@ -16,4 +16,4 @@
 #define KEY_SPACE 0x39
 #define KEY_ENTER 0x1C
 
-#endif
+#endif /* KEYS_H */
