@@ -80,7 +80,6 @@ static void state_destroy(Game *game) {
 }
 
 static void set_state(Game *game, State new_state) {
-  printf("Changing state from %d to %d\n", game->state, new_state);
   state_destroy(game);
   game->state = new_state;
   state_init(game);
@@ -151,8 +150,8 @@ static void menu_keyboard_handler(Game *game) {
 }
 
 static void level_keyboard_handler(Game *game) {
-  if (scan_code == ESC_BREAK_CODE) set_state(game, MENU);
   level_update_position(game->level, scan_code);
+  if (scan_code == ESC_BREAK_CODE) set_state(game, MENU);
 }
 
 static void game_over_keyboard_handler(Game *game) {

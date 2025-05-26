@@ -20,10 +20,8 @@
 #include "drivers/video/gpu.h"
 
 #define HEALTH 3
-#define PLAYER_MAX_SPEED 7 // Maximum speed of the player
-#define PLAYER_ACCELERATION 2 // Acceleration of the player
 #define PLAYER_HEALTH 3 // Health of the player
-#define PLAYER_DEFAULT_SPEED 5 // Default speed of the player
+#define PLAYER_DEFAULT_SPEED 3 // Default speed of the player
 
 typedef struct Player Player;
 
@@ -58,32 +56,19 @@ Sprite *player_get_sprite(Player *player);
  */
 unsigned char player_get_health(Player *player);
 /**
- * @brief returns the maximum speed of the player.
+ * @brief returns the speed in x;
  */
-int player_get_max_speed(Player *player);
+int player_get_dx(Player *player);
 /**
- * @brief returns the acceleration of the player.
+ * @brief returns the speed in y;
  */
-int player_get_acceleration(Player *player);
-/**
- * @brief returns true if the player moved, false otherwise. If true, provides the new position.
- */
-bool player_get_moved(Player *player, int *new_x, int *new_y);
-/**
- * @brief sets the flag if the player moved or not.
- */
-void player_set_moved(Player *player, bool moved);
-
-double get_direction(Player *player);
+int player_get_dy(Player *player);
 
 /**
- * @brief function to prevent the player from moving faster than the maximum speed.
+ * @brief updates the player's speed 
  */
-void player_limit_speed(Player *player);
-/**
- * @brief updates the player's next position 
- */
-void update_player_position(Player *player, double delta, uint8_t scan_code);
+void player_update_speed(Player *player, uint8_t scan_code);
+
 /**
  * @brief sets the player's health.
  */
