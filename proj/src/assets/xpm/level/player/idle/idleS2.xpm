@@ -1,4 +1,4 @@
-static xpm_row_t const player_idle2[] = {
+static xpm_row_t const player_idleS_2[] = {
 "48 48 7",
 " 	0",
 ".	20",

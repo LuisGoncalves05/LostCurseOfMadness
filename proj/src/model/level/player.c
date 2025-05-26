@@ -12,8 +12,8 @@ Player *create_player() {
     if (!player) return NULL;
     player->state = PLAYER_IDLE; 
     player->health = PLAYER_HEALTH;
-    Sprite *new_sprite = create_sprite((xpm_map_t) player_idle1, 400, 400, 0, 0);
-    player->animated_sprite = create_animated_sprite(new_sprite, 30, 2, (xpm_map_t) player_idle2);
+    Sprite *new_sprite = create_sprite((xpm_map_t) player_idleS_1, 400, 400, 0, 0);
+    player->animated_sprite = create_animated_sprite(new_sprite, 45, 2, (xpm_map_t) player_idleS_2);
     return player;
 }
 
@@ -81,25 +81,53 @@ void update_player_state(Player *player, struct packet pp) {
 void player_update_speed(Player *player, uint8_t scan_code) {
   switch (scan_code) {
     case KEY_W:
-        player->animated_sprite->sprite->yspeed = -PLAYER_DEFAULT_SPEED; 
+        player->animated_sprite = create_animated_sprite(
+            create_sprite(
+                (xpm_map_t) player_idleW_1,
+                player->animated_sprite->sprite->x,
+                player->animated_sprite->sprite->y,
+                player->animated_sprite->sprite->xspeed,
+                -PLAYER_DEFAULT_SPEED),
+            45, 2, (xpm_map_t) player_idleW_2);
         break;
     case KEY_A:
         player->animated_sprite->sprite->xspeed = -PLAYER_DEFAULT_SPEED;
         break;
     case KEY_S:
-        player->animated_sprite->sprite->yspeed = PLAYER_DEFAULT_SPEED;
+        player->animated_sprite = create_animated_sprite(
+            create_sprite(
+                (xpm_map_t) player_idleS_1,
+                player->animated_sprite->sprite->x,
+                player->animated_sprite->sprite->y,
+                player->animated_sprite->sprite->xspeed,
+                PLAYER_DEFAULT_SPEED),
+            45, 2, (xpm_map_t) player_idleS_2);
         break;
     case KEY_D:
         player->animated_sprite->sprite->xspeed = PLAYER_DEFAULT_SPEED;
         break;
     case KEY_BREAK_W:
-        player->animated_sprite->sprite->yspeed = 0; 
+        player->animated_sprite = create_animated_sprite(
+            create_sprite(
+                (xpm_map_t) player_idleW_1,
+                player->animated_sprite->sprite->x,
+                player->animated_sprite->sprite->y,
+                player->animated_sprite->sprite->xspeed,
+                0),
+            45, 2, (xpm_map_t) player_idleW_2);
         break;
     case KEY_BREAK_A:
         player->animated_sprite->sprite->xspeed = 0;
         break;
     case KEY_BREAK_S:
-        player->animated_sprite->sprite->yspeed = 0;
+        player->animated_sprite = create_animated_sprite(
+            create_sprite(
+                (xpm_map_t) player_idleS_1,
+                player->animated_sprite->sprite->x,
+                player->animated_sprite->sprite->y,
+                player->animated_sprite->sprite->xspeed,
+                0),
+            45, 2, (xpm_map_t) player_idleS_2);
         break;
     case KEY_BREAK_D:
         player->animated_sprite->sprite->xspeed = 0;
