@@ -437,3 +437,7 @@ Point **(get_mob_positions) (Maze * maze) {
 uint8_t(get_mob_count)(Maze *maze) {
   return maze->mob_count;
 }
+
+void set_mob_count(Maze *maze, uint8_t mob_count) {
+  maze->mob_count = mob_count;
+}

@@ -214,9 +214,7 @@ int(draw_sprite)(Sprite *sprite, uint8_t *frame_buffer) {
 }
 
 int draw_sprite_rotated(Sprite *sprite, double theta, uint8_t *frame_buffer) {
-
-  double rotated_width, rotated_height;
-  get_rotated_bounds(sprite->width, sprite->height, theta, &rotated_width, &rotated_height);
+  if (!sprite || !frame_buffer) return 1;
 
   double center_x = sprite->width / 2.0;
   double center_y = sprite->height / 2.0;
@@ -224,28 +222,43 @@ int draw_sprite_rotated(Sprite *sprite, double theta, uint8_t *frame_buffer) {
   double cos_theta = cos(theta);
   double sin_theta = sin(theta);
 
-  for (int i = 0; i < (int) rotated_height; i++) {
-    for (int j = 0; j < (int) rotated_width; j++) {
-      double translated_x = j - rotated_width / 2.0;
-      double translated_y = i - rotated_height / 2.0;
-      // se der merda na sync no mouse e do sprite troquem o sinal
-      //                                          |
-      //                                          v
-      double source_x = cos_theta * translated_x + sin_theta * translated_y + center_x;
-      double source_y = sin_theta * translated_x - cos_theta * translated_y + center_y;
+  // Compute bounding box of rotated sprite
+  double rotated_width, rotated_height;
+  get_rotated_bounds(sprite->width, sprite->height, theta, &rotated_width, &rotated_height);
+  int rot_w = (int)rotated_width;
+  int rot_h = (int)rotated_height;
 
-      if (source_x >= 0 && source_x < sprite->width && source_y >= 0 && source_y < sprite->height) {
-        int src_x = (int) source_x;
-        int src_y = (int) source_y;
+  // Compute top-left corner of where to draw the rotated image so it's centered
+  int draw_origin_x = sprite->x + sprite->width / 2 - rot_w / 2;
+  int draw_origin_y = sprite->y + sprite->height / 2 - rot_h / 2;
 
-        uint8_t color = sprite->map[src_y * sprite->width + src_x];
+  for (int i = 0; i < rot_h; i++) {
+    for (int j = 0; j < rot_w; j++) {
+      // (j, i) is the destination pixel in rotated space
+      double dx = j - rot_w / 2.0;
+      double dy = i - rot_h / 2.0;
 
+      // Apply inverse rotation to find source pixel in original sprite
+      double src_x = cos_theta * dx + sin_theta * dy + center_x;
+      double src_y = -sin_theta * dx + cos_theta * dy + center_y;
+
+      if (src_x >= 0 && src_x < sprite->width && src_y >= 0 && src_y < sprite->height) {
+        int ix = (int)src_x;
+        int iy = (int)src_y;
+
+        uint8_t color = sprite->map[iy * sprite->width + ix];
         if (color != BACKGROUND_COLOR) {
-          vga_draw_pixel(sprite->x + j - rotated_width / 2.0, sprite->y + i - rotated_height / 2.0, color, frame_buffer);
+          int draw_x = draw_origin_x + j;
+          int draw_y = draw_origin_y + i;
+
+          if (draw_x >= 0 && draw_x < x_res && draw_y >= 0 && draw_y < y_res) {
+            vga_draw_pixel(draw_x, draw_y, color, frame_buffer);
+          }
         }
       }
     }
   }
+
   return 0;
 }
 

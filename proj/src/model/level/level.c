@@ -154,11 +154,20 @@ void level_shoot(Level *level) {
   if (level == NULL || level->player == NULL) return;
   if (level->bullet_count >= MAX_BULLETS) return;
 
-  Player *player = level->player;
-  Sprite *s = player_get_sprite(player);
-  int cx = s->x + s->width / 2;
-  int cy = s->y + s->height / 2;
-  level->bullets[level->bullet_count++] = create_bullet(cx, cy, level->delta);
+  Sprite *sprite = player_get_sprite(level->player);
+  double delta = level->delta;
+
+  // Compute bounding box of rotated sprite
+  double rotated_width, rotated_height;
+  get_rotated_bounds(sprite->width, sprite->height, delta, &rotated_width, &rotated_height);
+  int rot_w = (int)rotated_width;
+  int rot_h = (int)rotated_height;
+
+  // Compute top-left corner of where to draw the rotated image so it's centered
+  int draw_origin_x = sprite->x + sprite->width / 2 - rot_w / 2;
+  int draw_origin_y = sprite->y + sprite->height / 2 - rot_h / 2;
+
+  level->bullets[level->bullet_count++] = create_bullet(draw_origin_x, draw_origin_y, delta);
 }
 
 static void update_bullet(Bullet *b, Level *level) {
@@ -204,8 +213,26 @@ static void level_update_all_bullets(Level *level) {
   }
 }
 
-static int draw_mobs(Mob **mobs, uint8_t mob_count) {
+static void level_update_all_mobs(Level *level) {
+  Mob **mobs = get_mobs(level);
+  Maze *maze = get_maze(level);
+  for (int i = 0; i < get_mob_count(maze);) {
+    Mob *mob = mobs[i];
+    update_mob_state(mob);
+    if (mob_get_health(mob) == 0) {
+      destroy_mob(mob);
+      set_mob_count(maze, get_mob_count(maze) - 1);
+      mobs[i] = mobs[get_mob_count(maze)];
+    } else {
+      i++;
+    }
+  }
+}
+
+static int draw_mobs(Level *level) {
   extern int frame_counter;
+  Mob **mobs = get_mobs(level);
+  uint8_t mob_count = get_mob_count(level->maze);
   for (int i = 0; i < mob_count; i++) {
     Mob *mob = mobs[i];
     Sprite *mob_sprite = mob_get_sprite(mob);
@@ -327,20 +354,16 @@ static void draw_all_bullets(Level *level, uint8_t *frame_buffer) {
 void draw_level(Level *level, struct packet pp) {
   if (!level) return;
 
-  Mob **mobs = get_mobs(level);
-  uint8_t mob_count = get_mob_count(level->maze);
-
   clear(maze_buffer);
   draw_maze(level->maze, maze_buffer);
-
+  
+  level_update_all_mobs(level);
+  draw_mobs(level);
+  
   update_player_state(level->player, pp);
-  for (int i = 0; i < mob_count; i++) {
-    update_mob_state(mobs[i]);
-  }
-  draw_mobs(mobs, mob_count);
-
   draw_fov_cone(level);
   draw_player(level->player, level->delta, sec_frame_buffer);
+  
 
   if (level->bullet_count > 0) {
     level_update_all_bullets(level);
