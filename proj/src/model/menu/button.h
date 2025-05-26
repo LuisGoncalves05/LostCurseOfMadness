@@ -1,20 +1,8 @@
-/**
- * @file button.h
- *
- * @brief This file contains the declarations for the button module.
- * The button module handles the creation, rendering, and interaction with UI buttons.
- */
-
-/** @defgroup button Button
- *  @brief Module for creating and handling UI buttons in the game.
- *  @{
- */
-
 #ifndef BUTTON_H
 #define BUTTON_H
 
-#include "drivers/video/gpu.h"
 #include <lcom/lcf.h>
+#include "drivers/video/gpu.h"
 
 /**
  * @brief X-coordinate for the Play button.
@@ -115,6 +103,5 @@ bool button_is_clicked(Button *button, uint16_t x, uint16_t y);
  */
 void draw_button(Button *button, uint8_t *frame_buffer);
 
-#endif
+#endif /* BUTTON_H */
 
-/** @} */

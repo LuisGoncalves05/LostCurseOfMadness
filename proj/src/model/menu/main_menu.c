@@ -5,6 +5,8 @@ struct MainMenu {
     Button *exitButton;
 };
 
+/* Create and destroy section */
+
 MainMenu *create_main_menu() {
     MainMenu *main_menu = (MainMenu *) malloc(sizeof(MainMenu));
     if (main_menu == NULL) {
@@ -35,6 +37,8 @@ void destroy_main_menu(MainMenu *main_menu) {
     free(main_menu);
 }
 
+/* Getter and setter section */
+
 ButtonType main_menu_get_button(MainMenu *main_menu) {
     if (main_menu == NULL)
         return BUTTON_NONE;
@@ -44,6 +48,10 @@ ButtonType main_menu_get_button(MainMenu *main_menu) {
         return BUTTON_EXIT;
     return BUTTON_NONE;
 }
+
+/* Statics section */
+
+/* Others section */
 
 void main_menu_change_button(MainMenu *main_menu) {
     if (main_menu == NULL)
@@ -68,6 +76,8 @@ ButtonType main_menu_click_handler(MainMenu *main_menu, uint16_t x, uint16_t y) 
         return BUTTON_EXIT;
     return BUTTON_NONE;
 }
+
+/* Draw section */
 
 void draw_main_menu(MainMenu *main_menu, uint8_t *frame_buffer) {
     vga_draw_xpm((xpm_map_t) lcom_xpm, 112, 184, frame_buffer);
