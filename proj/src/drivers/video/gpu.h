@@ -163,7 +163,7 @@ int draw_sprite_rotated(Sprite *sprite, double theta, uint8_t *frame_buffer);
 
 int vga_draw_xpm(xpm_map_t xpm, uint16_t x, uint16_t y, uint8_t *frame_buffer);
 
-int(clear)(uint8_t *frame_buffer);
+int(clear_buffer)(uint8_t *frame_buffer);
 
 void(set_display_start)();
 

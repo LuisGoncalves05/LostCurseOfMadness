@@ -75,7 +75,7 @@ void player_set_health(Player *player, unsigned char health);
 /**
  * @brief updates the player state based on the packet received.
  */
-void update_player_state(Player *player, struct packet pp);
+void player_update_state(Player *player, struct packet pp);
 /**
  * @brief sets the player with a new sprite.
  */

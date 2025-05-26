@@ -45,7 +45,7 @@ int(set_frame_buffers)(uint16_t mode) {
     return 0;
 }
 
-int(clear)(uint8_t *frame_buffer) {
+int(clear_buffer)(uint8_t *frame_buffer) {
     return memset(frame_buffer, 0, x_res * y_res * bytes_per_pixel) == NULL;
 }
 

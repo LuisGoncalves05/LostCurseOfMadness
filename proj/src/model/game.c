@@ -86,7 +86,7 @@ static void set_state(Game *game, State new_state) {
 }
 
 static void menu_timer_handler(Game *game) {
-    clear(sec_frame_buffer);
+    clear_buffer(sec_frame_buffer);
 
     draw_main_menu(game->menu.main_menu, sec_frame_buffer);
     draw_cursor(game->cursor, sec_frame_buffer);
@@ -95,7 +95,7 @@ static void menu_timer_handler(Game *game) {
 }
 
 static void level_timer_handler(Game *game) {
-    clear(sec_frame_buffer);
+    clear_buffer(sec_frame_buffer);
 
     draw_level(game->level, pp);
     draw_cursor(game->cursor, sec_frame_buffer);
@@ -111,7 +111,7 @@ static void victory_timer_handler(Game *game) {
 }
 
 static void game_over_timer_handler(Game *game) {
-    clear(sec_frame_buffer);
+    clear_buffer(sec_frame_buffer);
 
     draw_game_over(game->menu.game_over, sec_frame_buffer);
     draw_cursor(game->cursor, sec_frame_buffer);
@@ -201,7 +201,7 @@ static void menu_mouse_handler(Game *game) {
 }
 
 static void level_mouse_handler(Game *game) {
-    update_delta(game->level, cursor_get_x(game->cursor), cursor_get_y(game->cursor));
+    level_update_delta(game->level, cursor_get_x(game->cursor), cursor_get_y(game->cursor));
     if (pp.lb) {
         if (!game->shooting)
             level_shoot(game->level);

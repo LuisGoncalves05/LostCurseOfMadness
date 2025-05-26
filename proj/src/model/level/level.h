@@ -1,15 +1,3 @@
-/**
- * @file level.h
- *
- * @brief This file contains the declarations for the level module.
- * The level module encapsulates the elements that compose a game level, such as the maze and the player.
- */
-
-/** @defgroup level Level
- *  @brief Level module for managing individual game levels.
- *  @{
- */
-
 #ifndef LEVEL_H
 #define LEVEL_H
 
@@ -20,12 +8,7 @@
 #include "mob.h"
 #include "player.h"
 
-typedef struct Level Level;
-
-/**
- * @brief Radius of the player's field of view.
- */
-#define FOV_RADIUS 600
+#define FOV_RADIUS 600 /**< Radius of the player's field of view */
 
 extern uint8_t *maze_buffer;
 extern uint8_t *sec_frame_buffer;
@@ -33,6 +16,13 @@ extern uint8_t *main_frame_buffer;
 extern uint8_t bytes_per_pixel;
 extern uint16_t x_res;
 extern uint16_t y_res;
+
+/**
+ * @brief Represents a single Level instance.
+ *
+ * The Level struct is opaque.
+ */
+typedef struct Level Level;
 
 /**
  * @brief Creates a new level instance with a specified level number.
@@ -66,6 +56,14 @@ Maze *get_maze(Level *level);
 Player *get_player(Level *level);
 
 /**
+ * @brief Returns the delta associated with the given level.
+ *
+ * @param level Pointer to the Level structure.
+ * @return The level's delta.
+ */
+double get_delta(Level *level);
+
+/**
  * @brief Returns the Mob array associated with the given level.
  *
  * @param level Pointer to the Level structure.
@@ -73,16 +71,39 @@ Player *get_player(Level *level);
  */
 Mob **get_mobs(Level *level);
 
-double get_delta(Level *level);
 
-void update_delta(Level *level, double mouse_x, double mouse_y);
+/**
+ * @brief Updates the player's aim direction based on mouse coordinates.
+ *
+ * @param level Pointer to the Level structure.
+ * @param mouse_x X coordinate of the mouse cursor.
+ * @param mouse_y Y coordinate of the mouse cursor.
+ */
+void level_update_delta(Level *level, double mouse_x, double mouse_y);
 
+/**
+ * @brief Processes keyboard input to move the player.
+ *
+ * @param level Pointer to the Level structure.
+ * @param scan_code Scan code from keyboard input.
+ */
 void level_update_position(Level *level, uint8_t scan_code);
 
+/**
+ * @brief Triggers a projectile from the player's position and direction.
+ *
+ * @param level Pointer to the Level structure.
+ */
 void level_shoot(Level *level);
 
+/**
+ * @brief Renders the entire level state including player, mobs, maze, and bullets.
+ *
+ * @param level Pointer to the Level structure.
+ * @param pp Mouse packet used for determining cursor or aim direction.
+ */
 void draw_level(Level *level, struct packet pp);
 
 #endif
 
-/** @} */
+/* LEVEL_H */

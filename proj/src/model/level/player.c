@@ -56,7 +56,7 @@ void player_set_health(Player *player, unsigned char health) {
     player->health = health;
 }
 
-void update_player_state(Player *player, struct packet pp) {
+void player_update_state(Player *player, struct packet pp) {
     if (player == NULL)
         return;
     if (player->sprite->xspeed != 0 || player->sprite->yspeed != 0) {

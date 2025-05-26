@@ -4,12 +4,14 @@ struct Level {
     uint8_t number;
     Maze *maze;
     Player *player;
-    double delta; // atan2 of the player - mouse_position
+    double delta;
     double fov_angle;
     Mob **mobs;
     Bullet *bullets[MAX_BULLETS];
     int bullet_count;
 };
+
+/* Create and destroy section */
 
 Level *create_level(uint8_t number) {
     Level *level = (Level *) malloc(sizeof(Level));
@@ -75,16 +77,18 @@ void destroy_level(Level *level) {
     }
 }
 
-Player *get_player(Level *level) {
-    if (!level)
-        return NULL;
-    return level->player;
-}
+/* Getter and setter section */
 
 Maze *get_maze(Level *level) {
     if (!level)
         return NULL;
     return level->maze;
+}
+
+Player *get_player(Level *level) {
+    if (!level)
+        return NULL;
+    return level->player;
 }
 
 double get_delta(Level *level) {
@@ -97,6 +101,8 @@ Mob **get_mobs(Level *level) {
     return level->mobs;
 }
 
+/* Statics section */
+
 static bool(check_mob_collisions)(Level *level) {
     uint8_t mob_count = get_mob_count(get_maze(level));
     Mob **mobs = get_mobs(level);
@@ -107,46 +113,6 @@ static bool(check_mob_collisions)(Level *level) {
     }
 
     return false;
-}
-
-void update_delta(Level *level, double mouse_x, double mouse_y) {
-    Sprite *player_sprite = player_get_sprite(level->player);
-    double player_center_x = player_sprite->x + player_sprite->width / 2.0;
-    double player_center_y = player_sprite->y + player_sprite->height / 2.0;
-
-    double dx = mouse_x - player_center_x;
-    double dy = mouse_y - player_center_y;
-
-    level->delta = atan2(dy, dx);
-}
-
-void level_update_position(Level *level, uint8_t scan_code) {
-    if (!level)
-        return;
-    player_update_speed(level->player, scan_code);
-    printf("player speed: %d, %d\n", player_get_sprite(level->player)->xspeed, player_get_sprite(level->player)->yspeed);
-}
-
-void level_shoot(Level *level) {
-    if (level == NULL || level->player == NULL)
-        return;
-    if (level->bullet_count >= MAX_BULLETS)
-        return;
-
-    Sprite *sprite = player_get_sprite(level->player);
-    double delta = level->delta;
-
-    // Compute bounding box of rotated sprite
-    double rotated_width, rotated_height;
-    get_rotated_bounds(sprite->width, sprite->height, delta, &rotated_width, &rotated_height);
-    int rot_w = (int) rotated_width;
-    int rot_h = (int) rotated_height;
-
-    // Compute top-left corner of where to draw the rotated image so it's centered
-    int draw_origin_x = sprite->x + sprite->width / 2 - rot_w / 2;
-    int draw_origin_y = sprite->y + sprite->height / 2 - rot_h / 2;
-
-    level->bullets[level->bullet_count++] = create_bullet(draw_origin_x, draw_origin_y, delta);
 }
 
 static void update_bullet(Bullet *b, Level *level) {
@@ -345,23 +311,69 @@ static void draw_all_bullets(Level *level, uint8_t *frame_buffer) {
     }
 }
 
+/* Others section */
+
+void level_update_delta(Level *level, double mouse_x, double mouse_y) {
+    Sprite *player_sprite = player_get_sprite(level->player);
+    double player_center_x = player_sprite->x + player_sprite->width / 2.0;
+    double player_center_y = player_sprite->y + player_sprite->height / 2.0;
+
+    double dx = mouse_x - player_center_x;
+    double dy = mouse_y - player_center_y;
+
+    level->delta = atan2(dy, dx);
+}
+
+void level_update_position(Level *level, uint8_t scan_code) {
+    if (!level)
+        return;
+    player_update_speed(level->player, scan_code);
+    printf("player speed: %d, %d\n", player_get_sprite(level->player)->xspeed, player_get_sprite(level->player)->yspeed);
+}
+
+void level_shoot(Level *level) {
+    if (level == NULL || level->player == NULL)
+        return;
+    if (level->bullet_count >= MAX_BULLETS)
+        return;
+
+    Sprite *sprite = player_get_sprite(level->player);
+    double delta = level->delta;
+
+    // Compute bounding box of rotated sprite
+    double rotated_width, rotated_height;
+    get_rotated_bounds(sprite->width, sprite->height, delta, &rotated_width, &rotated_height);
+    int rot_w = (int) rotated_width;
+    int rot_h = (int) rotated_height;
+
+    // Compute top-left corner of where to draw the rotated image so it's centered
+    int draw_origin_x = sprite->x + sprite->width / 2 - rot_w / 2;
+    int draw_origin_y = sprite->y + sprite->height / 2 - rot_h / 2;
+
+    level->bullets[level->bullet_count++] = create_bullet(draw_origin_x, draw_origin_y, delta);
+}
+
+/* Draw section */
+
 void draw_level(Level *level, struct packet pp) {
     if (!level)
         return;
 
-    clear(maze_buffer);
+    // Maze logic
+    clear_buffer(maze_buffer);
     draw_maze(level->maze, maze_buffer);
 
+    // Mob logic
     level_update_all_mobs(level);
     draw_mobs(level);
 
+    // Player logic
     player_update_position(level);
-    update_player_state(level->player, pp);
+    player_update_state(level->player, pp);
     draw_fov_cone(level);
     draw_player(level->player, level->delta, sec_frame_buffer);
 
-    if (level->bullet_count > 0) {
-        level_update_all_bullets(level);
-        draw_all_bullets(level, sec_frame_buffer);
-    }
+    // Level logic
+    level_update_all_bullets(level);
+    draw_all_bullets(level, sec_frame_buffer);
 }

@@ -1,9 +1,8 @@
-#include "bullet.h"
-
-#include "drivers/video/gpu.h" // for draw_sprite_rotated()
-#include "drivers/video/gpu.h"
 #include <math.h>
 #include <stdlib.h>
+
+#include "bullet.h"
+#include "drivers/video/gpu.h"
 
 struct Bullet {
     Sprite *sprite; /**< Underlying sprite */
@@ -11,7 +10,7 @@ struct Bullet {
     bool active;    /**< Active flag */
 };
 
-extern uint16_t x_res, y_res;
+/* Create and destroy section */
 
 Bullet *create_bullet(int x, int y, double angle) {
     Bullet *bullet = malloc(sizeof(Bullet));
@@ -33,6 +32,8 @@ void destroy_bullet(Bullet *bullet) {
     free(bullet);
 }
 
+/* Getter and setter section */
+
 Sprite *bullet_get_sprite(Bullet *bullet) {
     return bullet->sprite;
 }
@@ -52,6 +53,12 @@ bool bullet_get_active(Bullet *bullet) {
 void bullet_set_active(Bullet *bullet, bool active) {
     bullet->active = active;
 }
+
+/* Statics section */
+
+/* Others section */
+
+/* Draw section */
 
 void draw_bullet(Bullet *bullet, uint8_t *frame_buffer) {
     if (!bullet)
