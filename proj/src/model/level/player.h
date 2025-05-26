@@ -50,10 +50,14 @@ PlayerState get_player_state(Player *player);
 
 void set_player_state(Player *player, PlayerState state);
 
+AnimatedSprite *player_get_animated_sprite(Player *player);
+
 /**
  * @brief returns the sprite associated with the player.
  */
 Sprite *player_get_sprite(Player *player);
+
+
 /**
  * @brief returns the current health of the player.
  */
@@ -83,7 +87,7 @@ void update_player_state(Player *player, struct packet pp);
 /**
  * @brief sets the player with a new sprite.
  */
-void player_set_sprite(Player *player, Sprite *sprite);
+void player_set_sprite(Player *player, AnimatedSprite *sprite);
 
 /**
  * @brief draws the player
