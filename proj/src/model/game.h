@@ -42,11 +42,11 @@ typedef struct Game Game;
  * @brief Enum representing the different game states.
  */
 typedef enum {
-  MENU,       /**< Main menu state */
-  LEVEL,      /**< Active game level state */
-  VICTORY,    /**< Game victory state */
-  GAME_OVER,  /**< Game over state */
-  EXIT        /**< Exit state */
+    MENU,      /**< Main menu state */
+    LEVEL,     /**< Active game level state */
+    VICTORY,   /**< Game victory state */
+    GAME_OVER, /**< Game over state */
+    EXIT       /**< Exit state */
 } State;
 
 /**

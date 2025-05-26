@@ -28,21 +28,26 @@ MainMenu *create_main_menu() {
 }
 
 void destroy_main_menu(MainMenu *main_menu) {
-    if (main_menu == NULL) return;
+    if (main_menu == NULL)
+        return;
     destroy_button(main_menu->playButton);
     destroy_button(main_menu->exitButton);
     free(main_menu);
 }
 
 ButtonType main_menu_get_button(MainMenu *main_menu) {
-    if (main_menu == NULL) return BUTTON_NONE;
-    if (button_get_selected(main_menu->playButton)) return BUTTON_PLAY;
-    if (button_get_selected(main_menu->exitButton)) return BUTTON_EXIT;
+    if (main_menu == NULL)
+        return BUTTON_NONE;
+    if (button_get_selected(main_menu->playButton))
+        return BUTTON_PLAY;
+    if (button_get_selected(main_menu->exitButton))
+        return BUTTON_EXIT;
     return BUTTON_NONE;
 }
 
 void main_menu_change_button(MainMenu *main_menu) {
-    if (main_menu == NULL) return;
+    if (main_menu == NULL)
+        return;
     bool play_selected = button_get_selected(main_menu->playButton);
     bool exit_selected = button_get_selected(main_menu->exitButton);
     if (play_selected == exit_selected) { // no button selected
@@ -55,9 +60,12 @@ void main_menu_change_button(MainMenu *main_menu) {
 }
 
 ButtonType main_menu_click_handler(MainMenu *main_menu, uint16_t x, uint16_t y) {
-    if (main_menu == NULL) return BUTTON_NONE;
-    if (button_is_clicked(main_menu->playButton, x, y)) return BUTTON_PLAY;
-    if (button_is_clicked(main_menu->exitButton, x, y)) return BUTTON_EXIT;
+    if (main_menu == NULL)
+        return BUTTON_NONE;
+    if (button_is_clicked(main_menu->playButton, x, y))
+        return BUTTON_PLAY;
+    if (button_is_clicked(main_menu->exitButton, x, y))
+        return BUTTON_EXIT;
     return BUTTON_NONE;
 }
 

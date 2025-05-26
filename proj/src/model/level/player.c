@@ -9,8 +9,9 @@ struct Player {
 // Create a new player
 Player *create_player() {
     Player *player = (Player *) malloc(sizeof(Player));
-    if (!player) return NULL;
-    player->state = PLAYER_IDLE; 
+    if (!player)
+        return NULL;
+    player->state = PLAYER_IDLE;
     player->health = PLAYER_HEALTH;
     player->sprite = create_sprite((xpm_map_t) cross, 400, 400, 0, 0);
     return player;
@@ -18,7 +19,8 @@ Player *create_player() {
 
 // Destroy the player and free memory
 void destroy_player(Player *player) {
-    if (!player) return;
+    if (!player)
+        return;
     destroy_sprite(player->sprite);
     free(player);
 }
@@ -28,7 +30,8 @@ Sprite *player_get_sprite(Player *player) {
 }
 
 void player_set_sprite(Player *player, Sprite *sprite) {
-    if (player == NULL) return;
+    if (player == NULL)
+        return;
     if (player->sprite != NULL) {
         destroy_sprite(player->sprite);
     }
@@ -44,7 +47,8 @@ PlayerState get_player_state(Player *player) {
 }
 
 void set_player_state(Player *player, PlayerState state) {
-    if (player == NULL) return;
+    if (player == NULL)
+        return;
     player->state = state;
 }
 
@@ -53,7 +57,8 @@ void player_set_health(Player *player, unsigned char health) {
 }
 
 void update_player_state(Player *player, struct packet pp) {
-    if (player == NULL) return;
+    if (player == NULL)
+        return;
     if (player->sprite->xspeed != 0 || player->sprite->yspeed != 0) {
         player->state = PLAYER_WALKING;
     } else {
@@ -63,41 +68,41 @@ void update_player_state(Player *player, struct packet pp) {
     if (pp.lb == 1) {
         player->state = PLAYER_SHOOTING;
     }
-    
+
     if (player->health == 0) {
         player->state = PLAYER_DYING;
     }
 }
 
 void player_update_speed(Player *player, uint8_t scan_code) {
-  switch (scan_code) {
-    case KEY_W:
-        player->sprite->yspeed = -PLAYER_DEFAULT_SPEED; 
-        break;
-    case KEY_A:
-        player->sprite->xspeed = -PLAYER_DEFAULT_SPEED;
-        break;
-    case KEY_S:
-        player->sprite->yspeed = PLAYER_DEFAULT_SPEED;
-        break;
-    case KEY_D:
-        player->sprite->xspeed = PLAYER_DEFAULT_SPEED;
-        break;
-    case KEY_BREAK_W:
-        player->sprite->yspeed = 0; 
-        break;
-    case KEY_BREAK_A:
-        player->sprite->xspeed = 0;
-        break;
-    case KEY_BREAK_S:
-        player->sprite->yspeed = 0;
-        break;
-    case KEY_BREAK_D:
-        player->sprite->xspeed = 0;
-        break;
-    default:
-        break;
-  }
+    switch (scan_code) {
+        case KEY_W:
+            player->sprite->yspeed = -PLAYER_DEFAULT_SPEED;
+            break;
+        case KEY_A:
+            player->sprite->xspeed = -PLAYER_DEFAULT_SPEED;
+            break;
+        case KEY_S:
+            player->sprite->yspeed = PLAYER_DEFAULT_SPEED;
+            break;
+        case KEY_D:
+            player->sprite->xspeed = PLAYER_DEFAULT_SPEED;
+            break;
+        case KEY_BREAK_W:
+            player->sprite->yspeed = 0;
+            break;
+        case KEY_BREAK_A:
+            player->sprite->xspeed = 0;
+            break;
+        case KEY_BREAK_S:
+            player->sprite->yspeed = 0;
+            break;
+        case KEY_BREAK_D:
+            player->sprite->xspeed = 0;
+            break;
+        default:
+            break;
+    }
 }
 
 void draw_player(Player *player, double delta, uint8_t *frame_buffer) {
@@ -105,40 +110,41 @@ void draw_player(Player *player, double delta, uint8_t *frame_buffer) {
     Sprite *new_sprite;
 
     extern int frame_counter;
-    if(frame_counter > 16) frame_counter = 0;
+    if (frame_counter > 16)
+        frame_counter = 0;
 
     switch (player->state) {
-    case PLAYER_IDLE:
-        if (frame_counter <= 4){
+        case PLAYER_IDLE:
+            if (frame_counter <= 4) {
+                new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
+            } else if (frame_counter <= 8) {
+                new_sprite = create_sprite((xpm_map_t) pic2, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
+            } else {
+                new_sprite = create_sprite((xpm_map_t) cross, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
+            }
+            break;
+        case PLAYER_WALKING:
+            if (frame_counter <= 4) {
+                new_sprite = create_sprite((xpm_map_t) penguin, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
+            } else if (frame_counter <= 8) {
+                new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
+            } else if (frame_counter <= 12) {
+                new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
+            } else {
+                new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
+            }
+            break;
+        case PLAYER_AIMING:
             new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
-        } else if (frame_counter <= 8){
-            new_sprite = create_sprite((xpm_map_t) pic2, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
-        } else {
-            new_sprite = create_sprite((xpm_map_t) cross, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
-        }
-        break;
-    case PLAYER_WALKING:
-        if (frame_counter <= 4){
-            new_sprite = create_sprite((xpm_map_t) penguin, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
-        } else if (frame_counter <= 8){
+            break;
+        case PLAYER_SHOOTING:
             new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
-        } else if (frame_counter <= 12){
+            break;
+        case PLAYER_DYING:
             new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
-        } else {
-            new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
-        }
-        break;  
-    case PLAYER_AIMING:
-        new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
-        break;
-    case PLAYER_SHOOTING:
-        new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
-        break;
-    case PLAYER_DYING:
-        new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
-        break;
-    default:
-        break;
+            break;
+        default:
+            break;
     }
     destroy_sprite(player_sprite);
     player_set_sprite(player, new_sprite);

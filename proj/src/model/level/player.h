@@ -12,25 +12,25 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include <lcom/lcf.h>
-#include <stdlib.h>
-#include <math.h>
-#include "model/utils/sprite.h"
-#include "model/utils/keys.h"
 #include "drivers/video/gpu.h"
+#include "model/utils/keys.h"
+#include "model/utils/sprite.h"
+#include <lcom/lcf.h>
+#include <math.h>
+#include <stdlib.h>
 
 #define HEALTH 3
-#define PLAYER_HEALTH 3 // Health of the player
+#define PLAYER_HEALTH 3        // Health of the player
 #define PLAYER_DEFAULT_SPEED 3 // Default speed of the player
 
 typedef struct Player Player;
 
 typedef enum {
-	PLAYER_IDLE,
-	PLAYER_WALKING,
-	PLAYER_AIMING,
-	PLAYER_SHOOTING,
-	PLAYER_DYING,
+    PLAYER_IDLE,
+    PLAYER_WALKING,
+    PLAYER_AIMING,
+    PLAYER_SHOOTING,
+    PLAYER_DYING,
 } PlayerState;
 
 /**
@@ -41,7 +41,6 @@ Player *create_player();
  * @brief Destroys the player "object" and frees its memory.
  */
 void destroy_player(Player *player);
-
 
 PlayerState get_player_state(Player *player);
 
@@ -65,7 +64,7 @@ int player_get_dx(Player *player);
 int player_get_dy(Player *player);
 
 /**
- * @brief updates the player's speed 
+ * @brief updates the player's speed
  */
 void player_update_speed(Player *player, uint8_t scan_code);
 
@@ -85,7 +84,7 @@ void player_set_sprite(Player *player, Sprite *sprite);
 /**
  * @brief draws the player
  */
-void draw_player(Player* player, double delta, uint8_t *frame_buffer);
+void draw_player(Player *player, double delta, uint8_t *frame_buffer);
 
 #endif
 

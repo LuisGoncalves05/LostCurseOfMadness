@@ -15,17 +15,17 @@
 
 #include <lcom/lcf.h>
 
-#include "maze.h"
-#include "player.h"
-#include "mob.h"
 #include "bullet.h"
+#include "maze.h"
+#include "mob.h"
+#include "player.h"
 
 typedef struct Level Level;
 
 /**
  * @brief Radius of the player's field of view.
  */
- #define FOV_RADIUS 600
+#define FOV_RADIUS 600
 
 extern uint8_t *maze_buffer;
 extern uint8_t *sec_frame_buffer;
@@ -73,7 +73,7 @@ Player *get_player(Level *level);
  */
 Mob **get_mobs(Level *level);
 
-double get_delta(Level* level);
+double get_delta(Level *level);
 
 void update_delta(Level *level, double mouse_x, double mouse_y);
 

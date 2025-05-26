@@ -4,13 +4,12 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-#include "model/utils/sprite.h"
-#include "model/level/maze.h"
 #include "model/level/level.h"
+#include "model/level/maze.h"
+#include "model/utils/sprite.h"
 
-
-#define BULLET_SPEED   6   /**< Speed in pixels per tick */
-#define MAX_BULLETS   50   /**< Maximum simultaneous bullets */
+#define BULLET_SPEED 6 /**< Speed in pixels per tick */
+#define MAX_BULLETS 50 /**< Maximum simultaneous bullets */
 
 /**
  * @brief A single bullet instance.
@@ -26,13 +25,11 @@ typedef struct Bullet Bullet;
  */
 Bullet *create_bullet(int x, int y, double angle);
 
-
 /**
  * @brief Destroy (free) a single bullet.
  * @param bullet Pointer to the Bullet to destroy.
  */
 void destroy_bullet(Bullet *bullet);
-
 
 Sprite *bullet_get_sprite(Bullet *bullet);
 

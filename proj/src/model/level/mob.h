@@ -10,24 +10,24 @@
  *  @{
  */
 #ifndef MOB_H
-#  define MOB_H
+#define MOB_H
 
-#  include "drivers/video/gpu.h"
-#  include "model/utils/sprite.h"
-#  include <lcom/lcf.h>
+#include "drivers/video/gpu.h"
+#include "model/utils/sprite.h"
+#include <lcom/lcf.h>
 
-#  define MOB_MAX_SPEED 5     // Maximum speed of the mob
-#  define MOB_ACCELERATION 1  // Acceleration of the mob
-#  define MOB_HEALTH 1        // Health of the mob
-#  define MOB_DEFAULT_SPEED 2 // Default speed of the mob
+#define MOB_MAX_SPEED 5     // Maximum speed of the mob
+#define MOB_ACCELERATION 1  // Acceleration of the mob
+#define MOB_HEALTH 1        // Health of the mob
+#define MOB_DEFAULT_SPEED 2 // Default speed of the mob
 
 typedef struct Mob Mob;
 
 enum mob_state {
-  MOB_IDLE,
-  MOB_WALKING,
-  MOB_ATTACKING,
-  MOB_DYING,
+    MOB_IDLE,
+    MOB_WALKING,
+    MOB_ATTACKING,
+    MOB_DYING,
 };
 
 /**

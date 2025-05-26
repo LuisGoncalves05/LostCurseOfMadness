@@ -53,12 +53,12 @@
 typedef struct Maze Maze;
 
 typedef struct Line {
-  int x1, y1;
-  int x2, y2;
+    int x1, y1;
+    int x2, y2;
 } Line;
 
 typedef struct Point {
-  int x, y;
+    int x, y;
 } Point;
 
 extern uint32_t frame_size;
@@ -120,8 +120,7 @@ bool check_line_collision(int x, int y, int width, int height, Line line);
  * @param b Sprite b.
  * @return true if there is a collision, false otherwise.
  */
-bool (check_sprite_collision)(Sprite *a, Sprite *b);
-
+bool(check_sprite_collision)(Sprite *a, Sprite *b);
 
 /**
  * @brief Initializes the buffer used for maze drawing.
@@ -172,7 +171,6 @@ Point **get_mob_positions(Maze *maze);
  * @return Number of mobs in the maze.
  */
 uint8_t get_mob_count(Maze *maze);
-
 
 /**
  * @brief Sets the number of mobs in the maze.

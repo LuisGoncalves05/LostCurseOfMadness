@@ -13,15 +13,15 @@
 #ifndef MAIN_MENU_H
 #define MAIN_MENU_H
 
+#include "button.h"
 #include <lcom/lcf.h>
 #include <stdint.h>
-#include "button.h"
 
+#include "assets/xpm/main_menu/exit_button.xpm"
+#include "assets/xpm/main_menu/exit_button_selected.xpm"
 #include "assets/xpm/main_menu/lcom.xpm"
 #include "assets/xpm/main_menu/play_button.xpm"
 #include "assets/xpm/main_menu/play_button_selected.xpm"
-#include "assets/xpm/main_menu/exit_button.xpm"
-#include "assets/xpm/main_menu/exit_button_selected.xpm"
 
 typedef struct MainMenu MainMenu;
 
