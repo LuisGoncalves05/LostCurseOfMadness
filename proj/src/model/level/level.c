@@ -130,19 +130,10 @@ void level_shoot(Level *level) {
   if (level->bullet_count >= MAX_BULLETS) return;
 
   Sprite *sprite = player_get_sprite(level->player);
-  double delta = level->delta;
+  int draw_origin_x = sprite->x + sprite->width / 2;
+  int draw_origin_y = sprite->y + sprite->height / 2;
 
-  // Compute bounding box of rotated sprite
-  double rotated_width, rotated_height;
-  get_rotated_bounds(sprite->width, sprite->height, delta, &rotated_width, &rotated_height);
-  int rot_w = (int)rotated_width;
-  int rot_h = (int)rotated_height;
-
-  // Compute top-left corner of where to draw the rotated image so it's centered
-  int draw_origin_x = sprite->x + sprite->width / 2 - rot_w / 2;
-  int draw_origin_y = sprite->y + sprite->height / 2 - rot_h / 2;
-
-  level->bullets[level->bullet_count++] = create_bullet(draw_origin_x, draw_origin_y, delta);
+  level->bullets[level->bullet_count++] = create_bullet(draw_origin_x, draw_origin_y, level->delta);
 }
 
 static void update_bullet(Bullet *b, Level *level) {
