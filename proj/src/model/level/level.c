@@ -109,6 +109,7 @@ static bool(check_mob_collisions)(Level *level) {
 }
 
 void update_delta(Level *level, double mouse_x, double mouse_y) {
+  printf("Updating delta with mouse position: (%f, %f)\n", mouse_x, mouse_y);
   Sprite *player_sprite = player_get_sprite(level->player);
   double player_center_x = player_sprite->x + player_sprite->width / 2.0;
   double player_center_y = player_sprite->y + player_sprite->height / 2.0;
@@ -158,7 +159,7 @@ void level_shoot(Level *level) {
   Sprite *s = player_get_sprite(player);
   int cx = s->x + s->width / 2;
   int cy = s->y + s->height / 2;
-  level->bullets[level->bullet_count++] = create_bullet(cx, cy, get_direction(player));
+  level->bullets[level->bullet_count++] = create_bullet(cx, cy, level->delta);
 }
 
 static void level_update_all_bullets(Level *level) {
