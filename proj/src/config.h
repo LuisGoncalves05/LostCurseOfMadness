@@ -1,2 +1,2 @@
-#define GAME_FREQUENCY 30
+#define GAME_FREQUENCY 60
 #define VIDEO_MODE 0x105

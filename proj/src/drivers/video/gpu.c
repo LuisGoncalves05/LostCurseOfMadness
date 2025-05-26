@@ -269,11 +269,9 @@ int draw_animated_sprite(AnimatedSprite *sprite, uint8_t *frame_buffer) {
   }
 
   sprite->current_frame++;
-  printf("at frame %d of %d\n", sprite->current_frame, sprite->frames_per_sprite);
   if (sprite->current_frame >= sprite->frames_per_sprite) {
     sprite->current_frame = 0;
     sprite->current_sprite = (sprite->current_sprite + 1) % sprite->number_sprites;
-    printf("changed sprites\n");
   }
 
   return 0;

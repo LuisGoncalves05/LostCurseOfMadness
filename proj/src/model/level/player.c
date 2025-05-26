@@ -13,7 +13,7 @@ Player *create_player() {
     player->state = PLAYER_IDLE; 
     player->health = PLAYER_HEALTH;
     Sprite *new_sprite = create_sprite((xpm_map_t) player_idle1, 400, 400, 0, 0);
-    player->animated_sprite = create_animated_sprite(new_sprite, 15, 2, (xpm_map_t) player_idle2);
+    player->animated_sprite = create_animated_sprite(new_sprite, 30, 2, (xpm_map_t) player_idle2);
     return player;
 }
 
