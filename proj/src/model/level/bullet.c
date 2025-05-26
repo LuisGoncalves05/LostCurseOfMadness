@@ -18,7 +18,7 @@ Bullet *create_bullet(int x, int y, double angle) {
     Bullet *bullet = malloc(sizeof(Bullet));
     if (!bullet) return NULL;
 
-    bullet->sprite = create_sprite((xpm_map_t) cross, x, y, BULLET_SPEED, BULLET_SPEED);
+    bullet->sprite = create_sprite((xpm_map_t) bullet_xpm, x, y, BULLET_SPEED, BULLET_SPEED);
     bullet->dx = (int)(cos(angle) * BULLET_SPEED);
     bullet->dy = (int)(sin(angle) * BULLET_SPEED);
     bullet->active = true;

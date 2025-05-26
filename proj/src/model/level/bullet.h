@@ -8,6 +8,7 @@
 #include "model/level/maze.h"
 #include "model/level/level.h"
 
+#include "assets/xpm/level/bullet.xpm"
 
 #define BULLET_SPEED   6   /**< Speed in pixels per tick */
 #define MAX_BULLETS   50   /**< Maximum simultaneous bullets */
