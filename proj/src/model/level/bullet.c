@@ -1,11 +1,9 @@
 #include "bullet.h"
 
-#include "drivers/video/gpu.h" // for draw_sprite_rotated()
-#include "lcom/lcf.h"          // for xpm_map_t
 #include <math.h>
 #include <stdlib.h>
 #include <math.h>
-
+#include "drivers/video/gpu.h" // for draw_sprite_rotated()
 #include "drivers/video/gpu.h"
 
 struct Bullet {
@@ -28,33 +26,36 @@ Bullet *create_bullet(int x, int y, double angle) {
     return bullet;
 }
 
-void update_bullet(Bullet *bullet, Maze *maze) {
-    if (!bullet->active) return;
-    bullet->sprite->x += bullet->dx;
-    bullet->sprite->y += bullet->dy;
-
-    if (bullet->sprite->x < 0 || bullet->sprite->x > x_res ||
-        bullet->sprite->y < 0 || bullet->sprite->y > y_res) {
-        bullet->active = false;
-    }
-
-    if(check_rectangle_line_collision(maze, bullet->sprite->x,bullet->sprite->y, bullet->sprite->width, bullet->sprite->height)) {
-        bullet->active = false; // Deactivate if it hits a wall
-    }
-}
-
 void destroy_bullet(Bullet *bullet) {
     if (!bullet) return;
     destroy_sprite(bullet->sprite);
     free(bullet);
 }
 
-bool bullet_is_active(Bullet *bullet) {
-    if (!bullet) return false;
-    return bullet->active;
+Sprite *bullet_get_sprite(Bullet *bullet) {
+  return bullet->sprite;
 }
+
+int bullet_get_dx(Bullet *bullet) {
+  return bullet->dx;
+}
+
+int bullet_get_dy(Bullet *bullet) {
+  return bullet->dy;
+}
+
+bool bullet_get_active(Bullet *bullet) {
+  return bullet->active;
+}
+
+void bullet_set_active(Bullet *bullet, bool active) {
+  bullet->active = active;
+}
+
 
 void draw_bullet(Bullet *bullet, uint8_t *frame_buffer) {
     if (!bullet) return;
     draw_sprite(bullet->sprite, frame_buffer);
 }
+
+

@@ -6,6 +6,8 @@
 
 #include "model/utils/sprite.h"
 #include "model/level/maze.h"
+#include "model/level/level.h"
+
 
 #define BULLET_SPEED   6   /**< Speed in pixels per tick */
 #define MAX_BULLETS   50   /**< Maximum simultaneous bullets */
@@ -24,11 +26,6 @@ typedef struct Bullet Bullet;
  */
 Bullet *create_bullet(int x, int y, double angle);
 
-/**
- * @brief Update (move & deactivate off-screen) a single bullet.
- * @param bullet  Pointer to the Bullet to update.
- */
-void update_bullet(Bullet *bullet, Maze *maze);
 
 /**
  * @brief Destroy (free) a single bullet.
@@ -36,7 +33,18 @@ void update_bullet(Bullet *bullet, Maze *maze);
  */
 void destroy_bullet(Bullet *bullet);
 
-bool bullet_is_active(Bullet *bullet);
+
+Sprite *bullet_get_sprite(Bullet *bullet);
+
+int bullet_get_dx(Bullet *bullet);
+
+int bullet_get_dy(Bullet *bullet);
+
+bool bullet_get_active(Bullet *bullet);
+
+void bullet_set_active(Bullet *bullet, bool active);
+
+bool bullet_get_active(Bullet *bullet);
 
 void draw_bullet(Bullet *bullet, uint8_t *frame_buffer);
 

@@ -151,7 +151,8 @@ static void menu_keyboard_handler(Game *game) {
 
 static void level_keyboard_handler(Game *game) {
   level_update_position(game->level, scan_code);
-  if (scan_code == ESC_BREAK_CODE) set_state(game, MENU);
+  if (scan_code == ESC_BREAK_CODE)
+    set_state(game, MENU);
 }
 
 static void game_over_keyboard_handler(Game *game) {
