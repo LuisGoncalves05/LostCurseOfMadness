@@ -155,13 +155,12 @@ void level_shoot(Level *level) {
   if (level->bullet_count >= MAX_BULLETS) return;
 
   Player *player = level->player;
-  if (get_player_state(player) == PLAYER_SHOOTING) {
-    Sprite *s = player_get_sprite(player);
-    int cx = s->x + s->width / 2;
-    int cy = s->y + s->height / 2;
-    level->bullets[level->bullet_count++] = create_bullet(cx, cy, get_direction(player));
-    set_player_state(player, PLAYER_IDLE); // Reset state after shooting
-  }
+  printf("shooting\n");
+  Sprite *s = player_get_sprite(player);
+  int cx = s->x + s->width / 2;
+  int cy = s->y + s->height / 2;
+  level->bullets[level->bullet_count++] = create_bullet(cx, cy, get_direction(player));
+  set_player_state(player, PLAYER_IDLE); // Reset state after shooting
 }
 
 static void level_update_all_bullets(Level *level) {
@@ -169,7 +168,8 @@ static void level_update_all_bullets(Level *level) {
     update_bullet(level->bullets[i], level->maze);
     if (!bullet_is_active(level->bullets[i])) {
       destroy_bullet(level->bullets[i]);
-      level->bullets[i] = level->bullets[level->bullet_count--]; // --
+      level->bullet_count--;
+      level->bullets[i] = level->bullets[level->bullet_count];
     } else {
       i++;
     }
@@ -319,7 +319,5 @@ void draw_level(Level *level, struct packet pp) {
     level_update_all_bullets(level);
     draw_all_bullets(level, sec_frame_buffer);
   }
-
-  printf("bullet = %d\n", level->bullet_count);
 }
 

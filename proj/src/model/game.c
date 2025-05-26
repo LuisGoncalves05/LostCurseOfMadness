@@ -11,6 +11,7 @@ struct Game {
     struct GameOver *game_over;
     struct MainMenu *main_menu;
   } menu;
+  bool shooting;
 };
 
 static void menu_init(Game *game) {
@@ -203,7 +204,12 @@ static void menu_mouse_handler(Game *game) {
 
 static void level_mouse_handler(Game *game) {
   update_delta(game->level, cursor_get_x(game->cursor), cursor_get_y(game->cursor));
-  if (pp.lb) level_shoot(game->level);
+  if (pp.lb) {
+    if (!game->shooting) level_shoot(game->level);
+    game->shooting = true;
+  } else {
+    game->shooting = false;
+  }
 }
 
 static void victory_mouse_handler(Game *game) {
@@ -249,6 +255,7 @@ Game *create_game() {
   game->score = 0;
   game->state = MENU;
   game->cursor = create_cursor((xpm_map_t) cursor);
+  game->shooting = false;
   state_init(game);
 
   return game;

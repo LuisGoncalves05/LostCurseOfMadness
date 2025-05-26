@@ -7,6 +7,7 @@ struct Player {
   int max_speed;
   int acceleration;
   bool moved;
+  bool shooting;
   double direction;
   int new_x;
   int new_y;
@@ -22,6 +23,7 @@ Player *create_player() {
   player->max_speed = PLAYER_MAX_SPEED;
   player->acceleration = PLAYER_ACCELERATION;
   player->moved = 0;
+  player->shooting = true;
   player->direction = 0;
   player->new_x = 0;
   player->new_y = 0;
@@ -154,7 +156,6 @@ void update_player_position(Player *player, double delta, uint8_t scan_code) {
 
   player->moved = moved;
   player->direction = direction;
-  printf("player direction: %d\n", player->direction);
   player->new_x = player->sprite->x + x_changer * player->sprite->xspeed;
   player->new_y = player->sprite->y + y_changer * player->sprite->yspeed;
 }
