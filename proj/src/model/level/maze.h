@@ -173,6 +173,14 @@ Point **get_mob_positions(Maze *maze);
  */
 uint8_t get_mob_count(Maze *maze);
 
+
+/**
+ * @brief Sets the number of mobs in the maze.
+ *
+ * @param maze Pointer to the Maze structure.
+ */
+void set_mob_count(Maze *maze, uint8_t mob_count);
+
 #endif
 
 /** @} */

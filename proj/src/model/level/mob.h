@@ -55,6 +55,10 @@ Sprite *mob_get_sprite(Mob *mob);
  */
 unsigned char mob_get_health(Mob *mob);
 /**
+ * @brief sets the current health of the mob.
+ */
+void mob_set_health(Mob *mob, unsigned char health);
+/**
  * @brief returns the maximum speed of the mob.
  */
 int mob_get_max_speed(Mob *mob);
