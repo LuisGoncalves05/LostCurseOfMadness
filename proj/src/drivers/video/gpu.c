@@ -249,6 +249,34 @@ int draw_sprite_rotated(Sprite *sprite, double theta, uint8_t *frame_buffer) {
   return 0;
 }
 
+int draw_animated_sprite(AnimatedSprite *sprite, uint8_t *frame_buffer) {
+  if (sprite == NULL) {
+    printf("draw_animated_sprite: NULL pointer provided.\n");
+    return 1;
+  }
+
+  if (sprite->current_sprite >= sprite->number_sprites) {
+    printf("draw_animated_sprite: current sprite index out of bounds.\n");
+    return 1;
+  }
+
+  Sprite *current_sprite = sprite->sprite;
+  current_sprite->map = sprite->maps[sprite->current_sprite];
+
+  if (draw_sprite(current_sprite, frame_buffer) != 0) {
+    printf("draw_animated_sprite: draw_sprite failed.\n");
+    return 1;
+  }
+
+  sprite->current_frame++;
+  if (sprite->current_frame >= sprite->frames_per_sprite) {
+    sprite->current_frame = 0;
+    sprite->current_sprite = (sprite->current_sprite + 1) % sprite->number_sprites;
+  }
+
+  return 0;
+}
+
 int vga_draw_xpm(xpm_map_t xpm, uint16_t x, uint16_t y, uint8_t *frame_buffer) {
   xpm_image_t img;
   uint8_t *data = xpm_load(xpm, XPM_INDEXED, &img);

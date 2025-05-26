@@ -6,6 +6,7 @@
 #include <stdint.h>
 
 #include "model/utils/sprite.h"
+#include "model/utils/animated_sprite.h"
 
 /**
  * @defgroup gpu gpu
@@ -160,6 +161,8 @@ void get_rotated_bounds(double width, double height, double theta, double *out_w
 int draw_sprite(Sprite *sprite, uint8_t *frame_buffer);
 
 int draw_sprite_rotated(Sprite *sprite, double theta, uint8_t *frame_buffer);
+
+int draw_animated_sprite(AnimatedSprite *sprite, uint8_t *frame_buffer);
 
 int vga_draw_xpm(xpm_map_t xpm, uint16_t x, uint16_t y, uint8_t *frame_buffer);
 
