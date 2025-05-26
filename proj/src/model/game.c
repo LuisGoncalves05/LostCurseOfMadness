@@ -80,7 +80,6 @@ static void state_destroy(Game *game) {
 }
 
 static void set_state(Game *game, State new_state) {
-  printf("Changing state from %d to %d\n", game->state, new_state);
   state_destroy(game);
   game->state = new_state;
   state_init(game);

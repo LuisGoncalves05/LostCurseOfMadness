@@ -122,32 +122,8 @@ void update_delta(Level *level, double mouse_x, double mouse_y) {
 void level_update_position(Level *level, uint8_t scan_code) {
   if (!level)
     return;
-  update_player_position(level->player, level->delta, scan_code);
-
-  Sprite *player_sprite = player_get_sprite(level->player);
-  Maze *maze = level->maze;
-  int new_x = 0, new_y = 0;
-  if (player_get_moved(level->player, &new_x, &new_y)) {
-    int acceleration = player_get_acceleration(level->player);
-    player_sprite->xspeed += acceleration;
-    player_sprite->yspeed += acceleration;
-    player_limit_speed(level->player);
-
-    // Verifica colisão antes de atualizar a posição
-    if (!check_rectangle_line_collision(maze, new_x, new_y, player_sprite->width, player_sprite->height)) {
-      if (!check_mob_collisions(level)) {
-        player_sprite->x = new_x;
-        player_sprite->y = new_y;
-      }
-      else {
-        player_set_health(level->player, player_get_health(level->player) - 1);
-      }
-    }
-  }
-  else {
-    player_sprite->xspeed = PLAYER_DEFAULT_SPEED;
-    player_sprite->yspeed = PLAYER_DEFAULT_SPEED;
-  }
+  player_update_speed(level->player, scan_code);
+  printf("player speed: %d, %d\n", player_get_sprite(level->player)->xspeed, player_get_sprite(level->player)->yspeed);
 }
 
 void level_shoot(Level *level) {
@@ -198,6 +174,27 @@ static void update_bullet(Bullet *b, Level *level) {
       break;
     }
   }
+}
+
+static int player_update_position(Level *level) {
+  if (!level)
+    return 1;
+
+  Sprite *player_sprite = player_get_sprite(level->player);
+  Maze *maze = level->maze;
+  uint16_t new_x = player_sprite->x + player_sprite->xspeed;
+  uint16_t new_y = player_sprite->y + player_sprite->yspeed;
+  if (!check_rectangle_line_collision(maze, new_x, new_y, player_sprite->width, player_sprite->height)) {
+    if (!check_mob_collisions(level)) {
+      printf("moving!\n");
+      player_sprite->x = new_x;
+      player_sprite->y = new_y;
+    }
+    else {
+      player_set_health(level->player, player_get_health(level->player) - 1);
+    } 
+  }
+  return 0;
 }
 
 static void level_update_all_bullets(Level *level) {
@@ -360,6 +357,7 @@ void draw_level(Level *level, struct packet pp) {
   level_update_all_mobs(level);
   draw_mobs(level);
   
+  player_update_position(level);
   update_player_state(level->player, pp);
   draw_fov_cone(level);
   draw_player(level->player, level->delta, sec_frame_buffer);
