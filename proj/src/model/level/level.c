@@ -123,7 +123,6 @@ void level_update_position(Level *level, uint8_t scan_code) {
   if (!level)
     return;
   player_update_speed(level->player, scan_code);
-  printf("player speed: %d, %d\n", player_get_sprite(level->player)->xspeed, player_get_sprite(level->player)->yspeed);
 }
 
 void level_shoot(Level *level) {
@@ -147,7 +146,6 @@ static int player_update_position(Level *level) {
   uint16_t new_y = player_sprite->y + player_sprite->yspeed;
   if (!check_rectangle_line_collision(maze, new_x, new_y, player_sprite->width, player_sprite->height)) {
     if (!check_mob_collisions(level)) {
-      printf("moving!\n");
       player_sprite->x = new_x;
       player_sprite->y = new_y;
     }

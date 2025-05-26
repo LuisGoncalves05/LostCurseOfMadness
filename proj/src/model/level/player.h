@@ -19,6 +19,9 @@
 #include "model/utils/keys.h"
 #include "drivers/video/gpu.h"
 
+#include "assets/xpm/level/player/idle/idle1.xpm"
+#include "assets/xpm/level/player/idle/idle2.xpm"
+
 #define HEALTH 3
 #define PLAYER_HEALTH 3 // Health of the player
 #define PLAYER_DEFAULT_SPEED 3 // Default speed of the player

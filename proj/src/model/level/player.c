@@ -3,6 +3,7 @@
 struct Player {
     PlayerState state;
     Sprite *sprite;
+    AnimatedSprite *animated_sprite;
     unsigned char health;
 };
 
@@ -13,6 +14,9 @@ Player *create_player() {
     player->state = PLAYER_IDLE; 
     player->health = PLAYER_HEALTH;
     player->sprite = create_sprite((xpm_map_t) cross, 400, 400, 0, 0);
+
+    Sprite *new_sprite = create_sprite((xpm_map_t) player_idle1, player->sprite->x, player->sprite->y, player->sprite->xspeed, player->sprite->yspeed);
+    player->animated_sprite = create_animated_sprite(new_sprite, 15, 2, (xpm_map_t) player_idle2);
     return player;
 }
 
@@ -108,14 +112,8 @@ void draw_player(Player *player, double delta, uint8_t *frame_buffer) {
     if(frame_counter > 16) frame_counter = 0;
 
     switch (player->state) {
-    case PLAYER_IDLE:
-        if (frame_counter <= 4){
-            new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
-        } else if (frame_counter <= 8){
-            new_sprite = create_sprite((xpm_map_t) pic2, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
-        } else {
-            new_sprite = create_sprite((xpm_map_t) cross, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
-        }
+        case PLAYER_IDLE:
+        new_sprite = create_sprite((xpm_map_t) pic1, player_sprite->x, player_sprite->y, player_sprite->xspeed, player_sprite->yspeed);
         break;
     case PLAYER_WALKING:
         if (frame_counter <= 4){
@@ -142,5 +140,6 @@ void draw_player(Player *player, double delta, uint8_t *frame_buffer) {
     }
     destroy_sprite(player_sprite);
     player_set_sprite(player, new_sprite);
-    draw_sprite_rotated(player_get_sprite(player), delta, frame_buffer);
+    if (player->state == PLAYER_IDLE) draw_animated_sprite(player->animated_sprite, frame_buffer);
+    else draw_sprite_rotated(player_get_sprite(player), delta, frame_buffer);
 }

@@ -16,8 +16,8 @@ AnimatedSprite *create_animated_sprite(Sprite *sprite, uint32_t frames_per_sprit
     
     va_list args_pointer;
     va_start(args_pointer, number_sprites);
-    for (i = 1; i < number_sprites; i++) {
-        uint8_t *tpm = va_arg(args_pointer, xpm_map_t);
+    for (int i = 1; i < (int)number_sprites; i++) {
+        xpm_map_t tpm = va_arg(args_pointer, xpm_map_t);
         xpm_image_t img;
         anim_sprite->maps[i] = xpm_load(tpm, XPM_INDEXED, &img);
         if (anim_sprite->maps[i] == NULL) {
@@ -32,6 +32,7 @@ AnimatedSprite *create_animated_sprite(Sprite *sprite, uint32_t frames_per_sprit
     }
 
     va_end(args_pointer);
+    return anim_sprite;
 }
 
 int destroy_animated_sprite(AnimatedSprite *anim_sprite) {
@@ -39,7 +40,7 @@ int destroy_animated_sprite(AnimatedSprite *anim_sprite) {
         return 1;
 
     free(anim_sprite->sprite);
-    for (int i = 0; i < anim_sprite->number_sprites; i++) {
+    for (int i = 0; i < (int)anim_sprite->number_sprites; i++) {
         free(anim_sprite->maps[i]);
     }
     free(anim_sprite->maps);
@@ -47,5 +48,3 @@ int destroy_animated_sprite(AnimatedSprite *anim_sprite) {
     
     return 0;
 }
-
-int animate_sprite()
