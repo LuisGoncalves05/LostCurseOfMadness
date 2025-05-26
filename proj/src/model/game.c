@@ -13,9 +13,6 @@ struct Game {
   } menu;
 };
 
-extern int frame_counter;
-extern int bullet_count;
-
 static void menu_init(Game *game) {
   game->menu.main_menu = create_main_menu();
 }
@@ -56,12 +53,10 @@ static void menu_destroy(Game *game) {
 }
 
 static void level_destroy(Game *game) {
-  printf("exiting level\n");
   destroy_level(game->level);
 }
 
 static void victory_destroy(Game *game) {
-  printf("exiting victory state\n");
 }
 
 static void game_over_destroy(Game *game) {
@@ -105,16 +100,9 @@ static void level_timer_handler(Game *game) {
   draw_level(game->level, pp);
   draw_cursor(game->cursor, sec_frame_buffer);
   
-  if (bullet_count > 0) {
-    update_all_bullets(get_maze(game->level));
-    draw_all_bullets(sec_frame_buffer, get_delta(game->level));
-  }
-  
   vga_flip_pages();
 
-  if (get_playerstate(get_player(game->level)) == PLAYER_DYING) {
-    set_state(game, GAME_OVER);
-  }
+  if (get_player_state(get_player(game->level)) == PLAYER_DYING) set_state(game, GAME_OVER);
 }
 
 static void victory_timer_handler(Game *game) {
@@ -162,9 +150,8 @@ static void menu_keyboard_handler(Game *game) {
 }
 
 static void level_keyboard_handler(Game *game) {
+  if (scan_code == ESC_BREAK_CODE) set_state(game, MENU);
   level_update_position(game->level, scan_code);
-  if (scan_code == ESC_BREAK_CODE)
-    set_state(game, MENU);
 }
 
 static void game_over_keyboard_handler(Game *game) {
@@ -216,14 +203,7 @@ static void menu_mouse_handler(Game *game) {
 
 static void level_mouse_handler(Game *game) {
   update_delta(game->level, cursor_get_x(game->cursor), cursor_get_y(game->cursor));
-  Player *p = get_player(game->level);
-  if (get_playerstate(p) == PLAYER_SHOOTING) {
-    Sprite *s = player_get_sprite(p);
-    int cx = s->x + s->width / 2;
-    int cy = s->y + s->height / 2;
-    Level *level = game->level;
-    create_bullet(cx, cy, get_delta(level));
-  }
+  if (pp.lb) level_shoot(game->level);
 }
 
 static void victory_mouse_handler(Game *game) {

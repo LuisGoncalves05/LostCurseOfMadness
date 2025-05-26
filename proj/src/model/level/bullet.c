@@ -1,78 +1,60 @@
 #include "bullet.h"
+
 #include "drivers/video/gpu.h" // for draw_sprite_rotated()
 #include "lcom/lcf.h"          // for xpm_map_t
 #include <math.h>
 #include <stdlib.h>
+#include <math.h>
 
-Bullet *bullets[MAX_BULLETS];
-int bullet_count = 0;
+#include "drivers/video/gpu.h"
+
+struct Bullet {
+    Sprite *sprite;  /**< Underlying sprite */
+    int     dx, dy;  /**< Velocity components */
+    bool    active;  /**< Active flag */
+};
+
 extern uint16_t x_res, y_res;
 
 Bullet *create_bullet(int x, int y, double angle) {
-  if (bullet_count >= MAX_BULLETS)
-    return NULL;
-  Bullet *b = malloc(sizeof(Bullet));
-  if (!b)
-    return NULL;
+    Bullet *bullet = malloc(sizeof(Bullet));
+    if (!bullet) return NULL;
 
-  b->sprite = create_sprite((xpm_map_t) cross, x, y, BULLET_SPEED, BULLET_SPEED);
-  b->dx = (int) (cos(angle) * BULLET_SPEED);
-  b->dy = (int) (sin(angle) * BULLET_SPEED);
-  b->active = true;
+    bullet->sprite = create_sprite((xpm_map_t) cross, x, y, BULLET_SPEED, BULLET_SPEED);
+    bullet->dx = (int)(cos(angle) * BULLET_SPEED);
+    bullet->dy = (int)(sin(angle) * BULLET_SPEED);
+    bullet->active = true;
 
-  bullets[bullet_count++] = b;
-  return b;
+    return bullet;
 }
 
-void update_bullet(Bullet *b, Maze *maze) {
-  if (!b->active)
-    return;
-  b->sprite->x += b->dx;
-  b->sprite->y += b->dy;
+void update_bullet(Bullet *bullet, Maze *maze) {
+    if (!bullet->active) return;
+    bullet->sprite->x += bullet->dx;
+    bullet->sprite->y += bullet->dy;
 
-  if (b->sprite->x < 0 || b->sprite->x > x_res ||
-      b->sprite->y < 0 || b->sprite->y > y_res) {
-    b->active = false;
-  }
-
-  if (check_rectangle_line_collision(maze, b->sprite->x, b->sprite->y, b->sprite->width, b->sprite->height)) {
-    b->active = false; // Deactivate if it hits a wall
-  }
-}
-
-// Advances all bullets: moves them, deactivates off-screen, and cleans up
-void update_all_bullets(Maze *maze) {
-  for (int i = 0; i < bullet_count;) {
-    update_bullet(bullets[i], maze);
-    if (!bullets[i]->active) {
-      destroy_bullet(bullets[i]);
-      bullets[i] = bullets[--bullet_count];
+    if (bullet->sprite->x < 0 || bullet->sprite->x > x_res ||
+        bullet->sprite->y < 0 || bullet->sprite->y > y_res) {
+        bullet->active = false;
     }
-    else {
-      i++;
+
+    if(check_rectangle_line_collision(maze, bullet->sprite->x,bullet->sprite->y, bullet->sprite->width, bullet->sprite->height)) {
+        bullet->active = false; // Deactivate if it hits a wall
     }
-  }
 }
 
-// Draws every active bullet, rotated by theta
-void draw_all_bullets(uint8_t *frame_buffer, double theta) {
-  for (int i = 0; i < bullet_count; i++) {
-    Bullet *b = bullets[i];
-    if (b->active) {
-      draw_sprite_rotated(b->sprite, theta, frame_buffer);
-    }
-  }
+void destroy_bullet(Bullet *bullet) {
+    if (!bullet) return;
+    destroy_sprite(bullet->sprite);
+    free(bullet);
 }
 
-void destroy_bullet(Bullet *b) {
-  if (!b)
-    return;
-  destroy_sprite(b->sprite);
-  free(b);
+bool bullet_is_active(Bullet *bullet) {
+    if (!bullet) return false;
+    return bullet->active;
 }
 
-void reset_bullets(void) {
-  for (int i = 0; i < bullet_count; i++)
-    destroy_bullet(bullets[i]);
-  bullet_count = 0;
+void draw_bullet(Bullet *bullet, uint8_t *frame_buffer) {
+    if (!bullet) return;
+    draw_sprite(bullet->sprite, frame_buffer);
 }

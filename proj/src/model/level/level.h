@@ -18,6 +18,7 @@
 #include "maze.h"
 #include "player.h"
 #include "mob.h"
+#include "bullet.h"
 
 typedef struct Level Level;
 
@@ -64,13 +65,6 @@ Maze *get_maze(Level *level);
  */
 Player *get_player(Level *level);
 
-double get_delta(Level* level);
-
-void update_delta(Level *level, double mouse_x, double mouse_y);
-
-void level_update_position(Level *level, uint8_t scan_code);
-
-void draw_level(Level *level, struct packet pp);
 /**
  * @brief Returns the Mob array associated with the given level.
  *
@@ -78,6 +72,16 @@ void draw_level(Level *level, struct packet pp);
  * @return Pointer to the Mob array.
  */
 Mob **get_mobs(Level *level);
+
+double get_delta(Level* level);
+
+void update_delta(Level *level, double mouse_x, double mouse_y);
+
+void level_update_position(Level *level, uint8_t scan_code);
+
+void level_shoot(Level *level);
+
+void draw_level(Level *level, struct packet pp);
 
 #endif
 

@@ -61,8 +61,13 @@ int player_get_acceleration(Player *player) {
   return player->acceleration;
 }
 
-PlayerState get_playerstate(Player *player) {
+PlayerState get_player_state(Player *player) {
   return player->state;
+}
+
+void set_player_state(Player *player, PlayerState state) {
+  if (player == NULL) return;
+  player->state = state;
 }
 
 bool player_get_moved(Player *player, int *new_x, int *new_y) {
@@ -79,6 +84,10 @@ void player_set_moved(Player *player, bool moved) {
   player->moved = moved;
 }
 
+double get_direction(Player *player) {
+  return player->direction;
+}
+
 void player_limit_speed(Player *player) {
   if (player->sprite->xspeed >= player->max_speed) {
     player->sprite->xspeed = player->max_speed;
@@ -93,19 +102,14 @@ void player_set_health(Player *player, unsigned char health) {
 }
 
 void update_player_state(Player *player, struct packet pp) {
-  if (player == NULL)
-    return;
+  if (player == NULL) return;
   if (player->moved == 1) {
     player->state = PLAYER_WALKING;
-  }
-  else {
+  } else {
     player->state = PLAYER_IDLE;
   }
 
-  if (pp.lb == 0 && pp.rb == 1) {
-    player->state = PLAYER_AIMING;
-  }
-  else if (pp.lb == 1 && pp.rb == 0) {
+  if (pp.lb == 1) {
     player->state = PLAYER_SHOOTING;
   }
   
@@ -118,7 +122,7 @@ void update_player_position(Player *player, double delta, uint8_t scan_code) {
   double x_changer = 0;
   double y_changer = 0;
   bool moved = 0;
-  double direction = 0;
+  double direction = player->direction;
   switch (scan_code) {
     case KEY_W:
       x_changer = cos(delta);
@@ -150,6 +154,7 @@ void update_player_position(Player *player, double delta, uint8_t scan_code) {
 
   player->moved = moved;
   player->direction = direction;
+  printf("player direction: %d\n", player->direction);
   player->new_x = player->sprite->x + x_changer * player->sprite->xspeed;
   player->new_y = player->sprite->y + y_changer * player->sprite->yspeed;
 }

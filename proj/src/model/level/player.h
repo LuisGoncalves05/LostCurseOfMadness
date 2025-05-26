@@ -43,6 +43,12 @@ Player *create_player();
  * @brief Destroys the player "object" and frees its memory.
  */
 void destroy_player(Player *player);
+
+
+PlayerState get_player_state(Player *player);
+
+void set_player_state(Player *player, PlayerState state);
+
 /**
  * @brief returns the sprite associated with the player.
  */
@@ -67,6 +73,8 @@ bool player_get_moved(Player *player, int *new_x, int *new_y);
  * @brief sets the flag if the player moved or not.
  */
 void player_set_moved(Player *player, bool moved);
+
+double get_direction(Player *player);
 
 /**
  * @brief function to prevent the player from moving faster than the maximum speed.
@@ -93,8 +101,6 @@ void player_set_sprite(Player *player, Sprite *sprite);
  * @brief draws the player
  */
 void draw_player(Player* player, double delta, uint8_t *frame_buffer);
-
-PlayerState get_playerstate(Player *player);
 
 #endif
 

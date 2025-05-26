@@ -3,6 +3,7 @@
 
 #include <stdbool.h>
 #include <stdint.h>
+
 #include "model/utils/sprite.h"
 #include "model/level/maze.h"
 
@@ -12,16 +13,7 @@
 /**
  * @brief A single bullet instance.
  */
-typedef struct {
-    Sprite *sprite;  /**< Underlying sprite */
-    int     dx, dy;  /**< Velocity components */
-    bool    active;  /**< Active flag */
-} Bullet;
-
-/** Global array of active bullets */
-extern Bullet *bullets[MAX_BULLETS];
-/** Current bullet count */
-extern int bullet_count;
+typedef struct Bullet Bullet;
 
 /**
  * @brief Spawn a new bullet at (x,y) moving at given angle.
@@ -34,31 +26,18 @@ Bullet *create_bullet(int x, int y, double angle);
 
 /**
  * @brief Update (move & deactivate off-screen) a single bullet.
- * @param b  Pointer to the Bullet to update.
+ * @param bullet  Pointer to the Bullet to update.
  */
-void update_bullet(Bullet *b, Maze *maze);
-
-/**
- * @brief Advance **all** bullets: move, deactivate off-screen, and free them.
- */
-void update_all_bullets(Maze *maze);
-
-/**
- * @brief Draw **all** active bullets, rotated by given angle.
- * @param frame_buffer  Pointer to the target frame buffer.
- * @param theta         Rotation angle (radians) to apply when drawing.
- */
-void draw_all_bullets(uint8_t *frame_buffer, double theta);
+void update_bullet(Bullet *bullet, Maze *maze);
 
 /**
  * @brief Destroy (free) a single bullet.
- * @param b  Pointer to the Bullet to destroy.
+ * @param bullet Pointer to the Bullet to destroy.
  */
-void destroy_bullet(Bullet *b);
+void destroy_bullet(Bullet *bullet);
 
-/**
- * @brief Destroy **all** bullets and reset count to zero.
- */
-void reset_bullets(void);
+bool bullet_is_active(Bullet *bullet);
+
+void draw_bullet(Bullet *bullet, uint8_t *frame_buffer);
 
 #endif /* BULLET_H */
