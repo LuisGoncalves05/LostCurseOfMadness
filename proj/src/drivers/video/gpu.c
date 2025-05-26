@@ -251,15 +251,24 @@ int draw_sprite_rotated(Sprite *sprite, double theta, uint8_t *frame_buffer) {
 
 int vga_draw_xpm(xpm_map_t xpm, uint16_t x, uint16_t y, uint8_t *frame_buffer) {
   xpm_image_t img;
-  uint8_t *map;
-  enum xpm_image_type image_type = XPM_INDEXED;
-  map = (uint8_t *) xpm_load(xpm, image_type, &img);
-  for (int i = 0; i < img.height; i++) {
-    for (int j = 0; j < img.width; j++) {
-      if (map[i * img.width + j] != BACKGROUND_COLOR) {
-        vga_draw_pixel(x + j, y + i, map[i * img.width + j], frame_buffer);
-      }
-    }
+  uint8_t *data = xpm_load(xpm, XPM_INDEXED, &img);
+  if (x >= x_res || y >= y_res) {
+    printf("vg_draw_xpm: invalid xpm position, x:%hu, y:%hu.\n", x, y);
+    return 1;
   }
+  uint8_t *ptr = get_position(x, y, frame_buffer);
+  if (ptr == NULL) {
+    fprintf(stderr, "vg_draw_xpm: get_position failed.\n");
+    return 1;
+  }
+  
+  uint16_t line_size = img.width * bytes_per_pixel;
+  uint16_t usable_line_size = line_size;
+  if (x + img.width > x_res)
+    usable_line_size = (x_res - x) * bytes_per_pixel;
+
+  for (int h = 0; h < img.height && y + h < y_res; h++, ptr += x_res * bytes_per_pixel, data += line_size)
+    memcpy(ptr, data, usable_line_size);
+
   return 0;
 }
