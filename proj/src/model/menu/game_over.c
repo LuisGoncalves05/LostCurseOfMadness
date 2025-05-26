@@ -1,5 +1,6 @@
 #include "game_over.h"
 
+
 struct GameOver {
     Button *menuButton;
     Button *exitButton;
@@ -60,7 +61,7 @@ ButtonType game_over_click_handler(GameOver *game_over, uint16_t x, uint16_t y) 
 }
 
 void draw_game_over(GameOver *game_over, uint8_t *frame_buffer) {
-    draw_xpm((xpm_map_t) game_over_xpm, 154, 262, frame_buffer);
+    vga_draw_xpm((xpm_map_t) game_over_xpm, 154, 262, frame_buffer);
     draw_button(game_over->menuButton, frame_buffer);
     draw_button(game_over->exitButton, frame_buffer);
 }

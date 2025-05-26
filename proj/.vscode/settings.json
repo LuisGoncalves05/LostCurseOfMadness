@@ -5,6 +5,8 @@
         "level.h": "c",
         "maze.h": "c",
         "player.h": "c",
-        "mob.h": "c"
+        "mob.h": "c",
+        "cstdlib": "c",
+        "*.xpm": "c"
     }
 }

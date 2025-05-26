@@ -158,9 +158,10 @@ uint32_t(indexed_mode)(uint8_t no_rectangles, uint16_t i, uint16_t j, uint8_t st
 void get_rotated_bounds(double width, double height, double theta, double *out_width, double *out_height);
 
 int draw_sprite(Sprite *sprite, uint8_t *frame_buffer);
+
 int draw_sprite_rotated(Sprite *sprite, double theta, uint8_t *frame_buffer);
 
-int draw_xpm(xpm_map_t xpm, uint16_t x, uint16_t y, uint8_t *frame_buffer);
+int vga_draw_xpm(xpm_map_t xpm, uint16_t x, uint16_t y, uint8_t *frame_buffer);
 
 int(clear)(uint8_t *frame_buffer);
 

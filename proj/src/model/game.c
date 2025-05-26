@@ -84,7 +84,7 @@ static void state_destroy(Game *game) {
 }
 
 static void set_state(Game *game, State new_state) {
-  // printf("Changing state from %d to %d\n", game->state, new_state);
+  printf("Changing state from %d to %d\n", game->state, new_state);
   state_destroy(game);
   game->state = new_state;
   state_init(game);
@@ -104,13 +104,14 @@ static void level_timer_handler(Game *game) {
 
   draw_level(game->level, pp);
   draw_cursor(game->cursor, sec_frame_buffer);
-
+  
   if (bullet_count > 0) {
     update_all_bullets(get_maze(game->level));
     draw_all_bullets(sec_frame_buffer, get_delta(game->level));
   }
-
+  
   vga_flip_pages();
+
   if (get_playerstate(get_player(game->level)) == PLAYER_DYING) {
     set_state(game, GAME_OVER);
   }
@@ -122,6 +123,7 @@ static void victory_timer_handler(Game *game) {
 
 static void game_over_timer_handler(Game *game) {
   clear(sec_frame_buffer);
+
   draw_game_over(game->menu.game_over, sec_frame_buffer);
   draw_cursor(game->cursor, sec_frame_buffer);
 
@@ -160,9 +162,9 @@ static void menu_keyboard_handler(Game *game) {
 }
 
 static void level_keyboard_handler(Game *game) {
-  if (scan_code == ESC_BREAK_CODE)
-    set_state(game, EXIT);
   level_update_position(game->level, scan_code);
+  if (scan_code == ESC_BREAK_CODE)
+    set_state(game, MENU);
 }
 
 static void game_over_keyboard_handler(Game *game) {

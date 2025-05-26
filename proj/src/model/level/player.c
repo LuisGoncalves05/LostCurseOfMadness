@@ -95,11 +95,7 @@ void player_set_health(Player *player, unsigned char health) {
 void update_player_state(Player *player, struct packet pp) {
   if (player == NULL)
     return;
-
-  if (player->health == 0) {
-    player->state = PLAYER_DYING;
-  }
-  else if (player->moved == 1) {
+  if (player->moved == 1) {
     player->state = PLAYER_WALKING;
   }
   else {
@@ -109,8 +105,12 @@ void update_player_state(Player *player, struct packet pp) {
   if (pp.lb == 0 && pp.rb == 1) {
     player->state = PLAYER_AIMING;
   }
-  else if (pp.lb == 1 && pp.rb == 1) {
+  else if (pp.lb == 1 && pp.rb == 0) {
     player->state = PLAYER_SHOOTING;
+  }
+  
+  if (player->health == 0) {
+    player->state = PLAYER_DYING;
   }
 }
 
@@ -194,6 +194,7 @@ void draw_player(Player *player, double delta, uint8_t *frame_buffer) {
     default:
       break;
   }
+  destroy_sprite(player_sprite);
   player_set_sprite(player, new_sprite);
   draw_sprite_rotated(player_get_sprite(player), delta, frame_buffer);
 }

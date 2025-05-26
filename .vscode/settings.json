@@ -5,6 +5,15 @@
         "animsprite.h": "c",
         "memory": "c",
         "gpu.h": "c",
-        "random": "c"
+        "random": "c",
+        "*.xpm": "c",
+        "locale": "c",
+        "string": "c",
+        "game_over.h": "c",
+        "array": "c",
+        "string_view": "c",
+        "iterator": "c",
+        "vector": "c",
+        "span": "c"
     }
 }
