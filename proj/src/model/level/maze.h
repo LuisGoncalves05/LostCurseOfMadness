@@ -1,67 +1,53 @@
-/**
- * @file maze.h
- *
- * @brief This file contains the declarations for the maze module.
- * The maze module handles maze generation, rendering, and collision detection.
- */
-
-/** @defgroup maze Maze
- *  @brief Maze module for generating and managing the game maze.
- *  @{
- */
-
 #ifndef MAZE_H
 #define MAZE_H
 
 #include "../../drivers/video/gpu.h"
 #include <lcom/lcf.h>
 
-#define EMPTY 0
-#define WALL 1
-#define MOB 2
+#define EMPTY 0                 /**< Represents an empty cell in the maze. */
+#define WALL 1                  /**< Represents a wall cell in the maze. */
+#define MOB 2                   /**< Represents a mob cell in the maze. */
+#define WALL_COLOR 0x07         /**< Color used for the walls of the maze. */
+#define CELL_SIZE 52            /**< Total size of each cell including wall width. */
+#define WALL_WIDTH 2            /**< Width of the walls in pixels. */
+#define LINE_COLLISION_MARGIN 2 /**< Margin used for collision detection with the maze walls. */
+
+extern uint32_t frame_size;
+extern uint16_t x_res, y_res;
+
+////////////////////////////////////////
+/**
+ * @brief Initializes the buffer used for maze drawing.
+ */
+void init_maze_buffer();
 
 /**
- * @brief Color used for the walls of the maze.
+ * @brief Frees the buffer used for maze drawing.
  */
-#define WALL_COLOR 0x07
+void free_maze_buffer();
+////////////////////////////////////////
 
 /**
- * @brief Total size of each cell including wall width.
+ * @brief Represents a single Maze instance.
+ *
+ * The Maze struct is opaque.
  */
-#define CELL_SIZE 52
-
-/**
- * @brief Width of the walls in pixels.
- */
-#define WALL_WIDTH 2
-
-/**
- * @brief Margin used for collision detection with the maze walls.
- */
-#define LINE_COLLISION_MARGIN 2
-
-/**
- * @brief Width of the maze in pixels.
- */
-#define WIDTH 1024
-
-/**
- * @brief Height of the maze in pixels.
- */
-#define HEIGHT 768
-
 typedef struct Maze Maze;
 
+/**
+ * @brief Represents a single Line instance.
+ */
 typedef struct Line {
     int x1, y1;
     int x2, y2;
 } Line;
 
+/**
+ * @brief Represents a single Point instance.
+ */
 typedef struct Point {
     int x, y;
 } Point;
-
-extern uint32_t frame_size;
 
 /**
  * @brief Creates and initializes a new maze with the given dimensions.
@@ -78,59 +64,7 @@ Maze *create_maze(uint8_t width, uint8_t height, uint8_t mob_count);
  *
  * @param maze Pointer to the Maze structure to free.
  */
-void free_maze(Maze *maze);
-
-/**
- * @brief Draws the maze to the provided frame buffer.
- *
- * @param maze Pointer to the Maze structure to draw.
- * @param frame_buffer Pointer to the frame buffer.
- * @return 0 on success, non-zero on failure.
- */
-int draw_maze(Maze *maze, uint8_t *frame_buffer);
-
-/**
- * @brief Checks for collision between a rectangle and the maze walls.
- *
- * @param maze Pointer to the Maze structure.
- * @param x X-coordinate of the top-left corner of the rectangle.
- * @param y Y-coordinate of the top-left corner of the rectangle.
- * @param width Width of the rectangle.
- * @param height Height of the rectangle.
- * @return true if there is a collision, false otherwise.
- */
-bool check_rectangle_line_collision(Maze *maze, int x, int y, int width, int height);
-
-/**
- * @brief Checks for collision between a rectangle and a specific maze wall line.
- *
- * @param x X-coordinate of the top-left corner of the rectangle.
- * @param y Y-coordinate of the top-left corner of the rectangle.
- * @param width Width of the rectangle.
- * @param height Height of the rectangle.
- * @param line The Line structure representing a maze wall.
- * @return true if there is a collision, false otherwise.
- */
-bool check_line_collision(int x, int y, int width, int height, Line line);
-
-/**
- * @brief Checks for collision between two sprites (ignores rotation);
- *
- * @param a Sprite a.
- * @param b Sprite b.
- * @return true if there is a collision, false otherwise.
- */
-bool(check_sprite_collision)(Sprite *a, Sprite *b);
-
-/**
- * @brief Initializes the buffer used for maze drawing.
- */
-void init_maze_buffer();
-
-/**
- * @brief Frees the buffer used for maze drawing.
- */
-void free_maze_buffer();
+void destroy_maze(Maze *maze);
 
 /**
  * @brief Returns the width of the maze in cells.
@@ -157,14 +91,6 @@ uint8_t get_height(Maze *maze);
 int get_line_count(Maze *maze);
 
 /**
- * @brief Returns the positions in the maze where there are mobs.
- *
- * @param maze Pointer to the Maze structure.
- * @return Point array of mob positions;
- */
-Point **get_mob_positions(Maze *maze);
-
-/**
  * @brief Returns the number of mobs in the maze.
  *
  * @param maze Pointer to the Maze structure.
@@ -179,6 +105,42 @@ uint8_t get_mob_count(Maze *maze);
  */
 void set_mob_count(Maze *maze, uint8_t mob_count);
 
-#endif
+/**
+ * @brief Returns the positions in the maze where there are mobs.
+ *
+ * @param maze Pointer to the Maze structure.
+ * @return Pointer to array of mob Position pointers;
+ */
+Point **get_mob_positions(Maze *maze);
 
-/** @} */
+/**
+ * @brief Checks for collision between two sprites.
+ *
+ * @param a Sprite a.
+ * @param b Sprite b.
+ * @return true if there is a collision, false otherwise.
+ */
+bool(check_sprite_collision)(Sprite *a, Sprite *b);
+
+/**
+ * @brief Checks for collision between a rectangle and the maze walls.
+ *
+ * @param maze Pointer to the Maze structure.
+ * @param x X-coordinate of the top-left corner of the rectangle.
+ * @param y Y-coordinate of the top-left corner of the rectangle.
+ * @param width Width of the rectangle.
+ * @param height Height of the rectangle.
+ * @return true if there is a collision, false otherwise.
+ */
+bool check_rectangle_line_collision(Maze *maze, int x, int y, int width, int height);
+
+/**
+ * @brief Draws the maze to the provided frame buffer.
+ *
+ * @param maze Pointer to the Maze structure to draw.
+ * @param frame_buffer Pointer to the frame buffer.
+ * @return 0 on success, non-zero on failure.
+ */
+int draw_maze(Maze *maze, uint8_t *frame_buffer);
+
+#endif /* MAZE_H */

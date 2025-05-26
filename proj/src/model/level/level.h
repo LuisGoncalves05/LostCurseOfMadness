@@ -104,6 +104,4 @@ void level_shoot(Level *level);
  */
 void draw_level(Level *level, struct packet pp);
 
-#endif
-
-/* LEVEL_H */
+#endif /* LEVEL_H */

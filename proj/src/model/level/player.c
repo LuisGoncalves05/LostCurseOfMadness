@@ -1,12 +1,13 @@
 #include "player.h"
 
 struct Player {
-    PlayerState state;
     Sprite *sprite;
     unsigned char health;
+    PlayerState state;
 };
 
-// Create a new player
+/* Create and destroy section */
+
 Player *create_player() {
     Player *player = (Player *) malloc(sizeof(Player));
     if (!player)
@@ -17,13 +18,14 @@ Player *create_player() {
     return player;
 }
 
-// Destroy the player and free memory
 void destroy_player(Player *player) {
     if (!player)
         return;
     destroy_sprite(player->sprite);
     free(player);
 }
+
+/* Getter and setter section */
 
 Sprite *player_get_sprite(Player *player) {
     return player->sprite;
@@ -42,23 +44,22 @@ unsigned char player_get_health(Player *player) {
     return player->health;
 }
 
-PlayerState get_player_state(Player *player) {
-    return player->state;
-}
-
-void set_player_state(Player *player, PlayerState state) {
-    if (player == NULL)
-        return;
-    player->state = state;
-}
-
 void player_set_health(Player *player, unsigned char health) {
     player->health = health;
 }
 
+PlayerState player_get_state(Player *player) {
+    return player->state;
+}
+
+/* Statics section */
+
+/* Others section */
+
 void player_update_state(Player *player, struct packet pp) {
     if (player == NULL)
         return;
+
     if (player->sprite->xspeed != 0 || player->sprite->yspeed != 0) {
         player->state = PLAYER_WALKING;
     } else {
@@ -104,6 +105,8 @@ void player_update_speed(Player *player, uint8_t scan_code) {
             break;
     }
 }
+
+/* Draw section */
 
 void draw_player(Player *player, double delta, uint8_t *frame_buffer) {
     Sprite *player_sprite = player->sprite;

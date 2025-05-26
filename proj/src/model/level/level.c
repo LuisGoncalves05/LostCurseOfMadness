@@ -69,7 +69,7 @@ Level *create_level(uint8_t number) {
 void destroy_level(Level *level) {
     if (level != NULL) {
         destroy_player(level->player);
-        free_maze(level->maze);
+        destroy_maze(level->maze);
         for (int i = 0; i < get_mob_count(get_maze(level)); i++) {
             destroy_mob(level->mobs[i]);
         }
