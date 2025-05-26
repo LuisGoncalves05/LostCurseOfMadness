@@ -64,6 +64,10 @@ unsigned char mob_get_health(Mob *mob) {
   return mob->health;
 }
 
+void mob_set_health(Mob *mob, unsigned char health) {
+  mob->health = health;
+}
+
 int mob_get_max_speed(Mob *mob) {
   return mob->max_speed;
 }

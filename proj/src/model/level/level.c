@@ -109,7 +109,6 @@ static bool(check_mob_collisions)(Level *level) {
 }
 
 void update_delta(Level *level, double mouse_x, double mouse_y) {
-  printf("Updating delta with mouse position: (%f, %f)\n", mouse_x, mouse_y);
   Sprite *player_sprite = player_get_sprite(level->player);
   double player_center_x = player_sprite->x + player_sprite->width / 2.0;
   double player_center_y = player_sprite->y + player_sprite->height / 2.0;
@@ -162,10 +161,40 @@ void level_shoot(Level *level) {
   level->bullets[level->bullet_count++] = create_bullet(cx, cy, level->delta);
 }
 
+static void update_bullet(Bullet *b, Level *level) {
+  if (!bullet_get_active(b))
+    return;
+
+  Sprite *sprite = bullet_get_sprite(b);
+
+  sprite->x += bullet_get_dx(b);
+  sprite->y += bullet_get_dy(b);
+
+  if (sprite->x < 0 || sprite->x > x_res ||
+      sprite->y < 0 || sprite->y > y_res) {
+    bullet_set_active(b, false);
+  }
+
+  if (check_rectangle_line_collision(get_maze(level), sprite->x, sprite->y, sprite->width, sprite->height)) {
+    bullet_set_active(b, false); // Deactivate if it hits a wall
+  }
+
+  Mob **mobs = get_mobs(level);
+  int mob_count = get_mob_count(get_maze(level));
+  for (int i = 0; i < mob_count; i++) {
+    Mob *mob = mobs[i];
+    if (check_sprite_collision(sprite, mob_get_sprite(mob))) {
+      mob_set_health(mob, mob_get_health(mob) - 1);
+      bullet_set_active(b, false);
+      break;
+    }
+  }
+}
+
 static void level_update_all_bullets(Level *level) {
   for (int i = 0; i < level->bullet_count;) {
-    update_bullet(level->bullets[i], level->maze);
-    if (!bullet_is_active(level->bullets[i])) {
+    update_bullet(level->bullets[i], level);
+    if (!bullet_get_active(level->bullets[i])) {
       destroy_bullet(level->bullets[i]);
       level->bullet_count--;
       level->bullets[i] = level->bullets[level->bullet_count];
@@ -174,7 +203,6 @@ static void level_update_all_bullets(Level *level) {
     }
   }
 }
-
 
 static int draw_mobs(Mob **mobs, uint8_t mob_count) {
   extern int frame_counter;
@@ -290,7 +318,7 @@ static void draw_fov_cone(Level *level) {
 static void draw_all_bullets(Level *level, uint8_t *frame_buffer) {
     for (int i = 0; i < level->bullet_count; i++) {
         Bullet *bullet = level->bullets[i];
-        if (bullet_is_active(bullet)) {
+        if (bullet_get_active(bullet)) {
             draw_bullet(bullet, frame_buffer);
         }
     }
