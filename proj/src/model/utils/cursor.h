@@ -5,8 +5,15 @@
 #include <stdint.h>
 #include "drivers/video/gpu.h"
 #include "model/utils/sprite.h"
+#include "assets/xpm/cursor.xpm"
+#include "assets/xpm/crosshair.xpm"
 
 extern uint16_t x_res, y_res;
+
+typedef enum {
+    CURSOR_DEFAULT,  // Default cursor
+    CURSOR_CROSSHAIR // Crosshair cursor
+} CursorMode;
 
 /**
  * @brief Represents a mouse cursor instance.
@@ -21,7 +28,7 @@ typedef struct Cursor Cursor;
  * @param xpm XPM image used to represent the cursor.
  * @return Pointer to the created Cursor structure.
  */
-Cursor *create_cursor(xpm_map_t xpm);
+Cursor *create_cursor(CursorMode mode, int x, int y);
 
 /**
  * @brief Frees the memory associated with the cursor.

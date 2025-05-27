@@ -15,11 +15,11 @@
 #include "drivers/mouse/mouse.h"
 #include "drivers/timer/i8254.h"
 #include "drivers/video/gpu.h"
-#include "assets/xpm/cursor.xpm"
 
 extern uint8_t scan_code;
 extern struct packet pp;
 extern int frame_counter;
+extern uint16_t x_res, y_res;
 
 /**
  * @brief Represents a single Game instance.

@@ -382,8 +382,8 @@ void level_shoot(Level *level) {
         return;
 
     Sprite *sprite = player_get_sprite(level->player);
-    int draw_origin_x = sprite->x + sprite->width / 2;
-    int draw_origin_y = sprite->y + sprite->height / 2;
+    double draw_origin_x = sprite->x + sprite->width / 2;
+    double draw_origin_y = sprite->y + sprite->height / 2;
 
     level->bullets[level->bullet_count++] = create_bullet(draw_origin_x, draw_origin_y, level->delta);
 }

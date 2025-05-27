@@ -16,20 +16,31 @@ struct Game {
 
 /* Create and destroy section */
 
+static void set_cursor(Game *game, CursorMode mode) {
+    uint16_t x = cursor_get_x(game->cursor);
+    uint16_t y = cursor_get_y(game->cursor);
+    destroy_cursor(game->cursor);
+    game->cursor = create_cursor(mode, x, y);
+}
+
 static void menu_init(Game *game) {
+    set_cursor(game, CURSOR_DEFAULT);
     game->menu.main_menu = create_main_menu();
 }
 
 static void level_init(Game *game) {
+    set_cursor(game, CURSOR_CROSSHAIR);
     game->level = create_level(game->level_number);
 }
 
 static void victory_init(Game *game) {
+    set_cursor(game, CURSOR_DEFAULT);
     game->score = game->level_number;
     game->level_number++;
 }
 
 static void game_over_init(Game *game) {
+    set_cursor(game, CURSOR_DEFAULT);
     game->score = game->level_number;
     game->level_number = 0;
 
@@ -59,7 +70,7 @@ Game *create_game() {
     game->level_number = 0;
     game->score = 0;
     game->state = MENU;
-    game->cursor = create_cursor((xpm_map_t) cursor);
+    game->cursor = create_cursor(CURSOR_DEFAULT, x_res / 2, y_res / 2);
     game->shooting = false;
     state_init(game);
 
@@ -74,7 +85,7 @@ void destroy_game(Game *game) {
     }
 }
 
-/* Others section */
+/* Statics section */
 
 // Destroy
 static void menu_destroy(Game *game) {
