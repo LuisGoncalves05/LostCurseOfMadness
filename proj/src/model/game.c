@@ -16,33 +16,6 @@ struct Game {
 
 /* Create and destroy section */
 
-Game *create_game() {
-    Game *game = (Game *) malloc(sizeof(Game));
-    if (!game)
-        return NULL;
-
-    game->level_number = 0;
-    game->score = 0;
-    game->state = MENU;
-    game->cursor = create_cursor((xpm_map_t) cursor);
-    game->shooting = false;
-    state_init(game);
-
-    return game;
-}
-
-void destroy_game(Game *game) {
-    if (game != NULL) {
-        if (game->state == LEVEL)
-            destroy_level(game->level);
-        free(game);
-    }
-}
-
-/* Others section */
-
-// Init
-
 static void menu_init(Game *game) {
     game->menu.main_menu = create_main_menu();
 }
@@ -78,8 +51,32 @@ static void state_init(Game *game) {
     game_init[game->state](game);
 }
 
-// Destroy
+Game *create_game() {
+    Game *game = (Game *) malloc(sizeof(Game));
+    if (!game)
+        return NULL;
 
+    game->level_number = 0;
+    game->score = 0;
+    game->state = MENU;
+    game->cursor = create_cursor((xpm_map_t) cursor);
+    game->shooting = false;
+    state_init(game);
+
+    return game;
+}
+
+void destroy_game(Game *game) {
+    if (game != NULL) {
+        if (game->state == LEVEL)
+            destroy_level(game->level);
+        free(game);
+    }
+}
+
+/* Others section */
+
+// Destroy
 static void menu_destroy(Game *game) {
     destroy_main_menu(game->menu.main_menu);
 }
