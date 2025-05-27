@@ -130,7 +130,7 @@ static void update_bullet(Bullet *b, Level *level) {
         bullet_set_active(b, false);
     }
 
-    if (check_rectangle_line_collision(get_maze(level), sprite->x, sprite->y, sprite->width, sprite->height)) {
+    if (check_wall_collision(get_maze(level), sprite)) {
         bullet_set_active(b, false); // Deactivate if it hits a wall
     }
 
@@ -152,15 +152,16 @@ static int player_update_position(Level *level) {
 
     Sprite *player_sprite = player_get_sprite(level->player);
     Maze *maze = level->maze;
-    uint16_t new_x = player_sprite->x + player_sprite->xspeed;
-    uint16_t new_y = player_sprite->y + player_sprite->yspeed;
-    if (!check_rectangle_line_collision(maze, new_x, new_y, player_sprite->width, player_sprite->height)) {
-        if (!check_mob_collisions(level)) {
-            player_sprite->x = new_x;
-            player_sprite->y = new_y;
-        } else {
+
+    player_sprite->x += player_sprite->xspeed;
+    player_sprite->y += player_sprite->yspeed;
+    if (!check_wall_collision(maze, player_sprite)) {
+        if (check_mob_collisions(level)) {
             player_set_health(level->player, player_get_health(level->player) - 1);
         }
+    } else {
+        player_sprite->x -= player_sprite->xspeed;
+        player_sprite->y -= player_sprite->yspeed;
     }
     return 0;
 }
@@ -343,7 +344,7 @@ static void draw_fov_cone(Level *level) {
 
     vga_draw_rectangle(0, 0, x_res, box_min_y, OUT_OF_FOV_COLOR, sec_frame_buffer);
     vga_draw_rectangle(0, box_min_y, box_min_x, box_max_y, OUT_OF_FOV_COLOR, sec_frame_buffer);
-    vga_draw_rectangle(max_x, box_min_y, x_res, max_y, OUT_OF_FOV_COLOR, sec_frame_buffer);
+    vga_draw_rectangle(max_x, box_min_y, x_res, box_max_y, OUT_OF_FOV_COLOR, sec_frame_buffer);
     vga_draw_rectangle(0, box_max_y, x_res, y_res, OUT_OF_FOV_COLOR, sec_frame_buffer);
 }
 

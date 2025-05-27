@@ -237,91 +237,13 @@ void set_mob_count(Maze *maze, uint8_t mob_count) {
 
 /* Statics section */
 
-static bool(check_line_collision)(int x, int y, int width, int height, Line line) {
-    // Retângulo do objeto
-    int left = x;
-    int right = x + width;
-    int top = y;
-    int bottom = y + height;
-
-    // Expandir a linha com a margem de colisão
-    int margin = LINE_COLLISION_MARGIN;
-
-    // Verifica se a linha está completamente fora do retângulo
-    if ((line.x1 < left - margin && line.x2 < left - margin) ||
-        (line.x1 > right + margin && line.x2 > right + margin) ||
-        (line.y1 < top - margin && line.y2 < top - margin) ||
-        (line.y1 > bottom + margin && line.y2 > bottom + margin)) {
-        return false;
-    }
-
-    // Algoritmo de interseção linha-retângulo usando o algoritmo Cohen-Sutherland modificado
-    // Calcula os parâmetros da equação da linha: y = mx + b
-    double dx = line.x2 - line.x1;
-    double dy = line.y2 - line.y1;
-
-    // Se a linha é vertical (caso especial)
-    if (dx == 0) {
-        if (line.x1 >= left - margin && line.x1 <= right + margin) {
-            // Verifica se a linha cruza o retângulo verticalmente
-            int min_y = (line.y1 < line.y2) ? line.y1 : line.y2;
-            int max_y = (line.y1 > line.y2) ? line.y1 : line.y2;
-            return !(max_y < top - margin || min_y > bottom + margin);
-        }
-        return false;
-    }
-
-    // Se a linha é horizontal (caso especial)
-    if (dy == 0) {
-        if (line.y1 >= top - margin && line.y1 <= bottom + margin) {
-            // Verifica se a linha cruza o retângulo horizontalmente
-            int min_x = (line.x1 < line.x2) ? line.x1 : line.x2;
-            int max_x = (line.x1 > line.x2) ? line.x1 : line.x2;
-            return !(max_x < left - margin || min_x > right + margin);
-        }
-        return false;
-    }
-
-    // Linha diagonal - verificar interseção com cada lado do retângulo
-    double m = dy / dx;
-    double b = line.y1 - m * line.x1;
-
-    // Expandir o retângulo com a margem
-    left -= margin;
-    right += margin;
-    top -= margin;
-    bottom += margin;
-
-    // Verificar interseção com cada lado do retângulo expandido
-    // Lado esquerdo: x = left
-    double y_left = m * left + b;
-    if (y_left >= top && y_left <= bottom &&
-        ((line.x1 <= left && line.x2 >= left) || (line.x1 >= left && line.x2 <= left))) {
-        return true;
-    }
-
-    // Lado direito: x = right
-    double y_right = m * right + b;
-    if (y_right >= top && y_right <= bottom &&
-        ((line.x1 <= right && line.x2 >= right) || (line.x1 >= right && line.x2 <= right))) {
-        return true;
-    }
-
-    // Lado superior: y = top
-    double x_top = (top - b) / m;
-    if (x_top >= left && x_top <= right &&
-        ((line.y1 <= top && line.y2 >= top) || (line.y1 >= top && line.y2 <= top))) {
-        return true;
-    }
-
-    // Lado inferior: y = bottom
-    double x_bottom = (bottom - b) / m;
-    if (x_bottom >= left && x_bottom <= right &&
-        ((line.y1 <= bottom && line.y2 >= bottom) || (line.y1 >= bottom && line.y2 <= bottom))) {
-        return true;
-    }
-
-    return false;
+static bool(check_rectangle_collision)(int x1, int y1, int width1, int height1, int x2, int y2, int width2, int height2) {
+    return !(
+        x1 + width1 < x2 ||  // a to the left of b
+        x1 > x2 + width2 ||  // b to the left of a
+        y1 + height1 < y2 || // in normal people coordinates, a above b
+        y1 > y2 + height2    // in normal people coordinates, b above a
+    );
 }
 
 /* Others section */
@@ -354,32 +276,27 @@ bool(check_sprite_collision)(Sprite *a, Sprite *b) {
         return false;
     }
 
-    return !(
-        a->x + a->width < b->x ||  // a to the left of b
-        a->x > b->x + b->width ||  // b to the left of a
-        a->y + a->height < b->y || // in normal people coordinates, a above b
-        a->y > b->y + b->height    // in normal people coordinates, b above a
-    );
+    return check_rectangle_collision(a->x, a->y, a->width, a->height, b->x, b->y, b->width, b->height);
 }
 
-bool(check_rectangle_line_collision)(Maze *maze, int x, int y, int width, int height) {
+bool(check_wall_collision)(Maze *maze, Sprite *sprite) {
     if (!maze)
         return false;
 
-    // Verificar colisão com todas as linhas do labirinto
-    for (int i = 0; i < maze->line_count; i++) {
-        // Converter coordenadas das linhas para coordenadas da tela
-        int offset_x = (x_res - (maze->width * CELL_SIZE)) / 2;
-        int offset_y = (y_res - (maze->height * CELL_SIZE)) / 2;
+    double scaled_down_x = sprite->x / CELL_SIZE;
+    double scaled_down_y = sprite->y / CELL_SIZE;
 
-        Line line;
-        line.x1 = offset_x + maze->lines[i].x1 * CELL_SIZE;
-        line.y1 = offset_y + maze->lines[i].y1 * CELL_SIZE;
-        line.x2 = offset_x + maze->lines[i].x2 * CELL_SIZE;
-        line.y2 = offset_y + maze->lines[i].y2 * CELL_SIZE;
-
-        if (check_line_collision(x, y, width, height, line)) {
-            return true;
+    for (int i = -1; i < 2; i++) {
+        for (int j = -1; j < 2; j++) {
+            int x = scaled_down_x + i;
+            int y = scaled_down_y + j;
+            if (x >= 0 && x < x_res &&
+                y >= 0 && y < y_res &&
+                maze->cells[y][x] == WALL) {
+                if (check_rectangle_collision(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE, sprite->x, sprite->y, sprite->width, sprite->height)) {
+                    return true;
+                }
+            }
         }
     }
 
@@ -394,35 +311,10 @@ int(draw_maze)(Maze *maze, uint8_t *frame_buffer) {
         return 1;
     }
 
-    // Offset para centralizar o labirinto na tela
-    int offset_x = (x_res - (maze->width * CELL_SIZE)) / 2;  // Assumindo largura da tela de WIDTH
-    int offset_y = (y_res - (maze->height * CELL_SIZE)) / 2; // Assumindo altura da tela de HEIGHT
-
-    // Desenhar cada linha do labirinto
-    for (int i = 0; i < maze->line_count; i++) {
-        int x1 = offset_x + maze->lines[i].x1 * CELL_SIZE;
-        int y1 = offset_y + maze->lines[i].y1 * CELL_SIZE;
-        int x2 = offset_x + maze->lines[i].x2 * CELL_SIZE;
-        int y2 = offset_y + maze->lines[i].y2 * CELL_SIZE;
-
-        // Desenhar uma linha grossa (2 pixels de largura)
-        if (x1 == x2 && y1 == y2) {
-            // Ponto isolado - desenhar como um quadrado pequeno
-            vga_draw_rectangle(x1, y1, WALL_WIDTH, WALL_WIDTH, WALL_COLOR, frame_buffer);
-        } else {
-            // Linha - usar algoritmo de Bresenham com espessura 2
-            vga_draw_line(x1, y1, x2, y2, WALL_COLOR, frame_buffer);
-
-            // Desenhar linha paralela para criar espessura
-            if (x1 == x2) {
-                // Linha vertical
-                vga_draw_line(x1 + 1, y1, x2 + 1, y2, WALL_COLOR, frame_buffer);
-            } else if (y1 == y2) {
-                // Linha horizontal
-                vga_draw_line(x1, y1 + 1, x2, y2 + 1, WALL_COLOR, frame_buffer);
-            } else {
-                // Linha diagonal - não tratamos aqui, mas poderia ser implementado
-                // para garantir consistência visual
+    for (int y = 0; y < maze->height; y++) {
+        for (int x = 0; x < maze->width; x++) {
+            if (maze->cells[y][x] == WALL) {
+                vga_draw_rectangle(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE, WALL_COLOR, sec_frame_buffer);
             }
         }
     }

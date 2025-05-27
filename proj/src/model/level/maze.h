@@ -7,11 +7,10 @@
 #define EMPTY 0                 /**< Represents an empty cell in the maze. */
 #define WALL 1                  /**< Represents a wall cell in the maze. */
 #define MOB 2                   /**< Represents a mob cell in the maze. */
-#define WALL_COLOR 0x07         /**< Color used for the walls of the maze. */
-#define CELL_SIZE 52            /**< Total size of each cell including wall width. */
-#define WALL_WIDTH 2            /**< Width of the walls in pixels. */
-#define LINE_COLLISION_MARGIN 2 /**< Margin used for collision detection with the maze walls. */
+#define WALL_COLOR 0x08         /**< Color used for the walls of the maze. */
+#define CELL_SIZE 64            /**< Total size of each cell including wall width. */
 
+extern uint8_t* sec_frame_buffer;
 extern uint32_t frame_size;
 extern uint16_t x_res, y_res;
 
@@ -111,16 +110,15 @@ Point **get_mob_positions(Maze *maze);
 bool(check_sprite_collision)(Sprite *a, Sprite *b);
 
 /**
- * @brief Checks for collision between a rectangle and the maze walls.
+ * @brief Checks for collision between a sprite and the maze walls.
  *
  * @param maze Pointer to the Maze structure.
  * @param x X-coordinate of the top-left corner of the rectangle.
  * @param y Y-coordinate of the top-left corner of the rectangle.
- * @param width Width of the rectangle.
- * @param height Height of the rectangle.
+ * @param sprite Pointer to the Sprite structure.
  * @return true if there is a collision, false otherwise.
  */
-bool check_rectangle_line_collision(Maze *maze, int x, int y, int width, int height);
+bool(check_wall_collision)(Maze *maze, Sprite *sprite);
 
 /**
  * @brief Draws the maze to the provided frame buffer.
