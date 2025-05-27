@@ -15,7 +15,8 @@ Player *create_player() {
     player->state = PLAYER_IDLE;
     player->health = PLAYER_HEALTH;
     Sprite *new_sprite = create_sprite((xpm_map_t) player_idleS_1, 400, 400, 0, 0);
-    player->animated_sprite = create_animated_sprite(new_sprite, 45, 2, (xpm_map_t) player_idleS_2);
+    player->animated_sprite = create_animated_sprite(new_sprite, 45, 2,
+        (xpm_map_t) player_idleS_2);
     return player;
 }
 

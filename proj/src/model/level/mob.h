@@ -2,8 +2,12 @@
 #define MOB_H
 
 #include <lcom/lcf.h>
+
 #include "drivers/video/gpu.h"
 #include "model/utils/sprite.h"
+#include "assets/xpm/level/mob/idle1.xpm"
+#include "assets/xpm/level/mob/idle2.xpm"
+#include "assets/xpm/level/mob/idle3.xpm"
 
 #define MOB_MAX_SPEED 5     /**< Maximum speed of the mob */
 #define MOB_ACCELERATION 1  /**< Acceleration of the mob */
@@ -32,7 +36,7 @@ enum mob_state {
  * @param sprite Pointer to the Sprite structure used for the mob.
  * @return Pointer to the created Mob structure.
  */
-Mob *create_mob(Sprite *sprite);
+Mob *create_mob(uint16_t x, uint16_t y);
 
 /**
  * @brief Frees the memory associated with the mob.
@@ -133,5 +137,13 @@ void mobIsAtMaxSpeed(Mob *mob);
  * @param mob Pointer to the Mob structure.
  */
 void mobStopped(Mob *mob);
+
+/**
+ * @brief Renders the mob on the screen.
+ *
+ * @param mob Pointer to the Mob structure.
+ * @param frame_buffer Pointer to the frame buffer.
+ */
+void draw_mob(Mob *mob, uint8_t *frame_buffer);
 
 #endif /* MOB_H */
