@@ -1,4 +1,5 @@
 #include "level.h"
+#include "config.h"
 
 struct Level {
     uint8_t number;
@@ -34,7 +35,7 @@ Level *create_level(uint8_t number) {
     }
 
     level->delta = 0;
-    level->fov_angle = 60.0;
+    level->fov_angle = FOV_ANGLE;
     level->mobs = malloc(sizeof(Mob *) * mob_count);
     if (!level->mobs) {
         free(level->maze);
@@ -246,11 +247,74 @@ static void draw_fov_cone(Level *level) {
     if (!player_sprite || !maze)
         return;
 
+    // Player center coordinates
     double cx = player_sprite->x + player_sprite->width / 2.0;
     double cy = player_sprite->y + player_sprite->height / 2.0;
 
     double fov_radius = FOV_RADIUS;
     double cone_half_angle = level->fov_angle * M_PI / 360.0;
+
+    // Angles that bound the circular sector
+    double angle1 = delta - cone_half_angle;
+    double angle2 = delta + cone_half_angle;
+
+    // Normalize to [0, 2pi)
+    while (angle1 < 0)
+        angle1 += 2 * M_PI;
+    while (angle2 < 0)
+        angle2 += 2 * M_PI;
+    while (angle1 >= 2 * M_PI)
+        angle1 -= 2 * M_PI;
+    while (angle2 >= 2 * M_PI)
+        angle2 -= 2 * M_PI;
+
+    // Ensure angle1 <= angle2
+    if (angle2 < angle1)
+        angle2 += 2 * M_PI;
+
+    // Candidate points
+    double min_x = cx, max_x = cx;
+    double min_y = cy, max_y = cy;
+
+    // Add endpoints of cone
+    double x1 = cx + cos(angle1) * fov_radius;
+    double y1 = cy + sin(angle1) * fov_radius;
+    double x2 = cx + cos(angle2) * fov_radius;
+    double y2 = cy + sin(angle2) * fov_radius;
+
+    min_x = fmin(min_x, fmin(x1, x2));
+    max_x = fmax(max_x, fmax(x1, x2));
+    min_y = fmin(min_y, fmin(y1, y2));
+    max_y = fmax(max_y, fmax(y1, y2));
+
+    // Directions to consider: 0, π/2, π, 3π/2
+    double angles[] = {0, M_PI_2, M_PI, 3 * M_PI_2};
+    for (int i = 0; i < 4; ++i) {
+        double a = angles[i];
+        double a_check = a;
+        if (a_check < angle1)
+            a_check += 2 * M_PI;
+        if (a_check >= angle1 && a_check <= angle2) {
+            double x = cx + cos(a) * fov_radius;
+            double y = cy + sin(a) * fov_radius;
+            min_x = fmin(min_x, x);
+            max_x = fmax(max_x, x);
+            min_y = fmin(min_y, y);
+            max_y = fmax(max_y, y);
+        }
+    }
+
+    // Expand bounding box to fully contain CLOSE_RADIUS circle
+    min_x = fmin(min_x, cx - CLOSE_RADIUS);
+    max_x = fmax(max_x, cx + CLOSE_RADIUS);
+    min_y = fmin(min_y, cy - CLOSE_RADIUS);
+    max_y = fmax(max_y, cy + CLOSE_RADIUS);
+
+    // Check screen bounds
+    int box_min_x = round(fmax(0, floor(min_x)));
+    int box_max_x = round(fmin(x_res - 1, ceil(max_x)));
+    int box_min_y = round(fmax(0, floor(min_y)));
+    int box_max_y = round(fmin(y_res - 1, ceil(max_y)));
 
     // Unit vector direction
     double dir_x = cos(delta);
@@ -259,29 +323,28 @@ static void draw_fov_cone(Level *level) {
     double cos_half_angle = cos(cone_half_angle);
     double cos_half_angle_sq = cos_half_angle * cos_half_angle;
 
-    for (int y_pixel = 0; y_pixel < y_res; y_pixel++) {
-        for (int x_pixel = 0; x_pixel < x_res; x_pixel++) {
-            // dx and dy are coordinates of pixel if origin is in center of player
+    for (int y_pixel = box_min_y; y_pixel < box_max_y; y_pixel++) {
+        double dy = y_pixel - cy;
+        double dy_sq = dy * dy;
+        for (int x_pixel = box_min_x; x_pixel < box_max_x; x_pixel++) {
             double dx = x_pixel - cx;
-            double dy = y_pixel - cy;
-
-            // the square of the distance to the center of the player
-            double dist_sq = dx * dx + dy * dy;
-
+            double dist_sq = dx * dx + dy_sq;
             double dot_product = dx * dir_x + dy * dir_y;
-            if (dist_sq > fov_radius * fov_radius || // Outside the circle of radius fov_radius
-                dot_product < 0 || // Behind player
-                (dot_product * dot_product) < (dist_sq * cos_half_angle_sq)) { // Outside the cone
-                uint32_t index = (x_res * y_pixel + x_pixel) * bytes_per_pixel;
 
-                if (index < frame_size) {
-                    memset(&sec_frame_buffer[index], 7, bytes_per_pixel);
-                } else {
-                    return; // Outside the screen
-                }
+            if ((dist_sq > fov_radius * fov_radius ||                        // Outside the circle of radius fov_radius
+                 dot_product < 0 ||                                          // Behind player
+                 (dot_product * dot_product) < (dist_sq * cos_half_angle_sq) // Outside the cone
+                 ) &&
+                dist_sq > CLOSE_RADIUS * CLOSE_RADIUS) { // Outside the circle the fov cone would be in
+                vga_draw_pixel(x_pixel, y_pixel, OUT_OF_FOV_COLOR, sec_frame_buffer);
             }
         }
     }
+
+    vga_draw_rectangle(0, 0, x_res, box_min_y, OUT_OF_FOV_COLOR, sec_frame_buffer);
+    vga_draw_rectangle(0, box_min_y, box_min_x, box_max_y, OUT_OF_FOV_COLOR, sec_frame_buffer);
+    vga_draw_rectangle(max_x, box_min_y, x_res, max_y, OUT_OF_FOV_COLOR, sec_frame_buffer);
+    vga_draw_rectangle(0, box_max_y, x_res, y_res, OUT_OF_FOV_COLOR, sec_frame_buffer);
 }
 
 static void draw_all_bullets(Level *level, uint8_t *frame_buffer) {

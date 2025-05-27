@@ -8,8 +8,6 @@
 #include "mob.h"
 #include "player.h"
 
-#define FOV_RADIUS 500 /**< Radius of the player's field of view */
-
 extern uint8_t *sec_frame_buffer;
 extern uint8_t *main_frame_buffer;
 extern uint8_t bytes_per_pixel;
