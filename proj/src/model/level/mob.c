@@ -4,19 +4,25 @@ struct Mob {
     unsigned char health;
     int max_speed;
     int acceleration;
-    Sprite *sprite;
+    AnimatedSprite *animated_sprite;
     bool moved;
     enum mob_state state;
 };
 
 /* Create and destroy section */
 
-Mob *create_mob(Sprite *sprite) {
+Mob *create_mob(uint16_t x, uint16_t y) {
     Mob *mob = (Mob *) malloc(sizeof(Mob));
     if (!mob)
         return NULL;
     mob->health = MOB_HEALTH;
-    mob->sprite = sprite;
+    Sprite *new_sprite = create_sprite((xpm_map_t) mob_idle_1, x, y, 0, 0);
+    mob->animated_sprite = create_animated_sprite(new_sprite, 30, 5,
+        (xpm_map_t) mob_idle_2,
+        (xpm_map_t) mob_idle_3,
+        (xpm_map_t) mob_idle_2,
+        (xpm_map_t) mob_idle_1
+    );
     mob->moved = 0;
     mob->max_speed = MOB_MAX_SPEED;
     mob->acceleration = MOB_ACCELERATION;
@@ -27,23 +33,14 @@ Mob *create_mob(Sprite *sprite) {
 void destroy_mob(Mob *mob) {
     if (!mob)
         return;
-    destroy_sprite(mob->sprite);
+    destroy_animated_sprite(mob->animated_sprite);
     free(mob);
 }
 
 /* Getter and setter section */
 
 Sprite *mob_get_sprite(Mob *mob) {
-    return mob->sprite;
-}
-
-void mob_set_sprite(Mob *mob, Sprite *sprite) {
-    if (mob == NULL)
-        return;
-    if (mob->sprite != NULL) {
-        destroy_sprite(mob->sprite);
-    }
-    mob->sprite = sprite;
+    return mob->animated_sprite->sprite;
 }
 
 unsigned char mob_get_health(Mob *mob) {
@@ -90,19 +87,23 @@ void update_mob_state(Mob *mob) {
 }
 
 void mobIsAtMaxSpeed(Mob *mob) {
-    if (mob->sprite->xspeed >= mob->max_speed) {
-        mob->sprite->xspeed = mob->max_speed;
+    if (mob->animated_sprite->sprite->xspeed >= mob->max_speed) {
+        mob->animated_sprite->sprite->xspeed = mob->max_speed;
     }
-    if (mob->sprite->yspeed >= mob->max_speed) {
-        mob->sprite->yspeed = mob->max_speed;
+    if (mob->animated_sprite->sprite->xspeed >= mob->max_speed) {
+        mob->animated_sprite->sprite->xspeed = mob->max_speed;
     }
 }
 
 void mobStopped(Mob *mob) {
     if (mob->moved == 0) {
-        mob->sprite->xspeed = MOB_DEFAULT_SPEED;
-        mob->sprite->yspeed = MOB_DEFAULT_SPEED;
+        mob->animated_sprite->sprite->xspeed = MOB_DEFAULT_SPEED;
+        mob->animated_sprite->sprite->xspeed = MOB_DEFAULT_SPEED;
     }
 }
 
 /* Draw section */
+
+void draw_mob(Mob *mob, uint8_t *frame_buffer) {
+    draw_animated_sprite(mob->animated_sprite, frame_buffer);
+}

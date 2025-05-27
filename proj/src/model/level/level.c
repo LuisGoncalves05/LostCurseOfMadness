@@ -47,8 +47,7 @@ Level *create_level(uint8_t number) {
     Point **mob_positions = get_mob_positions(level->maze);
     for (int i = 0; i < mob_count; i++) {
         Point *position = mob_positions[i];
-        Sprite *mob_sprite = create_sprite((xpm_map_t) cross, position->x * CELL_SIZE, position->y * CELL_SIZE, 0, 0);
-        level->mobs[i] = create_mob(mob_sprite);
+        level->mobs[i] = create_mob(position->x * CELL_SIZE, position->y * CELL_SIZE);
         if (!level->mobs[i]) {
             for (int j = i - 1; j >= 0; j--) {
                 destroy_mob(level->mobs[j]);
@@ -180,8 +179,8 @@ static void level_update_all_bullets(Level *level) {
 }
 
 static void level_update_all_mobs(Level *level) {
-    Mob **mobs = get_mobs(level);
-    Maze *maze = get_maze(level);
+    Mob **mobs = level->mobs;
+    Maze *maze = level->maze;
     for (int i = 0; i < get_mob_count(maze);) {
         Mob *mob = mobs[i];
         update_mob_state(mob);
@@ -201,42 +200,7 @@ static int draw_mobs(Level *level) {
     uint8_t mob_count = get_mob_count(level->maze);
     for (int i = 0; i < mob_count; i++) {
         Mob *mob = mobs[i];
-        Sprite *mob_sprite = mob_get_sprite(mob);
-        Sprite *new_sprite;
-        if (frame_counter > 16) {
-            frame_counter = 0;
-        }
-        switch (mob_get_state(mob)) {
-            case MOB_IDLE:
-                if (frame_counter <= 4) {
-                    new_sprite = create_sprite((xpm_map_t) pic1, mob_sprite->x, mob_sprite->y, mob_sprite->xspeed, mob_sprite->yspeed);
-                } else if (frame_counter <= 8) {
-                    new_sprite = create_sprite((xpm_map_t) pic2, mob_sprite->x, mob_sprite->y, mob_sprite->xspeed, mob_sprite->yspeed);
-                } else {
-                    new_sprite = create_sprite((xpm_map_t) cross, mob_sprite->x, mob_sprite->y, mob_sprite->xspeed, mob_sprite->yspeed);
-                }
-
-                break;
-            case MOB_WALKING:
-                if (frame_counter <= 4) {
-                    new_sprite = create_sprite((xpm_map_t) penguin, mob_sprite->x, mob_sprite->y, mob_sprite->xspeed, mob_sprite->yspeed);
-                } else if (frame_counter <= 8) {
-                    new_sprite = create_sprite((xpm_map_t) pic1, mob_sprite->x, mob_sprite->y, mob_sprite->xspeed, mob_sprite->yspeed);
-                } else if (frame_counter <= 12) {
-                    new_sprite = create_sprite((xpm_map_t) pic1, mob_sprite->x, mob_sprite->y, mob_sprite->xspeed, mob_sprite->yspeed);
-                } else {
-                    new_sprite = create_sprite((xpm_map_t) pic1, mob_sprite->x, mob_sprite->y, mob_sprite->xspeed, mob_sprite->yspeed);
-                }
-                break;
-            case MOB_ATTACKING:
-                new_sprite = create_sprite((xpm_map_t) pic1, mob_sprite->x, mob_sprite->y, mob_sprite->xspeed, mob_sprite->yspeed);
-                break;
-            case MOB_DYING:
-                new_sprite = create_sprite((xpm_map_t) pic1, mob_sprite->x, mob_sprite->y, mob_sprite->xspeed, mob_sprite->yspeed);
-                break;
-        }
-        mob_set_sprite(mob, new_sprite);
-        draw_sprite_rotated(mob_sprite, 0, sec_frame_buffer);
+        draw_mob(mob, second_frame_buffer);
     }
     return 0;
 }
