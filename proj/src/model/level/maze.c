@@ -1,26 +1,6 @@
 #include "maze.h"
 #include <stdlib.h>
 
-////////////////////////////////////////
-uint8_t *maze_buffer = NULL;
-
-void(init_maze_buffer)() {
-    if (maze_buffer == NULL) {
-        maze_buffer = (uint8_t *) malloc(frame_size);
-        if (maze_buffer == NULL) {
-            printf("Erro ao alocar maze_buffer\n");
-        }
-    }
-}
-
-void(free_maze_buffer)() {
-    if (maze_buffer != NULL) {
-        free(maze_buffer);
-        maze_buffer = NULL;
-    }
-}
-////////////////////////////////////////
-
 struct Maze {
     uint8_t width;
     uint8_t height;

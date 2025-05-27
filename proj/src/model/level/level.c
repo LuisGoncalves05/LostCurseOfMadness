@@ -234,7 +234,7 @@ static int draw_mobs(Level *level) {
                 break;
         }
         mob_set_sprite(mob, new_sprite);
-        draw_sprite_rotated(mob_sprite, 0, maze_buffer);
+        draw_sprite_rotated(mob_sprite, 0, sec_frame_buffer);
     }
     return 0;
 }
@@ -246,55 +246,38 @@ static void draw_fov_cone(Level *level) {
     if (!player_sprite || !maze)
         return;
 
-    double x = player_sprite->x + player_sprite->width / 2.0;
-    double y = player_sprite->y + player_sprite->height / 2.0;
+    double cx = player_sprite->x + player_sprite->width / 2.0;
+    double cy = player_sprite->y + player_sprite->height / 2.0;
 
     double fov_radius = FOV_RADIUS;
-    double cone_half_angle = level->fov_angle * M_PI / 360.0; // Metade do ângulo do cone em radianos
+    double cone_half_angle = level->fov_angle * M_PI / 360.0;
 
-    // Precompute direção do vetor unitário
+    // Unit vector direction
     double dir_x = cos(delta);
     double dir_y = sin(delta);
 
-    // Precompute cosseno para o produto escalar
     double cos_half_angle = cos(cone_half_angle);
     double cos_half_angle_sq = cos_half_angle * cos_half_angle;
 
-    // Apenas verifica pixels num quadrado ao redor do jogador (otimização massiva)
-    int x_start = (int) (x - fov_radius);
-    int x_end = (int) (x + fov_radius);
-    int y_start = (int) (y - fov_radius);
-    int y_end = (int) (y + fov_radius);
+    for (int y_pixel = 0; y_pixel < y_res; y_pixel++) {
+        for (int x_pixel = 0; x_pixel < x_res; x_pixel++) {
+            // dx and dy are coordinates of pixel if origin is in center of player
+            double dx = x_pixel - cx;
+            double dy = y_pixel - cy;
 
-    // Limita valores às bordas da tela
-    x_start = (x_start < 0) ? 0 : x_start;
-    x_end = (x_end >= x_res) ? x_res - 1 : x_end;
-    y_start = (y_start < 0) ? 0 : y_start;
-    y_end = (y_end >= y_res) ? y_res - 1 : y_end;
-
-    for (int y_pixel = y_start; y_pixel <= y_end; y_pixel++) {
-        for (int x_pixel = x_start; x_pixel <= x_end; x_pixel++) {
-            if (x_pixel == (int) x && y_pixel == (int) y)
-                continue;
-
-            double dx = x_pixel - x;
-            double dy = y_pixel - y;
-
-            // Apenas multiplicações em vez de sqrt para melhor desempenho
+            // the square of the distance to the center of the player
             double dist_sq = dx * dx + dy * dy;
-            if (dist_sq > fov_radius * fov_radius)
-                continue;
 
             double dot_product = dx * dir_x + dy * dir_y;
-            if (dot_product < 0)
-                continue; // Atrás do jogador
-
-            // Verifica se está dentro do cone usando comparação de quadrados
-            if ((dot_product * dot_product) >= (dist_sq * cos_half_angle_sq)) {
+            if (dist_sq > fov_radius * fov_radius || // Outside the circle of radius fov_radius
+                dot_product < 0 || // Behind player
+                (dot_product * dot_product) < (dist_sq * cos_half_angle_sq)) { // Outside the cone
                 uint32_t index = (x_res * y_pixel + x_pixel) * bytes_per_pixel;
 
                 if (index < frame_size) {
-                    memcpy(&sec_frame_buffer[index], &maze_buffer[index], bytes_per_pixel);
+                    memset(&sec_frame_buffer[index], 7, bytes_per_pixel);
+                } else {
+                    return; // Outside the screen
                 }
             }
         }
@@ -349,8 +332,8 @@ void draw_level(Level *level, struct packet pp) {
         return;
 
     // Maze logic
-    clear_buffer(maze_buffer);
-    draw_maze(level->maze, maze_buffer);
+    clear_buffer(sec_frame_buffer);
+    draw_maze(level->maze, sec_frame_buffer);
 
     // Mob logic
     level_update_all_mobs(level);

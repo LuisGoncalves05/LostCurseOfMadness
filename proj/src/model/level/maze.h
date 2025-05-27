@@ -15,18 +15,6 @@
 extern uint32_t frame_size;
 extern uint16_t x_res, y_res;
 
-////////////////////////////////////////
-/**
- * @brief Initializes the buffer used for maze drawing.
- */
-void init_maze_buffer();
-
-/**
- * @brief Frees the buffer used for maze drawing.
- */
-void free_maze_buffer();
-////////////////////////////////////////
-
 /**
  * @brief Represents a single Maze instance.
  *
