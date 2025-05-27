@@ -16,7 +16,7 @@ Cursor *create_cursor(CursorMode mode, int x, int y) {
     if (mode == CURSOR_DEFAULT) {
         cursor->sprite = create_sprite((xpm_map_t) cursor_xpm, x, y, 0, 0);
     } else {
-        cursor->sprite = create_sprite((xpm_map_t) crosshair_xpm, x, y, 0, 0);
+        cursor->sprite = create_sprite((xpm_map_t) crosshair_xpm, x_res / 2, y_res / 2, 0, 0);
     }
     if (cursor->sprite == NULL) {
         free(cursor);
@@ -39,12 +39,16 @@ void destroy_cursor(Cursor *cursor) {
 uint16_t cursor_get_x(Cursor *cursor) {
     if (cursor == NULL)
         return -1;
+    if (cursor->mode == CURSOR_CROSSHAIR)
+        return cursor->sprite->x + cursor->sprite->width / 2;
     return cursor->sprite->x;
 }
 
 uint16_t cursor_get_y(Cursor *cursor) {
     if (cursor == NULL)
         return -1;
+    if (cursor->mode == CURSOR_CROSSHAIR)
+        return cursor->sprite->y + cursor->sprite->height / 2;
     return cursor->sprite->y;
 }
 
