@@ -1,15 +1,3 @@
-/**
- * @file game.h
- *
- * @brief This file contains the declarations for the main game module.
- * The game module manages the core game loop, game state, input handling, and transitions between menus and levels.
- */
-
-/** @defgroup game Game
- *  @brief Main game module for managing game logic, input, and state transitions.
- *  @{
- */
-
 #ifndef GAME_H
 #define GAME_H
 
@@ -23,23 +11,25 @@
 #include "model/utils/cursor.h"
 #include "model/utils/keys.h"
 #include "model/utils/sprite.h"
-
 #include "drivers/keyboard/keyboard.h"
 #include "drivers/mouse/mouse.h"
 #include "drivers/timer/i8254.h"
 #include "drivers/video/gpu.h"
-
 #include "assets/xpm/cursor.xpm"
 
 extern uint8_t scan_code;
 extern struct packet pp;
-
 extern int frame_counter;
 
+/**
+ * @brief Represents a single Game instance.
+ *
+ * The Game struct is opaque.
+ */
 typedef struct Game Game;
 
 /**
- * @brief Enum representing the different game states.
+ * @brief Possible states of the game.
  */
 typedef enum {
     MENU,      /**< Main menu state */
@@ -64,14 +54,6 @@ Game *create_game();
 void destroy_game(Game *game);
 
 /**
- * @brief Returns the current state of the game.
- *
- * @param game Pointer to the Game structure.
- * @return Current game state.
- */
-State get_state(Game *game);
-
-/**
  * @brief Handles timer interrupts and updates game logic accordingly.
  *
  * @param game Pointer to the Game structure.
@@ -92,6 +74,12 @@ void game_keyboard_handler(Game *game);
  */
 void game_mouse_handler(Game *game);
 
-#endif
+/**
+ * @brief Returns the current state of the game.
+ *
+ * @param game Pointer to the Game structure.
+ * @return Current game state.
+ */
+State get_state(Game *game);
 
-/** @} */
+#endif /* GAME_H */
