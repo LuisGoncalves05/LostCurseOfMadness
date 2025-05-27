@@ -1,23 +1,24 @@
 #include "player.h"
 
 struct Player {
-    PlayerState state;
     AnimatedSprite *animated_sprite;
     unsigned char health;
+    PlayerState state;
 };
 
-// Create a new player
+/* Create and destroy section */
+
 Player *create_player() {
     Player *player = (Player *) malloc(sizeof(Player));
-    if (!player) return NULL;
-    player->state = PLAYER_IDLE; 
+    if (!player)
+        return NULL;
+    player->state = PLAYER_IDLE;
     player->health = PLAYER_HEALTH;
     Sprite *new_sprite = create_sprite((xpm_map_t) player_idleS_1, 400, 400, 0, 0);
     player->animated_sprite = create_animated_sprite(new_sprite, 45, 2, (xpm_map_t) player_idleS_2);
     return player;
 }
 
-// Destroy the player and free memory
 void destroy_player(Player *player) {
     if (!player) return;
     destroy_animated_sprite(player->animated_sprite);
@@ -48,21 +49,22 @@ unsigned char player_get_health(Player *player) {
     return player->health;
 }
 
-PlayerState get_player_state(Player *player) {
-    return player->state;
-}
-
-void set_player_state(Player *player, PlayerState state) {
-    if (player == NULL) return;
-    player->state = state;
-}
-
 void player_set_health(Player *player, unsigned char health) {
     player->health = health;
 }
 
-void update_player_state(Player *player, struct packet pp) {
-    if (player == NULL) return;
+PlayerState player_get_state(Player *player) {
+    return player->state;
+}
+
+/* Statics section */
+
+/* Others section */
+
+void player_update_state(Player *player, struct packet pp) {
+    if (player == NULL)
+        return;
+
     if (player->animated_sprite->sprite->xspeed != 0 || player->animated_sprite->sprite->yspeed != 0) {
         player->state = PLAYER_WALKING;
     } else {
@@ -72,7 +74,7 @@ void update_player_state(Player *player, struct packet pp) {
     if (pp.lb == 1) {
         player->state = PLAYER_SHOOTING;
     }
-    
+
     if (player->health == 0) {
         player->state = PLAYER_DYING;
     }
@@ -164,6 +166,8 @@ void player_update_speed(Player *player, uint8_t scan_code) {
         break;
   }
 }
+
+/* Draw section */
 
 void draw_player(Player *player, double delta, uint8_t *frame_buffer) {
     draw_animated_sprite(player->animated_sprite, frame_buffer);

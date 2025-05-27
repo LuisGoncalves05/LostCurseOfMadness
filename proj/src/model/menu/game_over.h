@@ -4,22 +4,65 @@
 #include <lcom/lcf.h>
 #include <stdint.h>
 #include "button.h"
-
+#include "assets/xpm/game_over/exit_button.xpm"
+#include "assets/xpm/game_over/exit_button_selected.xpm"
 #include "assets/xpm/game_over/game_over.xpm"
 #include "assets/xpm/game_over/menu_button.xpm"
 #include "assets/xpm/game_over/menu_button_selected.xpm"
-#include "assets/xpm/game_over/exit_button.xpm"
-#include "assets/xpm/game_over/exit_button_selected.xpm"
 
+/**
+ * @brief Represents a single GameOver instance.
+ *
+ * The GameOver struct is opaque.
+ */
 typedef struct GameOver GameOver;
 
+/**
+ * @brief Creates and initializes a new GameOver instance.
+ *
+ * @return Pointer to the created GameOver structure.
+ */
 GameOver *create_game_over();
+
+/**
+ * @brief Frees the memory associated with the GameOver instance.
+ *
+ * @param main_menu Pointer to the GameOver structure to destroy.
+ */
 void destroy_game_over(GameOver *game_over);
 
-void draw_game_over(GameOver *game_over, uint8_t *frame_buffer);
-
-void game_over_change_button(GameOver *game_over);
+/**
+ * @brief Gets the currently selected button in the game over menu.
+ *
+ * @param main_menu Pointer to the GameOver structure.
+ * @return The type of the currently selected button.
+ */
 ButtonType game_over_get_button(GameOver *game_over);
+
+/**
+ * @brief Cycles to the next selectable button in the game over menu.
+ *
+ * @param main_menu Pointer to the GameOver structure.
+ */
+void game_over_change_button(GameOver *game_over);
+
+/**
+ * @brief Handles a mouse click and determines if a button was clicked.
+ *
+ * @param main_menu Pointer to the GameOver structure.
+ * @param x X-coordinate of the mouse click.
+ * @param y Y-coordinate of the mouse click.
+ * @return The type of the button that was clicked, or BUTTON_NONE if no button was clicked.
+ */
 ButtonType game_over_click_handler(GameOver *game_over, uint16_t x, uint16_t y);
 
-#endif
+/**
+ * @brief Draws the game over menu on the given frame buffer.
+ *
+ * @param main_menu Pointer to the GameOver structure.
+ * @param frame_buffer Pointer to the frame buffer.
+ */
+void draw_game_over(GameOver *game_over, uint8_t *frame_buffer);
+
+#endif /* GAME_OVER_H */
+

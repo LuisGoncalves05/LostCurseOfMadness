@@ -1,14 +1,16 @@
 #include "game_over.h"
 
-
 struct GameOver {
     Button *menuButton;
     Button *exitButton;
 };
 
+/* Create and destroy section */
+
 GameOver *create_game_over() {
     GameOver *game_over = (GameOver *) malloc(sizeof(GameOver));
-    if (game_over == NULL) return NULL;
+    if (game_over == NULL)
+        return NULL;
 
     game_over->menuButton = create_button((xpm_map_t) menu_button, (xpm_map_t) menu_button_selected, BUTTON_MENU_START_X, GAME_OVER_BUTTON_START_Y);
     if (game_over->menuButton == NULL) {
@@ -27,14 +29,32 @@ GameOver *create_game_over() {
 }
 
 void destroy_game_over(GameOver *game_over) {
-    if (game_over == NULL) return;
+    if (game_over == NULL)
+        return;
     destroy_button(game_over->menuButton);
     destroy_button(game_over->exitButton);
     free(game_over);
 }
 
+/* Getter and setter section */
+
+ButtonType game_over_get_button(GameOver *game_over) {
+    if (game_over == NULL)
+        return BUTTON_NONE;
+    if (button_get_selected(game_over->menuButton))
+        return BUTTON_MENU;
+    if (button_get_selected(game_over->exitButton))
+        return BUTTON_EXIT;
+    return BUTTON_NONE;
+}
+
+/* Statics section */
+
+/* Others section */
+
 void game_over_change_button(GameOver *game_over) {
-    if (game_over == NULL) return;
+    if (game_over == NULL)
+        return;
     bool menu_selected = button_get_selected(game_over->menuButton);
     bool exit_selected = button_get_selected(game_over->exitButton);
     if (menu_selected == exit_selected) { // no button selected
@@ -46,19 +66,17 @@ void game_over_change_button(GameOver *game_over) {
     }
 }
 
-ButtonType game_over_get_button(GameOver *game_over) {
-    if (game_over == NULL) return BUTTON_NONE;
-    if (button_get_selected(game_over->menuButton)) return BUTTON_MENU;
-    if (button_get_selected(game_over->exitButton)) return BUTTON_EXIT;
+ButtonType game_over_click_handler(GameOver *game_over, uint16_t x, uint16_t y) {
+    if (game_over == NULL)
+        return BUTTON_NONE;
+    if (button_is_clicked(game_over->menuButton, x, y))
+        return BUTTON_MENU;
+    if (button_is_clicked(game_over->exitButton, x, y))
+        return BUTTON_EXIT;
     return BUTTON_NONE;
 }
 
-ButtonType game_over_click_handler(GameOver *game_over, uint16_t x, uint16_t y) {
-    if (game_over == NULL) return BUTTON_NONE;
-    if (button_is_clicked(game_over->menuButton, x, y)) return BUTTON_MENU;
-    if (button_is_clicked(game_over->exitButton, x, y)) return BUTTON_EXIT;
-    return BUTTON_NONE;
-}
+/* Draw section */
 
 void draw_game_over(GameOver *game_over, uint8_t *frame_buffer) {
     vga_draw_xpm((xpm_map_t) game_over_xpm, 154, 262, frame_buffer);

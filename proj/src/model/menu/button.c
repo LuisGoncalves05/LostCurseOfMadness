@@ -10,9 +10,12 @@ struct Button {
     uint16_t height;
 };
 
-Button* create_button(xpm_map_t xpm, xpm_map_t xpm_selected, uint16_t x, uint16_t y) {
-    Button* button = (Button*) malloc(sizeof(Button));
-    if (!button) return NULL;
+/* Create and destroy section */
+
+Button *create_button(xpm_map_t xpm, xpm_map_t xpm_selected, uint16_t x, uint16_t y) {
+    Button *button = (Button *) malloc(sizeof(Button));
+    if (!button)
+        return NULL;
 
     button->selected = false;
     button->x = x;
@@ -37,28 +40,40 @@ Button* create_button(xpm_map_t xpm, xpm_map_t xpm_selected, uint16_t x, uint16_
 }
 
 void destroy_button(Button *button) {
-    if (button == NULL) return;
+    if (button == NULL)
+        return;
     destroy_sprite(button->sprite);
     destroy_sprite(button->selected_sprite);
     free(button);
 }
 
+/* Getter and setter section */
+
 bool button_get_selected(Button *button) {
-    if (button == NULL) return false;
+    if (button == NULL)
+        return false;
     return button->selected;
 }
 
 void button_set_selected(Button *button, bool selected) {
-    if (button == NULL) return;
+    if (button == NULL)
+        return;
     button->selected = selected;
 }
+
+/* Statics section */
+
+/* Others section */
 
 bool button_is_clicked(Button *button, uint16_t x, uint16_t y) {
     bool clicked = (x >= button->x && x <= button->x + button->width &&
                     y >= button->y && y <= button->y + button->height);
-    if (clicked) button->selected = true;
+    if (clicked)
+        button->selected = true;
     return clicked;
 }
+
+/* Draw section */
 
 void draw_button(Button *button, uint8_t *frame_buffer) {
     if (button->selected) {

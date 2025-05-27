@@ -3,20 +3,64 @@
 
 #include <lcom/lcf.h>
 #include <stdint.h>
-
 #include "drivers/video/gpu.h"
 #include "model/utils/sprite.h"
 
+extern uint16_t x_res, y_res;
+
+/**
+ * @brief Represents a mouse cursor instance.
+ *
+ * The Cursor struct is opaque.
+ */
 typedef struct Cursor Cursor;
 
-Cursor* create_cursor(xpm_map_t xpm);
-void destroy_cursor(Cursor* cursor);
+/**
+ * @brief Creates a new cursor with the specified XPM image.
+ *
+ * @param xpm XPM image used to represent the cursor.
+ * @return Pointer to the created Cursor structure.
+ */
+Cursor *create_cursor(xpm_map_t xpm);
 
-uint16_t cursor_get_x(Cursor* cursor);
-uint16_t cursor_get_y(Cursor* cursor);
+/**
+ * @brief Frees the memory associated with the cursor.
+ *
+ * @param cursor Pointer to the Cursor structure to destroy.
+ */
+void destroy_cursor(Cursor *cursor);
 
-void cursor_update(Cursor* cursor, double dx, double dy);
+/**
+ * @brief Returns the current X position of the cursor.
+ *
+ * @param cursor Pointer to the Cursor structure.
+ * @return X coordinate of the cursor.
+ */
+uint16_t cursor_get_x(Cursor *cursor);
 
-void draw_cursor(Cursor* cursor, uint8_t* buffer);
+/**
+ * @brief Returns the current Y position of the cursor.
+ *
+ * @param cursor Pointer to the Cursor structure.
+ * @return Y coordinate of the cursor.
+ */
+uint16_t cursor_get_y(Cursor *cursor);
 
-#endif
+/**
+ * @brief Updates the cursor's position based on mouse movement deltas.
+ *
+ * @param cursor Pointer to the Cursor structure.
+ * @param dx Horizontal movement delta.
+ * @param dy Vertical movement delta.
+ */
+void cursor_update(Cursor *cursor, double dx, double dy);
+
+/**
+ * @brief Draws the cursor to the given frame buffer.
+ *
+ * @param cursor Pointer to the Cursor structure.
+ * @param buffer Pointer to the frame buffer.
+ */
+void draw_cursor(Cursor *cursor, uint8_t *buffer);
+
+#endif /* CURSOR_H */

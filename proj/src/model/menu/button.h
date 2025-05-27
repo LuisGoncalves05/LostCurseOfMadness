@@ -1,15 +1,3 @@
-/**
- * @file button.h
- *
- * @brief This file contains the declarations for the button module.
- * The button module handles the creation, rendering, and interaction with UI buttons.
- */
-
-/** @defgroup button Button
- *  @brief Module for creating and handling UI buttons in the game.
- *  @{
- */
-
 #ifndef BUTTON_H
 #define BUTTON_H
 
@@ -55,10 +43,10 @@
  * @brief Enumeration of button types.
  */
 typedef enum {
-    BUTTON_NONE,  /**< No button selected */
-    BUTTON_PLAY,  /**< Play button */
-    BUTTON_MENU,  /**< Menu button */
-    BUTTON_EXIT   /**< Exit button */
+    BUTTON_NONE, /**< No button selected */
+    BUTTON_PLAY, /**< Play button */
+    BUTTON_MENU, /**< Menu button */
+    BUTTON_EXIT  /**< Exit button */
 } ButtonType;
 
 typedef struct Button Button;
@@ -72,7 +60,7 @@ typedef struct Button Button;
  * @param y Y-coordinate of the button.
  * @return Pointer to the created Button structure.
  */
-Button* create_button(xpm_map_t xpm, xpm_map_t xpm_selected, uint16_t x, uint16_t y);
+Button *create_button(xpm_map_t xpm, xpm_map_t xpm_selected, uint16_t x, uint16_t y);
 
 /**
  * @brief Frees the memory associated with a Button.
@@ -115,6 +103,5 @@ bool button_is_clicked(Button *button, uint16_t x, uint16_t y);
  */
 void draw_button(Button *button, uint8_t *frame_buffer);
 
-#endif
+#endif /* BUTTON_H */
 
-/** @} */
