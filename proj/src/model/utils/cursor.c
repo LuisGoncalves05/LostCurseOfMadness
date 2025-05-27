@@ -2,20 +2,28 @@
 
 struct Cursor {
     Sprite *sprite;
+    CursorMode mode;
 };
 
 /* Create and destroy section */
 
-Cursor *create_cursor(xpm_map_t xpm) {
+Cursor *create_cursor(CursorMode mode, int x, int y) {
     Cursor *cursor = (Cursor *) malloc(sizeof(Cursor));
     if (cursor == NULL) {
         return NULL;
     }
-    cursor->sprite = create_sprite(xpm, 0, 0, 0, 0);
+    
+    if (mode == CURSOR_DEFAULT) {
+        cursor->sprite = create_sprite((xpm_map_t) cursor_xpm, x, y, 0, 0);
+    } else {
+        cursor->sprite = create_sprite((xpm_map_t) crosshair_xpm, x, y, 0, 0);
+    }
     if (cursor->sprite == NULL) {
         free(cursor);
         return NULL;
     }
+    cursor->mode = mode;
+    
     return cursor;
 }
 
