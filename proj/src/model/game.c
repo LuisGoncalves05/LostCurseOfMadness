@@ -59,7 +59,7 @@ Game *create_game() {
     game->level_number = 0;
     game->score = 0;
     game->state = MENU;
-    game->cursor = create_cursor((xpm_map_t) cursor);
+    game->cursor = create_cursor((xpm_map_t) crosshair);
     game->shooting = false;
     state_init(game);
 

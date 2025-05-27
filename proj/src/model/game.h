@@ -16,6 +16,7 @@
 #include "drivers/timer/i8254.h"
 #include "drivers/video/gpu.h"
 #include "assets/xpm/cursor.xpm"
+#include "assets/xpm/crosshair.xpm"
 
 extern uint8_t scan_code;
 extern struct packet pp;
