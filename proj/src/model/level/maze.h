@@ -7,7 +7,7 @@
 #define EMPTY 0                 /**< Represents an empty cell in the maze. */
 #define WALL 1                  /**< Represents a wall cell in the maze. */
 #define MOB 2                   /**< Represents a mob cell in the maze. */
-#define WALL_COLOR 0x08         /**< Color used for the walls of the maze. */
+#define WALL_COLOR 7         /**< Color used for the walls of the maze. */
 #define CELL_SIZE 64            /**< Total size of each cell including wall width. */
 
 extern uint8_t* secondary_frame_buffer;

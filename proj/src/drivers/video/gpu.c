@@ -45,8 +45,8 @@ int(set_frame_buffers)(uint16_t mode) {
     return 0;
 }
 
-int(clear_buffer)(uint8_t *frame_buffer) {
-    return memset(frame_buffer, 0, x_res * y_res * bytes_per_pixel) == NULL;
+int(clear_buffer)(uint8_t *frame_buffer, uint16_t color) {
+    return memset(frame_buffer, color, x_res * y_res * bytes_per_pixel) == NULL;
 }
 
 void(set_display_start)() {

@@ -10,6 +10,8 @@
 #include "assets/xpm/game_over/menu_button.xpm"
 #include "assets/xpm/game_over/menu_button_selected.xpm"
 
+extern uint16_t x_res, y_res;
+
 /**
  * @brief Represents a single GameOver instance.
  *

@@ -79,7 +79,7 @@ ButtonType game_over_click_handler(GameOver *game_over, uint16_t x, uint16_t y) 
 /* Draw section */
 
 void draw_game_over(GameOver *game_over, uint8_t *frame_buffer) {
-    vga_draw_xpm((xpm_map_t) game_over_xpm, 154, 262, frame_buffer);
+    vga_draw_xpm((xpm_map_t) game_over_xpm, x_res / 2 - 715 / 2, y_res / 2 - 120 / 2, frame_buffer);
     draw_button(game_over->menuButton, frame_buffer);
     draw_button(game_over->exitButton, frame_buffer);
 }

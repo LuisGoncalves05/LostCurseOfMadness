@@ -4,30 +4,7 @@
 #include <lcom/lcf.h>
 #include "drivers/video/gpu.h"
 
-/**
- * @brief X-coordinate for the Play button.
- */
-#define BUTTON_PLAY_START_X 212
-
-/**
- * @brief X-coordinate for the Menu button.
- */
-#define BUTTON_MENU_START_X 212
-
-/**
- * @brief X-coordinate for the Exit button.
- */
-#define BUTTON_EXIT_START_X 522
-
-/**
- * @brief Y-coordinate for buttons in the main menu.
- */
-#define MAIN_MENU_BUTTON_START_Y 500
-
-/**
- * @brief Y-coordinate for buttons in the game over screen.
- */
-#define GAME_OVER_BUTTON_START_Y 400
+extern uint16_t x_res, y_res;
 
 /**
  * @brief Width of a button in pixels.
@@ -38,6 +15,32 @@
  * @brief Height of a button in pixels.
  */
 #define BUTTON_HEIGHT 139
+
+/**
+ * @brief X-coordinate for the Play button.
+ */
+#define BUTTON_PLAY_START_X x_res / 2 - BUTTON_WIDTH - 25
+
+/**
+ * @brief X-coordinate for the Menu button.
+ */
+#define BUTTON_MENU_START_X x_res / 2 - BUTTON_WIDTH - 25
+
+/**
+ * @brief X-coordinate for the Exit button.
+ */
+#define BUTTON_EXIT_START_X x_res / 2 + 25
+
+/**
+ * @brief Y-coordinate for buttons in the main menu.
+ */
+#define MAIN_MENU_BUTTON_START_Y y_res / 2 + 200
+
+/**
+ * @brief Y-coordinate for buttons in the game over screen.
+ */
+#define GAME_OVER_BUTTON_START_Y y_res / 2 + 100
+
 
 /**
  * @brief Enumeration of button types.

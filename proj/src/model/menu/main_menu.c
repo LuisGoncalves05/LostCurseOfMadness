@@ -80,7 +80,7 @@ ButtonType main_menu_click_handler(MainMenu *main_menu, uint16_t x, uint16_t y) 
 /* Draw section */
 
 void draw_main_menu(MainMenu *main_menu, uint8_t *frame_buffer) {
-    vga_draw_xpm((xpm_map_t) lcom_xpm, 112, 184, frame_buffer);
+    vga_draw_xpm((xpm_map_t) lcom_xpm, x_res / 2 - 801 / 2, y_res / 2 - 300 / 2, frame_buffer);
     draw_button(main_menu->playButton, frame_buffer);
     draw_button(main_menu->exitButton, frame_buffer);
 }

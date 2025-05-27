@@ -10,6 +10,8 @@
 #include "assets/xpm/main_menu/play_button.xpm"
 #include "assets/xpm/main_menu/play_button_selected.xpm"
 
+extern uint16_t x_res, y_res;
+
 /**
  * @brief Represents a single MainMenu instance.
  *

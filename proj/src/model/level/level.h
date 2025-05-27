@@ -3,6 +3,7 @@
 
 #include <lcom/lcf.h>
 
+#include "config.h"
 #include "bullet.h"
 #include "maze.h"
 #include "mob.h"
