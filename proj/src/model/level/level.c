@@ -200,7 +200,7 @@ static int draw_mobs(Level *level) {
     uint8_t mob_count = get_mob_count(level->maze);
     for (int i = 0; i < mob_count; i++) {
         Mob *mob = mobs[i];
-        draw_mob(mob, second_frame_buffer);
+        draw_mob(mob, secondary_frame_buffer);
     }
     return 0;
 }
@@ -301,15 +301,15 @@ static void draw_fov_cone(Level *level) {
                  (dot_product * dot_product) < (dist_sq * cos_half_angle_sq) // Outside the cone
                  ) &&
                 dist_sq > CLOSE_RADIUS * CLOSE_RADIUS) { // Outside the circle the fov cone would be in
-                vga_draw_pixel(x_pixel, y_pixel, OUT_OF_FOV_COLOR, sec_frame_buffer);
+                vga_draw_pixel(x_pixel, y_pixel, OUT_OF_FOV_COLOR, secondary_frame_buffer);
             }
         }
     }
 
-    vga_draw_rectangle(0, 0, x_res, box_min_y, OUT_OF_FOV_COLOR, sec_frame_buffer);
-    vga_draw_rectangle(0, box_min_y, box_min_x, box_max_y, OUT_OF_FOV_COLOR, sec_frame_buffer);
-    vga_draw_rectangle(max_x, box_min_y, x_res, box_max_y, OUT_OF_FOV_COLOR, sec_frame_buffer);
-    vga_draw_rectangle(0, box_max_y, x_res, y_res, OUT_OF_FOV_COLOR, sec_frame_buffer);
+    vga_draw_rectangle(0, 0, x_res, box_min_y, OUT_OF_FOV_COLOR, secondary_frame_buffer);
+    vga_draw_rectangle(0, box_min_y, box_min_x, box_max_y, OUT_OF_FOV_COLOR, secondary_frame_buffer);
+    vga_draw_rectangle(max_x, box_min_y, x_res, box_max_y, OUT_OF_FOV_COLOR, secondary_frame_buffer);
+    vga_draw_rectangle(0, box_max_y, x_res, y_res, OUT_OF_FOV_COLOR, secondary_frame_buffer);
 }
 
 static void draw_all_bullets(Level *level, uint8_t *frame_buffer) {
@@ -360,8 +360,8 @@ void draw_level(Level *level, struct packet pp) {
         return;
 
     // Maze logic
-    clear_buffer(sec_frame_buffer);
-    draw_maze(level->maze, sec_frame_buffer);
+    clear_buffer(secondary_frame_buffer);
+    draw_maze(level->maze, secondary_frame_buffer);
 
     // Mob logic
     level_update_all_mobs(level);
@@ -371,9 +371,9 @@ void draw_level(Level *level, struct packet pp) {
     player_update_position(level);
     player_update_state(level->player, pp);
     draw_fov_cone(level);
-    draw_player(level->player, level->delta, sec_frame_buffer);
+    draw_player(level->player, level->delta, secondary_frame_buffer);
 
     // Level logic
     level_update_all_bullets(level);
-    draw_all_bullets(level, sec_frame_buffer);
+    draw_all_bullets(level, secondary_frame_buffer);
 }

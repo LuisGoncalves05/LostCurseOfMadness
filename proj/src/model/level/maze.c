@@ -314,7 +314,7 @@ int(draw_maze)(Maze *maze, uint8_t *frame_buffer) {
     for (int y = 0; y < maze->height; y++) {
         for (int x = 0; x < maze->width; x++) {
             if (maze->cells[y][x] == WALL) {
-                vga_draw_rectangle(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE, WALL_COLOR, sec_frame_buffer);
+                vga_draw_rectangle(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE, WALL_COLOR, secondary_frame_buffer);
             }
         }
     }

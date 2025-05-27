@@ -11,7 +11,7 @@ uint16_t x_res, y_res;
 uint32_t frame_size;
 bool frame_start = true;
 uint8_t *main_frame_buffer;
-uint8_t *sec_frame_buffer;
+uint8_t *secondary_frame_buffer;
 
 int(set_graphic_mode)(uint16_t mode) {
     reg86_t reg86;
@@ -40,7 +40,7 @@ int(set_frame_buffers)(uint16_t mode) {
     sys_privctl(SELF, SYS_PRIV_ADD_MEM, &physic_addresses); // add memory range to process
 
     main_frame_buffer = vm_map_phys(SELF, (void *) physic_addresses.mr_base, 2 * frame_size); // map memory range to process
-    sec_frame_buffer = main_frame_buffer + frame_size;
+    secondary_frame_buffer = main_frame_buffer + frame_size;
 
     return 0;
 }
@@ -64,8 +64,8 @@ void vga_flip_pages() {
     frame_start = !frame_start;
     set_display_start();
     uint8_t *tmp = main_frame_buffer;
-    main_frame_buffer = sec_frame_buffer;
-    sec_frame_buffer = tmp;
+    main_frame_buffer = secondary_frame_buffer;
+    secondary_frame_buffer = tmp;
 }
 
 uint8_t *(get_position) (uint16_t x, uint16_t y, uint8_t *frame_buffer) {

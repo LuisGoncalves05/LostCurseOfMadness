@@ -10,7 +10,7 @@
 #define WALL_COLOR 0x08         /**< Color used for the walls of the maze. */
 #define CELL_SIZE 64            /**< Total size of each cell including wall width. */
 
-extern uint8_t* sec_frame_buffer;
+extern uint8_t* secondary_frame_buffer;
 extern uint32_t frame_size;
 extern uint16_t x_res, y_res;
 

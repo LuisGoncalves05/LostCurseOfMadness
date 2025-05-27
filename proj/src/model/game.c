@@ -127,19 +127,19 @@ static void set_state(Game *game, State new_state) {
 // Timer handlers
 
 static void menu_timer_handler(Game *game) {
-    clear_buffer(sec_frame_buffer);
+    clear_buffer(secondary_frame_buffer);
 
-    draw_main_menu(game->menu.main_menu, sec_frame_buffer);
-    draw_cursor(game->cursor, sec_frame_buffer);
+    draw_main_menu(game->menu.main_menu, secondary_frame_buffer);
+    draw_cursor(game->cursor, secondary_frame_buffer);
 
     vga_flip_pages();
 }
 
 static void level_timer_handler(Game *game) {
-    clear_buffer(sec_frame_buffer);
+    clear_buffer(secondary_frame_buffer);
 
     draw_level(game->level, pp);
-    draw_cursor(game->cursor, sec_frame_buffer);
+    draw_cursor(game->cursor, secondary_frame_buffer);
 
     vga_flip_pages();
 
@@ -152,10 +152,10 @@ static void victory_timer_handler(Game *game) {
 }
 
 static void game_over_timer_handler(Game *game) {
-    clear_buffer(sec_frame_buffer);
+    clear_buffer(secondary_frame_buffer);
 
-    draw_game_over(game->menu.game_over, sec_frame_buffer);
-    draw_cursor(game->cursor, sec_frame_buffer);
+    draw_game_over(game->menu.game_over, secondary_frame_buffer);
+    draw_cursor(game->cursor, secondary_frame_buffer);
 
     vga_flip_pages();
 }

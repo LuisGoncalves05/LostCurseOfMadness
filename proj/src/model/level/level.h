@@ -8,7 +8,7 @@
 #include "mob.h"
 #include "player.h"
 
-extern uint8_t *sec_frame_buffer;
+extern uint8_t *secondary_frame_buffer;
 extern uint8_t *main_frame_buffer;
 extern uint8_t bytes_per_pixel;
 extern uint16_t x_res;
