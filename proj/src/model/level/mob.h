@@ -2,6 +2,7 @@
 #define MOB_H
 
 #include <lcom/lcf.h>
+#include <stdlib.h>
 
 #include "drivers/video/gpu.h"
 #include "model/utils/sprite.h"

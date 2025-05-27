@@ -78,7 +78,7 @@ int(vga_draw_pixel)(uint16_t x, uint16_t y, uint32_t color, uint8_t *frame_buffe
 
 int(vga_draw_hline)(uint16_t x, uint16_t y, uint16_t len, uint32_t color, uint8_t *frame_buffer) {
     if (len == 0 || x >= x_res || y >= y_res) {
-        printf("vga_draw_hline: invalid coordinates/dimensions, x:%u y:%u len:%u.\n", x, y, len);
+        // printf("vga_draw_hline: invalid coordinates/dimensions, x:%u y:%u len:%u.\n", x, y, len);
         return 1;
     }
 
