@@ -311,10 +311,10 @@ static void draw_fov_cone(Level *level) {
     max_y = fmax(max_y, cy + CLOSE_RADIUS);
 
     // Check screen bounds
-    int box_min_x = round(fmax(0, floor(min_x)));
-    int box_max_x = round(fmin(x_res - 1, ceil(max_x)));
-    int box_min_y = round(fmax(0, floor(min_y)));
-    int box_max_y = round(fmin(y_res - 1, ceil(max_y)));
+    int box_min_x = (int) fmax(0, floor(min_x));
+    int box_max_x = (int) fmin(x_res - 1, ceil(max_x));
+    int box_min_y = (int) fmax(0, floor(min_y));
+    int box_max_y = (int) fmin(y_res - 1, ceil(max_y));
 
     // Unit vector direction
     double dir_x = cos(delta);
