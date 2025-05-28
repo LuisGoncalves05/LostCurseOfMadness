@@ -59,14 +59,6 @@ void player_set_sprite(Player *player, AnimatedSprite *sprite) {
     player->animated_sprite = sprite;
 }
 
-unsigned char player_get_health(Player *player) {
-    return player->health;
-}
-
-void player_set_health(Player *player, unsigned char health) {
-    player->health = health;
-}
-
 PlayerState player_get_state(Player *player) {
     return player->state;
 }
@@ -179,6 +171,13 @@ void player_update_speed(Player *player, uint8_t scan_code) {
         default:
             break;
     }
+}
+
+void player_lose_health(Player *player) {
+    if (player == NULL)
+        return;
+    if (player->health > 0)
+        player->health--;
 }
 
 /* Draw section */

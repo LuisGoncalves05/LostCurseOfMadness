@@ -5,10 +5,10 @@
 #include <math.h>
 #include <stdlib.h>
 
+#include "assets/xpm/level/player/idle.xpm"
 #include "drivers/video/gpu.h"
 #include "model/utils/keys.h"
 #include "model/utils/sprite.h"
-#include "assets/xpm/level/player/idle.xpm"
 
 #define PLAYER_HEALTH 3        /**< Health of the player */
 #define PLAYER_DEFAULT_SPEED 3 /**< Default speed of the player */
@@ -78,33 +78,12 @@ uint16_t player_get_y(Player *player);
 AnimatedSprite *player_get_animated_sprite(Player *player);
 
 /**
- * @brief Returns the current health of the player.
- */
-unsigned char player_get_health(Player *player);
-
-/**
  * @brief Sets a new Sprite for the player.
  *
  * @param player Pointer to the Player structure.
  * @param sprite Pointer to the new Sprite.
  */
 void player_set_sprite(Player *player, AnimatedSprite *sprite);
-
-/**
- * @brief Returns the current health of the player.
- *
- * @param player Pointer to the Player structure.
- * @return The player's health.
- */
-unsigned char player_get_health(Player *player);
-
-/**
- * @brief Sets the current health of the player.
- *
- * @param player Pointer to the Player structure.
- * @param health New health value.
- */
-void player_set_health(Player *player, unsigned char health);
 
 /**
  * @brief Returns the current state of the player.
@@ -129,6 +108,13 @@ void player_update_state(Player *player, struct packet pp);
  * @param scan_code Keyboard scan code.
  */
 void player_update_speed(Player *player, uint8_t scan_code);
+
+/**
+ * @brief Decreases the player's health by one.
+ *
+ * @param player Pointer to the Player structure.
+ */
+void player_lose_health(Player *player);
 
 /**
  * @brief Renders the player on the screen.

@@ -163,7 +163,7 @@ static int player_update_position(Level *level) {
     }
 
     if (check_mob_collisions(level)) {
-        player_set_health(level->player, player_get_health(level->player) - 1);
+        player_lose_health(level->player);
     }
 
     return 0;
