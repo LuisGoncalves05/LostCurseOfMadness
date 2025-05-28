@@ -251,14 +251,16 @@ int(draw_maze)(Maze *maze, uint8_t *frame_buffer) {
     return 0;
 }
 
-int draw_maze_outer(level->maze, secondary_frame_buffer) {
-    for (int y = 0; y < maze->height; y++) {
-        for (int x = 0; x < maze->width; x++) {
-            if (maze->cells[y][x] == WALL) {
-                vga_draw_rectangle(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE, WALL_COLOR, secondary_frame_buffer);
-            } else if (maze->cells[y][x] == WIN) {
-                vga_draw_rectangle(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE, WIN_COLOR, secondary_frame_buffer);
+int draw_maze_outer(Maze *maze, uint8_t *frame_buffer) {
+    for (int y = 0; y < y_res / CELL_SIZE; y++) {
+        for (int x = 0; x < x_res / CELL_SIZE; x++) {
+            if (y < maze->height && x < maze->width) {
+                continue; // Inside maze, already drawn
             }
+
+            if (vga_draw_rectangle(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE, WALL_COLOR, frame_buffer))
+                return 1;
         }
     }
+    return 0;
 }
