@@ -5,6 +5,7 @@
 
 #include "assets/xpm/level/key.xpm"
 #include "drivers/video/gpu.h"
+#include "model/utils/animated_sprite.h"
 #include "model/utils/sprite.h"
 
 typedef enum {
@@ -100,6 +101,14 @@ void set_mob_count(Maze *maze, uint8_t mob_count);
  * @return Pointer to array of mob Position pointers;
  */
 Point **get_mob_positions(Maze *maze);
+
+/**
+ * @brief Returns the sprite of the key.
+ *
+ * @param maze Pointer to the Maze structure.
+ * @return Pointer to the Sprite structure representing the key.;
+ */
+Sprite *get_key_sprite(Maze *maze);
 
 /**
  * @brief Checks for collision between two rectangles.

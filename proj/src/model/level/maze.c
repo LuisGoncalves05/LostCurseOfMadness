@@ -6,6 +6,7 @@ struct Maze {
     uint8_t height;
     maze_entity **cells;
     uint8_t mob_count;
+    AnimatedSprite *key;
 };
 
 /* Create and destroy section */
@@ -127,6 +128,12 @@ Maze *(create_maze) (uint8_t width, uint8_t height, uint8_t mob_count) {
     open_maze(maze, MAZE_OPENING_PERCENTAGE);
     generate_mob_positions(maze, mob_count);
 
+    Sprite *key_sprite = create_sprite((xpm_map_t) key_1, 0, 0, 0, 0);
+    maze->key = create_animated_sprite(key_sprite, 25, 4,
+    (xpm_map_t) key_2,
+    (xpm_map_t) key_1,
+    (xpm_map_t) key_3);
+
     return maze;
 }
 
@@ -160,6 +167,10 @@ uint8_t(get_mob_count)(Maze *maze) {
 
 void set_mob_count(Maze *maze, uint8_t mob_count) {
     maze->mob_count = mob_count;
+}
+
+Sprite *get_key_sprite(Maze *maze) {
+    return maze->key->sprite;
 }
 
 /* Statics section */
@@ -243,7 +254,9 @@ int(draw_maze)(Maze *maze, uint8_t *frame_buffer) {
             if (maze->cells[y][x] == WALL) {
                 vga_draw_rectangle(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE, WALL_COLOR, secondary_frame_buffer);
             } else if (maze->cells[y][x] == WIN) {
-                vga_draw_rectangle(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE, WIN_COLOR, secondary_frame_buffer);
+                maze->key->sprite->x = x * CELL_SIZE + (CELL_SIZE - maze->key->sprite->width) / 2;
+                maze->key->sprite->y = y * CELL_SIZE + (CELL_SIZE - maze->key->sprite->height) / 2;
+                draw_animated_sprite(maze->key, frame_buffer);
             }
         }
     }

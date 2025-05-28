@@ -146,7 +146,7 @@ static void update_bullet(Bullet *b, Level *level) {
 }
 
 static bool check_win(Sprite *sprite, Maze *maze) {
-    return check_rectangle_collision(sprite->x, sprite->y, sprite->width, sprite->height, (get_width(maze) - 2) * CELL_SIZE, (get_height(maze) - 2) * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+    return check_sprite_collision(sprite, get_key_sprite(maze));
 }
 
 static int player_update_position(Level *level) {
