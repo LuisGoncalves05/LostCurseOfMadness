@@ -47,7 +47,6 @@ static int(initialize_maze)(Maze *maze, uint8_t width, uint8_t height) {
     if ((width % 2 == 0) || (height % 2 == 0))
         return 1;
 
-
     maze->width = width > x_res / CELL_SIZE ? x_res / CELL_SIZE : width;
     maze->height = height > y_res / CELL_SIZE ? y_res / CELL_SIZE : height;
 
@@ -130,9 +129,9 @@ Maze *(create_maze) (uint8_t width, uint8_t height, uint8_t mob_count) {
 
     Sprite *key_sprite = create_sprite((xpm_map_t) key_1, 0, 0, 0, 0);
     maze->key = create_animated_sprite(key_sprite, 25, 4,
-    (xpm_map_t) key_2,
-    (xpm_map_t) key_1,
-    (xpm_map_t) key_3);
+                                       (xpm_map_t) key_2,
+                                       (xpm_map_t) key_1,
+                                       (xpm_map_t) key_3);
 
     return maze;
 }
@@ -249,10 +248,14 @@ int(draw_maze)(Maze *maze, uint8_t *frame_buffer) {
         return 1;
     }
 
+    xpm_image_t wall;
+    uint8_t *data = xpm_load(wall_xpm, XPM_INDEXED, &wall);
+
     for (int y = 0; y < maze->height; y++) {
         for (int x = 0; x < maze->width; x++) {
             if (maze->cells[y][x] == WALL) {
-                vga_draw_rectangle(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE, WALL_COLOR, secondary_frame_buffer);
+                if (vga_draw_loaded_xpm(data, x * CELL_SIZE, y * CELL_SIZE, wall.width, wall.height, frame_buffer))
+                    return 1;
             } else if (maze->cells[y][x] == WIN) {
                 maze->key->sprite->x = x * CELL_SIZE + (CELL_SIZE - maze->key->sprite->width) / 2;
                 maze->key->sprite->y = y * CELL_SIZE + (CELL_SIZE - maze->key->sprite->height) / 2;

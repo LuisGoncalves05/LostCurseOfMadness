@@ -4,6 +4,7 @@
 #include <lcom/lcf.h>
 
 #include "assets/xpm/level/key.xpm"
+#include "assets/xpm/level/wall.xpm"
 #include "drivers/video/gpu.h"
 #include "model/utils/animated_sprite.h"
 #include "model/utils/sprite.h"
@@ -15,7 +16,6 @@ typedef enum {
     WIN,   /**< Represents the winning cell of the maze. */
 } maze_entity;
 
-#define WALL_COLOR 7               /**< Color used for the walls of the maze. */
 #define WIN_COLOR 62               /**< Color used for the win of the maze. */
 #define CELL_SIZE 64               /**< Total size of each cell including wall width. */
 #define MAZE_OPENING_PERCENTAGE 20 /**< Maze generated does not look like an arena so we generate it normally then remove random walls until we removed this percentage. */

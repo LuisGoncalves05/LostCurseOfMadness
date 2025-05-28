@@ -1,14 +1,15 @@
 #ifndef BULLET_H
 #define BULLET_H
 
+#include <lcom/lcf.h>
 #include <stdbool.h>
 #include <stdint.h>
 
-#include "model/utils/sprite.h"
 #include "assets/xpm/level/bullet.xpm"
+#include "model/utils/sprite.h"
 
-#define BULLET_SPEED 6 /**< Speed of the bullet in pixels per tick */
-#define MAX_BULLETS 50 /**< Maximum number of bullets that can exist simultaneously */
+#define BULLET_SPEED 10 /**< Speed of the bullet in pixels per tick */
+#define MAX_BULLETS 50  /**< Maximum number of bullets that can exist simultaneously */
 
 extern uint16_t x_res, y_res;
 
