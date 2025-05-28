@@ -190,52 +190,66 @@ void game_timer_handler(Game *game) {
 // Keyboard handlers
 
 static void menu_keyboard_handler(Game *game) {
-    if (scan_code == ESC_BREAK_CODE)
+    if (scan_code == ESC_BREAK_CODE) {
         set_state(game, EXIT);
+        return;
+    }
     if (scan_code == KEY_W || scan_code == KEY_S || scan_code == KEY_A || scan_code == KEY_D)
         main_menu_change_button(game->menu.main_menu);
     if (scan_code == KEY_ENTER) {
         ButtonType button = main_menu_get_button(game->menu.main_menu);
         if (button == BUTTON_PLAY) {
             set_state(game, LEVEL);
+            return;
         } else if (button == BUTTON_EXIT) {
             set_state(game, EXIT);
+            return;
         }
     }
 }
 
 static void level_keyboard_handler(Game *game) {
     level_update_position(game->level, scan_code);
-    if (scan_code == ESC_BREAK_CODE)
+    if (scan_code == ESC_BREAK_CODE) {
         set_state(game, MENU);
+        return;
+    }
 }
 
 static void game_over_keyboard_handler(Game *game) {
-    if (scan_code == ESC_BREAK_CODE)
+    if (scan_code == ESC_BREAK_CODE) {
         set_state(game, EXIT);
+        return;
+    }
     if (scan_code == KEY_W || scan_code == KEY_S || scan_code == KEY_A || scan_code == KEY_D)
         game_over_change_button(game->menu.game_over);
     if (scan_code == KEY_ENTER) {
         ButtonType button = game_over_get_button(game->menu.game_over);
         if (button == BUTTON_MENU) {
             set_state(game, MENU);
+            return;
         } else if (button == BUTTON_EXIT) {
             set_state(game, EXIT);
+            return;
         }
     }
 }
 
 static void victory_keyboard_handler(Game *game) {
-    if (scan_code == ESC_BREAK_CODE)
+    if (scan_code == ESC_BREAK_CODE) {
         set_state(game, EXIT);
+        return;
+    }
     if (scan_code == KEY_W || scan_code == KEY_S || scan_code == KEY_A || scan_code == KEY_D)
         victory_change_button(game->menu.victory);
     if (scan_code == KEY_ENTER) {
         ButtonType button = victory_get_button(game->menu.victory);
         if (button == BUTTON_NEXT) {
             set_state(game, LEVEL);
+            return;
         } else if (button == BUTTON_EXIT) {
             set_state(game, EXIT);
+            return;
         }
     }
 }
@@ -263,8 +277,10 @@ static void menu_mouse_handler(Game *game) {
         button = main_menu_click_handler(game->menu.main_menu, cursor_get_x(game->cursor), cursor_get_y(game->cursor));
     if (button == BUTTON_PLAY) {
         set_state(game, LEVEL);
+        return;
     } else if (button == BUTTON_EXIT) {
         set_state(game, EXIT);
+        return;
     }
 }
 
@@ -285,8 +301,10 @@ static void victory_mouse_handler(Game *game) {
         button = victory_click_handler(game->menu.victory, cursor_get_x(game->cursor), cursor_get_y(game->cursor));
     if (button == BUTTON_NEXT) {
         set_state(game, LEVEL);
+        return;
     } else if (button == BUTTON_EXIT) {
         set_state(game, EXIT);
+        return;
     }
 }
 
@@ -296,8 +314,10 @@ static void game_over_mouse_handler(Game *game) {
         button = game_over_click_handler(game->menu.game_over, cursor_get_x(game->cursor), cursor_get_y(game->cursor));
     if (button == BUTTON_MENU) {
         set_state(game, MENU);
+        return;
     } else if (button == BUTTON_EXIT) {
         set_state(game, EXIT);
+        return;
     }
 }
 
