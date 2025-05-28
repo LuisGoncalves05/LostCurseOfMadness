@@ -6,8 +6,6 @@ struct Maze {
     uint8_t height;
     uint8_t **cells;
     uint8_t mob_count;
-    Line *lines;
-    int line_count;
 };
 
 /* Create and destroy section */
@@ -113,23 +111,6 @@ static int(open_maze)(Maze *maze, uint8_t percentage) {
     return 0;
 }
 
-static void(add_line)(Maze *maze, int x1, int y1, int x2, int y2, int *line_index) {
-    if (*line_index >= maze->line_count) {
-        maze->line_count *= 2;
-        maze->lines = (Line *) realloc(maze->lines, maze->line_count * sizeof(Line));
-        if (!maze->lines) {
-            printf("Erro ao realocar memória para linhas\n");
-            return;
-        }
-    }
-
-    maze->lines[*line_index].x1 = x1;
-    maze->lines[*line_index].y1 = y1;
-    maze->lines[*line_index].x2 = x2;
-    maze->lines[*line_index].y2 = y2;
-    (*line_index)++;
-}
-
 Maze *(create_maze) (uint8_t width, uint8_t height, uint8_t mob_count) {
     srand(time(NULL));
     Maze *maze = (Maze *) malloc(sizeof(Maze));
@@ -143,54 +124,6 @@ Maze *(create_maze) (uint8_t width, uint8_t height, uint8_t mob_count) {
 
     open_maze(maze, 30);
     generate_mob_positions(maze, mob_count);
-
-    // Estimar o número máximo de linhas que podemos precisar
-    // No pior caso, cada célula de parede cria 4 linhas
-    int max_lines = maze->width * maze->height * 2;
-    maze->line_count = max_lines;
-    maze->lines = (Line *) malloc(max_lines * sizeof(Line));
-    if (!maze->lines) {
-        printf("Erro ao alocar memória para linhas\n");
-        destroy_maze(maze);
-        return NULL;
-    }
-
-    int line_index = 0;
-
-    // Converter a matriz de células para um conjunto de linhas
-    for (int y = 0; y < maze->height; y++) {
-        for (int x = 0; x < maze->width; x++) {
-            if (maze->cells[y][x] == 1) {
-                // Verificar se há paredes adjacentes e criar linhas
-
-                // Verificar parede à direita
-                if (x < maze->width - 1 && maze->cells[y][x + 1] == 1) {
-                    add_line(maze, x, y, x + 1, y, &line_index);
-                }
-
-                // Verificar parede abaixo
-                if (y < maze->height - 1 && maze->cells[y + 1][x] == 1) {
-                    add_line(maze, x, y, x, y + 1, &line_index);
-                }
-
-                // Verificar parede à esquerda (se não houver ligação)
-                if (x > 0 && maze->cells[y][x - 1] != 1) {
-                    // Linha isolada - criar um ponto
-                    add_line(maze, x, y, x, y, &line_index);
-                }
-
-                // Verificar parede acima (se não houver ligação)
-                if (y > 0 && maze->cells[y - 1][x] != 1 &&
-                    !(x > 0 && maze->cells[y][x - 1] == 1)) {
-                    // Linha isolada - criar um ponto
-                    add_line(maze, x, y, x, y, &line_index);
-                }
-            }
-        }
-    }
-
-    // Atualizar o número real de linhas
-    maze->line_count = line_index;
 
     return maze;
 }
