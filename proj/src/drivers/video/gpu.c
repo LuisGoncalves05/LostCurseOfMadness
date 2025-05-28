@@ -4,7 +4,6 @@
 #include <machine/int86.h>
 #include <math.h>
 
-xpm_image_t img;
 vbe_mode_info_t vg_mode_info;
 uint8_t bytes_per_pixel;
 uint16_t x_res, y_res;
@@ -108,6 +107,18 @@ int(vga_draw_rectangle)(uint16_t x, uint16_t y, uint16_t width, uint16_t height,
     }
 }
 
+/**
+ * @brief Extracts a specific color component from a 32-bit color value.
+ *
+ * @param color Original color.
+ * @param field_position Bit position of the field.
+ * @param mask_size Size in bits of the mask.
+ * @return Extracted component value.
+ */
+static inline uint8_t(get_component)(uint32_t color, uint8_t field_position, uint8_t mask_size) {
+    return (color >> field_position) & ((1 << mask_size) - 1);
+}
+
 uint32_t(direct_mode)(uint16_t i, uint16_t j, uint8_t step, uint32_t first) {
     uint8_t rfp = vg_mode_info.RedFieldPosition;
     uint8_t gfp = vg_mode_info.GreenFieldPosition;
@@ -122,10 +133,6 @@ uint32_t(direct_mode)(uint16_t i, uint16_t j, uint8_t step, uint32_t first) {
     uint8_t b = (get_component(first, bfp, bms) + (j + i) * step) % (1 << bms);
 
     return (r << rfp) | (g << gfp) | (b << bfp);
-}
-
-inline uint8_t(get_component)(uint32_t color, uint8_t field_position, uint8_t mask_size) {
-    return (color >> field_position) & (BIT(mask_size) - 1);
 }
 
 uint32_t(indexed_mode)(uint8_t no_rectangles, uint16_t i, uint16_t j, uint8_t step, uint32_t first) {

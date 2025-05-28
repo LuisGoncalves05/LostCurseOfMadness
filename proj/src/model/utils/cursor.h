@@ -1,12 +1,13 @@
 #ifndef CURSOR_H
 #define CURSOR_H
 
+#include <lcom/lcf.h>
+#include <stdint.h>
+
 #include "assets/xpm/crosshair.xpm"
 #include "assets/xpm/cursor.xpm"
 #include "drivers/video/gpu.h"
 #include "model/utils/sprite.h"
-#include <lcom/lcf.h>
-#include <stdint.h>
 
 extern uint16_t x_res, y_res;
 
