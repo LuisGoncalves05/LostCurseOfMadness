@@ -127,7 +127,7 @@ static void set_state(Game *game, State new_state) {
 // Timer handlers
 
 static void menu_timer_handler(Game *game) {
-    clear_buffer(secondary_frame_buffer, 0);
+    clear_frame_buffer(secondary_frame_buffer, 0);
 
     draw_main_menu(game->menu.main_menu, secondary_frame_buffer);
     draw_cursor(game->cursor, secondary_frame_buffer);
@@ -136,7 +136,7 @@ static void menu_timer_handler(Game *game) {
 }
 
 static void level_timer_handler(Game *game) {
-    clear_buffer(secondary_frame_buffer, IN_FOV_COLOR);
+    clear_frame_buffer(secondary_frame_buffer, IN_FOV_COLOR);
 
     draw_level(game->level, pp);
     draw_cursor(game->cursor, secondary_frame_buffer);
@@ -152,7 +152,7 @@ static void victory_timer_handler(Game *game) {
 }
 
 static void game_over_timer_handler(Game *game) {
-    clear_buffer(secondary_frame_buffer, 0);
+    clear_frame_buffer(secondary_frame_buffer, 0);
 
     draw_game_over(game->menu.game_over, secondary_frame_buffer);
     draw_cursor(game->cursor, secondary_frame_buffer);

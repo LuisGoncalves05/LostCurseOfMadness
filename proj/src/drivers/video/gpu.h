@@ -5,9 +5,6 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-#include "model/utils/sprite.h"
-#include "model/utils/animated_sprite.h"
-
 /**
  * @defgroup gpu gpu
  * @brief Functions and constants for handling Gpu operations.
@@ -156,20 +153,15 @@ uint32_t(direct_mode)(uint16_t i, uint16_t j, uint8_t step, uint32_t first);
  */
 uint32_t(indexed_mode)(uint8_t no_rectangles, uint16_t i, uint16_t j, uint8_t step, uint32_t first);
 
-void get_rotated_bounds(double width, double height, double theta, double *out_width, double *out_height);
+int(vga_draw_xpm)(xpm_map_t xpm, uint16_t x, uint16_t y, uint8_t *frame_buffer);
 
-int draw_sprite(Sprite *sprite, uint8_t *frame_buffer);
+int(vga_draw_loaded_xpm)(uint8_t *xpm_data, uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint8_t *frame_buffer);
 
-int draw_sprite_rotated(Sprite *sprite, double theta, uint8_t *frame_buffer);
 
-int draw_animated_sprite(AnimatedSprite *sprite, uint8_t *frame_buffer);
-
-int vga_draw_xpm(xpm_map_t xpm, uint16_t x, uint16_t y, uint8_t *frame_buffer);
-
-int(clear_buffer)(uint8_t *frame_buffer, uint16_t color);
+int(clear_frame_buffer)(uint8_t *frame_buffer, uint16_t color);
 
 void(set_display_start)();
 
-void vga_flip_pages();
+void(vga_flip_pages)();
 
 #endif /* GPU_H */

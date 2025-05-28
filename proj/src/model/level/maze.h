@@ -2,6 +2,7 @@
 #define MAZE_H
 
 #include "../../drivers/video/gpu.h"
+#include "../utils/sprite.h"
 #include <lcom/lcf.h>
 
 #define EMPTY 0                 /**< Represents an empty cell in the maze. */

@@ -360,7 +360,7 @@ void draw_level(Level *level, struct packet pp) {
         return;
 
     // Maze logic
-    clear_buffer(secondary_frame_buffer, IN_FOV_COLOR);
+    clear_frame_buffer(secondary_frame_buffer, IN_FOV_COLOR);
     draw_maze(level->maze, secondary_frame_buffer);
 
     // Mob logic

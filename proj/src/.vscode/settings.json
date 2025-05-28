@@ -11,6 +11,8 @@
     "player.h": "c",
     "sprite.h": "c",
     "game.h": "c",
-    "gpu.h": "c"
+    "gpu.h": "c",
+    "*.xpm": "c",
+    "keys.h": "c"
   },
 }

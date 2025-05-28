@@ -82,5 +82,5 @@ void cursor_update(Cursor *cursor, double dx, double dy) {
 void draw_cursor(Cursor *cursor, uint8_t *frame_buffer) {
     if (cursor == NULL)
         return;
-    draw_sprite(cursor->sprite, frame_buffer);
+    draw_transparent_sprite(cursor->sprite, frame_buffer);
 }

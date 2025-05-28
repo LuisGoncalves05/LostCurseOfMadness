@@ -1,5 +1,5 @@
-#include <stdlib.h>
 #include "sprite.h"
+#include <stdlib.h>
 
 /* Create and destroy section */
 
@@ -37,3 +37,28 @@ void destroy_sprite(Sprite *sp) {
 /* Others section */
 
 /* Draw section */
+
+int(draw_sprite)(Sprite *sprite, uint8_t *frame_buffer) {
+    return vga_draw_loaded_xpm(sprite->map, sprite->x, sprite->y, sprite->width, sprite->height, frame_buffer);
+}
+
+int(draw_transparent_sprite)(Sprite *sprite, uint8_t *frame_buffer) {
+    if (sprite == NULL) {
+        printf("draw_transparent_sprite: NULL pointer provided.\n");
+        return 1;
+    }
+
+    if (sprite->x >= x_res || sprite->y >= y_res) {
+        printf("draw_transparent_sprite: invalid sprite position, x:%d, y:%d.\n", sprite->x, sprite->y);
+        return 1;
+    }
+
+    uint8_t *map = sprite->map;
+
+    for (int h = 0; h < sprite->height && sprite->y + h < y_res; h++)
+        for (int w = 0; w < sprite->width && sprite->x + w < x_res; w++, map++)
+            if (*map != BACKGROUND_COLOR)
+                vga_draw_pixel(sprite->x + w, sprite->y + h, *map, frame_buffer);
+
+    return 0;
+}

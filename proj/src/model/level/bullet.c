@@ -63,5 +63,5 @@ void bullet_set_active(Bullet *bullet, bool active) {
 void draw_bullet(Bullet *bullet, uint8_t *frame_buffer) {
     if (!bullet)
         return;
-    draw_sprite(bullet->sprite, frame_buffer);
+    draw_transparent_sprite(bullet->sprite, frame_buffer);
 }

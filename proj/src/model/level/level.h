@@ -1,8 +1,6 @@
 #ifndef LEVEL_H
 #define LEVEL_H
 
-#include <lcom/lcf.h>
-
 #include "config.h"
 #include "bullet.h"
 #include "maze.h"
@@ -12,8 +10,7 @@
 extern uint8_t *secondary_frame_buffer;
 extern uint8_t *main_frame_buffer;
 extern uint8_t bytes_per_pixel;
-extern uint16_t x_res;
-extern uint16_t y_res;
+extern uint16_t x_res, y_res;
 
 /**
  * @brief Represents a single Level instance.

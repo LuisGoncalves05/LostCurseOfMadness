@@ -1,7 +1,9 @@
 #ifndef SPRITE_H
 #define SPRITE_H
 
-#include <lcom/lcf.h>
+#include "../../drivers/video/gpu.h"
+
+extern uint16_t x_res, y_res;
 
 /**
  * @brief Represents a Sprite used for rendering objects on screen.
@@ -33,5 +35,9 @@ Sprite *create_sprite(xpm_map_t xpm, int x, int y, int xspeed, int yspeed);
  * @param sp Pointer to the Sprite structure to destroy.
  */
 void destroy_sprite(Sprite *sp);
+
+int draw_sprite(Sprite *sprite, uint8_t *frame_buffer);
+
+int(draw_transparent_sprite)(Sprite *sprite, uint8_t *frame_buffer);
 
 #endif /* SPRITE_H */

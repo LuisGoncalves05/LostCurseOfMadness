@@ -1,4 +1,5 @@
 #include "button.h"
+#include "../utils/sprite.h"
 
 struct Button {
     bool selected;
@@ -77,8 +78,8 @@ bool button_is_clicked(Button *button, uint16_t x, uint16_t y) {
 
 void draw_button(Button *button, uint8_t *frame_buffer) {
     if (button->selected) {
-        draw_sprite(button->selected_sprite, frame_buffer);
+        draw_transparent_sprite(button->selected_sprite, frame_buffer);
     } else {
-        draw_sprite(button->sprite, frame_buffer);
+        draw_transparent_sprite(button->sprite, frame_buffer);
     }
 }

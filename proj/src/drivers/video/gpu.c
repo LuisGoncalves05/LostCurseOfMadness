@@ -45,7 +45,7 @@ int(set_frame_buffers)(uint16_t mode) {
     return 0;
 }
 
-int(clear_buffer)(uint8_t *frame_buffer, uint16_t color) {
+int(clear_frame_buffer)(uint8_t *frame_buffer, uint16_t color) {
     return memset(frame_buffer, color, x_res * y_res * bytes_per_pixel) == NULL;
 }
 
@@ -60,7 +60,7 @@ void(set_display_start)() {
     sys_int86(&reg86);
 }
 
-void vga_flip_pages() {
+void (vga_flip_pages)() {
     frame_start = !frame_start;
     set_display_start();
     uint8_t *tmp = main_frame_buffer;
@@ -164,152 +164,36 @@ uint32_t(indexed_mode)(uint8_t no_rectangles, uint16_t i, uint16_t j, uint8_t st
     return (first + (i * no_rectangles + j) * step) % (1 << vg_mode_info.BitsPerPixel);
 }
 
-void get_rotated_bounds(double width, double height, double theta, double *out_width, double *out_height) {
-    double cos_theta = cos(theta);
-    double sin_theta = sin(theta);
-
-    double corners_x[] = {-width / 2, width / 2, width / 2, -width / 2};
-    double corners_y[] = {-height / 2, -height / 2, height / 2, height / 2};
-
-    double min_x = 1e9, max_x = -1e9, min_y = 1e9, max_y = -1e9;
-
-    for (int i = 0; i < 4; i++) {
-        double x = corners_x[i] * cos_theta - corners_y[i] * sin_theta;
-        double y = corners_x[i] * sin_theta + corners_y[i] * cos_theta;
-
-        if (x < min_x)
-            min_x = x;
-        if (x > max_x)
-            max_x = x;
-        if (y < min_y)
-            min_y = y;
-        if (y > max_y)
-            max_y = y;
-    }
-
-    *out_width = max_x - min_x;
-    *out_height = max_y - min_y;
-}
-
-int(draw_sprite)(Sprite *sprite, uint8_t *frame_buffer) {
-    if (sprite == NULL) {
-        printf("draw_sprite: NULL pointer provided.\n");
-        return 1;
-    }
-
-    if (sprite->x >= x_res || sprite->y >= y_res) {
-        printf("draw_sprite: invalid sprite position, x:%d, y:%d.\n", sprite->x, sprite->y);
-        return 1;
-    }
-
-    uint8_t *map = sprite->map;
-
-    for (int h = 0; h < sprite->height && sprite->y + h < y_res; h++)
-        for (int w = 0; w < sprite->width && sprite->x + w < x_res; w++, map++)
-            if (*map != BACKGROUND_COLOR)
-                vga_draw_pixel(sprite->x + w, sprite->y + h, *map, frame_buffer);
-
-    return 0;
-}
-
-int draw_sprite_rotated(Sprite *sprite, double theta, uint8_t *frame_buffer) {
-    if (!sprite || !frame_buffer)
-        return 1;
-
-    double center_x = sprite->width / 2.0;
-    double center_y = sprite->height / 2.0;
-
-    double cos_theta = cos(theta);
-    double sin_theta = sin(theta);
-
-    // Compute bounding box of rotated sprite
-    double rotated_width, rotated_height;
-    get_rotated_bounds(sprite->width, sprite->height, theta, &rotated_width, &rotated_height);
-    int rot_w = (int) rotated_width;
-    int rot_h = (int) rotated_height;
-
-    // Compute top-left corner of where to draw the rotated image so it's centered
-    int draw_origin_x = sprite->x + sprite->width / 2 - rot_w / 2;
-    int draw_origin_y = sprite->y + sprite->height / 2 - rot_h / 2;
-
-    for (int i = 0; i < rot_h; i++) {
-        for (int j = 0; j < rot_w; j++) {
-            // (j, i) is the destination pixel in rotated space
-            double dx = j - rot_w / 2.0;
-            double dy = i - rot_h / 2.0;
-
-            // Apply inverse rotation to find source pixel in original sprite
-            double src_x = cos_theta * dx + sin_theta * dy + center_x;
-            double src_y = -sin_theta * dx + cos_theta * dy + center_y;
-
-            if (src_x >= 0 && src_x < sprite->width && src_y >= 0 && src_y < sprite->height) {
-                int ix = (int) src_x;
-                int iy = (int) src_y;
-
-                uint8_t color = sprite->map[iy * sprite->width + ix];
-                if (color != BACKGROUND_COLOR) {
-                    int draw_x = draw_origin_x + j;
-                    int draw_y = draw_origin_y + i;
-
-                    if (draw_x >= 0 && draw_x < x_res && draw_y >= 0 && draw_y < y_res) {
-                        vga_draw_pixel(draw_x, draw_y, color, frame_buffer);
-                    }
-                }
-            }
-        }
-    }
-
-    return 0;
-}
-
-int draw_animated_sprite(AnimatedSprite *sprite, uint8_t *frame_buffer) {
-  if (sprite == NULL) {
-    printf("draw_animated_sprite: NULL pointer provided.\n");
-    return 1;
-  }
-
-  if (sprite->current_sprite >= sprite->number_sprites) {
-    printf("draw_animated_sprite: current sprite index out of bounds.\n");
-    return 1;
-  }
-
-  Sprite *current_sprite = sprite->sprite;
-  current_sprite->map = sprite->maps[sprite->current_sprite];
-
-  if (draw_sprite(current_sprite, frame_buffer) != 0) {
-    printf("draw_animated_sprite: draw_sprite failed.\n");
-    return 1;
-  }
-
-  sprite->current_frame++;
-  if (sprite->current_frame >= sprite->frames_per_sprite) {
-    sprite->current_frame = 0;
-    sprite->current_sprite = (sprite->current_sprite + 1) % sprite->number_sprites;
-  }
-
-  return 0;
-}
-
-int vga_draw_xpm(xpm_map_t xpm, uint16_t x, uint16_t y, uint8_t *frame_buffer) {
-    xpm_image_t img;
-    uint8_t *data = xpm_load(xpm, XPM_INDEXED, &img);
-    if (x >= x_res || y >= y_res) {
-        printf("vg_draw_xpm: invalid xpm position, x:%hu, y:%hu.\n", x, y);
-        return 1;
-    }
+int (vga_draw_loaded_xpm)(uint8_t *xpm_data, uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint8_t *frame_buffer) {
     uint8_t *ptr = get_position(x, y, frame_buffer);
     if (ptr == NULL) {
-        fprintf(stderr, "vg_draw_xpm: get_position failed.\n");
+        fprintf(stderr, "vga_draw_loaded_xpm: get_position failed.\n");
+        return 1;
+    }
+    
+    if (x >= x_res || y >= y_res) {
+        printf("vga_draw_loaded_xpm: invalid xpm position, x:%hu, y:%hu.\n", x, y);
         return 1;
     }
 
-    uint16_t line_size = img.width * bytes_per_pixel;
+    uint16_t line_size = width * bytes_per_pixel;
     uint16_t usable_line_size = line_size;
-    if (x + img.width > x_res)
+    if (x + width > x_res)
         usable_line_size = (x_res - x) * bytes_per_pixel;
-
-    for (int h = 0; h < img.height && y + h < y_res; h++, ptr += x_res * bytes_per_pixel, data += line_size)
+    
+    uint8_t *data = xpm_data;
+    for (int h = 0; h < height && y + h < y_res; h++, ptr += x_res * bytes_per_pixel, data += line_size)
         memcpy(ptr, data, usable_line_size);
+
+    return 0;
+}
+
+int (vga_draw_xpm)(xpm_map_t xpm, uint16_t x, uint16_t y, uint8_t *frame_buffer) {
+    xpm_image_t img;
+    uint8_t *data = xpm_load(xpm, XPM_INDEXED, &img);
+    
+    if (vga_draw_loaded_xpm(data, x, y, img.width, img.height, frame_buffer))
+        return 1;
 
     return 0;
 }
