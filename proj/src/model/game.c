@@ -280,7 +280,14 @@ static void level_mouse_handler(Game *game) {
 }
 
 static void victory_mouse_handler(Game *game) {
-    printf("victory_mouse_handler: To be implemented\n");
+    ButtonType button = BUTTON_NONE;
+    if (pp.lb)
+        button = victory_click_handler(game->menu.victory, cursor_get_x(game->cursor), cursor_get_y(game->cursor));
+    if (button == BUTTON_NEXT) {
+        set_state(game, LEVEL);
+    } else if (button == BUTTON_EXIT) {
+        set_state(game, EXIT);
+    }
 }
 
 static void game_over_mouse_handler(Game *game) {
