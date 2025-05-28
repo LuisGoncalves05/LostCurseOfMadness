@@ -12,7 +12,7 @@ Cursor *create_cursor(CursorMode mode, int x, int y) {
     if (cursor == NULL) {
         return NULL;
     }
-    
+
     if (mode == CURSOR_DEFAULT) {
         cursor->sprite = create_sprite((xpm_map_t) cursor_xpm, x, y, 0, 0);
     } else {
@@ -23,7 +23,7 @@ Cursor *create_cursor(CursorMode mode, int x, int y) {
         return NULL;
     }
     cursor->mode = mode;
-    
+
     return cursor;
 }
 

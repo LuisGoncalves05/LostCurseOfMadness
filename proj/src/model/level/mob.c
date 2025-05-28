@@ -94,10 +94,10 @@ void mob_update_state(Mob *mob, uint16_t player_cx, uint16_t player_cy) {
         if (mob->state != MOB_IDLE) {
             Sprite *new_sprite = create_sprite((xpm_map_t) mob_idle_1, mob_x, mob_y, 0, 0);
             mob->animated_sprite = create_animated_sprite(new_sprite, 30, 5,
-                (xpm_map_t) mob_idle_2,
-                (xpm_map_t) mob_idle_3,
-                (xpm_map_t) mob_idle_2,
-                (xpm_map_t) mob_idle_1);
+                                                          (xpm_map_t) mob_idle_2,
+                                                          (xpm_map_t) mob_idle_3,
+                                                          (xpm_map_t) mob_idle_2,
+                                                          (xpm_map_t) mob_idle_1);
         }
         mob->state = MOB_IDLE;
     }

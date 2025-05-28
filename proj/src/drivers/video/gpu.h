@@ -144,7 +144,6 @@ int(vga_draw_xpm)(xpm_map_t xpm, uint16_t x, uint16_t y, uint8_t *frame_buffer);
 
 int(vga_draw_loaded_xpm)(uint8_t *xpm_data, uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint8_t *frame_buffer);
 
-
 int(clear_frame_buffer)(uint8_t *frame_buffer, uint16_t color);
 
 void(set_display_start)();

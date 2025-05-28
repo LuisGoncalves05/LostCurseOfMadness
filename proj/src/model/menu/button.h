@@ -1,8 +1,8 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
-#include <lcom/lcf.h>
 #include "drivers/video/gpu.h"
+#include <lcom/lcf.h>
 
 extern uint16_t x_res, y_res;
 
@@ -50,7 +50,6 @@ extern uint16_t x_res, y_res;
  * @brief Y-coordinate for buttons in the victory screen.
  */
 #define VICTORY_BUTTON_START_Y y_res / 2 + 100
-
 
 /**
  * @brief Enumeration of button types.
@@ -118,4 +117,3 @@ bool button_is_clicked(Button *button, uint16_t x, uint16_t y);
 void draw_button(Button *button, uint8_t *frame_buffer);
 
 #endif /* BUTTON_H */
-

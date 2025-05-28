@@ -1,8 +1,8 @@
 #ifndef LEVEL_H
 #define LEVEL_H
 
-#include "config.h"
 #include "bullet.h"
+#include "config.h"
 #include "maze.h"
 #include "mob.h"
 #include "player.h"
@@ -65,7 +65,6 @@ double get_delta(Level *level);
  * @return Pointer to the Mob array.
  */
 Mob **get_mobs(Level *level);
-
 
 /**
  * @brief Updates the player's aim direction based on mouse coordinates.

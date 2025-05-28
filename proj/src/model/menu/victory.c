@@ -69,7 +69,7 @@ ButtonType victory_click_handler(Victory *victory, uint16_t x, uint16_t y) {
 }
 
 void draw_victory(Victory *victory, uint8_t *frame_buffer) {
-    vga_draw_xpm((xpm_map_t)victory_xpm, x_res / 2 - 715 / 2, y_res / 2 - 129 / 2, frame_buffer);
+    vga_draw_xpm((xpm_map_t) victory_xpm, x_res / 2 - 715 / 2, y_res / 2 - 129 / 2, frame_buffer);
     draw_button(victory->nextButton, frame_buffer);
     draw_button(victory->exitButton, frame_buffer);
 }

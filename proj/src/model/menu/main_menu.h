@@ -1,14 +1,14 @@
 #ifndef MAIN_MENU_H
 #define MAIN_MENU_H
 
-#include <lcom/lcf.h>
-#include <stdint.h>
-#include "button.h"
 #include "assets/xpm/main_menu/exit_button.xpm"
 #include "assets/xpm/main_menu/exit_button_selected.xpm"
 #include "assets/xpm/main_menu/lcom.xpm"
 #include "assets/xpm/main_menu/play_button.xpm"
 #include "assets/xpm/main_menu/play_button_selected.xpm"
+#include "button.h"
+#include <lcom/lcf.h>
+#include <stdint.h>
 
 extern uint16_t x_res, y_res;
 
@@ -67,4 +67,3 @@ ButtonType main_menu_click_handler(MainMenu *main_menu, uint16_t x, uint16_t y);
 void draw_main_menu(MainMenu *main_menu, uint8_t *frame_buffer);
 
 #endif /* MAIN_MENU_H */
-

@@ -43,7 +43,7 @@ static void(dfs)(Maze *maze, int x, int y) {
 static int(initialize_maze)(Maze *maze, uint8_t width, uint8_t height) {
     if (maze == NULL)
         return 1;
-    
+
     uint8_t w = width + (width % 2 == 0);
     uint8_t h = height + (height % 2 == 0);
 

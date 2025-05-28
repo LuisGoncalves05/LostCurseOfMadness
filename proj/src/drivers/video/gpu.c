@@ -60,7 +60,7 @@ void(set_display_start)() {
     sys_int86(&reg86);
 }
 
-void (vga_flip_pages)() {
+void(vga_flip_pages)() {
     frame_start = !frame_start;
     set_display_start();
     uint8_t *tmp = main_frame_buffer;
@@ -132,13 +132,13 @@ uint32_t(indexed_mode)(uint8_t no_rectangles, uint16_t i, uint16_t j, uint8_t st
     return (first + (i * no_rectangles + j) * step) % (1 << vg_mode_info.BitsPerPixel);
 }
 
-int (vga_draw_loaded_xpm)(uint8_t *xpm_data, uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint8_t *frame_buffer) {
+int(vga_draw_loaded_xpm)(uint8_t *xpm_data, uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint8_t *frame_buffer) {
     uint8_t *ptr = get_position(x, y, frame_buffer);
     if (ptr == NULL) {
         fprintf(stderr, "vga_draw_loaded_xpm: get_position failed.\n");
         return 1;
     }
-    
+
     if (x >= x_res || y >= y_res) {
         printf("vga_draw_loaded_xpm: invalid xpm position, x:%hu, y:%hu.\n", x, y);
         return 1;
@@ -148,7 +148,7 @@ int (vga_draw_loaded_xpm)(uint8_t *xpm_data, uint16_t x, uint16_t y, uint16_t wi
     uint16_t usable_line_size = line_size;
     if (x + width > x_res)
         usable_line_size = (x_res - x) * bytes_per_pixel;
-    
+
     uint8_t *data = xpm_data;
     for (int h = 0; h < height && y + h < y_res; h++, ptr += x_res * bytes_per_pixel, data += line_size)
         memcpy(ptr, data, usable_line_size);
@@ -156,10 +156,10 @@ int (vga_draw_loaded_xpm)(uint8_t *xpm_data, uint16_t x, uint16_t y, uint16_t wi
     return 0;
 }
 
-int (vga_draw_xpm)(xpm_map_t xpm, uint16_t x, uint16_t y, uint8_t *frame_buffer) {
+int(vga_draw_xpm)(xpm_map_t xpm, uint16_t x, uint16_t y, uint8_t *frame_buffer) {
     xpm_image_t img;
     uint8_t *data = xpm_load(xpm, XPM_INDEXED, &img);
-    
+
     if (vga_draw_loaded_xpm(data, x, y, img.width, img.height, frame_buffer))
         return 1;
 
