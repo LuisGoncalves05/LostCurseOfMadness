@@ -1,8 +1,8 @@
-#include "gpu.h"
-#include "model/utils/sprite.h"
 #include <lcom/lcf.h>
 #include <machine/int86.h>
 #include <math.h>
+
+#include "gpu.h"
 
 vbe_mode_info_t vg_mode_info;
 uint8_t bytes_per_pixel;
@@ -45,7 +45,7 @@ int(set_frame_buffers)(uint16_t mode) {
 }
 
 int(clear_frame_buffer)(uint8_t *frame_buffer, uint16_t color) {
-    return memset(frame_buffer, color, x_res * y_res * bytes_per_pixel) == NULL;
+    return memset(frame_buffer, color, frame_size) == NULL;
 }
 
 void(set_display_start)() {

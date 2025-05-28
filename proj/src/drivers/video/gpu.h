@@ -2,7 +2,6 @@
 #define GPU_H
 
 #include <lcom/lcf.h>
-#include <stdbool.h>
 #include <stdint.h>
 
 /**
@@ -28,6 +27,7 @@
 #define VBE_MODE3 0x115 /**< 800x600, 24 bpp (direct color, RGB 8:8:8). */
 #define VBE_MODE4 0x11A /**< 1280x1024, 16 bpp (direct color, RGB 5:6:5). */
 #define VBE_MODE5 0x14C /**< 1152x864, 32 bpp (direct color, RGB 8:8:8). */
+#define VBE_MODE6 0x107 /**< 1280x1024, 256 colors (8 bpp, indexed color). */
 /** @} */
 
 /** @name VBE Return Status Codes */
