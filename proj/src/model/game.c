@@ -145,6 +145,9 @@ static void level_timer_handler(Game *game) {
 
     if (player_get_state(get_player(game->level)) == PLAYER_DYING)
         set_state(game, GAME_OVER);
+
+    if (player_get_state(get_player(game->level)) == PLAYER_WIN)
+        set_state(game, VICTORY);
 }
 
 static void victory_timer_handler(Game *game) {

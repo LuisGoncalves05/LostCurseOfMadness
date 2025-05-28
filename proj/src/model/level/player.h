@@ -29,7 +29,8 @@ typedef enum {
     PLAYER_WALKING,  /**< Player is walking */
     PLAYER_AIMING,   /**< Player is aiming */
     PLAYER_SHOOTING, /**< Player is shooting */
-    PLAYER_DYING     /**< Player is dying */
+    PLAYER_DYING,    /**< Player is dying */
+    PLAYER_WIN       /**< Player is winning */
 } PlayerState;
 
 /**
@@ -93,6 +94,14 @@ void player_set_sprite(Player *player, AnimatedSprite *sprite);
  * @return Current player state.
  */
 PlayerState player_get_state(Player *player);
+
+/**
+ * @brief Sets the current state of the player.
+ *
+ * @param player Pointer to the Player structure.
+ * @param health New state value.
+ */
+void player_set_state(Player *player, PlayerState state);
 
 /**
  * @brief Updates the player's state based on the given mouse packet.

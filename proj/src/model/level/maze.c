@@ -46,8 +46,9 @@ static int(initialize_maze)(Maze *maze, uint8_t width, uint8_t height) {
     if ((width % 2 == 0) || (height % 2 == 0))
         return 1;
 
-    maze->width = width;
-    maze->height = height;
+
+    maze->width = width > x_res / CELL_SIZE ? x_res / CELL_SIZE : width;
+    maze->height = height > y_res / CELL_SIZE ? y_res / CELL_SIZE : height;
 
     maze_entity **mz = (maze_entity **) malloc(height * sizeof(maze_entity *));
     if (mz == NULL)
@@ -68,6 +69,7 @@ static int(initialize_maze)(Maze *maze, uint8_t width, uint8_t height) {
     }
     maze->cells = mz;
     dfs(maze, 1, 1);
+    mz[maze->height - 2][maze->width - 2] = WIN;
 
     return 0;
 }
@@ -162,15 +164,6 @@ void set_mob_count(Maze *maze, uint8_t mob_count) {
 
 /* Statics section */
 
-static bool(check_rectangle_collision)(int x1, int y1, int width1, int height1, int x2, int y2, int width2, int height2) {
-    return !(
-        x1 + width1 <= x2 ||  // 1 to the left of 2
-        x1 >= x2 + width2 ||  // 2 to the left of 1
-        y1 + height1 <= y2 || // in normal people coordinates, 1 above 2
-        y1 >= y2 + height2    // in normal people coordinates, 2 above 1
-    );
-}
-
 /* Others section */
 
 Point **(get_mob_positions) (Maze *maze) {
@@ -193,6 +186,15 @@ Point **(get_mob_positions) (Maze *maze) {
     }
 
     return points;
+}
+
+bool(check_rectangle_collision)(int x1, int y1, int width1, int height1, int x2, int y2, int width2, int height2) {
+    return !(
+        x1 + width1 < x2 ||  // a to the left of b
+        x1 > x2 + width2 ||  // b to the left of a
+        y1 + height1 < y2 || // in normal people coordinates, a above b
+        y1 > y2 + height2    // in normal people coordinates, b above a
+    );
 }
 
 bool(check_sprite_collision)(Sprite *a, Sprite *b) {
@@ -240,6 +242,8 @@ int(draw_maze)(Maze *maze, uint8_t *frame_buffer) {
         for (int x = 0; x < maze->width; x++) {
             if (maze->cells[y][x] == WALL) {
                 vga_draw_rectangle(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE, WALL_COLOR, secondary_frame_buffer);
+            } else if (maze->cells[y][x] == WIN) {
+                vga_draw_rectangle(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE, WIN_COLOR, secondary_frame_buffer);
             }
         }
     }

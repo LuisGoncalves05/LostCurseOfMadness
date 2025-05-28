@@ -145,11 +145,16 @@ static void update_bullet(Bullet *b, Level *level) {
     }
 }
 
+static bool check_win(Sprite *sprite, Maze *maze) {
+    return check_rectangle_collision(sprite->x, sprite->y, sprite->width, sprite->height, (get_width(maze) - 2) * CELL_SIZE, (get_height(maze) - 2) * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+}
+
 static int player_update_position(Level *level) {
     if (!level)
         return 1;
 
-    Sprite *player_sprite = player_get_sprite(level->player);
+    Player *player = level->player;
+    Sprite *player_sprite = player_get_sprite(player);
     Maze *maze = level->maze;
 
     player_sprite->x += player_sprite->xspeed;
@@ -163,7 +168,11 @@ static int player_update_position(Level *level) {
     }
 
     if (check_mob_collisions(level)) {
-        player_lose_health(level->player);
+        player_lose_health(player);
+    }
+
+    if (player_get_state(player) != PLAYER_DYING && check_win(player_sprite, maze)) {
+        player_set_state(player, PLAYER_WIN);
     }
 
     return 0;

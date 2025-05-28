@@ -66,12 +66,16 @@ PlayerState player_get_state(Player *player) {
     return player->state;
 }
 
+void player_set_state(Player *player, PlayerState state) {
+    player->state = state;
+}
+
 /* Statics section */
 
 /* Others section */
 
 void player_update_state(Player *player, struct packet pp) {
-    if (player == NULL)
+    if (player == NULL || player->state == PLAYER_WIN)
         return;
 
     if (player->animated_sprite->sprite->xspeed != 0 || player->animated_sprite->sprite->yspeed != 0) {

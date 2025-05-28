@@ -13,6 +13,7 @@ typedef enum {
 } maze_entity;
 
 #define WALL_COLOR 7               /**< Color used for the walls of the maze. */
+#define WIN_COLOR 62               /**< Color used for the win of the maze. */
 #define CELL_SIZE 64               /**< Total size of each cell including wall width. */
 #define MAZE_OPENING_PERCENTAGE 20 /**< Maze generated does not look like an arena so we generate it normally then remove random walls until we removed this percentage. */
 
@@ -97,6 +98,21 @@ void set_mob_count(Maze *maze, uint8_t mob_count);
  * @return Pointer to array of mob Position pointers;
  */
 Point **get_mob_positions(Maze *maze);
+
+/**
+ * @brief Checks for collision between two rectangles.
+ *
+ * @param x1 First rectangle top left x.
+ * @param y1 First rectangle top left y.
+ * @param width1 First rectangle width.
+ * @param height1 First rectangle height.
+ * @param x2 Second rectangle top left x.
+ * @param y2 Second rectangle top left y.
+ * @param width1 Second rectangle width.
+ * @param height1 Second rectangle height.
+ * @return true if there is a collision, false otherwise.
+ */
+bool(check_rectangle_collision)(int x1, int y1, int width1, int height1, int x2, int y2, int width2, int height2);
 
 /**
  * @brief Checks for collision between two sprites.
