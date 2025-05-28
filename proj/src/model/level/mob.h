@@ -6,9 +6,7 @@
 
 #include "drivers/video/gpu.h"
 #include "model/utils/sprite.h"
-#include "assets/xpm/level/mob/idle1.xpm"
-#include "assets/xpm/level/mob/idle2.xpm"
-#include "assets/xpm/level/mob/idle3.xpm"
+#include "assets/xpm/level/mob/idle.xpm"
 
 #define MOB_MAX_SPEED 5     /**< Maximum speed of the mob */
 #define MOB_ACCELERATION 1  /**< Acceleration of the mob */

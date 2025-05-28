@@ -8,14 +8,7 @@
 #include "drivers/video/gpu.h"
 #include "model/utils/keys.h"
 #include "model/utils/sprite.h"
-#include "assets/xpm/level/player/idle/idleW1.xpm"
-#include "assets/xpm/level/player/idle/idleW2.xpm"
-#include "assets/xpm/level/player/idle/idleA1.xpm"
-#include "assets/xpm/level/player/idle/idleA2.xpm"
-#include "assets/xpm/level/player/idle/idleS1.xpm"
-#include "assets/xpm/level/player/idle/idleS2.xpm"
-#include "assets/xpm/level/player/idle/idleD1.xpm"
-#include "assets/xpm/level/player/idle/idleD2.xpm"
+#include "assets/xpm/level/player/idle.xpm"
 
 #define PLAYER_HEALTH 3        /**< Health of the player */
 #define PLAYER_DEFAULT_SPEED 3 /**< Default speed of the player */
