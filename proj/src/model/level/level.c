@@ -163,7 +163,7 @@ static void update_bullet(Bullet *b, Level *level) {
 
 static bool check_win(Sprite *sprite, Maze *maze) {
     if (!sprite || !maze)
-        return;
+        return false;
 
     return check_sprite_collision(sprite, get_key_sprite(maze));
 }
@@ -264,7 +264,6 @@ static void draw_fov_cone(Level *level) {
     }
     double delta = level->delta;
     Sprite *player_sprite = player_get_sprite(level->player);
-    Maze *maze = level->maze;
 
     // Player center coordinates
     double cx = player_sprite->x + player_sprite->width / 2.0;
@@ -418,8 +417,9 @@ void level_shoot(Level *level) {
 /* Draw section */
 
 int draw_level(Level *level, struct packet pp) {
-    if (!level)
-        return;
+    if (!level) {
+        return 1;
+    }
 
     // Maze logic
     clear_frame_buffer(secondary_frame_buffer, IN_FOV_COLOR);
@@ -441,4 +441,6 @@ int draw_level(Level *level, struct packet pp) {
     // Level logic
     level_update_all_bullets(level);
     draw_all_bullets(level, secondary_frame_buffer);
+
+    return 0;
 }

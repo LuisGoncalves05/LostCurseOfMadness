@@ -130,11 +130,11 @@ Maze *(create_maze) (uint8_t width, uint8_t height, uint8_t mob_count) {
     }
 
     if (open_maze(maze, MAZE_OPENING_PERCENTAGE)) {
-        return 1;
+        return NULL;
     }
 
     if (generate_mob_positions(maze, mob_count)) {
-        return 1;
+        return NULL;
     }
 
     Sprite *key_sprite = create_sprite((xpm_map_t) key_1, 0, 0, 0, 0);
