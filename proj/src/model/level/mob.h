@@ -9,7 +9,7 @@
 #include "drivers/video/gpu.h"
 #include "model/utils/sprite.h"
 
-#define MOB_RADIUS 200       /**< Radius of the mob's field of view */
+#define MOB_RADIUS 300       /**< Radius of the mob's field of view */
 #define MOB_MAX_SPEED 5      /**< Maximum speed of the mob */
 #define MOB_ACCELERATION 1.5 /**< Acceleration of the mob */
 #define MOB_HEALTH 1         /**< Health of the mob */

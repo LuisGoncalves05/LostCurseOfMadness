@@ -153,13 +153,19 @@ static int player_update_position(Level *level) {
     Maze *maze = level->maze;
 
     player_sprite->x += player_sprite->xspeed;
-    player_sprite->y += player_sprite->yspeed;
     if (!check_wall_collision(maze, player_sprite)) {
         if (check_mob_collisions(level)) {
             player_set_health(level->player, player_get_health(level->player) - 1);
         }
     } else {
         player_sprite->x -= player_sprite->xspeed;
+    }
+    player_sprite->y += player_sprite->yspeed;
+    if (!check_wall_collision(maze, player_sprite)) {
+        if (check_mob_collisions(level)) {
+            player_set_health(level->player, player_get_health(level->player) - 1);
+        }
+    } else {
         player_sprite->y -= player_sprite->yspeed;
     }
     return 0;
@@ -195,9 +201,11 @@ static void level_update_all_mobs(Level *level) {
         if (mob_get_state(mob) == MOB_ATTACKING) {
             Sprite *mob_sprite = mob_get_sprite(mob);
             mob_sprite->x += mob_sprite->xspeed;
-            mob_sprite->y += mob_sprite->yspeed;
             if (check_wall_collision(maze, mob_sprite)) {
                 mob_sprite->x -= mob_sprite->xspeed;
+            }
+            mob_sprite->y += mob_sprite->yspeed;
+            if (check_wall_collision(maze, mob_sprite)) {
                 mob_sprite->y -= mob_sprite->yspeed;
             }
         }
