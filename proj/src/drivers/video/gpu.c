@@ -90,38 +90,6 @@ int(vga_draw_hline)(uint16_t x, uint16_t y, uint16_t len, uint32_t color, uint8_
     return 0;
 }
 
-int(vga_draw_line)(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint32_t color, uint8_t *frame_buffer) {
-    int dx = abs(x2 - x1);
-    int dy = abs(y2 - y1);
-    int sx = (x1 < x2) ? 1 : -1;
-    int sy = (y1 < y2) ? 1 : -1;
-    int err = dx - dy;
-    int e2;
-
-    while (true) {
-        // Desenhar o pixel na posição atual
-        if (x1 >= 0 && x1 < x_res && y1 >= 0 && y1 < y_res) {
-            vga_draw_pixel(x1, y1, color, frame_buffer);
-        }
-
-        // Verificar se chegamos ao ponto final
-        if (x1 == x2 && y1 == y2)
-            break;
-
-        e2 = 2 * err;
-        if (e2 > -dy) {
-            err -= dy;
-            x1 += sx;
-        }
-        if (e2 < dx) {
-            err += dx;
-            y1 += sy;
-        }
-    }
-
-    return 0;
-}
-
 int(vga_draw_rectangle)(uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint32_t color, uint8_t *frame_buffer) {
     if (width == 0 || height == 0 || x >= x_res || y >= y_res) {
         // printf("vg_draw_rectangle: invalid coordinates/dimensions, x:%u y:%u width:%u height:%u.\n", x, y, width, height);

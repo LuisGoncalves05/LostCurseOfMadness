@@ -19,6 +19,9 @@ typedef enum {
 #define WIN_COLOR 62               /**< Color used for the win of the maze. */
 #define CELL_SIZE 64               /**< Total size of each cell including wall width. */
 #define MAZE_OPENING_PERCENTAGE 20 /**< Maze generated does not look like an arena so we generate it normally then remove random walls until we removed this percentage. */
+#define NO_MONSTER_SQUARE 2        /**< No mobs spawn at this manhattan distance from the player spawn. */
+#define MOB_MULTIPLIER 4           /**< Scales the number of mobs in the maze. */
+#define MAX_ATTEMPTS 1000          /**< max attmpts for loops with random. */
 
 extern uint8_t *secondary_frame_buffer;
 extern uint32_t frame_size;
@@ -153,5 +156,14 @@ bool(check_wall_collision)(Maze *maze, Sprite *sprite);
  * @return 0 on success, non-zero on failure.
  */
 int draw_maze(Maze *maze, uint8_t *frame_buffer);
+
+/**
+ * @brief Draws the not maze part of the screen to the provided frame buffer.
+ *
+ * @param maze Pointer to the Maze structure.
+ * @param frame_buffer Pointer to the frame buffer.
+ * @return 0 on success, non-zero on failure.
+ */
+int draw_maze_outer(Maze *maze, uint8_t *frame_buffer);
 
 #endif /* MAZE_H */

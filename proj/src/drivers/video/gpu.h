@@ -95,19 +95,6 @@ int(vga_draw_pixel)(uint16_t x, uint16_t y, uint32_t color, uint8_t *frame_buffe
 int(vga_draw_hline)(uint16_t x, uint16_t y, uint16_t len, uint32_t color, uint8_t *frame_buffer);
 
 /**
- * @brief Draws a line connecting two points.
- *
- * @param x1 X-coordinate of the starting point.
- * @param y1 Y-coordinate of the starting point.
- * @param x2 X-coordinate of the ending point.
- * @param y2 Y-coordinate of the ending point.
- * @param color Color of the line.
- * @param frame_buffer Pointer to the frame buffer.
- * @return 0 on success, non-zero on failure.
- */
-int(vga_draw_line)(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint32_t color, uint8_t *frame_buffer);
-
-/**
  * @brief Draws a rectangle of a specified color.
  *
  * @param x X-coordinate of the top-left corner.
