@@ -33,7 +33,7 @@ static void(dfs)(Maze *maze, int x, int y) {
         int new_y = y + dy[dir];
 
         if (new_x > 0 && new_x < maze->width - 1 && new_y > 0 && new_y < maze->height - 1 && maze->cells[new_y][new_x] == WALL) { // Position inside the maze and there is a wall
-            maze->cells[y + dy[dir] / 2][x + dx[dir] / 2] = EMPTY; // Remove wall
+            maze->cells[y + dy[dir] / 2][x + dx[dir] / 2] = EMPTY;                                                                // Remove wall
             dfs(maze, new_x, new_y);
         }
     }
@@ -65,7 +65,6 @@ static int(initialize_maze)(Maze *maze, uint8_t width, uint8_t height) {
         }
         for (int j = 0; j < width; j++)
             mz[i][j] = WALL;
-
     }
     maze->cells = mz;
     dfs(maze, 1, 1);
@@ -98,7 +97,7 @@ static int(open_maze)(Maze *maze, uint8_t percentage) {
 
     uint16_t max_attempts = 255 * 255;
     while (visited < wall_area * percentage / 100.0 && attempts < max_attempts) {
-        int random_x = 1 + rand() % (maze->width - 2); // Leave borders untouched
+        int random_x = 1 + rand() % (maze->width - 2);  // Leave borders untouched
         int random_y = 1 + rand() % (maze->height - 2); // Leave borders untouched
 
         if (maze->cells[random_y][random_x] == WALL) {
@@ -165,16 +164,16 @@ void set_mob_count(Maze *maze, uint8_t mob_count) {
 
 static bool(check_rectangle_collision)(int x1, int y1, int width1, int height1, int x2, int y2, int width2, int height2) {
     return !(
-        x1 + width1 < x2 ||  // a to the left of b
-        x1 > x2 + width2 ||  // b to the left of a
-        y1 + height1 < y2 || // in normal people coordinates, a above b
-        y1 > y2 + height2    // in normal people coordinates, b above a
+        x1 + width1 <= x2 ||  // 1 to the left of 2
+        x1 >= x2 + width2 ||  // 2 to the left of 1
+        y1 + height1 <= y2 || // in normal people coordinates, 1 above 2
+        y1 >= y2 + height2    // in normal people coordinates, 2 above 1
     );
 }
 
 /* Others section */
 
-Point **(get_mob_positions) (Maze * maze) {
+Point **(get_mob_positions) (Maze *maze) {
     int point_no = 0;
     Point **points = malloc(sizeof(Point *) * maze->mob_count);
 

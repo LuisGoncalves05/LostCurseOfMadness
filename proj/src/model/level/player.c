@@ -16,6 +16,8 @@ Player *create_player() {
     player->state = PLAYER_IDLE;
     player->health = PLAYER_HEALTH;
     Sprite *new_sprite = create_sprite((xpm_map_t) player_idleS_1, CELL_SIZE, CELL_SIZE, 0, 0);
+    new_sprite->x += (CELL_SIZE - new_sprite->width) / 2;
+    new_sprite->y += (CELL_SIZE - new_sprite->height) / 2;
     player->animated_sprite = create_animated_sprite(new_sprite, 45, 2, (xpm_map_t) player_idleS_2);
     return player;
 }
@@ -39,6 +41,18 @@ Sprite *player_get_sprite(Player *player) {
     return player->animated_sprite->sprite;
 }
 
+uint16_t player_get_x(Player *player) {
+    if (player == NULL)
+        return 0;
+    return player->animated_sprite->sprite->x;
+}
+
+uint16_t player_get_y(Player *player) {
+    if (player == NULL)
+        return 0;
+    return player->animated_sprite->sprite->y;
+}
+
 void player_set_sprite(Player *player, AnimatedSprite *sprite) {
     if (player == NULL)
         return;
@@ -46,14 +60,6 @@ void player_set_sprite(Player *player, AnimatedSprite *sprite) {
         destroy_animated_sprite(player->animated_sprite);
     }
     player->animated_sprite = sprite;
-}
-
-unsigned char player_get_health(Player *player) {
-    return player->health;
-}
-
-void player_set_health(Player *player, unsigned char health) {
-    player->health = health;
 }
 
 PlayerState player_get_state(Player *player) {
@@ -168,6 +174,13 @@ void player_update_speed(Player *player, uint8_t scan_code) {
         default:
             break;
     }
+}
+
+void player_lose_health(Player *player) {
+    if (player == NULL)
+        return;
+    if (player->health > 0)
+        player->health--;
 }
 
 /* Draw section */
