@@ -6,6 +6,7 @@ struct Mob {
     double acceleration;
     AnimatedSprite *animated_sprite;
     MobState state;
+    bool direction; // true for right, false for left
 };
 
 /* Create and destroy section */
@@ -75,9 +76,15 @@ void mob_update_state(Mob *mob, uint16_t player_x, uint16_t player_y) {
     int dx = player_x - mob_x;
     int dy = player_y - mob_y;
     if (abs(dx) < MOB_RADIUS && abs(dy) < MOB_RADIUS) {
+        bool new_direction = dx > 0;
+        if (mob->state != MOB_ATTACKING || mob->direction != new_direction) {
+            Sprite *new_sprite = create_sprite(new_direction? (xpm_map_t) mob_attacking_right : (xpm_map_t) mob_attacking_left, mob_x, mob_y, 0, 0);
+            mob->animated_sprite = create_animated_sprite(new_sprite, 30, 1);
+        }
         mob->animated_sprite->sprite->xspeed = dx == 0? 0 : dx / abs(dx);
         mob->animated_sprite->sprite->yspeed = dy == 0? 0 : dy / abs(dy);
         mob->state = MOB_ATTACKING;
+        mob->direction = new_direction;
     } else {
         mob->animated_sprite->sprite->xspeed = 0;
         mob->animated_sprite->sprite->yspeed = 0;
