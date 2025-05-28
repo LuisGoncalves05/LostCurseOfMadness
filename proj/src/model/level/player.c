@@ -38,6 +38,18 @@ Sprite *player_get_sprite(Player *player) {
     return player->animated_sprite->sprite;
 }
 
+uint16_t player_get_x(Player *player) {
+    if (player == NULL)
+        return 0;
+    return player->animated_sprite->sprite->x;
+}
+
+uint16_t player_get_y(Player *player) {
+    if (player == NULL)
+        return 0;
+    return player->animated_sprite->sprite->y;
+}
+
 void player_set_sprite(Player *player, AnimatedSprite *sprite) {
     if (player == NULL)
         return;

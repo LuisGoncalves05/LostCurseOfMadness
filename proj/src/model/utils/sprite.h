@@ -9,7 +9,7 @@
 typedef struct {
     int x, y;           /**< X and Y position of the sprite */
     int width, height;  /**< Dimensions of the sprite */
-    int xspeed, yspeed; /**< Velocity in the X and Y direction */
+    double xspeed, yspeed; /**< Velocity in the X and Y direction */
     uint8_t *map;       /**< Pointer to the sprite's pixel data */
 } Sprite;
 
@@ -25,7 +25,7 @@ typedef struct {
  * @param yspeed Speed in the Y direction.
  * @return Pointer to the created Sprite, or NULL on failure.
  */
-Sprite *create_sprite(xpm_map_t xpm, int x, int y, int xspeed, int yspeed);
+Sprite *create_sprite(xpm_map_t xpm, int x, int y, double xspeed, double yspeed);
 
 /**
  * @brief Frees the memory associated with the sprite.

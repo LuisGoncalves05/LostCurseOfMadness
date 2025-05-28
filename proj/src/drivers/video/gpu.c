@@ -281,7 +281,7 @@ int draw_animated_sprite(AnimatedSprite *sprite, uint8_t *frame_buffer) {
     return 1;
   }
 
-  sprite->current_frame++;
+  // sprite->current_frame++;
   if (sprite->current_frame >= sprite->frames_per_sprite) {
     sprite->current_frame = 0;
     sprite->current_sprite = (sprite->current_sprite + 1) % sprite->number_sprites;

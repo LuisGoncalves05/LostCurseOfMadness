@@ -183,13 +183,23 @@ static void level_update_all_mobs(Level *level) {
     Maze *maze = level->maze;
     for (int i = 0; i < get_mob_count(maze);) {
         Mob *mob = mobs[i];
-        update_mob_state(mob);
+        mob_update_state(mob, player_get_x(level->player), player_get_y(level->player));
         if (mob_get_health(mob) == 0) {
             destroy_mob(mob);
             set_mob_count(maze, get_mob_count(maze) - 1);
             mobs[i] = mobs[get_mob_count(maze)];
         } else {
             i++;
+        }
+        
+        if (mob_get_state(mob) == MOB_ATTACKING) {
+            Sprite *mob_sprite = mob_get_sprite(mob);
+            mob_sprite->x += mob_sprite->xspeed;
+            mob_sprite->y += mob_sprite->yspeed;
+            if (check_wall_collision(maze, mob_sprite)) {
+                mob_sprite->x -= mob_sprite->xspeed;
+                mob_sprite->y -= mob_sprite->yspeed;
+            }
         }
     }
 }

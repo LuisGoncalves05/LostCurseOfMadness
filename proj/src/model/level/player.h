@@ -46,14 +46,6 @@ Player *create_player();
 void destroy_player(Player *player);
 
 /**
- * @brief Returns the AnimatedSprite associated with the player.
- *
- * @param player Pointer to the Player structure.
- * @return Pointer to the AnimatedSprite structure.
- */
-AnimatedSprite *player_get_animated_sprite(Player *player);
-
-/**
  * @brief Returns the Sprite associated with the player.
  *
  * @param player Pointer to the Player structure.
@@ -61,6 +53,29 @@ AnimatedSprite *player_get_animated_sprite(Player *player);
  */
 Sprite *player_get_sprite(Player *player);
 
+/**
+ * @brief Returns the x-coordinate of the player.
+ *
+ * @param player Pointer to the Player structure.
+ * @return The player's x-coordinate.
+ */
+uint16_t player_get_x(Player *player);
+
+/**
+ * @brief Returns the y-coordinate of the player.
+ *
+ * @param player Pointer to the Player structure.
+ * @return The player's y-coordinate.
+ */
+uint16_t player_get_y(Player *player);
+
+/**
+ * @brief Returns the AnimatedSprite associated with the player.
+ *
+ * @param player Pointer to the Player structure.
+ * @return Pointer to the AnimatedSprite structure.
+ */
+AnimatedSprite *player_get_animated_sprite(Player *player);
 
 /**
  * @brief Returns the current health of the player.

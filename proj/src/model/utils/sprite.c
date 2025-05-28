@@ -3,7 +3,7 @@
 
 /* Create and destroy section */
 
-Sprite *create_sprite(xpm_map_t xpm, int x, int y, int xspeed, int yspeed) {
+Sprite *create_sprite(xpm_map_t xpm, int x, int y, double xspeed, double yspeed) {
     Sprite *sp = (Sprite *) malloc(sizeof(Sprite));
     xpm_image_t img;
     if (sp == NULL)
