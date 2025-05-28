@@ -1,9 +1,11 @@
 #ifndef MAZE_H
 #define MAZE_H
 
-#include "../../drivers/video/gpu.h"
-#include "../utils/sprite.h"
 #include <lcom/lcf.h>
+
+#include "assets/xpm/level/key.xpm"
+#include "drivers/video/gpu.h"
+#include "model/utils/sprite.h"
 
 typedef enum {
     EMPTY, /**< Represents an empty cell in the maze. */

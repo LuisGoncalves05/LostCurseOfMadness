@@ -147,11 +147,15 @@ static void level_timer_handler(Game *game) {
 
     vga_flip_pages();
 
-    if (player_get_state(get_player(game->level)) == PLAYER_DYING)
+    if (player_get_state(get_player(game->level)) == PLAYER_DYING) {
         set_state(game, GAME_OVER);
+        return;
+    }
 
-    if (player_get_state(get_player(game->level)) == PLAYER_WIN)
+    if (player_get_state(get_player(game->level)) == PLAYER_WIN) {
         set_state(game, VICTORY);
+        return;
+    }
 }
 
 static void victory_timer_handler(Game *game) {
