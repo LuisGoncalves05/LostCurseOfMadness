@@ -107,10 +107,10 @@ MobState mob_get_state(Mob *mob);
  * @brief Updates the state of the mob based on its context.
  *
  * @param mob Pointer to the Mob structure.
- * @param player_x X coordinate of the player.
- * @param player_y Y coordinate of the player.
+ * @param player_cx X coordinate of the center of the player.
+ * @param player_cy Y coordinate of the center of the player.
  */
-void mob_update_state(Mob *mob, uint16_t player_x, uint16_t player_y);
+void mob_update_state(Mob *mob, uint16_t player_cx, uint16_t player_cy);
 
 /**
  * @brief Caps the mob's velocity to its maximum speed.

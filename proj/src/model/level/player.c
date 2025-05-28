@@ -53,6 +53,18 @@ uint16_t player_get_y(Player *player) {
     return player->animated_sprite->sprite->y;
 }
 
+uint16_t player_get_width(Player *player) {
+    if (player == NULL)
+        return 0;
+    return player->animated_sprite->sprite->width;
+}
+
+uint16_t player_get_heigth(Player *player) {
+    if (player == NULL)
+        return 0;
+    return player->animated_sprite->sprite->height;
+}
+
 void player_set_sprite(Player *player, AnimatedSprite *sprite) {
     if (player == NULL)
         return;

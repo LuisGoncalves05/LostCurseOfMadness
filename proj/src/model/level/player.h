@@ -72,6 +72,22 @@ uint16_t player_get_x(Player *player);
 uint16_t player_get_y(Player *player);
 
 /**
+ * @brief Returns the width of the player.
+ *
+ * @param player Pointer to the Player structure.
+ * @return The player's width.
+ */
+uint16_t player_get_width(Player *player);
+
+/**
+ * @brief Returns the height of the player.
+ *
+ * @param player Pointer to the Player structure.
+ * @return The player's height.
+ */
+uint16_t player_get_heigth(Player *player);
+
+/**
  * @brief Returns the AnimatedSprite associated with the player.
  *
  * @param player Pointer to the Player structure.
