@@ -20,11 +20,10 @@ Mob *create_mob(uint16_t x, uint16_t y) {
     int ry = rand() % 32;
     Sprite *new_sprite = create_sprite((xpm_map_t) mob_idle_1, x + rx, y + ry, 0, 0);
     mob->animated_sprite = create_animated_sprite(new_sprite, 30, 5,
-        (xpm_map_t) mob_idle_2,
-        (xpm_map_t) mob_idle_3,
-        (xpm_map_t) mob_idle_2,
-        (xpm_map_t) mob_idle_1
-    );
+                                                  (xpm_map_t) mob_idle_2,
+                                                  (xpm_map_t) mob_idle_3,
+                                                  (xpm_map_t) mob_idle_2,
+                                                  (xpm_map_t) mob_idle_1);
     mob->max_speed = MOB_MAX_SPEED;
     mob->acceleration = MOB_ACCELERATION;
     mob->state = MOB_IDLE;
@@ -92,13 +91,14 @@ void mob_update_state(Mob *mob, uint16_t player_cx, uint16_t player_cy) {
         mob->state = MOB_ATTACKING;
         mob->direction = new_direction;
     } else {
-        Sprite *new_sprite = create_sprite((xpm_map_t) mob_idle_1, mob_x, mob_y, 0, 0);
-        mob->animated_sprite = create_animated_sprite(new_sprite, 30, 5,
-            (xpm_map_t) mob_idle_2,
-            (xpm_map_t) mob_idle_3,
-            (xpm_map_t) mob_idle_2,
-            (xpm_map_t) mob_idle_1
-        );
+        if (mob->state != MOB_IDLE) {
+            Sprite *new_sprite = create_sprite((xpm_map_t) mob_idle_1, mob_x, mob_y, 0, 0);
+            mob->animated_sprite = create_animated_sprite(new_sprite, 30, 5,
+                (xpm_map_t) mob_idle_2,
+                (xpm_map_t) mob_idle_3,
+                (xpm_map_t) mob_idle_2,
+                (xpm_map_t) mob_idle_1);
+        }
         mob->state = MOB_IDLE;
     }
 }
