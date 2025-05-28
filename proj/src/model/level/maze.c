@@ -42,20 +42,19 @@ static void(dfs)(Maze *maze, int x, int y) {
 static int(initialize_maze)(Maze *maze, uint8_t width, uint8_t height) {
     if (maze == NULL)
         return 1;
+    
+    uint8_t w = width + (width % 2 == 0);
+    uint8_t h = height + (height % 2 == 0);
 
-    if ((width % 2 == 0) || (height % 2 == 0))
-        return 1;
+    maze->width = w > x_res / CELL_SIZE ? x_res / CELL_SIZE : w;
+    maze->height = h > y_res / CELL_SIZE ? y_res / CELL_SIZE : h;
 
-
-    maze->width = width > x_res / CELL_SIZE ? x_res / CELL_SIZE : width;
-    maze->height = height > y_res / CELL_SIZE ? y_res / CELL_SIZE : height;
-
-    maze_entity **mz = (maze_entity **) malloc(height * sizeof(maze_entity *));
+    maze_entity **mz = (maze_entity **) malloc(maze->height * sizeof(maze_entity *));
     if (mz == NULL)
         return 1;
 
-    for (uint16_t i = 0; i < height; i++) {
-        mz[i] = (maze_entity *) malloc(width * sizeof(maze_entity));
+    for (uint16_t i = 0; i < maze->height; i++) {
+        mz[i] = (maze_entity *) malloc(maze->width * sizeof(maze_entity));
 
         if (mz[i] == NULL) {
             for (int16_t j = i - 1; j >= 0; j--) {
@@ -64,7 +63,7 @@ static int(initialize_maze)(Maze *maze, uint8_t width, uint8_t height) {
             free(mz);
             return 1;
         }
-        for (int j = 0; j < width; j++)
+        for (int j = 0; j < maze->width; j++)
             mz[i][j] = WALL;
     }
     maze->cells = mz;
@@ -75,11 +74,13 @@ static int(initialize_maze)(Maze *maze, uint8_t width, uint8_t height) {
 }
 
 static int(generate_mob_positions)(Maze *maze, uint8_t mob_count) {
-    int positions = 0;
-    while (positions < mob_count) {
+    int positions = 0, attempts = 0;
+    while (positions < mob_count && attempts < MAX_ATTEMPTS) {
+        attempts++;
         int i = rand() % maze->width;
         int j = rand() % maze->height;
-        if (i != 0 && j != 0 && maze->cells[j][i] == EMPTY) {
+        int manhattan_distance = i - 1 + j - 1;
+        if (i != 1 && j != 1 && maze->cells[j][i] == EMPTY && manhattan_distance > NO_MONSTER_SQUARE) {
             positions++;
             maze->cells[j][i] = MOB;
         }
@@ -97,8 +98,7 @@ static int(open_maze)(Maze *maze, uint8_t percentage) {
     uint16_t visited = 0;
     uint16_t attempts = 0;
 
-    uint16_t max_attempts = 255 * 255;
-    while (visited < wall_area * percentage / 100.0 && attempts < max_attempts) {
+    while (visited < wall_area * percentage / 100.0 && attempts < MAX_ATTEMPTS) {
         int random_x = 1 + rand() % (maze->width - 2);  // Leave borders untouched
         int random_y = 1 + rand() % (maze->height - 2); // Leave borders untouched
 
@@ -249,4 +249,16 @@ int(draw_maze)(Maze *maze, uint8_t *frame_buffer) {
     }
 
     return 0;
+}
+
+int draw_maze_outer(level->maze, secondary_frame_buffer) {
+    for (int y = 0; y < maze->height; y++) {
+        for (int x = 0; x < maze->width; x++) {
+            if (maze->cells[y][x] == WALL) {
+                vga_draw_rectangle(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE, WALL_COLOR, secondary_frame_buffer);
+            } else if (maze->cells[y][x] == WIN) {
+                vga_draw_rectangle(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE, WIN_COLOR, secondary_frame_buffer);
+            }
+        }
+    }
 }

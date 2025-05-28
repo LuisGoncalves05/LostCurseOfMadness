@@ -20,8 +20,8 @@ Level *create_level(uint8_t number) {
         return NULL;
 
     level->number = number;
-    uint8_t mob_count = 5 * (number + 1);
-    level->maze = create_maze(10 + 2 * (number + 1) + 1, 10 + 2 * (number + 1) + 1, mob_count);
+    uint8_t mob_count = MOB_MULTIPLIER * (number + 1);
+    level->maze = create_maze(2 + 4 * (number + 1), 2 + 3 * (number + 1), mob_count);
     if (!level->maze) {
         free(level);
         return NULL;
@@ -388,6 +388,7 @@ void draw_level(Level *level, struct packet pp) {
     // Maze logic
     clear_frame_buffer(secondary_frame_buffer, IN_FOV_COLOR);
     draw_maze(level->maze, secondary_frame_buffer);
+    draw_maze_outer(level->maze, secondary_frame_buffer);
 
     // Mob logic
     level_update_all_mobs(level);
