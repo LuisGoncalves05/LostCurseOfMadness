@@ -4,7 +4,7 @@
 struct Maze {
     uint8_t width;
     uint8_t height;
-    uint8_t **cells;
+    maze_entity **cells;
     uint8_t mob_count;
 };
 
@@ -20,7 +20,7 @@ static void(shuffle)(int *arr, int n) {
 }
 
 static void(dfs)(Maze *maze, int x, int y) {
-    maze->cells[y][x] = 0;
+    maze->cells[y][x] = EMPTY;
 
     int dx[] = {2, -2, 0, 0};
     int dy[] = {0, 0, 2, -2};
@@ -32,8 +32,8 @@ static void(dfs)(Maze *maze, int x, int y) {
         int new_x = x + dx[dir];
         int new_y = y + dy[dir];
 
-        if (new_x >= 0 && new_x <= maze->width - 1 && new_y >= 0 && new_y <= maze->height - 1 && maze->cells[new_y][new_x] == 1) { // Position inside the maze and there is a wall
-            maze->cells[y + dy[dir] / 2][x + dx[dir] / 2] = 0;                                                                     // Remove wall
+        if (new_x > 0 && new_x < maze->width - 1 && new_y > 0 && new_y < maze->height - 1 && maze->cells[new_y][new_x] == WALL) { // Position inside the maze and there is a wall
+            maze->cells[y + dy[dir] / 2][x + dx[dir] / 2] = EMPTY; // Remove wall
             dfs(maze, new_x, new_y);
         }
     }
@@ -49,12 +49,12 @@ static int(initialize_maze)(Maze *maze, uint8_t width, uint8_t height) {
     maze->width = width;
     maze->height = height;
 
-    uint8_t **mz = (uint8_t **) malloc(height * sizeof(uint8_t *));
+    maze_entity **mz = (maze_entity **) malloc(height * sizeof(maze_entity *));
     if (mz == NULL)
         return 1;
 
     for (uint16_t i = 0; i < height; i++) {
-        mz[i] = (uint8_t *) malloc(width * sizeof(uint8_t));
+        mz[i] = (maze_entity *) malloc(width * sizeof(maze_entity));
 
         if (mz[i] == NULL) {
             for (int16_t j = i - 1; j >= 0; j--) {
@@ -63,11 +63,12 @@ static int(initialize_maze)(Maze *maze, uint8_t width, uint8_t height) {
             free(mz);
             return 1;
         }
-        memset(mz[i], WALL, width);
+        for (int j = 0; j < width; j++)
+            mz[i][j] = WALL;
+
     }
     maze->cells = mz;
-    mz[0][0] = EMPTY;
-    dfs(maze, 0, 0);
+    dfs(maze, 1, 1);
 
     return 0;
 }
@@ -97,8 +98,8 @@ static int(open_maze)(Maze *maze, uint8_t percentage) {
 
     uint16_t max_attempts = 255 * 255;
     while (visited < wall_area * percentage / 100.0 && attempts < max_attempts) {
-        int random_x = rand() % maze->width;
-        int random_y = rand() % maze->height;
+        int random_x = 1 + rand() % (maze->width - 2); // Leave borders untouched
+        int random_y = 1 + rand() % (maze->height - 2); // Leave borders untouched
 
         if (maze->cells[random_y][random_x] == WALL) {
             maze->cells[random_y][random_x] = EMPTY;
@@ -122,7 +123,7 @@ Maze *(create_maze) (uint8_t width, uint8_t height, uint8_t mob_count) {
         return NULL;
     }
 
-    open_maze(maze, 30);
+    open_maze(maze, MAZE_OPENING_PERCENTAGE);
     generate_mob_positions(maze, mob_count);
 
     return maze;
@@ -139,10 +140,6 @@ void destroy_maze(Maze *maze) {
         free(maze->cells);
     }
 
-    if (maze->lines) {
-        free(maze->lines);
-    }
-
     free(maze);
 }
 
@@ -153,11 +150,7 @@ uint8_t(get_width)(Maze *maze) {
 }
 
 uint8_t(get_height)(Maze *maze) {
-    return maze->width;
-}
-
-int(get_line_count)(Maze *maze) {
-    return maze->line_count;
+    return maze->height;
 }
 
 uint8_t(get_mob_count)(Maze *maze) {

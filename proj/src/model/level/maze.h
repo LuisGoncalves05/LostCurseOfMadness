@@ -5,13 +5,18 @@
 #include "../utils/sprite.h"
 #include <lcom/lcf.h>
 
-#define EMPTY 0                 /**< Represents an empty cell in the maze. */
-#define WALL 1                  /**< Represents a wall cell in the maze. */
-#define MOB 2                   /**< Represents a mob cell in the maze. */
-#define WALL_COLOR 7         /**< Color used for the walls of the maze. */
-#define CELL_SIZE 64            /**< Total size of each cell including wall width. */
+typedef enum {
+    EMPTY, /**< Represents an empty cell in the maze. */
+    WALL,  /**< Represents a wall cell in the maze. */
+    MOB,   /**< Represents a mob cell in the maze. */
+    WIN,   /**< Represents the winning cell of the maze. */
+} maze_entity;
 
-extern uint8_t* secondary_frame_buffer;
+#define WALL_COLOR 7               /**< Color used for the walls of the maze. */
+#define CELL_SIZE 64               /**< Total size of each cell including wall width. */
+#define MAZE_OPENING_PERCENTAGE 20 /**< Maze generated does not look like an arena so we generate it normally then remove random walls until we removed this percentage. */
+
+extern uint8_t *secondary_frame_buffer;
 extern uint32_t frame_size;
 extern uint16_t x_res, y_res;
 
@@ -21,14 +26,6 @@ extern uint16_t x_res, y_res;
  * The Maze struct is opaque.
  */
 typedef struct Maze Maze;
-
-/**
- * @brief Represents a single Line instance.
- */
-typedef struct Line {
-    int x1, y1;
-    int x2, y2;
-} Line;
 
 /**
  * @brief Represents a single Point instance.
