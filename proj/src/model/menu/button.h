@@ -27,6 +27,11 @@ extern uint16_t x_res, y_res;
 #define BUTTON_MENU_START_X x_res / 2 - BUTTON_WIDTH - 25
 
 /**
+ * @brief X-coordinate for the Next button.
+ */
+#define BUTTON_NEXT_START_X x_res / 2 - BUTTON_WIDTH - 25
+
+/**
  * @brief X-coordinate for the Exit button.
  */
 #define BUTTON_EXIT_START_X x_res / 2 + 25
@@ -41,6 +46,11 @@ extern uint16_t x_res, y_res;
  */
 #define GAME_OVER_BUTTON_START_Y y_res / 2 + 100
 
+/**
+ * @brief Y-coordinate for buttons in the victory screen.
+ */
+#define VICTORY_BUTTON_START_Y y_res / 2 + 100
+
 
 /**
  * @brief Enumeration of button types.
@@ -48,6 +58,7 @@ extern uint16_t x_res, y_res;
 typedef enum {
     BUTTON_NONE, /**< No button selected */
     BUTTON_PLAY, /**< Play button */
+    BUTTON_NEXT, /**< Next button */
     BUTTON_MENU, /**< Menu button */
     BUTTON_EXIT  /**< Exit button */
 } ButtonType;

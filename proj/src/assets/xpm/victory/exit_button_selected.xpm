@@ -1,4 +1,4 @@
-static xpm_row_t const exit_button_selected[] = {
+static xpm_row_t const victory_exit_button_selected[] = {
 "290 139 2",
 " 	0",
 ".	4",

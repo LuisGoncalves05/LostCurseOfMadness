@@ -8,8 +8,9 @@ struct Game {
     Level *level;
     Cursor *cursor;
     union {
-        struct GameOver *game_over;
         struct MainMenu *main_menu;
+        struct Victory *victory;
+        struct GameOver *game_over;
     } menu;
     bool shooting;
 };
@@ -37,6 +38,8 @@ static void victory_init(Game *game) {
     set_cursor(game, CURSOR_DEFAULT);
     game->score = game->level_number;
     game->level_number++;
+
+    game->menu.victory = create_victory();
 }
 
 static void game_over_init(Game *game) {
@@ -97,6 +100,7 @@ static void level_destroy(Game *game) {
 }
 
 static void victory_destroy(Game *game) {
+    destroy_victory(game->menu.victory);
 }
 
 static void game_over_destroy(Game *game) {
@@ -151,7 +155,12 @@ static void level_timer_handler(Game *game) {
 }
 
 static void victory_timer_handler(Game *game) {
-    printf("Win!\n");
+    clear_frame_buffer(secondary_frame_buffer, 0);
+
+    draw_victory(game->menu.victory, secondary_frame_buffer);
+    draw_cursor(game->cursor, secondary_frame_buffer);
+
+    vga_flip_pages();
 }
 
 static void game_over_timer_handler(Game *game) {
@@ -217,7 +226,18 @@ static void game_over_keyboard_handler(Game *game) {
 }
 
 static void victory_keyboard_handler(Game *game) {
-    printf("victory_keyboard_handler: To be implemented\n");
+    if (scan_code == ESC_BREAK_CODE)
+        set_state(game, EXIT);
+    if (scan_code == KEY_W || scan_code == KEY_S || scan_code == KEY_A || scan_code == KEY_D)
+        victory_change_button(game->menu.victory);
+    if (scan_code == KEY_ENTER) {
+        ButtonType button = victory_get_button(game->menu.victory);
+        if (button == BUTTON_NEXT) {
+            set_state(game, LEVEL);
+        } else if (button == BUTTON_EXIT) {
+            set_state(game, EXIT);
+        }
+    }
 }
 
 static void exit_keyboard_handler(Game *game) {

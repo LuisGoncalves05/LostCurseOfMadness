@@ -5,16 +5,17 @@
 #include <math.h>
 #include <stdint.h>
 
-#include "model/level/level.h"
-#include "model/menu/game_over.h"
-#include "model/menu/main_menu.h"
-#include "model/utils/cursor.h"
-#include "model/utils/keys.h"
-#include "model/utils/sprite.h"
 #include "drivers/keyboard/keyboard.h"
 #include "drivers/mouse/mouse.h"
 #include "drivers/timer/i8254.h"
 #include "drivers/video/gpu.h"
+#include "model/level/level.h"
+#include "model/menu/game_over.h"
+#include "model/menu/main_menu.h"
+#include "model/menu/victory.h"
+#include "model/utils/cursor.h"
+#include "model/utils/keys.h"
+#include "model/utils/sprite.h"
 
 extern uint8_t scan_code;
 extern struct packet pp;
