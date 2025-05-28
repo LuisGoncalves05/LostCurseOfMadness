@@ -75,6 +75,10 @@ static int(initialize_maze)(Maze *maze, uint8_t width, uint8_t height) {
 }
 
 static int(generate_mob_positions)(Maze *maze, uint8_t mob_count) {
+    if (!maze) {
+        return 1;
+    }
+
     int positions = 0, attempts = 0;
     while (positions < mob_count && attempts < MAX_ATTEMPTS) {
         attempts++;
@@ -125,8 +129,13 @@ Maze *(create_maze) (uint8_t width, uint8_t height, uint8_t mob_count) {
         return NULL;
     }
 
-    open_maze(maze, MAZE_OPENING_PERCENTAGE);
-    generate_mob_positions(maze, mob_count);
+    if (open_maze(maze, MAZE_OPENING_PERCENTAGE)) {
+        return 1;
+    }
+
+    if (generate_mob_positions(maze, mob_count)) {
+        return 1;
+    }
 
     Sprite *key_sprite = create_sprite((xpm_map_t) key_1, 0, 0, 0, 0);
     maze->key = create_animated_sprite(key_sprite, 25, 4,
@@ -154,22 +163,37 @@ void destroy_maze(Maze *maze) {
 /* Getter and setter section */
 
 uint8_t(get_width)(Maze *maze) {
+    if (!maze) {
+        return 0;
+    }
     return maze->width;
 }
 
 uint8_t(get_height)(Maze *maze) {
+    if (!maze) {
+        return 0;
+    }
     return maze->height;
 }
 
 uint8_t(get_mob_count)(Maze *maze) {
+    if (!maze) {
+        return 0;
+    }
     return maze->mob_count;
 }
 
 void set_mob_count(Maze *maze, uint8_t mob_count) {
+    if (!maze) {
+        return;
+    }
     maze->mob_count = mob_count;
 }
 
 Sprite *get_key_sprite(Maze *maze) {
+    if (!maze) {
+        return NULL;
+    }
     return maze->key->sprite;
 }
 
@@ -177,7 +201,11 @@ Sprite *get_key_sprite(Maze *maze) {
 
 /* Others section */
 
-Point **(get_mob_positions) (Maze *maze) {
+Point **(get_mob_positions) (Maze * maze) {
+    if (!maze) {
+        return NULL;
+    }
+
     int point_no = 0;
     Point **points = malloc(sizeof(Point *) * maze->mob_count);
 
@@ -219,6 +247,9 @@ bool(check_sprite_collision)(Sprite *a, Sprite *b) {
 
 bool(check_wall_collision)(Maze *maze, Sprite *sprite) {
     if (!maze)
+        return false;
+
+    if (!sprite)
         return false;
 
     double scaled_down_x = sprite->x / CELL_SIZE;
@@ -269,6 +300,11 @@ int(draw_maze)(Maze *maze, uint8_t *frame_buffer) {
 }
 
 int draw_maze_outer(Maze *maze, uint8_t *frame_buffer) {
+    if (!maze || !frame_buffer) {
+        printf("Error: Maze or frame buffer is NULL\n");
+        return 1;
+    }
+
     xpm_image_t wall;
     uint8_t *data = xpm_load(wall_xpm, XPM_INDEXED, &wall);
 

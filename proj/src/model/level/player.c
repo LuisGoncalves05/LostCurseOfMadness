@@ -101,7 +101,7 @@ void player_update_state(Player *player, struct packet pp) {
     }
 
     if (player->health == 0) {
-        player->state = PLAYER_DYING;
+        player->state = PLAYER_DEAD;
     }
 }
 

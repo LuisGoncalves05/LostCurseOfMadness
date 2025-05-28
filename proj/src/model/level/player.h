@@ -29,7 +29,7 @@ typedef enum {
     PLAYER_WALKING,  /**< Player is walking */
     PLAYER_AIMING,   /**< Player is aiming */
     PLAYER_SHOOTING, /**< Player is shooting */
-    PLAYER_DYING,    /**< Player is dying */
+    PLAYER_DEAD,    /**< Player is dying */
     PLAYER_WIN       /**< Player is winning */
 } PlayerState;
 
