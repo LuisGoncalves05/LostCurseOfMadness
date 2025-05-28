@@ -6,6 +6,7 @@
 #include <stdlib.h>
 
 #include "assets/xpm/level/player/idle.xpm"
+#include "assets/xpm/level/player/walkingS.xpm"
 #include "drivers/video/gpu.h"
 #include "model/utils/animated_sprite.h"
 #include "model/utils/keys.h"

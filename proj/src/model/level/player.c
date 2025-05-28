@@ -128,14 +128,16 @@ void player_update_speed(Player *player, uint8_t scan_code) {
                 45, 2, (xpm_map_t) player_idleA_2);
             break;
         case KEY_S:
-            player->animated_sprite = create_animated_sprite(
+            if (player->state != PLAYER_WALKING) player->animated_sprite = create_animated_sprite(
                 create_sprite(
-                    (xpm_map_t) player_idleS_1,
+                    (xpm_map_t) player_walkS_3,
                     player->animated_sprite->sprite->x,
                     player->animated_sprite->sprite->y,
                     player->animated_sprite->sprite->xspeed,
                     PLAYER_DEFAULT_SPEED),
-                45, 2, (xpm_map_t) player_idleS_2);
+                10, 4, (xpm_map_t) player_walkS_2,
+                (xpm_map_t) player_walkS_1,
+                (xpm_map_t) player_walkS_2);
             break;
         case KEY_D:
             player->animated_sprite = create_animated_sprite(
