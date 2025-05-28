@@ -1,9 +1,10 @@
 #ifndef KBC_H
 #define KBC_H
 
-#include "i8042.h"
 #include <stdbool.h>
 #include <stdint.h>
+
+#include "i8042.h"
 
 extern int32_t kbd_subscription_id;
 
