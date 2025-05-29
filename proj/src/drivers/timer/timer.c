@@ -1,6 +1,7 @@
-#include "i8254.h"
 #include <lcom/lcf.h>
 #include <stdint.h>
+
+#include "i8254.h"
 
 int32_t timer_hook_id = TIMER;
 uint32_t interrupt_counter = 0;
@@ -37,10 +38,10 @@ int(timer_set_frequency)(uint8_t timer, uint32_t freq) {
     }
 
     /*
-    Frequency must be stored in a 16 bit unsigned integer so it cannot be more than 0xFFFF
-    and it must also be positive. Therefore,
-    TIMER_FREQ / freq > 0xFFFF <=> freq < TIMER_FREQ / 0xFFFF <=> freq < 18.2
-    TIMER_FREQ / freq < 1 <=> freq > TIMER_FREQ
+        Frequency must be stored in a 16 bit unsigned integer so it cannot be more than 0xFFFF
+        and it must also be positive. Therefore,
+        TIMER_FREQ / freq > 0xFFFF <=> freq < TIMER_FREQ / 0xFFFF <=> freq < 18.2
+        TIMER_FREQ / freq < 1 <=> freq > TIMER_FREQ
     */
     if (freq < 19 || freq > TIMER_FREQ) {
         printf("timer_set_frequency: invalid frequency %d, not in range [19:1193182].\n", freq);

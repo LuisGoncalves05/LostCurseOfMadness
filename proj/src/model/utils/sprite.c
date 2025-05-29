@@ -39,6 +39,14 @@ void destroy_sprite(Sprite *sp) {
 /* Draw section */
 
 int(draw_sprite)(Sprite *sprite, uint8_t *frame_buffer) {
+    if (sprite == NULL) {
+        return 1;
+    }
+
+    if (frame_buffer == NULL) {
+        return 1;
+    }
+    
     return vga_draw_loaded_xpm(sprite->map, sprite->x, sprite->y, sprite->width, sprite->height, frame_buffer);
 }
 

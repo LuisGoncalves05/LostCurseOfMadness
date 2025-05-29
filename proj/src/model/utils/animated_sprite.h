@@ -1,8 +1,8 @@
 #ifndef ANIMATED_SPRITE_H
 #define ANIMATED_SPRITE_H
 
-#include <stdarg.h>
 #include "model/utils/sprite.h"
+#include <stdarg.h>
 
 extern uint16_t x_res, y_res;
 

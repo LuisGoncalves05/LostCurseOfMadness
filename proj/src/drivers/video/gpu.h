@@ -2,7 +2,6 @@
 #define GPU_H
 
 #include <lcom/lcf.h>
-#include <stdbool.h>
 #include <stdint.h>
 
 /**
@@ -28,6 +27,7 @@
 #define VBE_MODE3 0x115 /**< 800x600, 24 bpp (direct color, RGB 8:8:8). */
 #define VBE_MODE4 0x11A /**< 1280x1024, 16 bpp (direct color, RGB 5:6:5). */
 #define VBE_MODE5 0x14C /**< 1152x864, 32 bpp (direct color, RGB 8:8:8). */
+#define VBE_MODE6 0x107 /**< 1280x1024, 256 colors (8 bpp, indexed color). */
 /** @} */
 
 /** @name VBE Return Status Codes */
@@ -41,7 +41,7 @@
 #define VERTICAL_RETRACE 0x0080    /**< Set display start during vertical retrace. */
 #define VBE 0x10                   /**< BIOS video interrupt number. */
 #define DIRECT_MODE 6              /**< Direct color memory model identifier. */
-#define BACKGROUND_COLOR 0         /**< Default background color used for clearing screen or erasing sprites. */
+#define BACKGROUND_COLOR 0         /**< Default background color. */
 
 extern uint32_t interrupt_counter;
 
@@ -95,7 +95,7 @@ int(vga_draw_pixel)(uint16_t x, uint16_t y, uint32_t color, uint8_t *frame_buffe
 int(vga_draw_hline)(uint16_t x, uint16_t y, uint16_t len, uint32_t color, uint8_t *frame_buffer);
 
 /**
- * @brief Draws a rectangle of a specified color.
+ * @brief Draws a filled rectangle of a specified color.
  *
  * @param x X-coordinate of the top-left corner.
  * @param y Y-coordinate of the top-left corner.
@@ -106,16 +106,6 @@ int(vga_draw_hline)(uint16_t x, uint16_t y, uint16_t len, uint32_t color, uint8_
  * @return 0 on success, non-zero on failure.
  */
 int(vga_draw_rectangle)(uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint32_t color, uint8_t *frame_buffer);
-
-/**
- * @brief Extracts a specific color component from a full 32-bit color value.
- *
- * @param color Original 32-bit color.
- * @param field_position Bit position of the component.
- * @param mask_size Size in bits of the component.
- * @return Extracted component value.
- */
-inline uint8_t(get_component)(uint32_t color, uint8_t field_position, uint8_t mask_size);
 
 /**
  * @brief Calculates the color for a rectangle in direct color mode.
@@ -140,15 +130,47 @@ uint32_t(direct_mode)(uint16_t i, uint16_t j, uint8_t step, uint32_t first);
  */
 uint32_t(indexed_mode)(uint8_t no_rectangles, uint16_t i, uint16_t j, uint8_t step, uint32_t first);
 
+/**
+ * @brief Draws an XPM image at the specified coordinates.
+ *
+ * @param xpm XPM map to be drawn.
+ * @param x X-coordinate.
+ * @param y Y-coordinate.
+ * @param frame_buffer Pointer to the frame buffer.
+ * @return 0 on success, non-zero on failure.
+ */
 int(vga_draw_xpm)(xpm_map_t xpm, uint16_t x, uint16_t y, uint8_t *frame_buffer);
 
+/**
+ * @brief Draws a preloaded XPM image at the specified coordinates.
+ *
+ * @param xpm_data Pointer to pixel data.
+ * @param x X-coordinate.
+ * @param y Y-coordinate.
+ * @param width Image width.
+ * @param height Image height.
+ * @param frame_buffer Pointer to the frame buffer.
+ * @return 0 on success, non-zero on failure.
+ */
 int(vga_draw_loaded_xpm)(uint8_t *xpm_data, uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint8_t *frame_buffer);
 
-
+/**
+ * @brief Clears the given frame buffer with the specified color.
+ *
+ * @param frame_buffer Pointer to the frame buffer.
+ * @param color Color used to clear (format depends on color depth).
+ * @return 0 on success, non-zero on failure.
+ */
 int(clear_frame_buffer)(uint8_t *frame_buffer, uint16_t color);
 
+/**
+ * @brief Sets the video memory display start to point to a new buffer (page flipping).
+ */
 void(set_display_start)();
 
+/**
+ * @brief Swaps the main and secondary frame buffers.
+ */
 void(vga_flip_pages)();
 
 #endif /* GPU_H */

@@ -1,10 +1,9 @@
-#include "gpu.h"
-#include "model/utils/sprite.h"
 #include <lcom/lcf.h>
 #include <machine/int86.h>
 #include <math.h>
 
-xpm_image_t img;
+#include "gpu.h"
+
 vbe_mode_info_t vg_mode_info;
 uint8_t bytes_per_pixel;
 uint16_t x_res, y_res;
@@ -46,7 +45,7 @@ int(set_frame_buffers)(uint16_t mode) {
 }
 
 int(clear_frame_buffer)(uint8_t *frame_buffer, uint16_t color) {
-    return memset(frame_buffer, color, x_res * y_res * bytes_per_pixel) == NULL;
+    return memset(frame_buffer, color, frame_size) == NULL;
 }
 
 void(set_display_start)() {
@@ -60,7 +59,7 @@ void(set_display_start)() {
     sys_int86(&reg86);
 }
 
-void (vga_flip_pages)() {
+void(vga_flip_pages)() {
     frame_start = !frame_start;
     set_display_start();
     uint8_t *tmp = main_frame_buffer;
@@ -108,6 +107,18 @@ int(vga_draw_rectangle)(uint16_t x, uint16_t y, uint16_t width, uint16_t height,
     }
 }
 
+/**
+ * @brief Extracts a specific color component from a 32-bit color value.
+ *
+ * @param color Original color.
+ * @param field_position Bit position of the field.
+ * @param mask_size Size in bits of the mask.
+ * @return Extracted component value.
+ */
+static inline uint8_t(get_component)(uint32_t color, uint8_t field_position, uint8_t mask_size) {
+    return (color >> field_position) & ((1 << mask_size) - 1);
+}
+
 uint32_t(direct_mode)(uint16_t i, uint16_t j, uint8_t step, uint32_t first) {
     uint8_t rfp = vg_mode_info.RedFieldPosition;
     uint8_t gfp = vg_mode_info.GreenFieldPosition;
@@ -124,21 +135,17 @@ uint32_t(direct_mode)(uint16_t i, uint16_t j, uint8_t step, uint32_t first) {
     return (r << rfp) | (g << gfp) | (b << bfp);
 }
 
-inline uint8_t(get_component)(uint32_t color, uint8_t field_position, uint8_t mask_size) {
-    return (color >> field_position) & (BIT(mask_size) - 1);
-}
-
 uint32_t(indexed_mode)(uint8_t no_rectangles, uint16_t i, uint16_t j, uint8_t step, uint32_t first) {
     return (first + (i * no_rectangles + j) * step) % (1 << vg_mode_info.BitsPerPixel);
 }
 
-int (vga_draw_loaded_xpm)(uint8_t *xpm_data, uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint8_t *frame_buffer) {
+int(vga_draw_loaded_xpm)(uint8_t *xpm_data, uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint8_t *frame_buffer) {
     uint8_t *ptr = get_position(x, y, frame_buffer);
     if (ptr == NULL) {
         fprintf(stderr, "vga_draw_loaded_xpm: get_position failed.\n");
         return 1;
     }
-    
+
     if (x >= x_res || y >= y_res) {
         printf("vga_draw_loaded_xpm: invalid xpm position, x:%hu, y:%hu.\n", x, y);
         return 1;
@@ -148,7 +155,7 @@ int (vga_draw_loaded_xpm)(uint8_t *xpm_data, uint16_t x, uint16_t y, uint16_t wi
     uint16_t usable_line_size = line_size;
     if (x + width > x_res)
         usable_line_size = (x_res - x) * bytes_per_pixel;
-    
+
     uint8_t *data = xpm_data;
     for (int h = 0; h < height && y + h < y_res; h++, ptr += x_res * bytes_per_pixel, data += line_size)
         memcpy(ptr, data, usable_line_size);
@@ -156,10 +163,10 @@ int (vga_draw_loaded_xpm)(uint8_t *xpm_data, uint16_t x, uint16_t y, uint16_t wi
     return 0;
 }
 
-int (vga_draw_xpm)(xpm_map_t xpm, uint16_t x, uint16_t y, uint8_t *frame_buffer) {
+int(vga_draw_xpm)(xpm_map_t xpm, uint16_t x, uint16_t y, uint8_t *frame_buffer) {
     xpm_image_t img;
     uint8_t *data = xpm_load(xpm, XPM_INDEXED, &img);
-    
+
     if (vga_draw_loaded_xpm(data, x, y, img.width, img.height, frame_buffer))
         return 1;
 

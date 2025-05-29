@@ -3,10 +3,11 @@
 
 #include <lcom/lcf.h>
 #include <stdint.h>
+
+#include "assets/xpm/crosshair.xpm"
+#include "assets/xpm/cursor.xpm"
 #include "drivers/video/gpu.h"
 #include "model/utils/sprite.h"
-#include "assets/xpm/cursor.xpm"
-#include "assets/xpm/crosshair.xpm"
 
 extern uint16_t x_res, y_res;
 

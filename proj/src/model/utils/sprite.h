@@ -9,10 +9,10 @@ extern uint16_t x_res, y_res;
  * @brief Represents a Sprite used for rendering objects on screen.
  */
 typedef struct {
-    int x, y;           /**< X and Y position of the sprite */
-    int width, height;  /**< Dimensions of the sprite */
+    int x, y;              /**< X and Y position of the sprite */
+    int width, height;     /**< Dimensions of the sprite */
     double xspeed, yspeed; /**< Velocity in the X and Y direction */
-    uint8_t *map;       /**< Pointer to the sprite's pixel data */
+    uint8_t *map;          /**< Pointer to the sprite's pixel data */
 } Sprite;
 
 /**

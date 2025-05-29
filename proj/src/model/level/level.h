@@ -1,8 +1,8 @@
 #ifndef LEVEL_H
 #define LEVEL_H
 
-#include "config.h"
 #include "bullet.h"
+#include "config.h"
 #include "maze.h"
 #include "mob.h"
 #include "player.h"
@@ -13,6 +13,7 @@ extern uint8_t *secondary_frame_buffer;
 extern uint8_t *main_frame_buffer;
 extern uint8_t bytes_per_pixel;
 extern uint16_t x_res, y_res;
+extern int frame_counter;
 
 /**
  * @brief Represents a single Level instance.
@@ -68,7 +69,6 @@ double get_delta(Level *level);
  */
 Mob **get_mobs(Level *level);
 
-
 /**
  * @brief Updates the player's aim direction based on mouse coordinates.
  *
@@ -98,7 +98,9 @@ void level_shoot(Level *level);
  *
  * @param level Pointer to the Level structure.
  * @param pp Mouse packet used for determining cursor or aim direction.
+ * 
+ * @return 0 on success, non-zero on failure.
  */
-void draw_level(Level *level, struct packet pp);
+int draw_level(Level *level, struct packet pp);
 
 #endif /* LEVEL_H */

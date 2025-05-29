@@ -3,11 +3,11 @@
 
 #include <lcom/lcf.h>
 
-#include "assets/xpm/victory/victory.xpm"
-#include "assets/xpm/victory/next_button.xpm"
-#include "assets/xpm/victory/next_button_selected.xpm"
 #include "assets/xpm/victory/exit_button.xpm"
 #include "assets/xpm/victory/exit_button_selected.xpm"
+#include "assets/xpm/victory/next_button.xpm"
+#include "assets/xpm/victory/next_button_selected.xpm"
+#include "assets/xpm/victory/victory.xpm"
 #include "model/menu/button.h"
 
 extern uint16_t x_res, y_res;

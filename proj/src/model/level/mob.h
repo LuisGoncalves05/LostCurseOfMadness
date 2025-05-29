@@ -14,7 +14,6 @@
 
 #define MOB_RADIUS 250       /**< Radius of the mob's field of view */
 #define MOB_MAX_SPEED 5      /**< Maximum speed of the mob */
-#define MOB_ACCELERATION 1.5 /**< Acceleration of the mob */
 #define MOB_HEALTH 1         /**< Health of the mob */
 #define MOB_DEFAULT_SPEED 2  /**< Default speed of the mob */
 
@@ -31,7 +30,7 @@ typedef struct Mob Mob;
 typedef enum {
     MOB_IDLE,      /**< Mob is idle */
     MOB_ATTACKING, /**< Mob is attacking */
-    MOB_DYING      /**< Mob is dying */
+    MOB_DEAD      /**< Mob is dying */
 } MobState;
 /**
  * @brief Creates a new mob instance with the specified sprite.
@@ -87,14 +86,6 @@ void mob_set_health(Mob *mob, unsigned char health);
  * @return The mob's maximum speed.
  */
 int mob_get_max_speed(Mob *mob);
-
-/**
- * @brief Returns the acceleration of the mob.
- *
- * @param mob Pointer to the Mob structure.
- * @return The mob's acceleration.
- */
-int mob_get_acceleration(Mob *mob);
 
 /**
  * @brief Returns the current state of the mob.

@@ -3,12 +3,13 @@
 
 #include <lcom/lcf.h>
 #include <stdint.h>
-#include "button.h"
+
 #include "assets/xpm/game_over/exit_button.xpm"
 #include "assets/xpm/game_over/exit_button_selected.xpm"
 #include "assets/xpm/game_over/game_over.xpm"
 #include "assets/xpm/game_over/menu_button.xpm"
 #include "assets/xpm/game_over/menu_button_selected.xpm"
+#include "button.h"
 
 extern uint16_t x_res, y_res;
 
@@ -67,4 +68,3 @@ ButtonType game_over_click_handler(GameOver *game_over, uint16_t x, uint16_t y);
 void draw_game_over(GameOver *game_over, uint8_t *frame_buffer);
 
 #endif /* GAME_OVER_H */
-

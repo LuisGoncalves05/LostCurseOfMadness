@@ -14,6 +14,7 @@ Player *create_player() {
     Player *player = (Player *) malloc(sizeof(Player));
     if (!player)
         return NULL;
+
     player->state = PLAYER_IDLE;
     player->health = PLAYER_HEALTH;
     Sprite *new_sprite = create_sprite((xpm_map_t) player_idleS_1, CELL_SIZE, CELL_SIZE, 0, 0);
@@ -27,6 +28,7 @@ Player *create_player() {
 void destroy_player(Player *player) {
     if (!player)
         return;
+
     destroy_animated_sprite(player->animated_sprite);
     free(player);
 }
@@ -34,36 +36,42 @@ void destroy_player(Player *player) {
 AnimatedSprite *player_get_animated_sprite(Player *player) {
     if (player == NULL)
         return NULL;
+
     return player->animated_sprite;
 }
 
 Sprite *player_get_sprite(Player *player) {
     if (player == NULL)
         return NULL;
+
     return player->animated_sprite->sprite;
 }
 
 uint16_t player_get_x(Player *player) {
     if (player == NULL)
         return 0;
+
     return player->animated_sprite->sprite->x;
 }
 
 uint16_t player_get_y(Player *player) {
     if (player == NULL)
         return 0;
+
     return player->animated_sprite->sprite->y;
 }
 
 uint16_t player_get_width(Player *player) {
     if (player == NULL)
         return 0;
+
     return player->animated_sprite->sprite->width;
 }
 
 uint16_t player_get_heigth(Player *player) {
     if (player == NULL)
         return 0;
+
     return player->animated_sprite->sprite->height;
 }
 
@@ -73,11 +81,27 @@ Direction player_get_direction(Player *player) {
     return player->direction;
 }
 
+void player_set_sprite(Player *player, AnimatedSprite *sprite) {
+    if (player == NULL || sprite == NULL)
+        return;
+
+    if (player->animated_sprite != NULL) {
+        destroy_animated_sprite(player->animated_sprite);
+    }
+    player->animated_sprite = sprite;
+}
+
 PlayerState player_get_state(Player *player) {
+    if (player == NULL)
+        return PLAYER_DEAD;
+
     return player->state;
 }
 
 void player_set_state(Player *player, PlayerState state) {
+    if (player == NULL)
+        return;
+
     player->state = state;
 }
 
@@ -99,11 +123,14 @@ void player_update_state(Player *player, struct packet pp) {
     }
 
     if (player->health == 0) {
-        player->state = PLAYER_DYING;
+        player->state = PLAYER_DEAD;
     }
 }
 
 void player_update_speed(Player *player, uint8_t scan_code) {
+    if (player == NULL)
+        return;
+    
     switch (scan_code) {
         case KEY_W:
             if (player->state != PLAYER_WALKING || player->direction != UP) player->animated_sprite = create_animated_sprite(
@@ -205,6 +232,7 @@ void player_update_speed(Player *player, uint8_t scan_code) {
 void player_lose_health(Player *player) {
     if (player == NULL)
         return;
+        
     if (player->health > 0)
         player->health--;
 }

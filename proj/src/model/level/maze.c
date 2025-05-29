@@ -43,7 +43,7 @@ static void(dfs)(Maze *maze, int x, int y) {
 static int(initialize_maze)(Maze *maze, uint8_t width, uint8_t height) {
     if (maze == NULL)
         return 1;
-    
+
     uint8_t w = width + (width % 2 == 0);
     uint8_t h = height + (height % 2 == 0);
 
@@ -75,6 +75,10 @@ static int(initialize_maze)(Maze *maze, uint8_t width, uint8_t height) {
 }
 
 static int(generate_mob_positions)(Maze *maze, uint8_t mob_count) {
+    if (!maze) {
+        return 1;
+    }
+
     int positions = 0, attempts = 0;
     while (positions < mob_count && attempts < MAX_ATTEMPTS) {
         attempts++;
@@ -116,16 +120,28 @@ static int(open_maze)(Maze *maze, uint8_t percentage) {
 
 Maze *(create_maze) (uint8_t width, uint8_t height, uint8_t mob_count) {
     Maze *maze = (Maze *) malloc(sizeof(Maze));
-    if (!maze)
+    if (maze == NULL) {
+        printf("create_maze: NULL pointer provided\n");
         return NULL;
+    }
 
     if (initialize_maze(maze, width, height)) {
+        printf("create_maze: initialize_maze failed");
         free(maze);
         return NULL;
     }
 
-    open_maze(maze, MAZE_OPENING_PERCENTAGE);
-    generate_mob_positions(maze, mob_count);
+    if (open_maze(maze, MAZE_OPENING_PERCENTAGE)) {
+        printf("create_maze: open_maze failed");
+        free(maze);
+        return NULL;
+    }
+
+    if (generate_mob_positions(maze, mob_count)) {
+        printf("create_maze: generate_mob_positions failed");
+        free(maze);
+        return NULL;
+    }
 
     Sprite *key_sprite = create_sprite((xpm_map_t) key_1, 0, 0, 0, 0);
     maze->key = create_animated_sprite(key_sprite, 25, 4,
@@ -137,8 +153,10 @@ Maze *(create_maze) (uint8_t width, uint8_t height, uint8_t mob_count) {
 }
 
 void destroy_maze(Maze *maze) {
-    if (!maze)
+    if (!maze) {
+        printf("destroy_maze: NULL pointer provided");
         return;
+    }
 
     if (maze->cells) {
         for (int i = 0; i < maze->height; i++) {
@@ -153,22 +171,42 @@ void destroy_maze(Maze *maze) {
 /* Getter and setter section */
 
 uint8_t(get_width)(Maze *maze) {
+    if (!maze) {
+        printf("get_width: NULL pointer provided");
+        return 0;
+    }
     return maze->width;
 }
 
 uint8_t(get_height)(Maze *maze) {
+    if (!maze) {
+        printf("get_height: NULL pointer provided");
+        return 0;
+    }
     return maze->height;
 }
 
 uint8_t(get_mob_count)(Maze *maze) {
+    if (!maze) {
+        printf("get_mob_count: NULL pointer provided");
+        return 0;
+    }
     return maze->mob_count;
 }
 
 void set_mob_count(Maze *maze, uint8_t mob_count) {
+    if (!maze) {
+        printf("set_mob_count: NULL pointer provided");
+        return;
+    }
     maze->mob_count = mob_count;
 }
 
 Sprite *get_key_sprite(Maze *maze) {
+    if (!maze) {
+        printf("get_key_sprite: NULL pointer provided");
+        return NULL;
+    }
     return maze->key->sprite;
 }
 
@@ -176,17 +214,28 @@ Sprite *get_key_sprite(Maze *maze) {
 
 /* Others section */
 
-Point **(get_mob_positions) (Maze *maze) {
+Point **(get_mob_positions) (Maze * maze) {
+    if (!maze) {
+        printf("get_mob_positions: NULL pointer provided");
+        return NULL;
+    }
+
     int point_no = 0;
     Point **points = malloc(sizeof(Point *) * maze->mob_count);
 
-    if (!points)
+    if (!points) {
+        printf("get_mob_positions: malloc failed");
         return NULL;
-
+    }
+    
     for (int j = 0; j < maze->height; j++) {
         for (int i = 0; i < maze->width; i++) {
             if (maze->cells[j][i] == MOB) {
                 Point *p = malloc(sizeof(Point));
+                 if (!p) {
+                    printf("get_mob_positions: malloc failed");
+                    return NULL;
+                }
                 p->x = i;
                 p->y = j;
                 points[point_no] = p;
@@ -209,7 +258,7 @@ bool(check_rectangle_collision)(int x1, int y1, int width1, int height1, int x2,
 
 bool(check_sprite_collision)(Sprite *a, Sprite *b) {
     if (!a || !b) {
-        printf("check_sprite_collision: NULL provided");
+        printf("check_sprite_collision: NULL pointer provided");
         return false;
     }
 
@@ -217,8 +266,10 @@ bool(check_sprite_collision)(Sprite *a, Sprite *b) {
 }
 
 bool(check_wall_collision)(Maze *maze, Sprite *sprite) {
-    if (!maze)
+    if (!maze || !sprite) {
+        printf("check_wall_collision: NULL pointer provided.\n");
         return false;
+    }
 
     double scaled_down_x = sprite->x / CELL_SIZE;
     double scaled_down_y = sprite->y / CELL_SIZE;
@@ -250,16 +301,25 @@ int(draw_maze)(Maze *maze, uint8_t *frame_buffer) {
 
     xpm_image_t wall;
     uint8_t *data = xpm_load(wall_xpm, XPM_INDEXED, &wall);
+    if (data == NULL) {
+        printf("draw_maze: xpm_load failed\n");
+        return 1;
+    }
 
     for (int y = 0; y < maze->height; y++) {
         for (int x = 0; x < maze->width; x++) {
             if (maze->cells[y][x] == WALL) {
-                if (vga_draw_loaded_xpm(data, x * CELL_SIZE, y * CELL_SIZE, wall.width, wall.height, frame_buffer))
+                if (vga_draw_loaded_xpm(data, x * CELL_SIZE, y * CELL_SIZE, wall.width, wall.height, frame_buffer)) {
+                    printf("draw_maze: vga_draw_loaded_xpm failed\n");
                     return 1;
+                }
             } else if (maze->cells[y][x] == WIN) {
                 maze->key->sprite->x = x * CELL_SIZE + (CELL_SIZE - maze->key->sprite->width) / 2;
                 maze->key->sprite->y = y * CELL_SIZE + (CELL_SIZE - maze->key->sprite->height) / 2;
-                draw_animated_sprite(maze->key, frame_buffer);
+                if (draw_animated_sprite(maze->key, frame_buffer)) {
+                    printf("draw_maze: draw_animated_sprite failed\n");
+                    return 1;
+                }
             }
         }
     }
@@ -268,17 +328,29 @@ int(draw_maze)(Maze *maze, uint8_t *frame_buffer) {
 }
 
 int draw_maze_outer(Maze *maze, uint8_t *frame_buffer) {
+    if (!maze || !frame_buffer) {
+        printf("draw_maze_outer: NULL pointer provided\n");
+        return 1;
+    }
+
     xpm_image_t wall;
     uint8_t *data = xpm_load(wall_xpm, XPM_INDEXED, &wall);
+    if (data == NULL) {
+        printf("draw_maze_outer: xpm_load failed\n");
+        return 1;
+    }
 
     for (int y = 0; y < y_res / CELL_SIZE; y++) {
         for (int x = 0; x < x_res / CELL_SIZE; x++) {
             if (y < maze->height && x < maze->width) {
                 continue; // Inside maze, already drawn
             }
-            if (vga_draw_loaded_xpm(data, x * CELL_SIZE, y * CELL_SIZE, wall.width, wall.height, frame_buffer))
+            if (vga_draw_loaded_xpm(data, x * CELL_SIZE, y * CELL_SIZE, wall.width, wall.height, frame_buffer)) {
+                printf("draw_maze_outer: vga_draw_loaded_xpm failed\n");
                 return 1;
+            }
         }
     }
+
     return 0;
 }
