@@ -105,6 +105,8 @@ double get_delta(Level *level) {
 }
 
 Mob **get_mobs(Level *level) {
+    if (!level)
+        return NULL;
     return level->mobs;
 }
 
