@@ -43,6 +43,38 @@ Sprite *mob_get_sprite(Mob *mob) {
     return mob->animated_sprite->sprite;
 }
 
+uint16_t mob_get_x(Mob *mob) {
+    if (!mob) {
+        printf("mob_get_x: NULL pointer provided\n");
+        return 0;
+    }
+    return mob->animated_sprite->sprite->x;
+}
+
+void mob_set_x(Mob *mob, uint16_t x) {
+    if (!mob) {
+        printf("mob_set_x: NULL pointer provided\n");
+        return;
+    }
+    mob->animated_sprite->sprite->x = x;
+}
+
+uint16_t mob_get_y(Mob *mob) {
+    if (!mob) {
+        printf("mob_get_y: NULL pointer provided\n");
+        return 0;
+    }
+    return mob->animated_sprite->sprite->y;
+}
+
+void mob_set_y(Mob *mob, uint16_t y) {
+    if (!mob) {
+        printf("mob_set_y: NULL pointer provided\n");
+        return;
+    }
+    mob->animated_sprite->sprite->y = y;
+}
+
 unsigned char mob_get_health(Mob *mob) {
     return mob->health;
 }
