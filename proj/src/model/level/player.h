@@ -72,12 +72,60 @@ Sprite *player_get_sprite(Player *player);
 uint16_t player_get_x(Player *player);
 
 /**
+ * @brief Sets the x of the player.
+ *
+ * @param player Pointer to the Player structure.
+ * @param x New x value.
+ */
+void player_set_x(Player *player, uint16_t x);
+
+/**
  * @brief Returns the y-coordinate of the player.
  *
  * @param player Pointer to the Player structure.
  * @return The player's y-coordinate.
  */
 uint16_t player_get_y(Player *player);
+
+/**
+ * @brief Sets the yx of the player.
+ *
+ * @param player Pointer to the Player structure.
+ * @param y New y value.
+ */
+void player_set_y(Player *player, uint16_t y);
+
+/**
+ * @brief Returns the x-speed of the player.
+ *
+ * @param player Pointer to the Player structure.
+ * @return The player's x-speed.
+ */
+double player_get_xspeed(Player *player);
+
+/**
+ * @brief Sets the x-speed of the player.
+ *
+ * @param player Pointer to the Player structure.
+ * @param xspeed New x-speed value.
+ */
+void player_set_xspeed(Player *player, double xspeed);
+
+/**
+ * @brief Returns the y-speed of the player.
+ *
+ * @param player Pointer to the Player structure.
+ * @return The player's y-speed.
+ */
+double player_get_yspeed(Player *player);
+
+/**
+ * @brief Sets the y-speed of the player.
+ *
+ * @param player Pointer to the Player structure.
+ * @param yspeed New y-speed value.
+ */
+void player_set_yspeed(Player *player, double yspeed);
 
 /**
  * @brief Returns the width of the player.

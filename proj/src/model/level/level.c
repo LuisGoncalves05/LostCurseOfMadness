@@ -70,7 +70,7 @@ void destroy_level(Level *level) {
     if (level != NULL) {
         destroy_player(level->player);
         destroy_maze(level->maze);
-        for (int i = 0; i < get_mob_count(get_maze(level)); i++) {
+        for (int i = 0; i < get_mob_count(level->maze); i++) {
             destroy_mob(level->mobs[i]);
         }
         free(level);
@@ -101,13 +101,21 @@ Mob **get_mobs(Level *level) {
     return level->mobs;
 }
 
+PlayerState level_get_player_state(Level *level) {
+    if (!level) {
+        printf("level_get_player_state: NULL pointer provided\n");
+        return PLAYER_DYING;
+    }
+    return player_get_state(level->player);
+}
+
 /* Statics section */
 
 static bool(check_mob_collisions)(Level *level) {
     uint8_t mob_count = get_mob_count(get_maze(level));
     Mob **mobs = get_mobs(level);
     for (int i = 0; i < mob_count; i++) {
-        Sprite *player = player_get_sprite(get_player(level));
+        Sprite *player = player_get_sprite(level->player);
         if (check_sprite_collision(mob_get_sprite(mobs[i]), player))
             return true;
     }
@@ -154,24 +162,28 @@ static int player_update_position(Level *level) {
         return 1;
 
     Player *player = level->player;
-    Sprite *player_sprite = player_get_sprite(player);
     Maze *maze = level->maze;
 
-    player_sprite->x += player_sprite->xspeed;
-    if (check_wall_collision(maze, player_sprite)) {
-        player_sprite->x -= player_sprite->xspeed;
+    uint16_t x = player_get_x(player);
+    uint16_t y = player_get_y(player);
+    double xspeed = player_get_xspeed(player);
+    double yspeed = player_get_yspeed(player);
+
+    player_set_x(player, x + xspeed);
+    if (check_wall_collision(maze, player_get_sprite(player))) {
+        player_set_x(player, x);
     }
 
-    player_sprite->y += player_sprite->yspeed;
-    if (check_wall_collision(maze, player_sprite)) {
-        player_sprite->y -= player_sprite->yspeed;
+    player_set_y(player, y + yspeed);
+    if (check_wall_collision(maze, player_get_sprite(player))) {
+        player_set_y(player, y);
     }
 
     if (check_mob_collisions(level)) {
         player_lose_health(player);
     }
 
-    if (player_get_state(player) != PLAYER_DYING && check_win(player_sprite, maze)) {
+    if (player_get_state(player) != PLAYER_DYING && check_win(player_get_sprite(player), maze)) {
         player_set_state(player, PLAYER_WIN);
     }
 

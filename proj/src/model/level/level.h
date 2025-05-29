@@ -68,6 +68,13 @@ double get_delta(Level *level);
  */
 Mob **get_mobs(Level *level);
 
+/**
+ * @brief Returns the state of the level's player.
+ *
+ * @param level Pointer to the Level structure.
+ * @return The PlayerState of the player in the level.
+ */
+PlayerState level_get_player_state(Level *level);
 
 /**
  * @brief Updates the player's aim direction based on mouse coordinates.
