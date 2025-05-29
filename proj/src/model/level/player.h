@@ -34,6 +34,13 @@ typedef enum {
     PLAYER_WIN       /**< Player is winning */
 } PlayerState;
 
+typedef enum {
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT
+} Direction;
+
 /**
  * @brief Creates a new player instance.
  *
@@ -95,14 +102,6 @@ uint16_t player_get_heigth(Player *player);
  * @return Pointer to the AnimatedSprite structure.
  */
 AnimatedSprite *player_get_animated_sprite(Player *player);
-
-/**
- * @brief Sets a new Sprite for the player.
- *
- * @param player Pointer to the Player structure.
- * @param sprite Pointer to the new Sprite.
- */
-void player_set_sprite(Player *player, AnimatedSprite *sprite);
 
 /**
  * @brief Returns the current state of the player.

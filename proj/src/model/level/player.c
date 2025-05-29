@@ -5,6 +5,7 @@ struct Player {
     AnimatedSprite *animated_sprite;
     unsigned char health;
     PlayerState state;
+    Direction direction;
 };
 
 /* Create and destroy section */
@@ -19,6 +20,7 @@ Player *create_player() {
     new_sprite->x += (CELL_SIZE - new_sprite->width) / 2;
     new_sprite->y += (CELL_SIZE - new_sprite->height) / 2;
     player->animated_sprite = create_animated_sprite(new_sprite, 45, 2, (xpm_map_t) player_idleS_2);
+    player->direction = DOWN;
     return player;
 }
 
@@ -65,15 +67,6 @@ uint16_t player_get_heigth(Player *player) {
     return player->animated_sprite->sprite->height;
 }
 
-void player_set_sprite(Player *player, AnimatedSprite *sprite) {
-    if (player == NULL)
-        return;
-    if (player->animated_sprite != NULL) {
-        destroy_animated_sprite(player->animated_sprite);
-    }
-    player->animated_sprite = sprite;
-}
-
 PlayerState player_get_state(Player *player) {
     return player->state;
 }
@@ -107,7 +100,7 @@ void player_update_state(Player *player, struct packet pp) {
 void player_update_speed(Player *player, uint8_t scan_code) {
     switch (scan_code) {
         case KEY_W:
-            if (player->state != PLAYER_WALKING) player->animated_sprite = create_animated_sprite(
+            if (player->state != PLAYER_WALKING || player->direction != UP) player->animated_sprite = create_animated_sprite(
                 create_sprite(
                     (xpm_map_t) player_walkW_1,
                     player->animated_sprite->sprite->x,
@@ -116,9 +109,10 @@ void player_update_speed(Player *player, uint8_t scan_code) {
                     -PLAYER_DEFAULT_SPEED),
                 10, 4, (xpm_map_t) player_walkW_2, (xpm_map_t) player_walkW_3, (xpm_map_t) player_walkW_2);
             player->state = PLAYER_WALKING;
+            player->direction = UP;
             break;
         case KEY_A:
-            if (player->state != PLAYER_WALKING) player->animated_sprite = create_animated_sprite(
+            if (player->state != PLAYER_WALKING || player->direction != LEFT) player->animated_sprite = create_animated_sprite(
                 create_sprite(
                     (xpm_map_t) player_walkA_1,
                     player->animated_sprite->sprite->x,
@@ -127,9 +121,10 @@ void player_update_speed(Player *player, uint8_t scan_code) {
                     player->animated_sprite->sprite->yspeed),
                 10, 4, (xpm_map_t) player_walkA_2, (xpm_map_t) player_walkA_3, (xpm_map_t) player_walkA_2);
             player->state = PLAYER_WALKING;
+            player->direction = LEFT;
             break;
         case KEY_S:
-            if (player->state != PLAYER_WALKING) player->animated_sprite = create_animated_sprite(
+            if (player->state != PLAYER_WALKING || player->direction != DOWN) player->animated_sprite = create_animated_sprite(
                 create_sprite(
                     (xpm_map_t) player_walkS_3,
                     player->animated_sprite->sprite->x,
@@ -138,9 +133,10 @@ void player_update_speed(Player *player, uint8_t scan_code) {
                     PLAYER_DEFAULT_SPEED),
                 10, 4, (xpm_map_t) player_walkS_2, (xpm_map_t) player_walkS_1, (xpm_map_t) player_walkS_2);
             player->state = PLAYER_WALKING;
+            player->direction = DOWN;
             break;
         case KEY_D:
-            if (player->state != PLAYER_WALKING) player->animated_sprite = create_animated_sprite(
+            if (player->state != PLAYER_WALKING || player->direction != RIGHT) player->animated_sprite = create_animated_sprite(
                 create_sprite(
                     (xpm_map_t) player_walkD_1,
                     player->animated_sprite->sprite->x,
@@ -149,9 +145,10 @@ void player_update_speed(Player *player, uint8_t scan_code) {
                     player->animated_sprite->sprite->yspeed),
                 10, 4, (xpm_map_t) player_walkD_2, (xpm_map_t) player_walkD_3, (xpm_map_t) player_walkD_2);
             player->state = PLAYER_WALKING;
+            player->direction = RIGHT;
             break;
         case KEY_BREAK_W:
-            player->animated_sprite = create_animated_sprite(
+            if (player->state != PLAYER_WALKING || player->direction == UP) player->animated_sprite = create_animated_sprite(
                 create_sprite(
                     (xpm_map_t) player_walkW_1,
                     player->animated_sprite->sprite->x,
@@ -162,7 +159,7 @@ void player_update_speed(Player *player, uint8_t scan_code) {
             player->state = PLAYER_IDLE;
             break;
         case KEY_BREAK_A:
-            player->animated_sprite = create_animated_sprite(
+            if (player->state != PLAYER_WALKING || player->direction == LEFT) player->animated_sprite = create_animated_sprite(
                 create_sprite(
                     (xpm_map_t) player_idleA_1,
                     player->animated_sprite->sprite->x,
@@ -173,7 +170,7 @@ void player_update_speed(Player *player, uint8_t scan_code) {
             player->state = PLAYER_IDLE;
             break;
         case KEY_BREAK_S:
-            player->animated_sprite = create_animated_sprite(
+            if (player->state != PLAYER_WALKING || player->direction == DOWN) player->animated_sprite = create_animated_sprite(
                 create_sprite(
                     (xpm_map_t) player_idleS_1,
                     player->animated_sprite->sprite->x,
@@ -184,7 +181,7 @@ void player_update_speed(Player *player, uint8_t scan_code) {
             player->state = PLAYER_IDLE;
             break;
         case KEY_BREAK_D:
-            player->animated_sprite = create_animated_sprite(
+            if (player->state != PLAYER_WALKING || player->direction == RIGHT) player->animated_sprite = create_animated_sprite(
                 create_sprite(
                     (xpm_map_t) player_idleD_1,
                     player->animated_sprite->sprite->x,
