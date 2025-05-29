@@ -43,6 +43,8 @@ int main(int argc, char *argv[]) {
 }
 
 int(setup)() {
+    srand(time(NULL));
+
     if (set_frame_buffers(VIDEO_MODE) != 0)
         return 1;
     if (set_graphic_mode(VIDEO_MODE) != 0)

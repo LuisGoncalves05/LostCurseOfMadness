@@ -382,7 +382,7 @@ void level_shoot(Level *level) {
         draw_origin_x = sprite->x;
     }
 
-    double bullet_randomizer = ((rand() % BULLET_DEVIANCE) - BULLET_DEVIANCE) * 2 * M_PI / 360.0;
+    double bullet_randomizer = ((rand() % BULLET_DEVIANCE) - BULLET_DEVIANCE / 2) * 2 * M_PI / 360.0;
     level->bullets[level->bullet_count++] = create_bullet(draw_origin_x, draw_origin_y, level->delta + bullet_randomizer);
 }
 

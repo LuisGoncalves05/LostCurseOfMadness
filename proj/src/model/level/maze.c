@@ -115,7 +115,6 @@ static int(open_maze)(Maze *maze, uint8_t percentage) {
 }
 
 Maze *(create_maze) (uint8_t width, uint8_t height, uint8_t mob_count) {
-    srand(time(NULL));
     Maze *maze = (Maze *) malloc(sizeof(Maze));
     if (!maze)
         return NULL;

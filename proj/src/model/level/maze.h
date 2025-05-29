@@ -8,6 +8,7 @@
 #include "drivers/video/gpu.h"
 #include "model/utils/animated_sprite.h"
 #include "model/utils/sprite.h"
+#include "config.h"
 
 typedef enum {
     EMPTY, /**< Represents an empty cell in the maze. */
@@ -16,8 +17,6 @@ typedef enum {
     WIN,   /**< Represents the winning cell of the maze. */
 } maze_entity;
 
-#define WIN_COLOR 62               /**< Color used for the win of the maze. */
-#define CELL_SIZE 64               /**< Total size of each cell including wall width. */
 #define MAZE_OPENING_PERCENTAGE 20 /**< Maze generated does not look like an arena so we generate it normally then remove random walls until we removed this percentage. */
 #define NO_MONSTER_SQUARE 2        /**< No mobs spawn at this manhattan distance from the player spawn. */
 #define MOB_MULTIPLIER 4           /**< Scales the number of mobs in the maze. */

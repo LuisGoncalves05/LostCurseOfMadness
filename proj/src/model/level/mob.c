@@ -16,8 +16,8 @@ Mob *create_mob(uint16_t x, uint16_t y) {
     if (!mob)
         return NULL;
     mob->health = MOB_HEALTH;
-    int rx = rand() % 32;
-    int ry = rand() % 32;
+    int rx = rand() % (CELL_SIZE - 30);
+    int ry = rand() % (CELL_SIZE - 23);
     Sprite *new_sprite = create_sprite((xpm_map_t) mob_idle_1, x + rx, y + ry, 0, 0);
     mob->animated_sprite = create_animated_sprite(new_sprite, 30, 5,
                                                   (xpm_map_t) mob_idle_2,
