@@ -115,8 +115,7 @@ static bool(check_mob_collisions)(Level *level) {
     uint8_t mob_count = get_mob_count(get_maze(level));
     Mob **mobs = get_mobs(level);
     for (int i = 0; i < mob_count; i++) {
-        Sprite *player = player_get_sprite(level->player);
-        if (check_sprite_collision(mob_get_sprite(mobs[i]), player))
+        if (check_sprite_collision(mob_get_sprite(mobs[i]), player_get_sprite(level->player)))
             return true;
     }
 
@@ -245,14 +244,14 @@ static int draw_mobs(Level *level) {
 
 static void draw_fov_cone(Level *level) {
     double delta = level->delta;
-    Sprite *player_sprite = player_get_sprite(level->player);
+    Player *player = level->player;
     Maze *maze = level->maze;
-    if (!player_sprite || !maze)
+    if (!player || !maze)
         return;
 
     // Player center coordinates
-    double cx = player_sprite->x + player_sprite->width / 2.0;
-    double cy = player_sprite->y + player_sprite->height / 2.0;
+    double cx = player_get_x(player) + player_get_width(player) / 2.0;
+    double cy = player_get_y(player) + player_get_heigth(player) / 2.0;
 
     double fov_radius = FOV_RADIUS;
     double cone_half_angle = level->fov_angle * M_PI / 360.0;
@@ -362,9 +361,9 @@ static void draw_all_bullets(Level *level, uint8_t *frame_buffer) {
 /* Others section */
 
 void level_update_delta(Level *level, double mouse_x, double mouse_y) {
-    Sprite *player_sprite = player_get_sprite(level->player);
-    double player_center_x = player_sprite->x + player_sprite->width / 2.0;
-    double player_center_y = player_sprite->y + player_sprite->height / 2.0;
+    Player *player = level->player;
+    double player_center_x = player_get_x(player) + player_get_width(player) / 2.0;
+    double player_center_y = player_get_y(player) + player_get_heigth(player) / 2.0;
 
     double dx = mouse_x - player_center_x;
     double dy = mouse_y - player_center_y;
@@ -384,15 +383,9 @@ void level_shoot(Level *level) {
     if (level->bullet_count >= MAX_BULLETS)
         return;
 
-    Sprite *sprite = player_get_sprite(level->player);
-    Direction direction = player_get_direction(level->player);
-    double draw_origin_y = sprite->y + sprite->height / 2;
-    double draw_origin_x;
-    if (direction == RIGHT || direction == UP) {
-        draw_origin_x = sprite->x + sprite->width;
-    } else {
-        draw_origin_x = sprite->x;
-    }
+    Player *player = level->player;
+    double draw_origin_x = player_get_x(player) + player_get_width(player) / 2.0;
+    double draw_origin_y = player_get_y(player) + player_get_heigth(player) / 2.0;
 
     double bullet_randomizer = ((rand() % BULLET_DEVIANCE) - BULLET_DEVIANCE / 2) * 2 * M_PI / 360.0;
     level->bullets[level->bullet_count++] = create_bullet(draw_origin_x, draw_origin_y, level->delta + bullet_randomizer);
