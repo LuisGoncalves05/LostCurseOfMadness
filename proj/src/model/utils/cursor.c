@@ -54,17 +54,18 @@ uint16_t cursor_get_y(Cursor *cursor) {
 
 /* Statics section */
 
+static inline int clamp(int val, int min, int max) {
+    return (val < min) ? min : (val > max) ? max : val;
+}
+
 static void cursor_check_bound(Cursor *cursor) {
-    if (cursor == NULL)
+    if (!cursor)
         return;
-    if (cursor->sprite->x > x_res - cursor->sprite->width)
-        cursor->sprite->x = x_res - cursor->sprite->width;
-    if (cursor->sprite->y > y_res - cursor->sprite->height)
-        cursor->sprite->y = y_res - cursor->sprite->height;
-    if (cursor->sprite->x < 0)
-        cursor->sprite->x = 0;
-    if (cursor->sprite->y < 0)
-        cursor->sprite->y = 0;
+
+    Sprite *s = cursor->sprite;
+
+    s->x = clamp(s->x, 0, x_res - s->width);
+    s->y = clamp(s->y, 0, y_res - s->height);
 }
 
 /* Others section */

@@ -1,8 +1,10 @@
 #include "main_menu.h"
+#include "../utils/sprite.h"
 
 struct MainMenu {
     Button *playButton;
     Button *exitButton;
+    Sprite *title;
 };
 
 /* Create and destroy section */
@@ -26,12 +28,17 @@ MainMenu *create_main_menu() {
         return NULL;
     }
 
+    main_menu->title = create_sprite(lcom_xpm, x_res / 2 - 801 / 2, y_res / 2 - 300, 0, 0);
+    if (!main_menu->title)
+        return NULL;
+
     return main_menu;
 }
 
 void destroy_main_menu(MainMenu *main_menu) {
     if (main_menu == NULL)
         return;
+    destroy_sprite(main_menu->title);
     destroy_button(main_menu->playButton);
     destroy_button(main_menu->exitButton);
     free(main_menu);
@@ -80,7 +87,7 @@ ButtonType main_menu_click_handler(MainMenu *main_menu, uint16_t x, uint16_t y) 
 /* Draw section */
 
 void draw_main_menu(MainMenu *main_menu, uint8_t *frame_buffer) {
-    vga_draw_xpm((xpm_map_t) lcom_xpm, x_res / 2 - 801 / 2, y_res / 2 - 300 / 2, frame_buffer);
+    draw_sprite(main_menu->title, frame_buffer);
     draw_button(main_menu->playButton, frame_buffer);
     draw_button(main_menu->exitButton, frame_buffer);
 }

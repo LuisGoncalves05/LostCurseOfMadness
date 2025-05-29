@@ -1,8 +1,10 @@
 #include "victory.h"
+#include "../utils/sprite.h"
 
 struct Victory {
     Button *nextButton;
     Button *exitButton;
+    Sprite *title;
 };
 
 Victory *create_victory() {
@@ -23,12 +25,17 @@ Victory *create_victory() {
         return NULL;
     }
 
+    victory->title = create_sprite(victory_xpm, x_res / 2 - 715 / 2, y_res / 2 - 129, 0, 0);
+    if (!victory->title)
+        return NULL;
+
     return victory;
 }
 
 void destroy_victory(Victory *victory) {
     if (victory == NULL)
         return;
+    destroy_sprite(victory->title);
     destroy_button(victory->nextButton);
     destroy_button(victory->exitButton);
     free(victory);
@@ -69,7 +76,7 @@ ButtonType victory_click_handler(Victory *victory, uint16_t x, uint16_t y) {
 }
 
 void draw_victory(Victory *victory, uint8_t *frame_buffer) {
-    vga_draw_xpm((xpm_map_t) victory_xpm, x_res / 2 - 715 / 2, y_res / 2 - 129 / 2, frame_buffer);
+    draw_sprite(victory->title, frame_buffer);
     draw_button(victory->nextButton, frame_buffer);
     draw_button(victory->exitButton, frame_buffer);
 }

@@ -223,7 +223,7 @@ static void level_update_all_mobs(Level *level) {
     for (int i = 0; i < get_mob_count(maze);) {
         Mob *mob = mobs[i];
         mob_update_state(mob, player_get_x(player) + player_get_width(player) / 2, player_get_y(player) + player_get_heigth(player) / 2);
-        if (mob_get_health(mob) == 0) {
+        if (mob_get_state(mob) == MOB_DEAD) {
             destroy_mob(mob);
             set_mob_count(maze, get_mob_count(maze) - 1);
             mobs[i] = mobs[get_mob_count(maze)];

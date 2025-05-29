@@ -3,7 +3,6 @@
 struct Mob {
     unsigned char health;
     int max_speed;
-    double acceleration;
     AnimatedSprite *animated_sprite;
     MobState state;
     bool direction; // true for right, false for left
@@ -15,6 +14,7 @@ Mob *create_mob(uint16_t x, uint16_t y) {
     Mob *mob = (Mob *) malloc(sizeof(Mob));
     if (!mob)
         return NULL;
+    
     mob->health = MOB_HEALTH;
     int rx = rand() % 32;
     int ry = rand() % 32;
@@ -25,7 +25,6 @@ Mob *create_mob(uint16_t x, uint16_t y) {
                                                   (xpm_map_t) mob_idle_2,
                                                   (xpm_map_t) mob_idle_1);
     mob->max_speed = MOB_MAX_SPEED;
-    mob->acceleration = MOB_ACCELERATION;
     mob->state = MOB_IDLE;
     return mob;
 }
@@ -40,26 +39,36 @@ void destroy_mob(Mob *mob) {
 /* Getter and setter section */
 
 Sprite *mob_get_sprite(Mob *mob) {
+    if (!mob)
+        return NULL;
+
     return mob->animated_sprite->sprite;
 }
 
 unsigned char mob_get_health(Mob *mob) {
+    if (!mob)
+        return 0;
     return mob->health;
 }
 
 void mob_set_health(Mob *mob, unsigned char health) {
+    if (!mob)
+        return;
+    
     mob->health = health;
 }
 
 int mob_get_max_speed(Mob *mob) {
+    if (!mob)
+        return 0;
+
     return mob->max_speed;
 }
 
-int mob_get_acceleration(Mob *mob) {
-    return mob->acceleration;
-}
 
 MobState mob_get_state(Mob *mob) {
+    if (!mob)
+        return MOB_DEAD;
     return mob->state;
 }
 
@@ -70,6 +79,11 @@ MobState mob_get_state(Mob *mob) {
 void mob_update_state(Mob *mob, uint16_t player_cx, uint16_t player_cy) {
     if (mob == NULL)
         return;
+
+    if (mob->health == 0) {
+        mob->state = MOB_DEAD;
+        return;
+    }
 
     Sprite *sprite = mob->animated_sprite->sprite;
     uint16_t mob_x = sprite->x;

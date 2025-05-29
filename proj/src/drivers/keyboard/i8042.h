@@ -13,7 +13,7 @@
 /** @name General Constants */
 /**@{*/
 #define DELAY_US 20000        /**< @brief Delay used for polling (microseconds) */
-#define READ_ATTEMPT_LIMIT 20 /**< @brief Maximum read attempts before timeout */
+#define READ_ATTEMPT_LIMIT 30 /**< @brief Maximum read attempts before timeout */
 /**@}*/
 
 /** @name IRQ Lines */

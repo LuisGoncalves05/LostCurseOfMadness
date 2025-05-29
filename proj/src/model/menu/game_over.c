@@ -1,8 +1,10 @@
 #include "game_over.h"
+#include "../utils/sprite.h"
 
 struct GameOver {
     Button *menuButton;
     Button *exitButton;
+    Sprite *title;
 };
 
 /* Create and destroy section */
@@ -25,12 +27,17 @@ GameOver *create_game_over() {
         return NULL;
     }
 
+    game_over->title = create_sprite(game_over_xpm, x_res / 2 - 715 / 2, y_res / 2 - 120, 0, 0);
+    if (!game_over->title)
+        return NULL;
+
     return game_over;
 }
 
 void destroy_game_over(GameOver *game_over) {
     if (game_over == NULL)
         return;
+    destroy_sprite(game_over->title);
     destroy_button(game_over->menuButton);
     destroy_button(game_over->exitButton);
     free(game_over);
@@ -79,7 +86,7 @@ ButtonType game_over_click_handler(GameOver *game_over, uint16_t x, uint16_t y) 
 /* Draw section */
 
 void draw_game_over(GameOver *game_over, uint8_t *frame_buffer) {
-    vga_draw_xpm((xpm_map_t) game_over_xpm, x_res / 2 - 715 / 2, y_res / 2 - 120 / 2, frame_buffer);
+    draw_sprite(game_over->title, frame_buffer);
     draw_button(game_over->menuButton, frame_buffer);
     draw_button(game_over->exitButton, frame_buffer);
 }

@@ -39,17 +39,17 @@ extern uint16_t x_res, y_res;
 /**
  * @brief Y-coordinate for buttons in the main menu.
  */
-#define MAIN_MENU_BUTTON_START_Y y_res / 2 + 200
+#define MAIN_MENU_BUTTON_START_Y y_res / 2
 
 /**
  * @brief Y-coordinate for buttons in the game over screen.
  */
-#define GAME_OVER_BUTTON_START_Y y_res / 2 + 100
+#define GAME_OVER_BUTTON_START_Y y_res / 2
 
 /**
  * @brief Y-coordinate for buttons in the victory screen.
  */
-#define VICTORY_BUTTON_START_Y y_res / 2 + 100
+#define VICTORY_BUTTON_START_Y y_res / 2
 
 /**
  * @brief Enumeration of button types.
