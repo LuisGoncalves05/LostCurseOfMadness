@@ -373,10 +373,17 @@ void level_shoot(Level *level) {
         return;
 
     Sprite *sprite = player_get_sprite(level->player);
-    double draw_origin_x = sprite->x + sprite->width / 2;
+    Direction direction = player_get_direction(level->player);
     double draw_origin_y = sprite->y + sprite->height / 2;
+    double draw_origin_x;
+    if (direction == RIGHT || direction == UP) {
+        draw_origin_x = sprite->x + sprite->width;
+    } else {
+        draw_origin_x = sprite->x;
+    }
 
-    level->bullets[level->bullet_count++] = create_bullet(draw_origin_x, draw_origin_y, level->delta);
+    double bullet_randomizer = ((rand() % BULLET_DEVIANCE) - BULLET_DEVIANCE) * 2 * M_PI / 360.0;
+    level->bullets[level->bullet_count++] = create_bullet(draw_origin_x, draw_origin_y, level->delta + bullet_randomizer);
 }
 
 /* Draw section */

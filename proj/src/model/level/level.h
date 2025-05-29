@@ -7,6 +7,8 @@
 #include "mob.h"
 #include "player.h"
 
+#define BULLET_DEVIANCE 10
+
 extern uint8_t *secondary_frame_buffer;
 extern uint8_t *main_frame_buffer;
 extern uint8_t bytes_per_pixel;

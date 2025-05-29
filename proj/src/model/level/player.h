@@ -104,6 +104,14 @@ uint16_t player_get_heigth(Player *player);
 AnimatedSprite *player_get_animated_sprite(Player *player);
 
 /**
+ * @brief Returns the current Direction of the player.
+ *
+ * @param player Pointer to the Player structure.
+ * @return Current player Direction value.
+ */
+Direction player_get_direction(Player *player);
+
+/**
  * @brief Returns the current state of the player.
  *
  * @param player Pointer to the Player structure.

@@ -4,8 +4,8 @@
 struct Player {
     AnimatedSprite *animated_sprite;
     unsigned char health;
-    PlayerState state;
     Direction direction;
+    PlayerState state;
 };
 
 /* Create and destroy section */
@@ -65,6 +65,12 @@ uint16_t player_get_heigth(Player *player) {
     if (player == NULL)
         return 0;
     return player->animated_sprite->sprite->height;
+}
+
+Direction player_get_direction(Player *player) {
+    if (player == NULL)
+        return DOWN;
+    return player->direction;
 }
 
 PlayerState player_get_state(Player *player) {
