@@ -5,10 +5,10 @@
 
 #include "assets/xpm/level/key.xpm"
 #include "assets/xpm/level/wall.xpm"
+#include "config.h"
 #include "drivers/video/gpu.h"
 #include "model/utils/animated_sprite.h"
 #include "model/utils/sprite.h"
-#include "config.h"
 
 typedef enum {
     EMPTY, /**< Represents an empty cell in the maze. */
@@ -22,9 +22,10 @@ typedef enum {
 #define MOB_MULTIPLIER 4           /**< Scales the number of mobs in the maze. */
 #define MAX_ATTEMPTS 1000          /**< max attmpts for loops with random. */
 
-extern uint8_t *secondary_frame_buffer;
-extern uint32_t frame_size;
-extern uint16_t x_res, y_res;
+extern uint8_t *secondary_frame_buffer; /**< Pointer to the secondary framebuffer */
+extern uint32_t frame_size;             /**< Size of the framebuffer */
+extern uint16_t x_res;                  /**< X resolution of the screen */
+extern uint16_t y_res;                  /**< Y resolution of the screen */
 
 /**
  * @brief Represents a single Maze instance.

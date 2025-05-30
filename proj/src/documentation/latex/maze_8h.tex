@@ -3,11 +3,12 @@
 {\ttfamily \#include $<$lcom/lcf.\+h$>$}\newline
 {\ttfamily \#include "{}assets/xpm/level/key.\+xpm"{}}\newline
 {\ttfamily \#include "{}assets/xpm/level/wall.\+xpm"{}}\newline
+{\ttfamily \#include "{}config.\+h"{}}\newline
 {\ttfamily \#include "{}drivers/video/gpu.\+h"{}}\newline
 {\ttfamily \#include "{}model/utils/animated\+\_\+sprite.\+h"{}}\newline
 {\ttfamily \#include "{}model/utils/sprite.\+h"{}}\newline
-{\ttfamily \#include "{}config.\+h"{}}\newline
-Include dependency graph for maze.\+h\+:\nopagebreak
+Include dependency graph for maze.\+h\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -460,21 +461,22 @@ Sets the number of mobs in the maze.
 \doxysubsubsection{\texorpdfstring{frame\_size}{frame\_size}}
 {\footnotesize\ttfamily uint32\+\_\+t frame\+\_\+size\hspace{0.3cm}{\ttfamily [extern]}}
 
-\Hypertarget{maze_8h_aa0b878733cd01083e20d9c85310285b7}\label{maze_8h_aa0b878733cd01083e20d9c85310285b7} 
+Size of the framebuffer \Hypertarget{maze_8h_aa0b878733cd01083e20d9c85310285b7}\label{maze_8h_aa0b878733cd01083e20d9c85310285b7} 
 \index{maze.h@{maze.h}!secondary\_frame\_buffer@{secondary\_frame\_buffer}}
 \index{secondary\_frame\_buffer@{secondary\_frame\_buffer}!maze.h@{maze.h}}
 \doxysubsubsection{\texorpdfstring{secondary\_frame\_buffer}{secondary\_frame\_buffer}}
 {\footnotesize\ttfamily uint8\+\_\+t\texorpdfstring{$\ast$}{*} secondary\+\_\+frame\+\_\+buffer\hspace{0.3cm}{\ttfamily [extern]}}
 
-\Hypertarget{maze_8h_a8c698380dc32cd8b5a19a84da1ab2ad9}\label{maze_8h_a8c698380dc32cd8b5a19a84da1ab2ad9} 
+Pointer to the secondary framebuffer \Hypertarget{maze_8h_a8c698380dc32cd8b5a19a84da1ab2ad9}\label{maze_8h_a8c698380dc32cd8b5a19a84da1ab2ad9} 
 \index{maze.h@{maze.h}!x\_res@{x\_res}}
 \index{x\_res@{x\_res}!maze.h@{maze.h}}
 \doxysubsubsection{\texorpdfstring{x\_res}{x\_res}}
 {\footnotesize\ttfamily uint16\+\_\+t x\+\_\+res\hspace{0.3cm}{\ttfamily [extern]}}
 
-\Hypertarget{maze_8h_a1188c1e5fe37db7b55bdad91f71e26c0}\label{maze_8h_a1188c1e5fe37db7b55bdad91f71e26c0} 
+X resolution of the screen \Hypertarget{maze_8h_a1188c1e5fe37db7b55bdad91f71e26c0}\label{maze_8h_a1188c1e5fe37db7b55bdad91f71e26c0} 
 \index{maze.h@{maze.h}!y\_res@{y\_res}}
 \index{y\_res@{y\_res}!maze.h@{maze.h}}
 \doxysubsubsection{\texorpdfstring{y\_res}{y\_res}}
-{\footnotesize\ttfamily uint16\+\_\+t y\+\_\+res}
+{\footnotesize\ttfamily uint16\+\_\+t y\+\_\+res\hspace{0.3cm}{\ttfamily [extern]}}
 
+Y resolution of the screen 

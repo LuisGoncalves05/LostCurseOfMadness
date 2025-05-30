@@ -17,10 +17,11 @@
 #include "model/utils/keys.h"
 #include "model/utils/sprite.h"
 
-extern uint8_t scan_code;
-extern struct packet pp;
-extern int frame_counter;
-extern uint16_t x_res, y_res;
+extern uint8_t scan_code; /**< Keyboard scan code */
+extern struct packet pp;  /**< Mouse packet */
+extern int frame_counter; /**< Frame counter for the game */
+extern uint16_t x_res;    /**< X resolution of the screen */
+extern uint16_t y_res;    /**< Y resolution of the screen */
 
 /**
  * @brief Represents a single Game instance.

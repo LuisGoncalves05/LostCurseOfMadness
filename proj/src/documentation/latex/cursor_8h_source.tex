@@ -13,27 +13,27 @@
 \DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{gpu_8h}{drivers/video/gpu.h}}"{}}}
 \DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{sprite_8h}{model/utils/sprite.h}}"{}}}
 \DoxyCodeLine{00011\ }
-\DoxyCodeLine{00012\ \textcolor{keyword}{extern}\ uint16\_t\ \mbox{\hyperlink{cursor_8h_a8c698380dc32cd8b5a19a84da1ab2ad9}{x\_res}},\ \mbox{\hyperlink{cursor_8h_a1188c1e5fe37db7b55bdad91f71e26c0}{y\_res}};}
-\DoxyCodeLine{00013\ }
-\DoxyCodeLine{00014\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
-\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{cursor_8h_a3bbf59221044115f117dc97bb8930648ac9829fc9a37d0c79b00a3b72eaeee1d3}{CURSOR\_DEFAULT}},\ \ \textcolor{comment}{//\ Default\ cursor}}
-\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{cursor_8h_a3bbf59221044115f117dc97bb8930648aebf9a9908a7ce64f2022d2afed6f73c8}{CURSOR\_CROSSHAIR}}\ \textcolor{comment}{//\ Crosshair\ cursor}}
-\DoxyCodeLine{00017\ \}\ \mbox{\hyperlink{cursor_8h_a3bbf59221044115f117dc97bb8930648}{CursorMode}};}
-\DoxyCodeLine{00018\ }
-\DoxyCodeLine{00024\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structCursor}{Cursor}}\ \mbox{\hyperlink{structCursor}{Cursor}};}
-\DoxyCodeLine{00025\ }
-\DoxyCodeLine{00032\ \mbox{\hyperlink{structCursor}{Cursor}}\ *\mbox{\hyperlink{cursor_8h_ac284c571fcda6c7f046a4be63f5d15ea}{create\_cursor}}(\mbox{\hyperlink{cursor_8h_a3bbf59221044115f117dc97bb8930648}{CursorMode}}\ \mbox{\hyperlink{structCursor_a80a263c4740562d619e8a7c06e7e2206}{mode}},\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
-\DoxyCodeLine{00033\ }
-\DoxyCodeLine{00039\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{cursor_8h_a703c262b2001b4ee8aadfadd87baae71}{destroy\_cursor}}(\mbox{\hyperlink{structCursor}{Cursor}}\ *cursor);}
-\DoxyCodeLine{00040\ }
-\DoxyCodeLine{00047\ uint16\_t\ \mbox{\hyperlink{cursor_8h_ab8438ddee952a850ddc7f7b262885444}{cursor\_get\_x}}(\mbox{\hyperlink{structCursor}{Cursor}}\ *cursor);}
-\DoxyCodeLine{00048\ }
-\DoxyCodeLine{00055\ uint16\_t\ \mbox{\hyperlink{cursor_8h_a8e235d292a95eb5dbff2b430721c36eb}{cursor\_get\_y}}(\mbox{\hyperlink{structCursor}{Cursor}}\ *cursor);}
-\DoxyCodeLine{00056\ }
-\DoxyCodeLine{00064\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{cursor_8h_a458d2027838ff5a62163c5ff04b72411}{cursor\_update}}(\mbox{\hyperlink{structCursor}{Cursor}}\ *cursor,\ \textcolor{keywordtype}{double}\ dx,\ \textcolor{keywordtype}{double}\ dy);}
-\DoxyCodeLine{00065\ }
-\DoxyCodeLine{00072\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{cursor_8h_aba5334dbc95c7bfebd355183c6ed3438}{draw\_cursor}}(\mbox{\hyperlink{structCursor}{Cursor}}\ *cursor,\ uint8\_t\ *buffer);}
-\DoxyCodeLine{00073\ }
-\DoxyCodeLine{00074\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ CURSOR\_H\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00012\ \textcolor{keyword}{extern}\ uint16\_t\ \mbox{\hyperlink{cursor_8h_a8c698380dc32cd8b5a19a84da1ab2ad9}{x\_res}};\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{extern}\ uint16\_t\ \mbox{\hyperlink{cursor_8h_a1188c1e5fe37db7b55bdad91f71e26c0}{y\_res}};\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{cursor_8h_a3bbf59221044115f117dc97bb8930648ac9829fc9a37d0c79b00a3b72eaeee1d3}{CURSOR\_DEFAULT}},\ \ \textcolor{comment}{//\ Default\ cursor}}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{cursor_8h_a3bbf59221044115f117dc97bb8930648aebf9a9908a7ce64f2022d2afed6f73c8}{CURSOR\_CROSSHAIR}}\ \textcolor{comment}{//\ Crosshair\ cursor}}
+\DoxyCodeLine{00018\ \}\ \mbox{\hyperlink{cursor_8h_a3bbf59221044115f117dc97bb8930648}{CursorMode}};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structCursor}{Cursor}}\ \mbox{\hyperlink{structCursor}{Cursor}};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00033\ \mbox{\hyperlink{structCursor}{Cursor}}\ *\mbox{\hyperlink{cursor_8h_ac284c571fcda6c7f046a4be63f5d15ea}{create\_cursor}}(\mbox{\hyperlink{cursor_8h_a3bbf59221044115f117dc97bb8930648}{CursorMode}}\ \mbox{\hyperlink{structCursor_a80a263c4740562d619e8a7c06e7e2206}{mode}},\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00040\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{cursor_8h_a703c262b2001b4ee8aadfadd87baae71}{destroy\_cursor}}(\mbox{\hyperlink{structCursor}{Cursor}}\ *cursor);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00048\ uint16\_t\ \mbox{\hyperlink{cursor_8h_ab8438ddee952a850ddc7f7b262885444}{cursor\_get\_x}}(\mbox{\hyperlink{structCursor}{Cursor}}\ *cursor);}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00056\ uint16\_t\ \mbox{\hyperlink{cursor_8h_a8e235d292a95eb5dbff2b430721c36eb}{cursor\_get\_y}}(\mbox{\hyperlink{structCursor}{Cursor}}\ *cursor);}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00065\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{cursor_8h_a458d2027838ff5a62163c5ff04b72411}{cursor\_update}}(\mbox{\hyperlink{structCursor}{Cursor}}\ *cursor,\ \textcolor{keywordtype}{double}\ dx,\ \textcolor{keywordtype}{double}\ dy);}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00073\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{cursor_8h_aba5334dbc95c7bfebd355183c6ed3438}{draw\_cursor}}(\mbox{\hyperlink{structCursor}{Cursor}}\ *cursor,\ uint8\_t\ *buffer);}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ CURSOR\_H\ */}\textcolor{preprocessor}{}}
 
 \end{DoxyCode}

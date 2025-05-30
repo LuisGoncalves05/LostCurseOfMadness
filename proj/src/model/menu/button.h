@@ -4,7 +4,8 @@
 #include "drivers/video/gpu.h"
 #include <lcom/lcf.h>
 
-extern uint16_t x_res, y_res;
+extern uint16_t x_res; /**< X resolution of the screen */
+extern uint16_t y_res; /**< Y resolution of the screen */
 
 /**
  * @brief Width of a button in pixels.
@@ -65,7 +66,7 @@ typedef enum {
 /**
  * @brief Represents a Button instance
  *
- * The Button struct is opaque. 
+ * The Button struct is opaque.
  */
 typedef struct Button Button;
 

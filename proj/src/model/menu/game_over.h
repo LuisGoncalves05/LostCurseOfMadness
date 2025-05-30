@@ -11,7 +11,8 @@
 #include "assets/xpm/game_over/menu_button_selected.xpm"
 #include "button.h"
 
-extern uint16_t x_res, y_res;
+extern uint16_t x_res; /**< X resolution of the screen */
+extern uint16_t y_res; /**< Y resolution of the screen */
 
 /**
  * @brief Represents a single GameOver instance.

@@ -9,11 +9,12 @@
 
 #define BULLET_DEVIANCE 10
 
-extern uint8_t *secondary_frame_buffer;
-extern uint8_t *main_frame_buffer;
-extern uint8_t bytes_per_pixel;
-extern uint16_t x_res, y_res;
-extern int frame_counter;
+extern uint8_t *main_frame_buffer;      /**< Pointer to the main framebuffer */
+extern uint8_t *secondary_frame_buffer; /**< Pointer to the secondary framebuffer */
+extern uint8_t bytes_per_pixel;         /**< Bytes per pixel */
+extern uint16_t x_res;                  /**< X resolution of the screen */
+extern uint16_t y_res;                  /**< Y resolution of the screen */
+extern int frame_counter;               /**< Frame counter for the game */
 
 /**
  * @brief Represents a single Level instance.
@@ -106,7 +107,7 @@ void level_shoot(Level *level);
  *
  * @param level Pointer to the Level structure.
  * @param pp Mouse packet used for determining cursor or aim direction.
- * 
+ *
  * @return 0 on success, non-zero on failure.
  */
 int draw_level(Level *level, struct packet pp);

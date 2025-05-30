@@ -4,7 +4,8 @@
 #include "model/utils/sprite.h"
 #include <stdarg.h>
 
-extern uint16_t x_res, y_res;
+extern uint16_t x_res; /**< X resolution of the screen */
+extern uint16_t y_res; /**< Y resolution of the screen */
 
 /**
  * @brief Represents an Animated Sprite for rendering animated objects on screen.

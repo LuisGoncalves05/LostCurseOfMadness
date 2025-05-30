@@ -4,13 +4,14 @@
 
 #include "gpu.h"
 
-vbe_mode_info_t vg_mode_info;
-uint8_t bytes_per_pixel;
-uint16_t x_res, y_res;
-uint32_t frame_size;
-bool frame_start = true;
-uint8_t *main_frame_buffer;
-uint8_t *secondary_frame_buffer;
+vbe_mode_info_t vg_mode_info;    /**< Video mode information */
+uint8_t bytes_per_pixel;         /**< Bytes per pixel */
+uint16_t x_res;                  /**< X resolution of the screen */
+uint16_t y_res;                  /**< Y resolution of the screen */
+uint32_t frame_size;             /**< Size of the framebuffer */
+bool frame_start = true;         /**< Indicates if the current frame is the start frame */
+uint8_t *main_frame_buffer;      /**< Pointer to the main framebuffer */
+uint8_t *secondary_frame_buffer; /**< Pointer to the secondary framebuffer */
 
 int(set_graphic_mode)(uint16_t mode) {
     reg86_t reg86;
