@@ -75,11 +75,11 @@ void \mbox{\hyperlink{maze_8h_ad20bc65cad4929bc4138f5e5d21e2c17}{set\+\_\+mob\+\
 \begin{DoxyCompactList}\small\item\em Returns the positions in the maze where there are mobs. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structSprite}{Sprite}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{maze_8h_ae6f03a900245d2c5fe071c13a0fea626}{get\+\_\+key\+\_\+sprite}} (\mbox{\hyperlink{structMaze}{Maze}} \texorpdfstring{$\ast$}{*}maze)
 \begin{DoxyCompactList}\small\item\em Returns the sprite of the key. \end{DoxyCompactList}\item 
-bool() \mbox{\hyperlink{maze_8h_acf167b01a026f1e031ab8d19d456f506}{check\+\_\+rectangle\+\_\+collision}} (int x1, int y1, int width1, int height1, int x2, int y2, int width2, int height2)
+bool \mbox{\hyperlink{maze_8h_ad9e0a160d7d9674252138b540d83014c}{check\+\_\+rectangle\+\_\+collision}} (int x1, int y1, int width1, int height1, int x2, int y2, int width2, int height2)
 \begin{DoxyCompactList}\small\item\em Checks for collision between two rectangles. \end{DoxyCompactList}\item 
-bool() \mbox{\hyperlink{maze_8h_a38699c3fd7b528d1ee65ff8870487973}{check\+\_\+sprite\+\_\+collision}} (\mbox{\hyperlink{structSprite}{Sprite}} \texorpdfstring{$\ast$}{*}a, \mbox{\hyperlink{structSprite}{Sprite}} \texorpdfstring{$\ast$}{*}b)
+bool \mbox{\hyperlink{maze_8h_a4d30a231bae48a0f753245228236ac01}{check\+\_\+sprite\+\_\+collision}} (\mbox{\hyperlink{structSprite}{Sprite}} \texorpdfstring{$\ast$}{*}a, \mbox{\hyperlink{structSprite}{Sprite}} \texorpdfstring{$\ast$}{*}b)
 \begin{DoxyCompactList}\small\item\em Checks for collision between two sprites. \end{DoxyCompactList}\item 
-bool() \mbox{\hyperlink{maze_8h_a44aae104e868b664e5b7fea7cc171754}{check\+\_\+wall\+\_\+collision}} (\mbox{\hyperlink{structMaze}{Maze}} \texorpdfstring{$\ast$}{*}maze, \mbox{\hyperlink{structSprite}{Sprite}} \texorpdfstring{$\ast$}{*}sprite)
+bool \mbox{\hyperlink{maze_8h_a5843b98a70d107e4a275821981ddad5d}{check\+\_\+wall\+\_\+collision}} (\mbox{\hyperlink{structMaze}{Maze}} \texorpdfstring{$\ast$}{*}maze, \mbox{\hyperlink{structSprite}{Sprite}} \texorpdfstring{$\ast$}{*}sprite)
 \begin{DoxyCompactList}\small\item\em Checks for collision between a sprite and the maze walls. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{maze_8h_afaf42773ea1deee01263aa7b7c694eca}{draw\+\_\+maze}} (\mbox{\hyperlink{structMaze}{Maze}} \texorpdfstring{$\ast$}{*}maze, uint8\+\_\+t \texorpdfstring{$\ast$}{*}frame\+\_\+buffer)
 \begin{DoxyCompactList}\small\item\em Draws the maze to the provided frame buffer. \end{DoxyCompactList}\item 
@@ -176,11 +176,11 @@ WIN&Represents the winning cell of the maze. \\
 
 
 \doxysubsection{Function Documentation}
-\Hypertarget{maze_8h_acf167b01a026f1e031ab8d19d456f506}\label{maze_8h_acf167b01a026f1e031ab8d19d456f506} 
+\Hypertarget{maze_8h_ad9e0a160d7d9674252138b540d83014c}\label{maze_8h_ad9e0a160d7d9674252138b540d83014c} 
 \index{maze.h@{maze.h}!check\_rectangle\_collision@{check\_rectangle\_collision}}
 \index{check\_rectangle\_collision@{check\_rectangle\_collision}!maze.h@{maze.h}}
 \doxysubsubsection{\texorpdfstring{check\_rectangle\_collision()}{check\_rectangle\_collision()}}
-{\footnotesize\ttfamily bool() check\+\_\+rectangle\+\_\+collision (\begin{DoxyParamCaption}\item[{int}]{x1,  }\item[{int}]{y1,  }\item[{int}]{width1,  }\item[{int}]{height1,  }\item[{int}]{x2,  }\item[{int}]{y2,  }\item[{int}]{width2,  }\item[{int}]{height2 }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily bool check\+\_\+rectangle\+\_\+collision (\begin{DoxyParamCaption}\item[{int}]{x1,  }\item[{int}]{y1,  }\item[{int}]{width1,  }\item[{int}]{height1,  }\item[{int}]{x2,  }\item[{int}]{y2,  }\item[{int}]{width2,  }\item[{int}]{height2 }\end{DoxyParamCaption})}
 
 
 
@@ -208,11 +208,11 @@ Checks for collision between two rectangles.
 \begin{DoxyReturn}{Returns}
 true if there is a collision, false otherwise. 
 \end{DoxyReturn}
-\Hypertarget{maze_8h_a38699c3fd7b528d1ee65ff8870487973}\label{maze_8h_a38699c3fd7b528d1ee65ff8870487973} 
+\Hypertarget{maze_8h_a4d30a231bae48a0f753245228236ac01}\label{maze_8h_a4d30a231bae48a0f753245228236ac01} 
 \index{maze.h@{maze.h}!check\_sprite\_collision@{check\_sprite\_collision}}
 \index{check\_sprite\_collision@{check\_sprite\_collision}!maze.h@{maze.h}}
 \doxysubsubsection{\texorpdfstring{check\_sprite\_collision()}{check\_sprite\_collision()}}
-{\footnotesize\ttfamily bool() check\+\_\+sprite\+\_\+collision (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structSprite}{Sprite}} \texorpdfstring{$\ast$}{*}}]{a,  }\item[{\mbox{\hyperlink{structSprite}{Sprite}} \texorpdfstring{$\ast$}{*}}]{b }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily bool check\+\_\+sprite\+\_\+collision (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structSprite}{Sprite}} \texorpdfstring{$\ast$}{*}}]{a,  }\item[{\mbox{\hyperlink{structSprite}{Sprite}} \texorpdfstring{$\ast$}{*}}]{b }\end{DoxyParamCaption})}
 
 
 
@@ -228,11 +228,11 @@ Checks for collision between two sprites.
 \begin{DoxyReturn}{Returns}
 true if there is a collision, false otherwise. 
 \end{DoxyReturn}
-\Hypertarget{maze_8h_a44aae104e868b664e5b7fea7cc171754}\label{maze_8h_a44aae104e868b664e5b7fea7cc171754} 
+\Hypertarget{maze_8h_a5843b98a70d107e4a275821981ddad5d}\label{maze_8h_a5843b98a70d107e4a275821981ddad5d} 
 \index{maze.h@{maze.h}!check\_wall\_collision@{check\_wall\_collision}}
 \index{check\_wall\_collision@{check\_wall\_collision}!maze.h@{maze.h}}
 \doxysubsubsection{\texorpdfstring{check\_wall\_collision()}{check\_wall\_collision()}}
-{\footnotesize\ttfamily bool() check\+\_\+wall\+\_\+collision (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMaze}{Maze}} \texorpdfstring{$\ast$}{*}}]{maze,  }\item[{\mbox{\hyperlink{structSprite}{Sprite}} \texorpdfstring{$\ast$}{*}}]{sprite }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily bool check\+\_\+wall\+\_\+collision (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMaze}{Maze}} \texorpdfstring{$\ast$}{*}}]{maze,  }\item[{\mbox{\hyperlink{structSprite}{Sprite}} \texorpdfstring{$\ast$}{*}}]{sprite }\end{DoxyParamCaption})}
 
 
 

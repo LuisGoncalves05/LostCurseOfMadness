@@ -7,15 +7,15 @@
 
 #include "assets/xpm/level/mob/attacking.xpm"
 #include "assets/xpm/level/mob/idle.xpm"
+#include "config.h"
 #include "drivers/video/gpu.h"
 #include "model/utils/animated_sprite.h"
 #include "model/utils/sprite.h"
-#include "config.h"
 
-#define MOB_RADIUS 250       /**< Radius of the mob's field of view */
-#define MOB_MAX_SPEED 5      /**< Maximum speed of the mob */
-#define MOB_HEALTH 1         /**< Health of the mob */
-#define MOB_DEFAULT_SPEED 2  /**< Default speed of the mob */
+#define MOB_RADIUS 250      /**< Radius of the mob's field of view */
+#define MOB_MAX_SPEED 5     /**< Maximum speed of the mob */
+#define MOB_HEALTH 1        /**< Health of the mob */
+#define MOB_DEFAULT_SPEED 2 /**< Default speed of the mob */
 
 /**
  * @brief Represents a single Mob instance.
@@ -30,7 +30,7 @@ typedef struct Mob Mob;
 typedef enum {
     MOB_IDLE,      /**< Mob is idle */
     MOB_ATTACKING, /**< Mob is attacking */
-    MOB_DEAD      /**< Mob is dying */
+    MOB_DEAD       /**< Mob is dying */
 } MobState;
 /**
  * @brief Creates a new mob instance with the specified sprite.
