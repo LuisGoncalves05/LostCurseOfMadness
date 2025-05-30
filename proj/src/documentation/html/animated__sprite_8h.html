@@ -141,16 +141,20 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structAnimatedSprite.html">AnimatedSprite</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents an Animated <a class="el" href="structSprite.html" title="Represents a Sprite used for rendering objects on screen.">Sprite</a> for rendering animated objects on screen.  <a href="structAnimatedSprite.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a4adeace6bdeca0e23ade5868621503f9" id="r_a4adeace6bdeca0e23ade5868621503f9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structAnimatedSprite.html">AnimatedSprite</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="animated__sprite_8h.html#a4adeace6bdeca0e23ade5868621503f9">create_animated_sprite</a> (<a class="el" href="structSprite.html">Sprite</a> *sprite, uint32_t frames_per_sprite, uint32_t number_sprites,...)</td></tr>
+<tr class="memdesc:a4adeace6bdeca0e23ade5868621503f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new sprite with the given <a class="el" href="structSprite.html" title="Represents a Sprite used for rendering objects on screen.">Sprite</a> and xpm maps.  <br /></td></tr>
 <tr class="separator:a4adeace6bdeca0e23ade5868621503f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d3e77ac7137485a4221f2365da1a3b3" id="r_a4d3e77ac7137485a4221f2365da1a3b3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="animated__sprite_8h.html#a4d3e77ac7137485a4221f2365da1a3b3">destroy_animated_sprite</a> (<a class="el" href="structAnimatedSprite.html">AnimatedSprite</a> *anim_sprite)</td></tr>
+<tr class="memdesc:a4d3e77ac7137485a4221f2365da1a3b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees the memory associated with the animated sprite.  <br /></td></tr>
 <tr class="separator:a4d3e77ac7137485a4221f2365da1a3b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea8d5bc18da95beae4a00d1ea02ec33a" id="r_aea8d5bc18da95beae4a00d1ea02ec33a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="animated__sprite_8h.html#aea8d5bc18da95beae4a00d1ea02ec33a">draw_animated_sprite</a> (<a class="el" href="structAnimatedSprite.html">AnimatedSprite</a> *sprite, uint8_t *frame_buffer)</td></tr>
-<tr class="separator:aea8d5bc18da95beae4a00d1ea02ec33a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4985379ba60efd583bfac21a93c936d0" id="r_a4985379ba60efd583bfac21a93c936d0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="animated__sprite_8h.html#a4985379ba60efd583bfac21a93c936d0">draw_animated_sprite</a> (<a class="el" href="structAnimatedSprite.html">AnimatedSprite</a> *anim_sprite, uint8_t *frame_buffer)</td></tr>
+<tr class="memdesc:a4985379ba60efd583bfac21a93c936d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws the <a class="el" href="structAnimatedSprite.html" title="Represents an Animated Sprite for rendering animated objects on screen.">AnimatedSprite</a> on the given frame buffer.  <br /></td></tr>
+<tr class="separator:a4985379ba60efd583bfac21a93c936d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -198,6 +202,18 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Creates a new sprite with the given <a class="el" href="structSprite.html" title="Represents a Sprite used for rendering objects on screen.">Sprite</a> and xpm maps. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sprite</td><td>Base <a class="el" href="structSprite.html" title="Represents a Sprite used for rendering objects on screen.">Sprite</a>. </td></tr>
+    <tr><td class="paramname">frames_per_sprite</td><td>The number of frames per sprite. </td></tr>
+    <tr><td class="paramname">number_sprites</td><td>The total number of sprites in the animation. </td></tr>
+    <tr><td class="paramname">...</td><td>Variable arguments corresponding to the remaining sprite's xpm maps.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to the created <a class="el" href="structAnimatedSprite.html" title="Represents an Animated Sprite for rendering animated objects on screen.">AnimatedSprite</a>, or NULL on failure. </dd></dl>
+
 </div>
 </div>
 <a id="a4d3e77ac7137485a4221f2365da1a3b3" name="a4d3e77ac7137485a4221f2365da1a3b3"></a>
@@ -216,10 +232,18 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Frees the memory associated with the animated sprite. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">anim_sprite</td><td>Pointer to the <a class="el" href="structAnimatedSprite.html" title="Represents an Animated Sprite for rendering animated objects on screen.">AnimatedSprite</a> structure to destroy. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
-<a id="aea8d5bc18da95beae4a00d1ea02ec33a" name="aea8d5bc18da95beae4a00d1ea02ec33a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aea8d5bc18da95beae4a00d1ea02ec33a">&#9670;&#160;</a></span>draw_animated_sprite()</h2>
+<a id="a4985379ba60efd583bfac21a93c936d0" name="a4985379ba60efd583bfac21a93c936d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4985379ba60efd583bfac21a93c936d0">&#9670;&#160;</a></span>draw_animated_sprite()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -228,7 +252,7 @@ Variables</h2></td></tr>
           <td class="memname">int draw_animated_sprite </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structAnimatedSprite.html">AnimatedSprite</a> *&#160;</td>
-          <td class="paramname"><em>sprite</em>, </td>
+          <td class="paramname"><em>anim_sprite</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -243,6 +267,16 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Draws the <a class="el" href="structAnimatedSprite.html" title="Represents an Animated Sprite for rendering animated objects on screen.">AnimatedSprite</a> on the given frame buffer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">anim_sprite</td><td>Pointer to the <a class="el" href="structAnimatedSprite.html" title="Represents an Animated Sprite for rendering animated objects on screen.">AnimatedSprite</a> structure to draw. </td></tr>
+    <tr><td class="paramname">frame_buffer</td><td>Pointer to the frame buffer to draw the sprite on.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>1 on success, 0 on failure. </dd></dl>
 
 </div>
 </div>
