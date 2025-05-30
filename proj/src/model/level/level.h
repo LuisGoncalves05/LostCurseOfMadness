@@ -7,7 +7,7 @@
 #include "mob.h"
 #include "player.h"
 
-#define BULLET_DEVIANCE 10
+#define BULLET_DEVIANCE 10 /**< Amplitude of possible deviation of a bullet in degrees */
 
 extern uint8_t *main_frame_buffer;      /**< Pointer to the main framebuffer */
 extern uint8_t *secondary_frame_buffer; /**< Pointer to the secondary framebuffer */
