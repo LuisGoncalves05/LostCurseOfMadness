@@ -22,7 +22,7 @@ var searchData=
   ['player_5fget_5fyspeed_19',['player_get_yspeed',['../player_8c.html#a90153d8455e4c96ebac9e559126bfb9a',1,'player_get_yspeed(Player *player):&#160;player.c'],['../player_8h.html#a90153d8455e4c96ebac9e559126bfb9a',1,'player_get_yspeed(Player *player):&#160;player.c']]],
   ['player_5fhealth_20',['PLAYER_HEALTH',['../player_8h.html#a6b4ee6a19fc0bdf65dbdf7d77c853bd5',1,'player.h']]],
   ['player_5fidle_21',['PLAYER_IDLE',['../player_8h.html#a3c730f37b1b3a893159bada67637fdb1ad8b36925d4e50e71d62254ccf715e4ad',1,'player.h']]],
-  ['player_5flose_5fhealth_22',['player_lose_health',['../player_8c.html#a11324cf4b6eff0fad38a58958734fc55',1,'player_lose_health(Player *player):&#160;player.c'],['../player_8h.html#a11324cf4b6eff0fad38a58958734fc55',1,'player_lose_health(Player *player):&#160;player.c']]],
+  ['player_5flose_5fhealth_22',['player_lose_health',['../player_8c.html#a9dfb429e8550c4d1965783154cdb480a',1,'player_lose_health(Player *player):&#160;player.c'],['../player_8h.html#a9dfb429e8550c4d1965783154cdb480a',1,'player_lose_health(Player *player):&#160;player.c']]],
   ['player_5fset_5fsprite_23',['player_set_sprite',['../player_8c.html#ab1a9d3174691ae07a58886ab54520c5f',1,'player.c']]],
   ['player_5fset_5fstate_24',['player_set_state',['../player_8c.html#af7e1b8b3540ee6cafcac5f31c15f1e2e',1,'player_set_state(Player *player, PlayerState state):&#160;player.c'],['../player_8h.html#af7e1b8b3540ee6cafcac5f31c15f1e2e',1,'player_set_state(Player *player, PlayerState state):&#160;player.c']]],
   ['player_5fset_5fx_25',['player_set_x',['../player_8c.html#a7da494968254a2f1febdee1f9ae8d505',1,'player_set_x(Player *player, uint16_t x):&#160;player.c'],['../player_8h.html#a7da494968254a2f1febdee1f9ae8d505',1,'player_set_x(Player *player, uint16_t x):&#160;player.c']]],
@@ -30,12 +30,12 @@ var searchData=
   ['player_5fset_5fy_27',['player_set_y',['../player_8c.html#a6a8eb60da448fd668c6d6ea23a355015',1,'player_set_y(Player *player, uint16_t y):&#160;player.c'],['../player_8h.html#a6a8eb60da448fd668c6d6ea23a355015',1,'player_set_y(Player *player, uint16_t y):&#160;player.c']]],
   ['player_5fset_5fyspeed_28',['player_set_yspeed',['../player_8c.html#a09d662de542404912dc2aeded552f299',1,'player_set_yspeed(Player *player, double yspeed):&#160;player.c'],['../player_8h.html#a09d662de542404912dc2aeded552f299',1,'player_set_yspeed(Player *player, double yspeed):&#160;player.c']]],
   ['player_5fshooting_29',['PLAYER_SHOOTING',['../player_8h.html#a3c730f37b1b3a893159bada67637fdb1a616862bee744652f70f771af719e8bc1',1,'player.h']]],
-  ['player_5fupdate_5fspeed_30',['player_update_speed',['../player_8c.html#a8036860d36e4e05adbc91a802ed5e444',1,'player_update_speed(Player *player, uint8_t scan_code):&#160;player.c'],['../player_8h.html#a8036860d36e4e05adbc91a802ed5e444',1,'player_update_speed(Player *player, uint8_t scan_code):&#160;player.c']]],
-  ['player_5fupdate_5fstate_31',['player_update_state',['../player_8c.html#ac8f88a9ae8686858151a58703f1f8085',1,'player_update_state(Player *player, struct packet pp):&#160;player.c'],['../player_8h.html#ac8f88a9ae8686858151a58703f1f8085',1,'player_update_state(Player *player, struct packet pp):&#160;player.c']]],
+  ['player_5fupdate_5fspeed_30',['player_update_speed',['../player_8c.html#ab1895d7631ae5ac81ec512f7f5047662',1,'player_update_speed(Player *player, uint8_t scan_code):&#160;player.c'],['../player_8h.html#ab1895d7631ae5ac81ec512f7f5047662',1,'player_update_speed(Player *player, uint8_t scan_code):&#160;player.c']]],
+  ['player_5fupdate_5fstate_31',['player_update_state',['../player_8c.html#afbb12717340251c980dde079dad1fc1a',1,'player_update_state(Player *player, struct packet pp):&#160;player.c'],['../player_8h.html#afbb12717340251c980dde079dad1fc1a',1,'player_update_state(Player *player, struct packet pp):&#160;player.c']]],
   ['player_5fwalking_32',['PLAYER_WALKING',['../player_8h.html#a3c730f37b1b3a893159bada67637fdb1a3c899dc88f25c085eff52ca322f90e79',1,'player.h']]],
   ['player_5fwin_33',['PLAYER_WIN',['../player_8h.html#a3c730f37b1b3a893159bada67637fdb1af4bc343b5ebe87835dae7f6b99ee5a44',1,'player.h']]],
   ['playerstate_34',['PlayerState',['../player_8h.html#a3c730f37b1b3a893159bada67637fdb1',1,'player.h']]],
   ['point_35',['point',['../structPoint.html',1,'Point'],['../maze_8h.html#a332e649c40b7d806629d2cfa046f3ee0',1,'Point:&#160;maze.h']]],
   ['pp_36',['pp',['../main_8c.html#a26e83eca70c2b9169fbbb0eac7e32e32',1,'pp:&#160;main.c'],['../game_8h.html#a26e83eca70c2b9169fbbb0eac7e32e32',1,'pp:&#160;main.c']]],
-  ['proj_5fmain_5floop_37',['proj_main_loop',['../main_8c.html#a7a72220d8366dd84709e79ce415862e5',1,'main.c']]]
+  ['proj_5fmain_5floop_37',['proj_main_loop',['../main_8c.html#a2a16f651eccbd248e1ad3b3b924b143b',1,'main.c']]]
 ];

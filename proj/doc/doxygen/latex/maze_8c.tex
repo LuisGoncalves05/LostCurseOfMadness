@@ -18,7 +18,7 @@ struct \mbox{\hyperlink{structMaze}{Maze}}
 \item 
 \mbox{\hyperlink{structMaze}{Maze}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{maze_8c_a56e4bc51ed7d7cd3456a377d5acf43b8}{create\+\_\+maze}} (uint8\+\_\+t width, uint8\+\_\+t height, uint8\+\_\+t mob\+\_\+count)
 \begin{DoxyCompactList}\small\item\em Creates and initializes a new maze with the given dimensions. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{maze_8c_a544eaa1afdb894c6e85c0f0c8006e862}{destroy\+\_\+maze}} (\mbox{\hyperlink{structMaze}{Maze}} \texorpdfstring{$\ast$}{*}maze)
+int \mbox{\hyperlink{maze_8c_a62e8b93beada86013fe69ecfac1c9bf5}{destroy\+\_\+maze}} (\mbox{\hyperlink{structMaze}{Maze}} \texorpdfstring{$\ast$}{*}maze)
 \begin{DoxyCompactList}\small\item\em Frees the memory associated with the maze. \end{DoxyCompactList}\item 
 uint8\+\_\+t \mbox{\hyperlink{maze_8c_a23c219b4c70ebb740255cd28dbe3b9cb}{get\+\_\+width}} (\mbox{\hyperlink{structMaze}{Maze}} \texorpdfstring{$\ast$}{*}maze)
 \begin{DoxyCompactList}\small\item\em Returns the width of the maze in cells. \end{DoxyCompactList}\item 
@@ -143,11 +143,11 @@ Creates and initializes a new maze with the given dimensions.
 \begin{DoxyReturn}{Returns}
 Pointer to the created \doxylink{structMaze}{Maze} structure. 
 \end{DoxyReturn}
-\Hypertarget{maze_8c_a544eaa1afdb894c6e85c0f0c8006e862}\label{maze_8c_a544eaa1afdb894c6e85c0f0c8006e862} 
+\Hypertarget{maze_8c_a62e8b93beada86013fe69ecfac1c9bf5}\label{maze_8c_a62e8b93beada86013fe69ecfac1c9bf5} 
 \index{maze.c@{maze.c}!destroy\_maze@{destroy\_maze}}
 \index{destroy\_maze@{destroy\_maze}!maze.c@{maze.c}}
 \doxysubsubsection{\texorpdfstring{destroy\_maze()}{destroy\_maze()}}
-{\footnotesize\ttfamily void destroy\+\_\+maze (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMaze}{Maze}} \texorpdfstring{$\ast$}{*}}]{maze }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int destroy\+\_\+maze (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMaze}{Maze}} \texorpdfstring{$\ast$}{*}}]{maze }\end{DoxyParamCaption})}
 
 
 
@@ -158,6 +158,9 @@ Frees the memory associated with the maze.
 {\em maze} & Pointer to the \doxylink{structMaze}{Maze} structure to free. \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 for success, 1 for failure. 
+\end{DoxyReturn}
 \Hypertarget{maze_8c_afaf42773ea1deee01263aa7b7c694eca}\label{maze_8c_afaf42773ea1deee01263aa7b7c694eca} 
 \index{maze.c@{maze.c}!draw\_maze@{draw\_maze}}
 \index{draw\_maze@{draw\_maze}!maze.c@{maze.c}}

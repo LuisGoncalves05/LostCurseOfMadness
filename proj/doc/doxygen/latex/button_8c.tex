@@ -18,7 +18,7 @@ struct \mbox{\hyperlink{structButton}{Button}}
 \item 
 \mbox{\hyperlink{structButton}{Button}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{button_8c_a66c9ca9ef4206772ae74e8b53a9264ac}{create\+\_\+button}} (xpm\+\_\+map\+\_\+t xpm, xpm\+\_\+map\+\_\+t xpm\+\_\+selected, uint16\+\_\+t x, uint16\+\_\+t y)
 \begin{DoxyCompactList}\small\item\em Creates a new \doxylink{structButton}{Button} instance with the given properties. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{button_8c_a6b75c612ee123b9b3261a831fd6d805b}{destroy\+\_\+button}} (\mbox{\hyperlink{structButton}{Button}} \texorpdfstring{$\ast$}{*}button)
+int \mbox{\hyperlink{button_8c_a432e7a1ecf574e91efa49e8b0c81a8a2}{destroy\+\_\+button}} (\mbox{\hyperlink{structButton}{Button}} \texorpdfstring{$\ast$}{*}button)
 \begin{DoxyCompactList}\small\item\em Frees the memory associated with a \doxylink{structButton}{Button}. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{button_8c_ace3dcf63fcb9a3dabe8656963ecccc8b}{button\+\_\+get\+\_\+selected}} (\mbox{\hyperlink{structButton}{Button}} \texorpdfstring{$\ast$}{*}button)
 \begin{DoxyCompactList}\small\item\em Gets whether the button is currently selected. \end{DoxyCompactList}\item 
@@ -26,7 +26,7 @@ void \mbox{\hyperlink{button_8c_a3bc4c0eb84a599f716f155de07a651e0}{button\+\_\+s
 \begin{DoxyCompactList}\small\item\em Sets the selected state of the button. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{button_8c_aa0d35f495817dbfafe8289cc9c55dc6a}{button\+\_\+is\+\_\+selected}} (\mbox{\hyperlink{structButton}{Button}} \texorpdfstring{$\ast$}{*}button, uint16\+\_\+t x, uint16\+\_\+t y)
 \begin{DoxyCompactList}\small\item\em Checks if a click at the given coordinates is within the button bounds. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{button_8c_a0ffccef946ac8aba881f08da535c5f9c}{draw\+\_\+button}} (\mbox{\hyperlink{structButton}{Button}} \texorpdfstring{$\ast$}{*}button, uint8\+\_\+t \texorpdfstring{$\ast$}{*}frame\+\_\+buffer)
+int \mbox{\hyperlink{button_8c_a52f172d54a85608c0420a656f9d9b615}{draw\+\_\+button}} (\mbox{\hyperlink{structButton}{Button}} \texorpdfstring{$\ast$}{*}button, uint8\+\_\+t \texorpdfstring{$\ast$}{*}frame\+\_\+buffer)
 \begin{DoxyCompactList}\small\item\em Draws the button onto the given frame buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -112,11 +112,11 @@ Creates a new \doxylink{structButton}{Button} instance with the given properties
 \begin{DoxyReturn}{Returns}
 Pointer to the created \doxylink{structButton}{Button} structure. 
 \end{DoxyReturn}
-\Hypertarget{button_8c_a6b75c612ee123b9b3261a831fd6d805b}\label{button_8c_a6b75c612ee123b9b3261a831fd6d805b} 
+\Hypertarget{button_8c_a432e7a1ecf574e91efa49e8b0c81a8a2}\label{button_8c_a432e7a1ecf574e91efa49e8b0c81a8a2} 
 \index{button.c@{button.c}!destroy\_button@{destroy\_button}}
 \index{destroy\_button@{destroy\_button}!button.c@{button.c}}
 \doxysubsubsection{\texorpdfstring{destroy\_button()}{destroy\_button()}}
-{\footnotesize\ttfamily void destroy\+\_\+button (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structButton}{Button}} \texorpdfstring{$\ast$}{*}}]{button }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int destroy\+\_\+button (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structButton}{Button}} \texorpdfstring{$\ast$}{*}}]{button }\end{DoxyParamCaption})}
 
 
 
@@ -127,11 +127,14 @@ Frees the memory associated with a \doxylink{structButton}{Button}.
 {\em button} & Pointer to the \doxylink{structButton}{Button} structure to destroy. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{button_8c_a0ffccef946ac8aba881f08da535c5f9c}\label{button_8c_a0ffccef946ac8aba881f08da535c5f9c} 
+\begin{DoxyReturn}{Returns}
+0 for success, 1 for failure. 
+\end{DoxyReturn}
+\Hypertarget{button_8c_a52f172d54a85608c0420a656f9d9b615}\label{button_8c_a52f172d54a85608c0420a656f9d9b615} 
 \index{button.c@{button.c}!draw\_button@{draw\_button}}
 \index{draw\_button@{draw\_button}!button.c@{button.c}}
 \doxysubsubsection{\texorpdfstring{draw\_button()}{draw\_button()}}
-{\footnotesize\ttfamily void draw\+\_\+button (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structButton}{Button}} \texorpdfstring{$\ast$}{*}}]{button,  }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{frame\+\_\+buffer }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int draw\+\_\+button (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structButton}{Button}} \texorpdfstring{$\ast$}{*}}]{button,  }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{frame\+\_\+buffer }\end{DoxyParamCaption})}
 
 
 
@@ -144,3 +147,6 @@ Draws the button onto the given frame buffer.
 {\em frame\+\_\+buffer} & Pointer to the frame buffer. \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 for success, 1 for failure. 
+\end{DoxyReturn}

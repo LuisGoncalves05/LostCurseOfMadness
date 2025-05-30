@@ -180,9 +180,9 @@ Functions</h2></td></tr>
 <tr class="memitem:aa921782781644f21e848d193bf5e4b4d" id="r_aa921782781644f21e848d193bf5e4b4d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structMob.html">Mob</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mob_8h.html#aa921782781644f21e848d193bf5e4b4d">create_mob</a> (int16_t x, int16_t y)</td></tr>
 <tr class="memdesc:aa921782781644f21e848d193bf5e4b4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new mob instance with the specified sprite.  <br /></td></tr>
 <tr class="separator:aa921782781644f21e848d193bf5e4b4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6dffce9e1a708b2cd169d9590b5600a5" id="r_a6dffce9e1a708b2cd169d9590b5600a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mob_8h.html#a6dffce9e1a708b2cd169d9590b5600a5">destroy_mob</a> (<a class="el" href="structMob.html">Mob</a> *mob)</td></tr>
-<tr class="memdesc:a6dffce9e1a708b2cd169d9590b5600a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees the memory associated with the mob.  <br /></td></tr>
-<tr class="separator:a6dffce9e1a708b2cd169d9590b5600a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed36ef9677b7b150d7050195e4a17e73" id="r_aed36ef9677b7b150d7050195e4a17e73"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mob_8h.html#aed36ef9677b7b150d7050195e4a17e73">destroy_mob</a> (<a class="el" href="structMob.html">Mob</a> *mob)</td></tr>
+<tr class="memdesc:aed36ef9677b7b150d7050195e4a17e73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees the memory associated with the mob.  <br /></td></tr>
+<tr class="separator:aed36ef9677b7b150d7050195e4a17e73"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5381b01237f48cad5a023ac326d7df52" id="r_a5381b01237f48cad5a023ac326d7df52"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structSprite.html">Sprite</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mob_8h.html#a5381b01237f48cad5a023ac326d7df52">mob_get_sprite</a> (<a class="el" href="structMob.html">Mob</a> *mob)</td></tr>
 <tr class="memdesc:a5381b01237f48cad5a023ac326d7df52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the <a class="el" href="structSprite.html" title="Represents a Sprite used for rendering objects on screen.">Sprite</a> associated with the given mob.  <br /></td></tr>
 <tr class="separator:a5381b01237f48cad5a023ac326d7df52"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -219,12 +219,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a80d30d94990fe35374ca68e79c14d7c9" id="r_a80d30d94990fe35374ca68e79c14d7c9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="mob_8h.html#a4abc2498f19bcbe035b7b524e27fbb29">MobState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mob_8h.html#a80d30d94990fe35374ca68e79c14d7c9">mob_get_state</a> (<a class="el" href="structMob.html">Mob</a> *mob)</td></tr>
 <tr class="memdesc:a80d30d94990fe35374ca68e79c14d7c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current state of the mob.  <br /></td></tr>
 <tr class="separator:a80d30d94990fe35374ca68e79c14d7c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a79dbfd94639e48f4fd6da40e7c6d068c" id="r_a79dbfd94639e48f4fd6da40e7c6d068c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mob_8h.html#a79dbfd94639e48f4fd6da40e7c6d068c">mob_update_state</a> (<a class="el" href="structMob.html">Mob</a> *mob, int16_t mob_cx, int16_t mob_cy)</td></tr>
-<tr class="memdesc:a79dbfd94639e48f4fd6da40e7c6d068c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the state of the mob based on its context.  <br /></td></tr>
-<tr class="separator:a79dbfd94639e48f4fd6da40e7c6d068c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6800ec2eff68cf927f83440d98783cb7" id="r_a6800ec2eff68cf927f83440d98783cb7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mob_8h.html#a6800ec2eff68cf927f83440d98783cb7">draw_mob</a> (<a class="el" href="structMob.html">Mob</a> *mob, uint8_t *frame_buffer)</td></tr>
-<tr class="memdesc:a6800ec2eff68cf927f83440d98783cb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renders the mob on the screen.  <br /></td></tr>
-<tr class="separator:a6800ec2eff68cf927f83440d98783cb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d3ceca1f3b03bcd178fcbc3f3966d40" id="r_a3d3ceca1f3b03bcd178fcbc3f3966d40"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mob_8h.html#a3d3ceca1f3b03bcd178fcbc3f3966d40">mob_update_state</a> (<a class="el" href="structMob.html">Mob</a> *mob, int16_t mob_cx, int16_t mob_cy)</td></tr>
+<tr class="memdesc:a3d3ceca1f3b03bcd178fcbc3f3966d40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the state of the mob based on its context.  <br /></td></tr>
+<tr class="separator:a3d3ceca1f3b03bcd178fcbc3f3966d40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a530745e49de7b0f54e839c58f78b3afb" id="r_a530745e49de7b0f54e839c58f78b3afb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mob_8h.html#a530745e49de7b0f54e839c58f78b3afb">draw_mob</a> (<a class="el" href="structMob.html">Mob</a> *mob, uint8_t *frame_buffer)</td></tr>
+<tr class="memdesc:a530745e49de7b0f54e839c58f78b3afb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renders the mob on the screen.  <br /></td></tr>
+<tr class="separator:a530745e49de7b0f54e839c58f78b3afb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="ad0a2d55d022e8e1a1b5b8e14e690970f" name="ad0a2d55d022e8e1a1b5b8e14e690970f"></a>
@@ -368,14 +368,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a6dffce9e1a708b2cd169d9590b5600a5" name="a6dffce9e1a708b2cd169d9590b5600a5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6dffce9e1a708b2cd169d9590b5600a5">&#9670;&#160;</a></span>destroy_mob()</h2>
+<a id="aed36ef9677b7b150d7050195e4a17e73" name="aed36ef9677b7b150d7050195e4a17e73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed36ef9677b7b150d7050195e4a17e73">&#9670;&#160;</a></span>destroy_mob()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void destroy_mob </td>
+          <td class="memname">int destroy_mob </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structMob.html">Mob</a> *&#160;</td>
           <td class="paramname"><em>mob</em></td><td>)</td>
@@ -391,17 +391,18 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, 1 on failure. </dd></dl>
 
 </div>
 </div>
-<a id="a6800ec2eff68cf927f83440d98783cb7" name="a6800ec2eff68cf927f83440d98783cb7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6800ec2eff68cf927f83440d98783cb7">&#9670;&#160;</a></span>draw_mob()</h2>
+<a id="a530745e49de7b0f54e839c58f78b3afb" name="a530745e49de7b0f54e839c58f78b3afb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a530745e49de7b0f54e839c58f78b3afb">&#9670;&#160;</a></span>draw_mob()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void draw_mob </td>
+          <td class="memname">int draw_mob </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structMob.html">Mob</a> *&#160;</td>
           <td class="paramname"><em>mob</em>, </td>
@@ -428,6 +429,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, 1 on failure. </dd></dl>
 
 </div>
 </div>
@@ -795,14 +797,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a79dbfd94639e48f4fd6da40e7c6d068c" name="a79dbfd94639e48f4fd6da40e7c6d068c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a79dbfd94639e48f4fd6da40e7c6d068c">&#9670;&#160;</a></span>mob_update_state()</h2>
+<a id="a3d3ceca1f3b03bcd178fcbc3f3966d40" name="a3d3ceca1f3b03bcd178fcbc3f3966d40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d3ceca1f3b03bcd178fcbc3f3966d40">&#9670;&#160;</a></span>mob_update_state()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void mob_update_state </td>
+          <td class="memname">int mob_update_state </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structMob.html">Mob</a> *&#160;</td>
           <td class="paramname"><em>mob</em>, </td>
@@ -836,6 +838,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, 1 on failure. </dd></dl>
 
 </div>
 </div>

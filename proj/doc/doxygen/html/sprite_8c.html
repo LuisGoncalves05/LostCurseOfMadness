@@ -105,9 +105,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a1b2b4290b767101a91f399d9cea37da4" id="r_a1b2b4290b767101a91f399d9cea37da4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structSprite.html">Sprite</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sprite_8c.html#a1b2b4290b767101a91f399d9cea37da4">create_sprite</a> (xpm_map_t xpm, int16_t x, int16_t y, double xspeed, double yspeed)</td></tr>
 <tr class="memdesc:a1b2b4290b767101a91f399d9cea37da4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new sprite with the given XPM image, position, and speed.  <br /></td></tr>
 <tr class="separator:a1b2b4290b767101a91f399d9cea37da4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af16c6befaac9ffb673b9e3c798d542ed" id="r_af16c6befaac9ffb673b9e3c798d542ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sprite_8c.html#af16c6befaac9ffb673b9e3c798d542ed">destroy_sprite</a> (<a class="el" href="structSprite.html">Sprite</a> *sp)</td></tr>
-<tr class="memdesc:af16c6befaac9ffb673b9e3c798d542ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees the memory associated with the sprite.  <br /></td></tr>
-<tr class="separator:af16c6befaac9ffb673b9e3c798d542ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae10de51e6ec23c1eb987551e7ec4a0e9" id="r_ae10de51e6ec23c1eb987551e7ec4a0e9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sprite_8c.html#ae10de51e6ec23c1eb987551e7ec4a0e9">destroy_sprite</a> (<a class="el" href="structSprite.html">Sprite</a> *sp)</td></tr>
+<tr class="memdesc:ae10de51e6ec23c1eb987551e7ec4a0e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees the memory associated with the sprite.  <br /></td></tr>
+<tr class="separator:ae10de51e6ec23c1eb987551e7ec4a0e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a19fc6a20e805ce39e63df0f0ec93e6eb" id="r_a19fc6a20e805ce39e63df0f0ec93e6eb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sprite_8c.html#a19fc6a20e805ce39e63df0f0ec93e6eb">draw_sprite</a> (<a class="el" href="structSprite.html">Sprite</a> *sprite, uint8_t *frame_buffer)</td></tr>
 <tr class="memdesc:a19fc6a20e805ce39e63df0f0ec93e6eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws the <a class="el" href="structSprite.html" title="Represents a Sprite used for rendering objects on screen.">Sprite</a> on the given frame buffer.  <br /></td></tr>
 <tr class="separator:a19fc6a20e805ce39e63df0f0ec93e6eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -176,14 +176,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="af16c6befaac9ffb673b9e3c798d542ed" name="af16c6befaac9ffb673b9e3c798d542ed"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af16c6befaac9ffb673b9e3c798d542ed">&#9670;&#160;</a></span>destroy_sprite()</h2>
+<a id="ae10de51e6ec23c1eb987551e7ec4a0e9" name="ae10de51e6ec23c1eb987551e7ec4a0e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae10de51e6ec23c1eb987551e7ec4a0e9">&#9670;&#160;</a></span>destroy_sprite()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void destroy_sprite </td>
+          <td class="memname">int destroy_sprite </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structSprite.html">Sprite</a> *&#160;</td>
           <td class="paramname"><em>sp</em></td><td>)</td>
@@ -199,6 +199,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, 1 on failure. </dd></dl>
 
 </div>
 </div>
@@ -236,7 +237,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>1 on success, 0 on failure. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, 1 on failure. </dd></dl>
 
 </div>
 </div>
@@ -274,7 +275,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>1 on success, 0 on failure. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, 1 on failure. </dd></dl>
 
 </div>
 </div>

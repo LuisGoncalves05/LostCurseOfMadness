@@ -18,7 +18,7 @@ struct \mbox{\hyperlink{structMob}{Mob}}
 \item 
 \mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{mob_8c_aa921782781644f21e848d193bf5e4b4d}{create\+\_\+mob}} (int16\+\_\+t x, int16\+\_\+t y)
 \begin{DoxyCompactList}\small\item\em Creates a new mob instance with the specified sprite. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{mob_8c_a6dffce9e1a708b2cd169d9590b5600a5}{destroy\+\_\+mob}} (\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}mob)
+int \mbox{\hyperlink{mob_8c_aed36ef9677b7b150d7050195e4a17e73}{destroy\+\_\+mob}} (\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}mob)
 \begin{DoxyCompactList}\small\item\em Frees the memory associated with the mob. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structSprite}{Sprite}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{mob_8c_a5381b01237f48cad5a023ac326d7df52}{mob\+\_\+get\+\_\+sprite}} (\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}mob)
 \begin{DoxyCompactList}\small\item\em Returns the \doxylink{structSprite}{Sprite} associated with the given mob. \end{DoxyCompactList}\item 
@@ -42,9 +42,9 @@ int \mbox{\hyperlink{mob_8c_a60ee26ae92c918077c10d405911585df}{mob\+\_\+get\+\_\
 \begin{DoxyCompactList}\small\item\em Returns the maximum speed of the mob. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{mob_8h_a4abc2498f19bcbe035b7b524e27fbb29}{Mob\+State}} \mbox{\hyperlink{mob_8c_a80d30d94990fe35374ca68e79c14d7c9}{mob\+\_\+get\+\_\+state}} (\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}mob)
 \begin{DoxyCompactList}\small\item\em Returns the current state of the mob. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{mob_8c_aa7bb08878b30df3143b89c251d79a625}{mob\+\_\+update\+\_\+state}} (\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}mob, int16\+\_\+t player\+\_\+cx, int16\+\_\+t player\+\_\+cy)
+int \mbox{\hyperlink{mob_8c_a12c8f7c88ccf28772448de1677046813}{mob\+\_\+update\+\_\+state}} (\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}mob, int16\+\_\+t player\+\_\+cx, int16\+\_\+t player\+\_\+cy)
 \begin{DoxyCompactList}\small\item\em Updates the state of the mob based on its context. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{mob_8c_a6800ec2eff68cf927f83440d98783cb7}{draw\+\_\+mob}} (\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}mob, uint8\+\_\+t \texorpdfstring{$\ast$}{*}frame\+\_\+buffer)
+int \mbox{\hyperlink{mob_8c_a530745e49de7b0f54e839c58f78b3afb}{draw\+\_\+mob}} (\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}mob, uint8\+\_\+t \texorpdfstring{$\ast$}{*}frame\+\_\+buffer)
 \begin{DoxyCompactList}\small\item\em Renders the mob on the screen. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -67,11 +67,11 @@ Creates a new mob instance with the specified sprite.
 \begin{DoxyReturn}{Returns}
 Pointer to the created \doxylink{structMob}{Mob} structure. 
 \end{DoxyReturn}
-\Hypertarget{mob_8c_a6dffce9e1a708b2cd169d9590b5600a5}\label{mob_8c_a6dffce9e1a708b2cd169d9590b5600a5} 
+\Hypertarget{mob_8c_aed36ef9677b7b150d7050195e4a17e73}\label{mob_8c_aed36ef9677b7b150d7050195e4a17e73} 
 \index{mob.c@{mob.c}!destroy\_mob@{destroy\_mob}}
 \index{destroy\_mob@{destroy\_mob}!mob.c@{mob.c}}
 \doxysubsubsection{\texorpdfstring{destroy\_mob()}{destroy\_mob()}}
-{\footnotesize\ttfamily void destroy\+\_\+mob (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}}]{mob }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int destroy\+\_\+mob (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}}]{mob }\end{DoxyParamCaption})}
 
 
 
@@ -82,11 +82,14 @@ Frees the memory associated with the mob.
 {\em mob} & Pointer to the \doxylink{structMob}{Mob} structure to destroy. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{mob_8c_a6800ec2eff68cf927f83440d98783cb7}\label{mob_8c_a6800ec2eff68cf927f83440d98783cb7} 
+\begin{DoxyReturn}{Returns}
+0 on success, 1 on failure. 
+\end{DoxyReturn}
+\Hypertarget{mob_8c_a530745e49de7b0f54e839c58f78b3afb}\label{mob_8c_a530745e49de7b0f54e839c58f78b3afb} 
 \index{mob.c@{mob.c}!draw\_mob@{draw\_mob}}
 \index{draw\_mob@{draw\_mob}!mob.c@{mob.c}}
 \doxysubsubsection{\texorpdfstring{draw\_mob()}{draw\_mob()}}
-{\footnotesize\ttfamily void draw\+\_\+mob (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}}]{mob,  }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{frame\+\_\+buffer }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int draw\+\_\+mob (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}}]{mob,  }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{frame\+\_\+buffer }\end{DoxyParamCaption})}
 
 
 
@@ -99,6 +102,9 @@ Renders the mob on the screen.
 {\em frame\+\_\+buffer} & Pointer to the frame buffer. \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, 1 on failure. 
+\end{DoxyReturn}
 \Hypertarget{mob_8c_a82f8f6913b1d97888a9cd919da98932b}\label{mob_8c_a82f8f6913b1d97888a9cd919da98932b} 
 \index{mob.c@{mob.c}!mob\_get\_health@{mob\_get\_health}}
 \index{mob\_get\_health@{mob\_get\_health}!mob.c@{mob.c}}
@@ -294,11 +300,11 @@ Sets the yx of the mob.
 {\em y} & New y value. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{mob_8c_aa7bb08878b30df3143b89c251d79a625}\label{mob_8c_aa7bb08878b30df3143b89c251d79a625} 
+\Hypertarget{mob_8c_a12c8f7c88ccf28772448de1677046813}\label{mob_8c_a12c8f7c88ccf28772448de1677046813} 
 \index{mob.c@{mob.c}!mob\_update\_state@{mob\_update\_state}}
 \index{mob\_update\_state@{mob\_update\_state}!mob.c@{mob.c}}
 \doxysubsubsection{\texorpdfstring{mob\_update\_state()}{mob\_update\_state()}}
-{\footnotesize\ttfamily void mob\+\_\+update\+\_\+state (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}}]{mob,  }\item[{int16\+\_\+t}]{mob\+\_\+cx,  }\item[{int16\+\_\+t}]{mob\+\_\+cy }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int mob\+\_\+update\+\_\+state (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}}]{mob,  }\item[{int16\+\_\+t}]{mob\+\_\+cx,  }\item[{int16\+\_\+t}]{mob\+\_\+cy }\end{DoxyParamCaption})}
 
 
 
@@ -313,3 +319,6 @@ Updates the state of the mob based on its context.
 {\em mob\+\_\+cy} & Y coordinate of the center of the mob. \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, 1 on failure. 
+\end{DoxyReturn}

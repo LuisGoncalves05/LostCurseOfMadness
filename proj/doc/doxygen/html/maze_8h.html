@@ -188,9 +188,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a56e4bc51ed7d7cd3456a377d5acf43b8" id="r_a56e4bc51ed7d7cd3456a377d5acf43b8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structMaze.html">Maze</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="maze_8h.html#a56e4bc51ed7d7cd3456a377d5acf43b8">create_maze</a> (uint8_t width, uint8_t height, uint8_t mob_count)</td></tr>
 <tr class="memdesc:a56e4bc51ed7d7cd3456a377d5acf43b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates and initializes a new maze with the given dimensions.  <br /></td></tr>
 <tr class="separator:a56e4bc51ed7d7cd3456a377d5acf43b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a544eaa1afdb894c6e85c0f0c8006e862" id="r_a544eaa1afdb894c6e85c0f0c8006e862"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="maze_8h.html#a544eaa1afdb894c6e85c0f0c8006e862">destroy_maze</a> (<a class="el" href="structMaze.html">Maze</a> *maze)</td></tr>
-<tr class="memdesc:a544eaa1afdb894c6e85c0f0c8006e862"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees the memory associated with the maze.  <br /></td></tr>
-<tr class="separator:a544eaa1afdb894c6e85c0f0c8006e862"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62e8b93beada86013fe69ecfac1c9bf5" id="r_a62e8b93beada86013fe69ecfac1c9bf5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="maze_8h.html#a62e8b93beada86013fe69ecfac1c9bf5">destroy_maze</a> (<a class="el" href="structMaze.html">Maze</a> *maze)</td></tr>
+<tr class="memdesc:a62e8b93beada86013fe69ecfac1c9bf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees the memory associated with the maze.  <br /></td></tr>
+<tr class="separator:a62e8b93beada86013fe69ecfac1c9bf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23c219b4c70ebb740255cd28dbe3b9cb" id="r_a23c219b4c70ebb740255cd28dbe3b9cb"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="maze_8h.html#a23c219b4c70ebb740255cd28dbe3b9cb">get_width</a> (<a class="el" href="structMaze.html">Maze</a> *maze)</td></tr>
 <tr class="memdesc:a23c219b4c70ebb740255cd28dbe3b9cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the width of the maze in cells.  <br /></td></tr>
 <tr class="separator:a23c219b4c70ebb740255cd28dbe3b9cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -563,14 +563,14 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a544eaa1afdb894c6e85c0f0c8006e862" name="a544eaa1afdb894c6e85c0f0c8006e862"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a544eaa1afdb894c6e85c0f0c8006e862">&#9670;&#160;</a></span>destroy_maze()</h2>
+<a id="a62e8b93beada86013fe69ecfac1c9bf5" name="a62e8b93beada86013fe69ecfac1c9bf5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62e8b93beada86013fe69ecfac1c9bf5">&#9670;&#160;</a></span>destroy_maze()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void destroy_maze </td>
+          <td class="memname">int destroy_maze </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structMaze.html">Maze</a> *&#160;</td>
           <td class="paramname"><em>maze</em></td><td>)</td>
@@ -586,6 +586,7 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>0 for success, 1 for failure. </dd></dl>
 
 </div>
 </div>

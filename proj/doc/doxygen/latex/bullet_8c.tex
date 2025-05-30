@@ -18,7 +18,7 @@ struct \mbox{\hyperlink{structBullet}{Bullet}}
 \item 
 \mbox{\hyperlink{structBullet}{Bullet}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{bullet_8c_a986316bffe25dffcf4b0a246fd428864}{create\+\_\+bullet}} (int x, int y, double angle)
 \begin{DoxyCompactList}\small\item\em Creates a new bullet at the specified coordinates moving in the given direction. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{bullet_8c_a2e6902c7c7d0d3651a88892991cdcfb9}{destroy\+\_\+bullet}} (\mbox{\hyperlink{structBullet}{Bullet}} \texorpdfstring{$\ast$}{*}bullet)
+int \mbox{\hyperlink{bullet_8c_a45449723feed27f8b5f902bcba3b6465}{destroy\+\_\+bullet}} (\mbox{\hyperlink{structBullet}{Bullet}} \texorpdfstring{$\ast$}{*}bullet)
 \begin{DoxyCompactList}\small\item\em Frees resources used by a bullet and destroys it. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structSprite}{Sprite}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{bullet_8c_a614f7cac474f4c1091702eec6032852c}{bullet\+\_\+get\+\_\+sprite}} (\mbox{\hyperlink{structBullet}{Bullet}} \texorpdfstring{$\ast$}{*}bullet)
 \begin{DoxyCompactList}\small\item\em Gets the sprite associated with the bullet. \end{DoxyCompactList}\item 
@@ -38,7 +38,7 @@ bool \mbox{\hyperlink{bullet_8c_a996e6445aaaf51f380278f94ef14d1ca}{bullet\+\_\+g
 \begin{DoxyCompactList}\small\item\em Checks whether the bullet is currently active. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{bullet_8c_a52057c87bf16504f4b803b2632ee2247}{bullet\+\_\+set\+\_\+active}} (\mbox{\hyperlink{structBullet}{Bullet}} \texorpdfstring{$\ast$}{*}bullet, bool active)
 \begin{DoxyCompactList}\small\item\em Sets the bullet\textquotesingle{}s active status. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{bullet_8c_a185d18f207e3e6df1a1ff7412b6eeea6}{draw\+\_\+bullet}} (\mbox{\hyperlink{structBullet}{Bullet}} \texorpdfstring{$\ast$}{*}bullet, uint8\+\_\+t \texorpdfstring{$\ast$}{*}frame\+\_\+buffer)
+int \mbox{\hyperlink{bullet_8c_a23ee585f4ff41ac19d00da50cd805c6a}{draw\+\_\+bullet}} (\mbox{\hyperlink{structBullet}{Bullet}} \texorpdfstring{$\ast$}{*}bullet, uint8\+\_\+t \texorpdfstring{$\ast$}{*}frame\+\_\+buffer)
 \begin{DoxyCompactList}\small\item\em Draws the bullet on the provided frame buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -224,11 +224,11 @@ Creates a new bullet at the specified coordinates moving in the given direction.
 \begin{DoxyReturn}{Returns}
 Pointer to the created \doxylink{structBullet}{Bullet} on success, or NULL on failure. 
 \end{DoxyReturn}
-\Hypertarget{bullet_8c_a2e6902c7c7d0d3651a88892991cdcfb9}\label{bullet_8c_a2e6902c7c7d0d3651a88892991cdcfb9} 
+\Hypertarget{bullet_8c_a45449723feed27f8b5f902bcba3b6465}\label{bullet_8c_a45449723feed27f8b5f902bcba3b6465} 
 \index{bullet.c@{bullet.c}!destroy\_bullet@{destroy\_bullet}}
 \index{destroy\_bullet@{destroy\_bullet}!bullet.c@{bullet.c}}
 \doxysubsubsection{\texorpdfstring{destroy\_bullet()}{destroy\_bullet()}}
-{\footnotesize\ttfamily void destroy\+\_\+bullet (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structBullet}{Bullet}} \texorpdfstring{$\ast$}{*}}]{bullet }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int destroy\+\_\+bullet (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structBullet}{Bullet}} \texorpdfstring{$\ast$}{*}}]{bullet }\end{DoxyParamCaption})}
 
 
 
@@ -239,11 +239,14 @@ Frees resources used by a bullet and destroys it.
 {\em bullet} & Pointer to the \doxylink{structBullet}{Bullet} to destroy. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{bullet_8c_a185d18f207e3e6df1a1ff7412b6eeea6}\label{bullet_8c_a185d18f207e3e6df1a1ff7412b6eeea6} 
+\begin{DoxyReturn}{Returns}
+0 on success, 1 on failure. 
+\end{DoxyReturn}
+\Hypertarget{bullet_8c_a23ee585f4ff41ac19d00da50cd805c6a}\label{bullet_8c_a23ee585f4ff41ac19d00da50cd805c6a} 
 \index{bullet.c@{bullet.c}!draw\_bullet@{draw\_bullet}}
 \index{draw\_bullet@{draw\_bullet}!bullet.c@{bullet.c}}
 \doxysubsubsection{\texorpdfstring{draw\_bullet()}{draw\_bullet()}}
-{\footnotesize\ttfamily void draw\+\_\+bullet (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structBullet}{Bullet}} \texorpdfstring{$\ast$}{*}}]{bullet,  }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{frame\+\_\+buffer }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int draw\+\_\+bullet (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structBullet}{Bullet}} \texorpdfstring{$\ast$}{*}}]{bullet,  }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{frame\+\_\+buffer }\end{DoxyParamCaption})}
 
 
 
@@ -256,3 +259,6 @@ Draws the bullet on the provided frame buffer.
 {\em frame\+\_\+buffer} & Pointer to the frame buffer where the bullet will be rendered. \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, 1 on failure. 
+\end{DoxyReturn}

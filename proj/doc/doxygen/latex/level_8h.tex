@@ -34,7 +34,7 @@ typedef struct \mbox{\hyperlink{structLevel}{Level}} \mbox{\hyperlink{level_8h_a
 \item 
 \mbox{\hyperlink{structLevel}{Level}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{level_8h_a01dee95d6048a5125423ba13842e3b48}{create\+\_\+level}} (uint8\+\_\+t number)
 \begin{DoxyCompactList}\small\item\em Creates a new level instance with a specified level number. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{level_8h_a775008f1727551eff8cd700a71eff60f}{destroy\+\_\+level}} (\mbox{\hyperlink{structLevel}{Level}} \texorpdfstring{$\ast$}{*}level)
+int \mbox{\hyperlink{level_8h_ac67336c6e9d71c19eb4628bed09d7718}{destroy\+\_\+level}} (\mbox{\hyperlink{structLevel}{Level}} \texorpdfstring{$\ast$}{*}level)
 \begin{DoxyCompactList}\small\item\em Frees the memory associated with the level. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structMaze}{Maze}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{level_8h_ad7ee5c0141e39cfdc8dcaf72f9fdf887}{get\+\_\+maze}} (\mbox{\hyperlink{structLevel}{Level}} \texorpdfstring{$\ast$}{*}level)
 \begin{DoxyCompactList}\small\item\em Returns the \doxylink{structMaze}{Maze} associated with the given level. \end{DoxyCompactList}\item 
@@ -46,11 +46,11 @@ double \mbox{\hyperlink{level_8h_a92c3686306e16dd5510f88ff87f3d6ed}{get\+\_\+del
 \begin{DoxyCompactList}\small\item\em Returns the \doxylink{structMob}{Mob} array associated with the given level. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{player_8h_a3c730f37b1b3a893159bada67637fdb1}{Player\+State}} \mbox{\hyperlink{level_8h_a4e8e869877233b57ca5111380c5d867c}{level\+\_\+get\+\_\+player\+\_\+state}} (\mbox{\hyperlink{structLevel}{Level}} \texorpdfstring{$\ast$}{*}level)
 \begin{DoxyCompactList}\small\item\em Returns the state of the level\textquotesingle{}s player. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{level_8h_a7dec214a687e9bd25cad4d46ab0a89a9}{level\+\_\+update\+\_\+delta}} (\mbox{\hyperlink{structLevel}{Level}} \texorpdfstring{$\ast$}{*}level, double mouse\+\_\+x, double mouse\+\_\+y)
+int \mbox{\hyperlink{level_8h_a5cb751559837a88787532e5a4defed00}{level\+\_\+update\+\_\+delta}} (\mbox{\hyperlink{structLevel}{Level}} \texorpdfstring{$\ast$}{*}level, double mouse\+\_\+x, double mouse\+\_\+y)
 \begin{DoxyCompactList}\small\item\em Updates the player\textquotesingle{}s aim direction based on mouse coordinates. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{level_8h_a27c88d67c489661082af420e3085bcbd}{level\+\_\+update\+\_\+position}} (\mbox{\hyperlink{structLevel}{Level}} \texorpdfstring{$\ast$}{*}level, uint8\+\_\+t \mbox{\hyperlink{keyboard_8c_af4aead9dfdc0d2f7e93662387a21e0bc}{scan\+\_\+code}})
+int \mbox{\hyperlink{level_8h_a5aa99b1f3cc4e833e5116ca83dd47105}{level\+\_\+update\+\_\+position}} (\mbox{\hyperlink{structLevel}{Level}} \texorpdfstring{$\ast$}{*}level, uint8\+\_\+t \mbox{\hyperlink{keyboard_8c_af4aead9dfdc0d2f7e93662387a21e0bc}{scan\+\_\+code}})
 \begin{DoxyCompactList}\small\item\em Processes keyboard input to move the player. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{level_8h_ade2ac5e1cbc5ecff0084b0593714d7e1}{level\+\_\+shoot}} (\mbox{\hyperlink{structLevel}{Level}} \texorpdfstring{$\ast$}{*}level)
+int \mbox{\hyperlink{level_8h_acb05b31d3822881488e2f926672d6028}{level\+\_\+shoot}} (\mbox{\hyperlink{structLevel}{Level}} \texorpdfstring{$\ast$}{*}level)
 \begin{DoxyCompactList}\small\item\em Triggers a projectile from the player\textquotesingle{}s position and direction. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{level_8h_a58f57d051cb085d13754d9903ee0925c}{draw\+\_\+level}} (\mbox{\hyperlink{structLevel}{Level}} \texorpdfstring{$\ast$}{*}level, struct \mbox{\hyperlink{mouse_8c_ab234504ae156fa5b250e34cbb65a7807}{packet}} \mbox{\hyperlink{main_8c_a26e83eca70c2b9169fbbb0eac7e32e32}{pp}})
 \begin{DoxyCompactList}\small\item\em Renders the entire level state including player, mobs, maze, and bullets. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -112,11 +112,11 @@ Creates a new level instance with a specified level number.
 \begin{DoxyReturn}{Returns}
 Pointer to the created \doxylink{structLevel}{Level} structure. 
 \end{DoxyReturn}
-\Hypertarget{level_8h_a775008f1727551eff8cd700a71eff60f}\label{level_8h_a775008f1727551eff8cd700a71eff60f} 
+\Hypertarget{level_8h_ac67336c6e9d71c19eb4628bed09d7718}\label{level_8h_ac67336c6e9d71c19eb4628bed09d7718} 
 \index{level.h@{level.h}!destroy\_level@{destroy\_level}}
 \index{destroy\_level@{destroy\_level}!level.h@{level.h}}
 \doxysubsubsection{\texorpdfstring{destroy\_level()}{destroy\_level()}}
-{\footnotesize\ttfamily void destroy\+\_\+level (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structLevel}{Level}} \texorpdfstring{$\ast$}{*}}]{level }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int destroy\+\_\+level (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structLevel}{Level}} \texorpdfstring{$\ast$}{*}}]{level }\end{DoxyParamCaption})}
 
 
 
@@ -127,6 +127,9 @@ Frees the memory associated with the level.
 {\em level} & Pointer to the \doxylink{structLevel}{Level} structure to destroy. \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, 1 on failure. 
+\end{DoxyReturn}
 \Hypertarget{level_8h_a58f57d051cb085d13754d9903ee0925c}\label{level_8h_a58f57d051cb085d13754d9903ee0925c} 
 \index{level.h@{level.h}!draw\_level@{draw\_level}}
 \index{draw\_level@{draw\_level}!level.h@{level.h}}
@@ -237,11 +240,11 @@ Returns the state of the level\textquotesingle{}s player.
 \begin{DoxyReturn}{Returns}
 The Player\+State of the player in the level. 
 \end{DoxyReturn}
-\Hypertarget{level_8h_ade2ac5e1cbc5ecff0084b0593714d7e1}\label{level_8h_ade2ac5e1cbc5ecff0084b0593714d7e1} 
+\Hypertarget{level_8h_acb05b31d3822881488e2f926672d6028}\label{level_8h_acb05b31d3822881488e2f926672d6028} 
 \index{level.h@{level.h}!level\_shoot@{level\_shoot}}
 \index{level\_shoot@{level\_shoot}!level.h@{level.h}}
 \doxysubsubsection{\texorpdfstring{level\_shoot()}{level\_shoot()}}
-{\footnotesize\ttfamily void level\+\_\+shoot (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structLevel}{Level}} \texorpdfstring{$\ast$}{*}}]{level }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int level\+\_\+shoot (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structLevel}{Level}} \texorpdfstring{$\ast$}{*}}]{level }\end{DoxyParamCaption})}
 
 
 
@@ -252,11 +255,14 @@ Triggers a projectile from the player\textquotesingle{}s position and direction.
 {\em level} & Pointer to the \doxylink{structLevel}{Level} structure. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{level_8h_a7dec214a687e9bd25cad4d46ab0a89a9}\label{level_8h_a7dec214a687e9bd25cad4d46ab0a89a9} 
+\begin{DoxyReturn}{Returns}
+0 on success, 1 on failure. 
+\end{DoxyReturn}
+\Hypertarget{level_8h_a5cb751559837a88787532e5a4defed00}\label{level_8h_a5cb751559837a88787532e5a4defed00} 
 \index{level.h@{level.h}!level\_update\_delta@{level\_update\_delta}}
 \index{level\_update\_delta@{level\_update\_delta}!level.h@{level.h}}
 \doxysubsubsection{\texorpdfstring{level\_update\_delta()}{level\_update\_delta()}}
-{\footnotesize\ttfamily void level\+\_\+update\+\_\+delta (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structLevel}{Level}} \texorpdfstring{$\ast$}{*}}]{level,  }\item[{double}]{mouse\+\_\+x,  }\item[{double}]{mouse\+\_\+y }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int level\+\_\+update\+\_\+delta (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structLevel}{Level}} \texorpdfstring{$\ast$}{*}}]{level,  }\item[{double}]{mouse\+\_\+x,  }\item[{double}]{mouse\+\_\+y }\end{DoxyParamCaption})}
 
 
 
@@ -271,11 +277,14 @@ Updates the player\textquotesingle{}s aim direction based on mouse coordinates.
 {\em mouse\+\_\+y} & Y coordinate of the mouse cursor. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{level_8h_a27c88d67c489661082af420e3085bcbd}\label{level_8h_a27c88d67c489661082af420e3085bcbd} 
+\begin{DoxyReturn}{Returns}
+0 on success, 1 on failure. 
+\end{DoxyReturn}
+\Hypertarget{level_8h_a5aa99b1f3cc4e833e5116ca83dd47105}\label{level_8h_a5aa99b1f3cc4e833e5116ca83dd47105} 
 \index{level.h@{level.h}!level\_update\_position@{level\_update\_position}}
 \index{level\_update\_position@{level\_update\_position}!level.h@{level.h}}
 \doxysubsubsection{\texorpdfstring{level\_update\_position()}{level\_update\_position()}}
-{\footnotesize\ttfamily void level\+\_\+update\+\_\+position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structLevel}{Level}} \texorpdfstring{$\ast$}{*}}]{level,  }\item[{uint8\+\_\+t}]{scan\+\_\+code }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int level\+\_\+update\+\_\+position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structLevel}{Level}} \texorpdfstring{$\ast$}{*}}]{level,  }\item[{uint8\+\_\+t}]{scan\+\_\+code }\end{DoxyParamCaption})}
 
 
 
@@ -288,6 +297,9 @@ Processes keyboard input to move the player.
 {\em scan\+\_\+code} & Scan code from keyboard input. \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, 1 on failure. 
+\end{DoxyReturn}
 
 
 \doxysubsection{Variable Documentation}

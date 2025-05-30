@@ -33,15 +33,15 @@ typedef struct \mbox{\hyperlink{structMainMenu}{Main\+Menu}} \mbox{\hyperlink{ma
 \item 
 \mbox{\hyperlink{structMainMenu}{Main\+Menu}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{main__menu_8h_a3ed2cc2eac7c6fe63bc6a39f325f402e}{create\+\_\+main\+\_\+menu}} ()
 \begin{DoxyCompactList}\small\item\em Creates and initializes a new \doxylink{structMainMenu}{Main\+Menu} instance. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{main__menu_8h_a76108292c0d76b9087ecf85935cacf4d}{destroy\+\_\+main\+\_\+menu}} (\mbox{\hyperlink{structMainMenu}{Main\+Menu}} \texorpdfstring{$\ast$}{*}main\+\_\+menu)
+int \mbox{\hyperlink{main__menu_8h_af82ca3559e9f485d2f1093e7d8dee82c}{destroy\+\_\+main\+\_\+menu}} (\mbox{\hyperlink{structMainMenu}{Main\+Menu}} \texorpdfstring{$\ast$}{*}main\+\_\+menu)
 \begin{DoxyCompactList}\small\item\em Frees the memory associated with the \doxylink{structMainMenu}{Main\+Menu} instance. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{button_8h_ae2d5c50fae96a83cc4f5974af78e6943}{Button\+Type}} \mbox{\hyperlink{main__menu_8h_acb53be3fedad092244f8fa6f81cec130}{main\+\_\+menu\+\_\+get\+\_\+button}} (\mbox{\hyperlink{structMainMenu}{Main\+Menu}} \texorpdfstring{$\ast$}{*}main\+\_\+menu)
 \begin{DoxyCompactList}\small\item\em Gets the currently selected button in the main menu. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{main__menu_8h_a292a1b4e1e42d4dfebe787a0f339bb3e}{main\+\_\+menu\+\_\+change\+\_\+button}} (\mbox{\hyperlink{structMainMenu}{Main\+Menu}} \texorpdfstring{$\ast$}{*}main\+\_\+menu)
+int \mbox{\hyperlink{main__menu_8h_ad2a91515956a5e48c1494400a73c8f4a}{main\+\_\+menu\+\_\+change\+\_\+button}} (\mbox{\hyperlink{structMainMenu}{Main\+Menu}} \texorpdfstring{$\ast$}{*}main\+\_\+menu)
 \begin{DoxyCompactList}\small\item\em Cycles to the next selectable button in the main menu. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{button_8h_ae2d5c50fae96a83cc4f5974af78e6943}{Button\+Type}} \mbox{\hyperlink{main__menu_8h_aba5cf24b06ba495bd43b5cfcc152076d}{main\+\_\+menu\+\_\+click\+\_\+handler}} (\mbox{\hyperlink{structMainMenu}{Main\+Menu}} \texorpdfstring{$\ast$}{*}main\+\_\+menu, uint16\+\_\+t x, uint16\+\_\+t y)
 \begin{DoxyCompactList}\small\item\em Handles a mouse click and determines if a button was clicked. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{main__menu_8h_a6d4ded31bed4d338653f7a8a9d76118e}{draw\+\_\+main\+\_\+menu}} (\mbox{\hyperlink{structMainMenu}{Main\+Menu}} \texorpdfstring{$\ast$}{*}main\+\_\+menu, uint8\+\_\+t \texorpdfstring{$\ast$}{*}frame\+\_\+buffer)
+int \mbox{\hyperlink{main__menu_8h_a613de1d4c66e05f0fabdc3476b235414}{draw\+\_\+main\+\_\+menu}} (\mbox{\hyperlink{structMainMenu}{Main\+Menu}} \texorpdfstring{$\ast$}{*}main\+\_\+menu, uint8\+\_\+t \texorpdfstring{$\ast$}{*}frame\+\_\+buffer)
 \begin{DoxyCompactList}\small\item\em Draws the main menu on the given frame buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
@@ -79,11 +79,11 @@ Creates and initializes a new \doxylink{structMainMenu}{Main\+Menu} instance.
 \begin{DoxyReturn}{Returns}
 Pointer to the created \doxylink{structMainMenu}{Main\+Menu} structure. 
 \end{DoxyReturn}
-\Hypertarget{main__menu_8h_a76108292c0d76b9087ecf85935cacf4d}\label{main__menu_8h_a76108292c0d76b9087ecf85935cacf4d} 
+\Hypertarget{main__menu_8h_af82ca3559e9f485d2f1093e7d8dee82c}\label{main__menu_8h_af82ca3559e9f485d2f1093e7d8dee82c} 
 \index{main\_menu.h@{main\_menu.h}!destroy\_main\_menu@{destroy\_main\_menu}}
 \index{destroy\_main\_menu@{destroy\_main\_menu}!main\_menu.h@{main\_menu.h}}
 \doxysubsubsection{\texorpdfstring{destroy\_main\_menu()}{destroy\_main\_menu()}}
-{\footnotesize\ttfamily void destroy\+\_\+main\+\_\+menu (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMainMenu}{Main\+Menu}} \texorpdfstring{$\ast$}{*}}]{main\+\_\+menu }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int destroy\+\_\+main\+\_\+menu (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMainMenu}{Main\+Menu}} \texorpdfstring{$\ast$}{*}}]{main\+\_\+menu }\end{DoxyParamCaption})}
 
 
 
@@ -94,11 +94,14 @@ Frees the memory associated with the \doxylink{structMainMenu}{Main\+Menu} insta
 {\em main\+\_\+menu} & Pointer to the \doxylink{structMainMenu}{Main\+Menu} structure to destroy. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{main__menu_8h_a6d4ded31bed4d338653f7a8a9d76118e}\label{main__menu_8h_a6d4ded31bed4d338653f7a8a9d76118e} 
+\begin{DoxyReturn}{Returns}
+0 for success, 1 for failure. 
+\end{DoxyReturn}
+\Hypertarget{main__menu_8h_a613de1d4c66e05f0fabdc3476b235414}\label{main__menu_8h_a613de1d4c66e05f0fabdc3476b235414} 
 \index{main\_menu.h@{main\_menu.h}!draw\_main\_menu@{draw\_main\_menu}}
 \index{draw\_main\_menu@{draw\_main\_menu}!main\_menu.h@{main\_menu.h}}
 \doxysubsubsection{\texorpdfstring{draw\_main\_menu()}{draw\_main\_menu()}}
-{\footnotesize\ttfamily void draw\+\_\+main\+\_\+menu (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMainMenu}{Main\+Menu}} \texorpdfstring{$\ast$}{*}}]{main\+\_\+menu,  }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{frame\+\_\+buffer }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int draw\+\_\+main\+\_\+menu (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMainMenu}{Main\+Menu}} \texorpdfstring{$\ast$}{*}}]{main\+\_\+menu,  }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{frame\+\_\+buffer }\end{DoxyParamCaption})}
 
 
 
@@ -111,11 +114,14 @@ Draws the main menu on the given frame buffer.
 {\em frame\+\_\+buffer} & Pointer to the frame buffer. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{main__menu_8h_a292a1b4e1e42d4dfebe787a0f339bb3e}\label{main__menu_8h_a292a1b4e1e42d4dfebe787a0f339bb3e} 
+\begin{DoxyReturn}{Returns}
+0 for success, 1 for failure. 
+\end{DoxyReturn}
+\Hypertarget{main__menu_8h_ad2a91515956a5e48c1494400a73c8f4a}\label{main__menu_8h_ad2a91515956a5e48c1494400a73c8f4a} 
 \index{main\_menu.h@{main\_menu.h}!main\_menu\_change\_button@{main\_menu\_change\_button}}
 \index{main\_menu\_change\_button@{main\_menu\_change\_button}!main\_menu.h@{main\_menu.h}}
 \doxysubsubsection{\texorpdfstring{main\_menu\_change\_button()}{main\_menu\_change\_button()}}
-{\footnotesize\ttfamily void main\+\_\+menu\+\_\+change\+\_\+button (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMainMenu}{Main\+Menu}} \texorpdfstring{$\ast$}{*}}]{main\+\_\+menu }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int main\+\_\+menu\+\_\+change\+\_\+button (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMainMenu}{Main\+Menu}} \texorpdfstring{$\ast$}{*}}]{main\+\_\+menu }\end{DoxyParamCaption})}
 
 
 
@@ -126,6 +132,9 @@ Cycles to the next selectable button in the main menu.
 {\em main\+\_\+menu} & Pointer to the \doxylink{structMainMenu}{Main\+Menu} structure. \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 for success, 1 for failure. 
+\end{DoxyReturn}
 \Hypertarget{main__menu_8h_aba5cf24b06ba495bd43b5cfcc152076d}\label{main__menu_8h_aba5cf24b06ba495bd43b5cfcc152076d} 
 \index{main\_menu.h@{main\_menu.h}!main\_menu\_click\_handler@{main\_menu\_click\_handler}}
 \index{main\_menu\_click\_handler@{main\_menu\_click\_handler}!main\_menu.h@{main\_menu.h}}

@@ -32,15 +32,15 @@ typedef struct \mbox{\hyperlink{structVictory}{Victory}} \mbox{\hyperlink{victor
 \item 
 \mbox{\hyperlink{structVictory}{Victory}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{victory_8h_a00189b35a54dd3a219fef71ce3312456}{create\+\_\+victory}} ()
 \begin{DoxyCompactList}\small\item\em Creates and initializes a new \doxylink{structVictory}{Victory} instance. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{victory_8h_aa02de4a6b1f433dd76864ac2328270c7}{destroy\+\_\+victory}} (\mbox{\hyperlink{structVictory}{Victory}} \texorpdfstring{$\ast$}{*}victory)
+int \mbox{\hyperlink{victory_8h_a089169e1cba126450ef9875e7b06173f}{destroy\+\_\+victory}} (\mbox{\hyperlink{structVictory}{Victory}} \texorpdfstring{$\ast$}{*}victory)
 \begin{DoxyCompactList}\small\item\em Frees the memory associated with the \doxylink{structVictory}{Victory} instance. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{button_8h_ae2d5c50fae96a83cc4f5974af78e6943}{Button\+Type}} \mbox{\hyperlink{victory_8h_aaef6a5bbf35c591d0369548d56361db5}{victory\+\_\+get\+\_\+button}} (\mbox{\hyperlink{structVictory}{Victory}} \texorpdfstring{$\ast$}{*}victory)
 \begin{DoxyCompactList}\small\item\em Gets the currently selected button in the victory menu. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{victory_8h_a7ba41967ae855d60f532bd3955e234d2}{victory\+\_\+change\+\_\+button}} (\mbox{\hyperlink{structVictory}{Victory}} \texorpdfstring{$\ast$}{*}victory)
+int \mbox{\hyperlink{victory_8h_a35667262c15522ffca4ca8cae5e25c31}{victory\+\_\+change\+\_\+button}} (\mbox{\hyperlink{structVictory}{Victory}} \texorpdfstring{$\ast$}{*}victory)
 \begin{DoxyCompactList}\small\item\em Cycles to the next selectable button in the victory menu. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{button_8h_ae2d5c50fae96a83cc4f5974af78e6943}{Button\+Type}} \mbox{\hyperlink{victory_8h_a3767cc50c09dd101fb3b71011ea85106}{victory\+\_\+click\+\_\+handler}} (\mbox{\hyperlink{structVictory}{Victory}} \texorpdfstring{$\ast$}{*}victory, uint16\+\_\+t x, uint16\+\_\+t y)
 \begin{DoxyCompactList}\small\item\em Handles a mouse click and determines if a button was clicked. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{victory_8h_a30f50901659a0928964275884ae3d0d7}{draw\+\_\+victory}} (\mbox{\hyperlink{structVictory}{Victory}} \texorpdfstring{$\ast$}{*}victory, uint8\+\_\+t \texorpdfstring{$\ast$}{*}frame\+\_\+buffer)
+int \mbox{\hyperlink{victory_8h_ac82ca88329fe90e7ae968f89bdc32005}{draw\+\_\+victory}} (\mbox{\hyperlink{structVictory}{Victory}} \texorpdfstring{$\ast$}{*}victory, uint8\+\_\+t \texorpdfstring{$\ast$}{*}frame\+\_\+buffer)
 \begin{DoxyCompactList}\small\item\em Draws the victory menu on the given frame buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
@@ -78,11 +78,11 @@ Creates and initializes a new \doxylink{structVictory}{Victory} instance.
 \begin{DoxyReturn}{Returns}
 Pointer to the created \doxylink{structVictory}{Victory} structure. 
 \end{DoxyReturn}
-\Hypertarget{victory_8h_aa02de4a6b1f433dd76864ac2328270c7}\label{victory_8h_aa02de4a6b1f433dd76864ac2328270c7} 
+\Hypertarget{victory_8h_a089169e1cba126450ef9875e7b06173f}\label{victory_8h_a089169e1cba126450ef9875e7b06173f} 
 \index{victory.h@{victory.h}!destroy\_victory@{destroy\_victory}}
 \index{destroy\_victory@{destroy\_victory}!victory.h@{victory.h}}
 \doxysubsubsection{\texorpdfstring{destroy\_victory()}{destroy\_victory()}}
-{\footnotesize\ttfamily void destroy\+\_\+victory (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structVictory}{Victory}} \texorpdfstring{$\ast$}{*}}]{victory }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int destroy\+\_\+victory (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structVictory}{Victory}} \texorpdfstring{$\ast$}{*}}]{victory }\end{DoxyParamCaption})}
 
 
 
@@ -93,11 +93,14 @@ Frees the memory associated with the \doxylink{structVictory}{Victory} instance.
 {\em victory} & Pointer to the \doxylink{structVictory}{Victory} structure to destroy. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{victory_8h_a30f50901659a0928964275884ae3d0d7}\label{victory_8h_a30f50901659a0928964275884ae3d0d7} 
+\begin{DoxyReturn}{Returns}
+0 for success, 1 for failure. 
+\end{DoxyReturn}
+\Hypertarget{victory_8h_ac82ca88329fe90e7ae968f89bdc32005}\label{victory_8h_ac82ca88329fe90e7ae968f89bdc32005} 
 \index{victory.h@{victory.h}!draw\_victory@{draw\_victory}}
 \index{draw\_victory@{draw\_victory}!victory.h@{victory.h}}
 \doxysubsubsection{\texorpdfstring{draw\_victory()}{draw\_victory()}}
-{\footnotesize\ttfamily void draw\+\_\+victory (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structVictory}{Victory}} \texorpdfstring{$\ast$}{*}}]{victory,  }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{frame\+\_\+buffer }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int draw\+\_\+victory (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structVictory}{Victory}} \texorpdfstring{$\ast$}{*}}]{victory,  }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{frame\+\_\+buffer }\end{DoxyParamCaption})}
 
 
 
@@ -110,11 +113,14 @@ Draws the victory menu on the given frame buffer.
 {\em frame\+\_\+buffer} & Pointer to the frame buffer. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{victory_8h_a7ba41967ae855d60f532bd3955e234d2}\label{victory_8h_a7ba41967ae855d60f532bd3955e234d2} 
+\begin{DoxyReturn}{Returns}
+0 for success, 1 for failure. 
+\end{DoxyReturn}
+\Hypertarget{victory_8h_a35667262c15522ffca4ca8cae5e25c31}\label{victory_8h_a35667262c15522ffca4ca8cae5e25c31} 
 \index{victory.h@{victory.h}!victory\_change\_button@{victory\_change\_button}}
 \index{victory\_change\_button@{victory\_change\_button}!victory.h@{victory.h}}
 \doxysubsubsection{\texorpdfstring{victory\_change\_button()}{victory\_change\_button()}}
-{\footnotesize\ttfamily void victory\+\_\+change\+\_\+button (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structVictory}{Victory}} \texorpdfstring{$\ast$}{*}}]{victory }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int victory\+\_\+change\+\_\+button (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structVictory}{Victory}} \texorpdfstring{$\ast$}{*}}]{victory }\end{DoxyParamCaption})}
 
 
 
@@ -125,6 +131,9 @@ Cycles to the next selectable button in the victory menu.
 {\em victory} & Pointer to the \doxylink{structVictory}{Victory} structure. \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 for success, 1 for failure. 
+\end{DoxyReturn}
 \Hypertarget{victory_8h_a3767cc50c09dd101fb3b71011ea85106}\label{victory_8h_a3767cc50c09dd101fb3b71011ea85106} 
 \index{victory.h@{victory.h}!victory\_click\_handler@{victory\_click\_handler}}
 \index{victory\_click\_handler@{victory\_click\_handler}!victory.h@{victory.h}}

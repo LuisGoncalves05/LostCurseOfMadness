@@ -33,15 +33,15 @@ typedef struct \mbox{\hyperlink{structGameOver}{Game\+Over}} \mbox{\hyperlink{ga
 \item 
 \mbox{\hyperlink{structGameOver}{Game\+Over}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{game__over_8h_a39519e291a04b6e4a139863076934c24}{create\+\_\+game\+\_\+over}} ()
 \begin{DoxyCompactList}\small\item\em Creates and initializes a new \doxylink{structGameOver}{Game\+Over} instance. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{game__over_8h_ad219eb49d3a49c46606bfb35069b66ce}{destroy\+\_\+game\+\_\+over}} (\mbox{\hyperlink{structGameOver}{Game\+Over}} \texorpdfstring{$\ast$}{*}game\+\_\+over)
+int \mbox{\hyperlink{game__over_8h_a25a77822f9f2fa4315da355ecf6397f5}{destroy\+\_\+game\+\_\+over}} (\mbox{\hyperlink{structGameOver}{Game\+Over}} \texorpdfstring{$\ast$}{*}game\+\_\+over)
 \begin{DoxyCompactList}\small\item\em Frees the memory associated with the \doxylink{structGameOver}{Game\+Over} instance. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{button_8h_ae2d5c50fae96a83cc4f5974af78e6943}{Button\+Type}} \mbox{\hyperlink{game__over_8h_a88988718d51865e3b4076d9998d37f70}{game\+\_\+over\+\_\+get\+\_\+button}} (\mbox{\hyperlink{structGameOver}{Game\+Over}} \texorpdfstring{$\ast$}{*}game\+\_\+over)
 \begin{DoxyCompactList}\small\item\em Gets the currently selected button in the game over menu. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{game__over_8h_a73ad500e6399d93a106367a242ad777a}{game\+\_\+over\+\_\+change\+\_\+button}} (\mbox{\hyperlink{structGameOver}{Game\+Over}} \texorpdfstring{$\ast$}{*}game\+\_\+over)
+int \mbox{\hyperlink{game__over_8h_ad61d8fc7790832c5ccfe7e9b611744d3}{game\+\_\+over\+\_\+change\+\_\+button}} (\mbox{\hyperlink{structGameOver}{Game\+Over}} \texorpdfstring{$\ast$}{*}game\+\_\+over)
 \begin{DoxyCompactList}\small\item\em Cycles to the next selectable button in the game over menu. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{button_8h_ae2d5c50fae96a83cc4f5974af78e6943}{Button\+Type}} \mbox{\hyperlink{game__over_8h_af88c58ad9d2726b540489a7cb0502ae4}{game\+\_\+over\+\_\+click\+\_\+handler}} (\mbox{\hyperlink{structGameOver}{Game\+Over}} \texorpdfstring{$\ast$}{*}game\+\_\+over, uint16\+\_\+t x, uint16\+\_\+t y)
 \begin{DoxyCompactList}\small\item\em Handles a mouse click and determines if a button was clicked. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{game__over_8h_a1ebaae6c79f3bb086139ab173c6194a8}{draw\+\_\+game\+\_\+over}} (\mbox{\hyperlink{structGameOver}{Game\+Over}} \texorpdfstring{$\ast$}{*}game\+\_\+over, uint8\+\_\+t \texorpdfstring{$\ast$}{*}frame\+\_\+buffer)
+int \mbox{\hyperlink{game__over_8h_ab22c93e87b0fc8d1b76194a7050aadbf}{draw\+\_\+game\+\_\+over}} (\mbox{\hyperlink{structGameOver}{Game\+Over}} \texorpdfstring{$\ast$}{*}game\+\_\+over, uint8\+\_\+t \texorpdfstring{$\ast$}{*}frame\+\_\+buffer)
 \begin{DoxyCompactList}\small\item\em Draws the game over menu on the given frame buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
@@ -79,11 +79,11 @@ Creates and initializes a new \doxylink{structGameOver}{Game\+Over} instance.
 \begin{DoxyReturn}{Returns}
 Pointer to the created \doxylink{structGameOver}{Game\+Over} structure. 
 \end{DoxyReturn}
-\Hypertarget{game__over_8h_ad219eb49d3a49c46606bfb35069b66ce}\label{game__over_8h_ad219eb49d3a49c46606bfb35069b66ce} 
+\Hypertarget{game__over_8h_a25a77822f9f2fa4315da355ecf6397f5}\label{game__over_8h_a25a77822f9f2fa4315da355ecf6397f5} 
 \index{game\_over.h@{game\_over.h}!destroy\_game\_over@{destroy\_game\_over}}
 \index{destroy\_game\_over@{destroy\_game\_over}!game\_over.h@{game\_over.h}}
 \doxysubsubsection{\texorpdfstring{destroy\_game\_over()}{destroy\_game\_over()}}
-{\footnotesize\ttfamily void destroy\+\_\+game\+\_\+over (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGameOver}{Game\+Over}} \texorpdfstring{$\ast$}{*}}]{game\+\_\+over }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int destroy\+\_\+game\+\_\+over (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGameOver}{Game\+Over}} \texorpdfstring{$\ast$}{*}}]{game\+\_\+over }\end{DoxyParamCaption})}
 
 
 
@@ -94,11 +94,14 @@ Frees the memory associated with the \doxylink{structGameOver}{Game\+Over} insta
 {\em game\+\_\+over} & Pointer to the \doxylink{structGameOver}{Game\+Over} structure to destroy. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{game__over_8h_a1ebaae6c79f3bb086139ab173c6194a8}\label{game__over_8h_a1ebaae6c79f3bb086139ab173c6194a8} 
+\begin{DoxyReturn}{Returns}
+0 for success, 1 for failure. 
+\end{DoxyReturn}
+\Hypertarget{game__over_8h_ab22c93e87b0fc8d1b76194a7050aadbf}\label{game__over_8h_ab22c93e87b0fc8d1b76194a7050aadbf} 
 \index{game\_over.h@{game\_over.h}!draw\_game\_over@{draw\_game\_over}}
 \index{draw\_game\_over@{draw\_game\_over}!game\_over.h@{game\_over.h}}
 \doxysubsubsection{\texorpdfstring{draw\_game\_over()}{draw\_game\_over()}}
-{\footnotesize\ttfamily void draw\+\_\+game\+\_\+over (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGameOver}{Game\+Over}} \texorpdfstring{$\ast$}{*}}]{game\+\_\+over,  }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{frame\+\_\+buffer }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int draw\+\_\+game\+\_\+over (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGameOver}{Game\+Over}} \texorpdfstring{$\ast$}{*}}]{game\+\_\+over,  }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{frame\+\_\+buffer }\end{DoxyParamCaption})}
 
 
 
@@ -111,11 +114,14 @@ Draws the game over menu on the given frame buffer.
 {\em frame\+\_\+buffer} & Pointer to the frame buffer. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{game__over_8h_a73ad500e6399d93a106367a242ad777a}\label{game__over_8h_a73ad500e6399d93a106367a242ad777a} 
+\begin{DoxyReturn}{Returns}
+0 for success, 1 for failure. 
+\end{DoxyReturn}
+\Hypertarget{game__over_8h_ad61d8fc7790832c5ccfe7e9b611744d3}\label{game__over_8h_ad61d8fc7790832c5ccfe7e9b611744d3} 
 \index{game\_over.h@{game\_over.h}!game\_over\_change\_button@{game\_over\_change\_button}}
 \index{game\_over\_change\_button@{game\_over\_change\_button}!game\_over.h@{game\_over.h}}
 \doxysubsubsection{\texorpdfstring{game\_over\_change\_button()}{game\_over\_change\_button()}}
-{\footnotesize\ttfamily void game\+\_\+over\+\_\+change\+\_\+button (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGameOver}{Game\+Over}} \texorpdfstring{$\ast$}{*}}]{game\+\_\+over }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int game\+\_\+over\+\_\+change\+\_\+button (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGameOver}{Game\+Over}} \texorpdfstring{$\ast$}{*}}]{game\+\_\+over }\end{DoxyParamCaption})}
 
 
 
@@ -126,6 +132,9 @@ Cycles to the next selectable button in the game over menu.
 {\em game\+\_\+over} & Pointer to the \doxylink{structGameOver}{Game\+Over} structure. \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 for success, 1 for failure. 
+\end{DoxyReturn}
 \Hypertarget{game__over_8h_af88c58ad9d2726b540489a7cb0502ae4}\label{game__over_8h_af88c58ad9d2726b540489a7cb0502ae4} 
 \index{game\_over.h@{game\_over.h}!game\_over\_click\_handler@{game\_over\_click\_handler}}
 \index{game\_over\_click\_handler@{game\_over\_click\_handler}!game\_over.h@{game\_over.h}}

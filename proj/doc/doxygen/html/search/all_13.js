@@ -23,7 +23,7 @@ var searchData=
   ['victory_2ec_20',['victory.c',['../victory_8c.html',1,'']]],
   ['victory_2eh_21',['victory.h',['../victory_8h.html',1,'']]],
   ['victory_5fbutton_5fstart_5fy_22',['VICTORY_BUTTON_START_Y',['../button_8h.html#a70a1cd20aa94610a91468ca8867659f9',1,'button.h']]],
-  ['victory_5fchange_5fbutton_23',['victory_change_button',['../victory_8c.html#a7ba41967ae855d60f532bd3955e234d2',1,'victory_change_button(Victory *victory):&#160;victory.c'],['../victory_8h.html#a7ba41967ae855d60f532bd3955e234d2',1,'victory_change_button(Victory *victory):&#160;victory.c']]],
+  ['victory_5fchange_5fbutton_23',['victory_change_button',['../victory_8c.html#a35667262c15522ffca4ca8cae5e25c31',1,'victory_change_button(Victory *victory):&#160;victory.c'],['../victory_8h.html#a35667262c15522ffca4ca8cae5e25c31',1,'victory_change_button(Victory *victory):&#160;victory.c']]],
   ['victory_5fclick_5fhandler_24',['victory_click_handler',['../victory_8c.html#a3767cc50c09dd101fb3b71011ea85106',1,'victory_click_handler(Victory *victory, uint16_t x, uint16_t y):&#160;victory.c'],['../victory_8h.html#a3767cc50c09dd101fb3b71011ea85106',1,'victory_click_handler(Victory *victory, uint16_t x, uint16_t y):&#160;victory.c']]],
   ['victory_5fget_5fbutton_25',['victory_get_button',['../victory_8c.html#aaef6a5bbf35c591d0369548d56361db5',1,'victory_get_button(Victory *victory):&#160;victory.c'],['../victory_8h.html#aaef6a5bbf35c591d0369548d56361db5',1,'victory_get_button(Victory *victory):&#160;victory.c']]],
   ['video_5fmode_26',['VIDEO_MODE',['../config_8h.html#a3c5cde2577e877adb5f9827014079dde',1,'config.h']]]

@@ -27,7 +27,7 @@ struct \mbox{\hyperlink{structSprite}{Sprite}}
 \item 
 \mbox{\hyperlink{structSprite}{Sprite}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{sprite_8h_a1b2b4290b767101a91f399d9cea37da4}{create\+\_\+sprite}} (xpm\+\_\+map\+\_\+t xpm, int16\+\_\+t x, int16\+\_\+t y, double xspeed, double yspeed)
 \begin{DoxyCompactList}\small\item\em Creates a new sprite with the given XPM image, position, and speed. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{sprite_8h_af16c6befaac9ffb673b9e3c798d542ed}{destroy\+\_\+sprite}} (\mbox{\hyperlink{structSprite}{Sprite}} \texorpdfstring{$\ast$}{*}sp)
+int \mbox{\hyperlink{sprite_8h_ae10de51e6ec23c1eb987551e7ec4a0e9}{destroy\+\_\+sprite}} (\mbox{\hyperlink{structSprite}{Sprite}} \texorpdfstring{$\ast$}{*}sp)
 \begin{DoxyCompactList}\small\item\em Frees the memory associated with the sprite. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{sprite_8h_a19fc6a20e805ce39e63df0f0ec93e6eb}{draw\+\_\+sprite}} (\mbox{\hyperlink{structSprite}{Sprite}} \texorpdfstring{$\ast$}{*}sprite, uint8\+\_\+t \texorpdfstring{$\ast$}{*}frame\+\_\+buffer)
 \begin{DoxyCompactList}\small\item\em Draws the \doxylink{structSprite}{Sprite} on the given frame buffer. \end{DoxyCompactList}\item 
@@ -71,11 +71,11 @@ Does not draw the sprite on the screen.
 \begin{DoxyReturn}{Returns}
 Pointer to the created \doxylink{structSprite}{Sprite}, or NULL on failure. 
 \end{DoxyReturn}
-\Hypertarget{sprite_8h_af16c6befaac9ffb673b9e3c798d542ed}\label{sprite_8h_af16c6befaac9ffb673b9e3c798d542ed} 
+\Hypertarget{sprite_8h_ae10de51e6ec23c1eb987551e7ec4a0e9}\label{sprite_8h_ae10de51e6ec23c1eb987551e7ec4a0e9} 
 \index{sprite.h@{sprite.h}!destroy\_sprite@{destroy\_sprite}}
 \index{destroy\_sprite@{destroy\_sprite}!sprite.h@{sprite.h}}
 \doxysubsubsection{\texorpdfstring{destroy\_sprite()}{destroy\_sprite()}}
-{\footnotesize\ttfamily void destroy\+\_\+sprite (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structSprite}{Sprite}} \texorpdfstring{$\ast$}{*}}]{sp }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int destroy\+\_\+sprite (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structSprite}{Sprite}} \texorpdfstring{$\ast$}{*}}]{sp }\end{DoxyParamCaption})}
 
 
 
@@ -86,6 +86,9 @@ Frees the memory associated with the sprite.
 {\em sp} & Pointer to the \doxylink{structSprite}{Sprite} structure to destroy. \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, 1 on failure. 
+\end{DoxyReturn}
 \Hypertarget{sprite_8h_a19fc6a20e805ce39e63df0f0ec93e6eb}\label{sprite_8h_a19fc6a20e805ce39e63df0f0ec93e6eb} 
 \index{sprite.h@{sprite.h}!draw\_sprite@{draw\_sprite}}
 \index{draw\_sprite@{draw\_sprite}!sprite.h@{sprite.h}}
@@ -104,7 +107,7 @@ Draws the \doxylink{structSprite}{Sprite} on the given frame buffer.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-1 on success, 0 on failure. 
+0 on success, 1 on failure. 
 \end{DoxyReturn}
 \Hypertarget{sprite_8h_abc42c36ae1b9e1f82ad0d22e845910ce}\label{sprite_8h_abc42c36ae1b9e1f82ad0d22e845910ce} 
 \index{sprite.h@{sprite.h}!draw\_transparent\_sprite@{draw\_transparent\_sprite}}
@@ -124,7 +127,7 @@ Draws a transparent \doxylink{structSprite}{Sprite} on the given frame buffer, o
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-1 on success, 0 on failure. 
+0 on success, 1 on failure. 
 \end{DoxyReturn}
 
 

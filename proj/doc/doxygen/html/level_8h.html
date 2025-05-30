@@ -199,9 +199,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a01dee95d6048a5125423ba13842e3b48" id="r_a01dee95d6048a5125423ba13842e3b48"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structLevel.html">Level</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="level_8h.html#a01dee95d6048a5125423ba13842e3b48">create_level</a> (uint8_t number)</td></tr>
 <tr class="memdesc:a01dee95d6048a5125423ba13842e3b48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new level instance with a specified level number.  <br /></td></tr>
 <tr class="separator:a01dee95d6048a5125423ba13842e3b48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a775008f1727551eff8cd700a71eff60f" id="r_a775008f1727551eff8cd700a71eff60f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="level_8h.html#a775008f1727551eff8cd700a71eff60f">destroy_level</a> (<a class="el" href="structLevel.html">Level</a> *level)</td></tr>
-<tr class="memdesc:a775008f1727551eff8cd700a71eff60f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees the memory associated with the level.  <br /></td></tr>
-<tr class="separator:a775008f1727551eff8cd700a71eff60f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac67336c6e9d71c19eb4628bed09d7718" id="r_ac67336c6e9d71c19eb4628bed09d7718"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="level_8h.html#ac67336c6e9d71c19eb4628bed09d7718">destroy_level</a> (<a class="el" href="structLevel.html">Level</a> *level)</td></tr>
+<tr class="memdesc:ac67336c6e9d71c19eb4628bed09d7718"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees the memory associated with the level.  <br /></td></tr>
+<tr class="separator:ac67336c6e9d71c19eb4628bed09d7718"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7ee5c0141e39cfdc8dcaf72f9fdf887" id="r_ad7ee5c0141e39cfdc8dcaf72f9fdf887"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structMaze.html">Maze</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="level_8h.html#ad7ee5c0141e39cfdc8dcaf72f9fdf887">get_maze</a> (<a class="el" href="structLevel.html">Level</a> *level)</td></tr>
 <tr class="memdesc:ad7ee5c0141e39cfdc8dcaf72f9fdf887"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the <a class="el" href="structMaze.html" title="Represents a single Maze instance.">Maze</a> associated with the given level.  <br /></td></tr>
 <tr class="separator:ad7ee5c0141e39cfdc8dcaf72f9fdf887"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -217,15 +217,15 @@ Functions</h2></td></tr>
 <tr class="memitem:a4e8e869877233b57ca5111380c5d867c" id="r_a4e8e869877233b57ca5111380c5d867c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="player_8h.html#a3c730f37b1b3a893159bada67637fdb1">PlayerState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="level_8h.html#a4e8e869877233b57ca5111380c5d867c">level_get_player_state</a> (<a class="el" href="structLevel.html">Level</a> *level)</td></tr>
 <tr class="memdesc:a4e8e869877233b57ca5111380c5d867c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the state of the level's player.  <br /></td></tr>
 <tr class="separator:a4e8e869877233b57ca5111380c5d867c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7dec214a687e9bd25cad4d46ab0a89a9" id="r_a7dec214a687e9bd25cad4d46ab0a89a9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="level_8h.html#a7dec214a687e9bd25cad4d46ab0a89a9">level_update_delta</a> (<a class="el" href="structLevel.html">Level</a> *level, double mouse_x, double mouse_y)</td></tr>
-<tr class="memdesc:a7dec214a687e9bd25cad4d46ab0a89a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the player's aim direction based on mouse coordinates.  <br /></td></tr>
-<tr class="separator:a7dec214a687e9bd25cad4d46ab0a89a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a27c88d67c489661082af420e3085bcbd" id="r_a27c88d67c489661082af420e3085bcbd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="level_8h.html#a27c88d67c489661082af420e3085bcbd">level_update_position</a> (<a class="el" href="structLevel.html">Level</a> *level, uint8_t <a class="el" href="keyboard_8c.html#af4aead9dfdc0d2f7e93662387a21e0bc">scan_code</a>)</td></tr>
-<tr class="memdesc:a27c88d67c489661082af420e3085bcbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes keyboard input to move the player.  <br /></td></tr>
-<tr class="separator:a27c88d67c489661082af420e3085bcbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade2ac5e1cbc5ecff0084b0593714d7e1" id="r_ade2ac5e1cbc5ecff0084b0593714d7e1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="level_8h.html#ade2ac5e1cbc5ecff0084b0593714d7e1">level_shoot</a> (<a class="el" href="structLevel.html">Level</a> *level)</td></tr>
-<tr class="memdesc:ade2ac5e1cbc5ecff0084b0593714d7e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Triggers a projectile from the player's position and direction.  <br /></td></tr>
-<tr class="separator:ade2ac5e1cbc5ecff0084b0593714d7e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5cb751559837a88787532e5a4defed00" id="r_a5cb751559837a88787532e5a4defed00"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="level_8h.html#a5cb751559837a88787532e5a4defed00">level_update_delta</a> (<a class="el" href="structLevel.html">Level</a> *level, double mouse_x, double mouse_y)</td></tr>
+<tr class="memdesc:a5cb751559837a88787532e5a4defed00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the player's aim direction based on mouse coordinates.  <br /></td></tr>
+<tr class="separator:a5cb751559837a88787532e5a4defed00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5aa99b1f3cc4e833e5116ca83dd47105" id="r_a5aa99b1f3cc4e833e5116ca83dd47105"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="level_8h.html#a5aa99b1f3cc4e833e5116ca83dd47105">level_update_position</a> (<a class="el" href="structLevel.html">Level</a> *level, uint8_t <a class="el" href="keyboard_8c.html#af4aead9dfdc0d2f7e93662387a21e0bc">scan_code</a>)</td></tr>
+<tr class="memdesc:a5aa99b1f3cc4e833e5116ca83dd47105"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes keyboard input to move the player.  <br /></td></tr>
+<tr class="separator:a5aa99b1f3cc4e833e5116ca83dd47105"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb05b31d3822881488e2f926672d6028" id="r_acb05b31d3822881488e2f926672d6028"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="level_8h.html#acb05b31d3822881488e2f926672d6028">level_shoot</a> (<a class="el" href="structLevel.html">Level</a> *level)</td></tr>
+<tr class="memdesc:acb05b31d3822881488e2f926672d6028"><td class="mdescLeft">&#160;</td><td class="mdescRight">Triggers a projectile from the player's position and direction.  <br /></td></tr>
+<tr class="separator:acb05b31d3822881488e2f926672d6028"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a58f57d051cb085d13754d9903ee0925c" id="r_a58f57d051cb085d13754d9903ee0925c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="level_8h.html#a58f57d051cb085d13754d9903ee0925c">draw_level</a> (<a class="el" href="structLevel.html">Level</a> *level, struct <a class="el" href="mouse_8c.html#ab234504ae156fa5b250e34cbb65a7807">packet</a> <a class="el" href="main_8c.html#a26e83eca70c2b9169fbbb0eac7e32e32">pp</a>)</td></tr>
 <tr class="memdesc:a58f57d051cb085d13754d9903ee0925c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renders the entire level state including player, mobs, maze, and bullets.  <br /></td></tr>
 <tr class="separator:a58f57d051cb085d13754d9903ee0925c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -307,14 +307,14 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a775008f1727551eff8cd700a71eff60f" name="a775008f1727551eff8cd700a71eff60f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a775008f1727551eff8cd700a71eff60f">&#9670;&#160;</a></span>destroy_level()</h2>
+<a id="ac67336c6e9d71c19eb4628bed09d7718" name="ac67336c6e9d71c19eb4628bed09d7718"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac67336c6e9d71c19eb4628bed09d7718">&#9670;&#160;</a></span>destroy_level()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void destroy_level </td>
+          <td class="memname">int destroy_level </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structLevel.html">Level</a> *&#160;</td>
           <td class="paramname"><em>level</em></td><td>)</td>
@@ -330,6 +330,7 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, 1 on failure. </dd></dl>
 
 </div>
 </div>
@@ -506,14 +507,14 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="ade2ac5e1cbc5ecff0084b0593714d7e1" name="ade2ac5e1cbc5ecff0084b0593714d7e1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ade2ac5e1cbc5ecff0084b0593714d7e1">&#9670;&#160;</a></span>level_shoot()</h2>
+<a id="acb05b31d3822881488e2f926672d6028" name="acb05b31d3822881488e2f926672d6028"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb05b31d3822881488e2f926672d6028">&#9670;&#160;</a></span>level_shoot()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void level_shoot </td>
+          <td class="memname">int level_shoot </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structLevel.html">Level</a> *&#160;</td>
           <td class="paramname"><em>level</em></td><td>)</td>
@@ -529,17 +530,18 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, 1 on failure. </dd></dl>
 
 </div>
 </div>
-<a id="a7dec214a687e9bd25cad4d46ab0a89a9" name="a7dec214a687e9bd25cad4d46ab0a89a9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7dec214a687e9bd25cad4d46ab0a89a9">&#9670;&#160;</a></span>level_update_delta()</h2>
+<a id="a5cb751559837a88787532e5a4defed00" name="a5cb751559837a88787532e5a4defed00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5cb751559837a88787532e5a4defed00">&#9670;&#160;</a></span>level_update_delta()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void level_update_delta </td>
+          <td class="memname">int level_update_delta </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structLevel.html">Level</a> *&#160;</td>
           <td class="paramname"><em>level</em>, </td>
@@ -573,17 +575,18 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, 1 on failure. </dd></dl>
 
 </div>
 </div>
-<a id="a27c88d67c489661082af420e3085bcbd" name="a27c88d67c489661082af420e3085bcbd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a27c88d67c489661082af420e3085bcbd">&#9670;&#160;</a></span>level_update_position()</h2>
+<a id="a5aa99b1f3cc4e833e5116ca83dd47105" name="a5aa99b1f3cc4e833e5116ca83dd47105"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5aa99b1f3cc4e833e5116ca83dd47105">&#9670;&#160;</a></span>level_update_position()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void level_update_position </td>
+          <td class="memname">int level_update_position </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structLevel.html">Level</a> *&#160;</td>
           <td class="paramname"><em>level</em>, </td>
@@ -610,6 +613,7 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, 1 on failure. </dd></dl>
 
 </div>
 </div>
