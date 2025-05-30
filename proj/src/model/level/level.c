@@ -9,26 +9,30 @@ struct Level {
     double fov_angle;
     Mob **mobs;
     Bullet *bullets[MAX_BULLETS];
-    int bullet_count;
+    uint8_t bullet_count;
 };
 
 /* Create and destroy section */
 
 Level *create_level(uint8_t number) {
-    Level *level = (Level *) malloc(sizeof(Level));
-    if (!level)
+    Level *level = malloc(sizeof(Level));
+    if (level == NULL) {
+        printf("create_level: NULL pointer providede\n");
         return NULL;
+    }
 
     level->number = number;
     uint8_t mob_count = MOB_MULTIPLIER * number;
     level->maze = create_maze(4 * (number + 2), 3 * (number + 2), mob_count);
-    if (!level->maze) {
+    if (level->maze == NULL) {
+        printf("create_level: create_maze failed\n");
         free(level);
         return NULL;
     }
 
     level->player = create_player();
-    if (!level->player) {
+    if (level->player == NULL) {
+        printf("create_level: create_player failed\n");
         free(level->maze);
         free(level);
         return NULL;
@@ -37,7 +41,8 @@ Level *create_level(uint8_t number) {
     level->delta = 0;
     level->fov_angle = FOV_ANGLE;
     level->mobs = malloc(sizeof(Mob *) * mob_count);
-    if (!level->mobs) {
+    if (level->mobs == NULL) {
+        printf("create_level: malloc failed\n");
         free(level->maze);
         free(level->player);
         free(level);
@@ -45,7 +50,8 @@ Level *create_level(uint8_t number) {
     }
 
     Point **mob_positions = get_mob_positions(level->maze);
-    if (!mob_positions) {
+    if (mob_positions == NULL) {
+        printf("create_level: get_mob_positions failed\n");
         free(level->maze);
         free(level->player);
         free(level);
@@ -55,7 +61,8 @@ Level *create_level(uint8_t number) {
     for (int i = 0; i < mob_count; i++) {
         Point *position = mob_positions[i];
         level->mobs[i] = create_mob(position->x * CELL_SIZE, position->y * CELL_SIZE);
-        if (!level->mobs[i]) {
+        if (level->mobs[i] == NULL) {
+            printf("create_level: create_mob failed\n");
             for (int j = i - 1; j >= 0; j--) {
                 destroy_mob(level->mobs[j]);
                 free(level->maze);
@@ -66,81 +73,115 @@ Level *create_level(uint8_t number) {
         }
     }
 
-    for (int i = 0; i < MAX_BULLETS; i++)
+    for (int i = 0; i < MAX_BULLETS; i++) {
         level->bullets[i] = NULL;
+    }
     level->bullet_count = 0;
 
     return level;
 }
 
 void destroy_level(Level *level) {
-    if (level != NULL) {
-        destroy_player(level->player);
-        destroy_maze(level->maze);
-        for (int i = 0; i < get_mob_count(get_maze(level)); i++) {
-            destroy_mob(level->mobs[i]);
-        }
-        free(level);
+    if (level == NULL) {
+        printf("destroy_level: NULL pointer provided\n");
+        return;
     }
+
+    destroy_player(level->player);
+    destroy_maze(level->maze);
+    for (int i = 0; i < get_mob_count(get_maze(level)); i++) {
+        destroy_mob(level->mobs[i]);
+    }
+    free(level->mobs);
+    free(level);
 }
 
 /* Getter and setter section */
 
 Maze *get_maze(Level *level) {
-    if (!level)
+    if (level == NULL) {
+        printf("get_maze: NULL pointer provided\n");
         return NULL;
+    }
+
     return level->maze;
 }
 
 Player *get_player(Level *level) {
-    if (!level)
+    if (level == NULL) {
+        printf("get_player: NULL pointer provided\n");
         return NULL;
+    }
+
     return level->player;
 }
 
 double get_delta(Level *level) {
-    if (!level)
+    if (level == NULL) {
+        printf("get_delta: NULL pointer provided\n");
         return 0;
+    }
+
     return level->delta;
 }
 
 Mob **get_mobs(Level *level) {
-    if (!level)
+    if (level == NULL) {
+        printf("get_mobs: NULL pointer provided\n");
         return NULL;
+    }
+
     return level->mobs;
 }
 
 /* Statics section */
 
 static bool(check_mob_collisions)(Level *level) {
-    if (!level)
+    if (level == NULL){
+        printf("check_mob_collisions: NULL pointer provided\n");
         return false;
+    }
 
     uint8_t mob_count = get_mob_count(get_maze(level));
     Mob **mobs = get_mobs(level);
-    if (!mobs)
+    if (mobs == NULL) {
+        printf("check_mob_collisions: get_mobs failed\n");
         return false;
+    }
 
+    Sprite *player = player_get_sprite(get_player(level));
     for (int i = 0; i < mob_count; i++) {
-        Sprite *player = player_get_sprite(get_player(level));
-        if (check_sprite_collision(mob_get_sprite(mobs[i]), player))
+        if (player == NULL) {
+            printf("check_mob_collisions: player_get_sprite failed\n");
+            return false;
+        }
+        if (check_sprite_collision(mob_get_sprite(mobs[i]), player)) {
             return true;
+        }
     }
 
     return false;
 }
 
 static void update_bullet(Bullet *b, Level *level) {
-    if (!b || !level)
+    if (b == NULL || level == NULL) {
+        printf("update_bullet: NULL pointer provided\n");
         return;
+    }
 
-    if (!bullet_get_active(b))
+    if (!bullet_get_active(b)) {
+        printf("update_bullet: inactive bullet\n");
         return;
+    }
 
     Sprite *sprite = bullet_get_sprite(b);
+    if (sprite == NULL) {
+        printf("update_bullet: bullet_get_sprite failed\n");
+        return;
+    }
 
-    sprite->x += bullet_get_dx(b);
-    sprite->y += bullet_get_dy(b);
+    sprite->x += (int) round(bullet_get_xspeed(b));
+    sprite->y += (int) round(bullet_get_yspeed(b));
 
     if (sprite->x < 0 || sprite->x > x_res ||
         sprite->y < 0 || sprite->y > y_res) {
@@ -152,10 +193,16 @@ static void update_bullet(Bullet *b, Level *level) {
     }
 
     Mob **mobs = get_mobs(level);
+    if (mobs == NULL) {
+        printf("update_bullet: get_mobs failed\n");
+        return;
+    }
+    
     int mob_count = get_mob_count(get_maze(level));
     for (int i = 0; i < mob_count; i++) {
         Mob *mob = mobs[i];
-        if (check_sprite_collision(sprite, mob_get_sprite(mob))) {
+        Sprite *mob_sprite = mob_get_sprite(mob);
+        if (check_sprite_collision(sprite, mob_sprite)) {
             mob_set_health(mob, mob_get_health(mob) - 1);
             bullet_set_active(b, false);
             break;
@@ -164,15 +211,19 @@ static void update_bullet(Bullet *b, Level *level) {
 }
 
 static bool check_win(Sprite *sprite, Maze *maze) {
-    if (!sprite || !maze)
+    if (!sprite || maze == NULL) {
+        printf("check_win: NULL pointer provided\n");
         return false;
+    }
 
     return check_sprite_collision(sprite, get_key_sprite(maze));
 }
 
 static int player_update_position(Level *level) {
-    if (!level)
+    if (level == NULL) {
+        printf("player_update_position: NULL pointer provided\n");
         return 1;
+    }
 
     Player *player = level->player;
     Sprite *player_sprite = player_get_sprite(player);
@@ -200,8 +251,10 @@ static int player_update_position(Level *level) {
 }
 
 static void level_update_all_bullets(Level *level) {
-    if (!level)
+    if (level == NULL) {
+        printf("level_update_all_bullets: NULL pointer provided\n");
         return;
+    }
 
     for (int i = 0; i < level->bullet_count;) {
         update_bullet(level->bullets[i], level);
@@ -209,6 +262,7 @@ static void level_update_all_bullets(Level *level) {
             destroy_bullet(level->bullets[i]);
             level->bullet_count--;
             level->bullets[i] = level->bullets[level->bullet_count];
+            level->bullets[level->bullet_count] = NULL;
         } else {
             i++;
         }
@@ -216,8 +270,10 @@ static void level_update_all_bullets(Level *level) {
 }
 
 static void level_update_all_mobs(Level *level) {
-    if (!level)
+    if (level == NULL) {
+        printf("level_update_all_mobs: NULL pointer provided\n");
         return;
+    }
 
     Mob **mobs = level->mobs;
     Maze *maze = level->maze;
@@ -248,20 +304,24 @@ static void level_update_all_mobs(Level *level) {
 }
 
 static int draw_mobs(Level *level) {
-    if (!level) {
+    if (level == NULL) {
+        printf("draw_mobs: NULL pointer provided\n");
         return 1;
     }
+
     Mob **mobs = get_mobs(level);
     uint8_t mob_count = get_mob_count(level->maze);
     for (int i = 0; i < mob_count; i++) {
         Mob *mob = mobs[i];
         draw_mob(mob, secondary_frame_buffer);
     }
+
     return 0;
 }
 
 static void draw_fov_cone(Level *level) {
-    if (!level) {
+    if (level == NULL) {
+        printf("draw_fov_cone: NULL pointer provided\n");
         return;
     }
     double delta = level->delta;
@@ -279,18 +339,23 @@ static void draw_fov_cone(Level *level) {
     double angle2 = delta + cone_half_angle;
 
     // Normalize to [0, 2pi)
-    while (angle1 < 0)
+    while (angle1 < 0) {
         angle1 += 2 * M_PI;
-    while (angle2 < 0)
+    }
+    while (angle2 < 0) {
         angle2 += 2 * M_PI;
-    while (angle1 >= 2 * M_PI)
+    }
+    while (angle1 >= 2 * M_PI) {
         angle1 -= 2 * M_PI;
-    while (angle2 >= 2 * M_PI)
+    }
+    while (angle2 >= 2 * M_PI) {
         angle2 -= 2 * M_PI;
+    }
 
     // Ensure angle1 <= angle2
-    if (angle2 < angle1)
+    if (angle2 < angle1) {
         angle2 += 2 * M_PI;
+    }
 
     // Candidate points
     double min_x = cx, max_x = cx;
@@ -307,13 +372,13 @@ static void draw_fov_cone(Level *level) {
     min_y = fmin(min_y, fmin(y1, y2));
     max_y = fmax(max_y, fmax(y1, y2));
 
-    // Directions to consider: 0, π/2, π, 3π/2
     double angles[] = {0, M_PI_2, M_PI, 3 * M_PI_2};
-    for (int i = 0; i < 4; ++i) {
+    for (int i = 0; i < 4; i++) {
         double a = angles[i];
         double a_check = a;
-        if (a_check < angle1)
+        if (a_check < angle1) {
             a_check += 2 * M_PI;
+        }
         if (a_check >= angle1 && a_check <= angle2) {
             double x = cx + cos(a) * fov_radius;
             double y = cy + sin(a) * fov_radius;
@@ -331,10 +396,18 @@ static void draw_fov_cone(Level *level) {
     max_y = fmax(max_y, cy + CLOSE_RADIUS);
 
     // Check screen bounds
-    int box_min_x = (int) fmax(0, floor(min_x));
-    int box_max_x = (int) fmin(x_res - 1, ceil(max_x));
-    int box_min_y = (int) fmax(0, floor(min_y));
-    int box_max_y = (int) fmin(y_res - 1, ceil(max_y));
+    int box_min_x = (int)(min_x);
+    if (box_min_x < 0) box_min_x = 0;
+
+    int box_max_x = (int)(max_x + 1);
+    if (box_max_x >= x_res) box_max_x = x_res - 1;
+
+    int box_min_y = (int)(min_y);
+    if (box_min_y < 0) box_min_y = 0;
+
+    int box_max_y = (int)(max_y + 1);
+    if (box_max_y >= y_res) box_max_y = y_res - 1;
+
 
     // Unit vector direction
     double dir_x = cos(delta);
@@ -368,7 +441,7 @@ static void draw_fov_cone(Level *level) {
 }
 
 static void draw_all_bullets(Level *level, uint8_t *frame_buffer) {
-    if (!level || !frame_buffer) {
+    if (level == NULL || frame_buffer == NULL) {
         return;
     }
 
@@ -383,7 +456,7 @@ static void draw_all_bullets(Level *level, uint8_t *frame_buffer) {
 /* Others section */
 
 void level_update_delta(Level *level, double mouse_x, double mouse_y) {
-    if (!level) {
+    if (level == NULL) {
         return;
     }
 
@@ -398,7 +471,7 @@ void level_update_delta(Level *level, double mouse_x, double mouse_y) {
 }
 
 void level_update_position(Level *level, uint8_t scan_code) {
-    if (!level)
+    if (level == NULL)
         return;
     player_update_speed(level->player, scan_code);
 }
@@ -420,13 +493,18 @@ void level_shoot(Level *level) {
     }
 
     double bullet_randomizer = ((rand() % BULLET_DEVIANCE) - BULLET_DEVIANCE / 2) * 2 * M_PI / 360.0;
-    level->bullets[level->bullet_count++] = create_bullet(draw_origin_x, draw_origin_y, level->delta + bullet_randomizer);
+    Bullet *bullet = create_bullet(draw_origin_x, draw_origin_y, level->delta + bullet_randomizer);
+    if (bullet == NULL) {
+        printf("level_shoot: create_bullet failed\n");
+        return;
+    }
+    level->bullets[level->bullet_count++] = bullet;
 }
 
 /* Draw section */
 
 int draw_level(Level *level, struct packet pp) {
-    if (!level) {
+    if (level == NULL) {
         return 1;
     }
 
