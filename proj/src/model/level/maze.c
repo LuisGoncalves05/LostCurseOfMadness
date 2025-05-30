@@ -12,6 +12,11 @@ struct Maze {
 /* Create and destroy section */
 
 static void(shuffle)(int *arr, int n) {
+    if (arr == NULL) {
+        printf("shuffle: NULL pointer provided\n");
+        return;
+    }
+
     for (int i = n - 1; i > 0; i--) {
         int j = rand() % (i + 1);
         int tmp = arr[i];
@@ -21,6 +26,11 @@ static void(shuffle)(int *arr, int n) {
 }
 
 static void(dfs)(Maze *maze, int x, int y) {
+    if (maze == NULL) {
+        printf("dfs: NULL pointer provided\n");
+        return;
+    }
+
     maze->cells[y][x] = EMPTY;
 
     int dx[] = {2, -2, 0, 0};
@@ -41,8 +51,10 @@ static void(dfs)(Maze *maze, int x, int y) {
 }
 
 static int(initialize_maze)(Maze *maze, uint8_t width, uint8_t height) {
-    if (maze == NULL)
+    if (maze == NULL) {
+        printf("dfs: NULL pointer provided\n");
         return 1;
+    }
 
     uint8_t w = width + (width % 2 == 0);
     uint8_t h = height + (height % 2 == 0);
@@ -51,22 +63,28 @@ static int(initialize_maze)(Maze *maze, uint8_t width, uint8_t height) {
     maze->height = h > y_res / CELL_SIZE ? y_res / CELL_SIZE : h;
 
     maze_entity **mz = (maze_entity **) malloc(maze->height * sizeof(maze_entity *));
-    if (mz == NULL)
+    if (mz == NULL) {
+        printf("initialize_maze: malloc failed\n");
         return 1;
+    }
 
     for (uint16_t i = 0; i < maze->height; i++) {
         mz[i] = (maze_entity *) malloc(maze->width * sizeof(maze_entity));
 
         if (mz[i] == NULL) {
+            printf("initialize_maze: malloc failed\n");
             for (int16_t j = i - 1; j >= 0; j--) {
                 free(mz[j]);
             }
             free(mz);
             return 1;
         }
-        for (int j = 0; j < maze->width; j++)
+
+        for (int j = 0; j < maze->width; j++) {
             mz[i][j] = WALL;
+        }
     }
+
     maze->cells = mz;
     dfs(maze, 1, 1);
     mz[maze->height - 2][maze->width - 2] = WIN;
@@ -75,7 +93,8 @@ static int(initialize_maze)(Maze *maze, uint8_t width, uint8_t height) {
 }
 
 static int(generate_mob_positions)(Maze *maze, uint8_t mob_count) {
-    if (!maze) {
+    if (maze == NULL) {
+        printf("generate_mob_positions: NULL pointer provided\n");
         return 1;
     }
 
@@ -96,8 +115,10 @@ static int(generate_mob_positions)(Maze *maze, uint8_t mob_count) {
 }
 
 static int(open_maze)(Maze *maze, uint8_t percentage) {
-    if (maze == NULL)
+    if (maze == NULL) {
+        printf("open_maze: NULL pointer provided\n");
         return 1;
+    }
 
     uint16_t wall_area = 2 * (maze->width / 2 + 1) * (maze->height / 2 + 1) - 1; // 2 times O - 1 (V + E on spanning tree on a graph that passes through every other position)
     uint16_t visited = 0;
@@ -121,7 +142,7 @@ static int(open_maze)(Maze *maze, uint8_t percentage) {
 Maze *(create_maze) (uint8_t width, uint8_t height, uint8_t mob_count) {
     Maze *maze = (Maze *) malloc(sizeof(Maze));
     if (maze == NULL) {
-        printf("create_maze: NULL pointer provided\n");
+        printf("create_maze: malloc failed\n");
         return NULL;
     }
 
@@ -153,17 +174,15 @@ Maze *(create_maze) (uint8_t width, uint8_t height, uint8_t mob_count) {
 }
 
 void destroy_maze(Maze *maze) {
-    if (!maze) {
-        printf("destroy_maze: NULL pointer provided");
+    if (maze == NULL) {
+        printf("destroy_maze: NULL pointer provided\n");
         return;
     }
-
-    if (maze->cells) {
-        for (int i = 0; i < maze->height; i++) {
-            free(maze->cells[i]);
-        }
-        free(maze->cells);
+    
+    for (int i = 0; i < maze->height; i++) {
+        free(maze->cells[i]);
     }
+    free(maze->cells);
 
     free(maze);
 }
@@ -171,42 +190,47 @@ void destroy_maze(Maze *maze) {
 /* Getter and setter section */
 
 uint8_t(get_width)(Maze *maze) {
-    if (!maze) {
-        printf("get_width: NULL pointer provided");
+    if (maze == NULL) {
+        printf("get_width: NULL pointer provided\n");
         return 0;
     }
+
     return maze->width;
 }
 
 uint8_t(get_height)(Maze *maze) {
-    if (!maze) {
-        printf("get_height: NULL pointer provided");
+    if (maze == NULL) {
+        printf("get_height: NULL pointer provided\n");
         return 0;
     }
+
     return maze->height;
 }
 
 uint8_t(get_mob_count)(Maze *maze) {
-    if (!maze) {
-        printf("get_mob_count: NULL pointer provided");
+    if (maze == NULL) {
+        printf("get_mob_count: NULL pointer provided\n");
         return 0;
     }
+
     return maze->mob_count;
 }
 
 void set_mob_count(Maze *maze, uint8_t mob_count) {
-    if (!maze) {
-        printf("set_mob_count: NULL pointer provided");
+    if (maze == NULL) {
+        printf("set_mob_count: NULL pointer provided\n");
         return;
     }
+
     maze->mob_count = mob_count;
 }
 
 Sprite *get_key_sprite(Maze *maze) {
-    if (!maze) {
-        printf("get_key_sprite: NULL pointer provided");
+    if (maze == NULL) {
+        printf("get_key_sprite: NULL pointer provided\n");
         return NULL;
     }
+
     return maze->key->sprite;
 }
 
@@ -215,15 +239,14 @@ Sprite *get_key_sprite(Maze *maze) {
 /* Others section */
 
 Point **(get_mob_positions) (Maze * maze) {
-    if (!maze) {
-        printf("get_mob_positions: NULL pointer provided");
+    if (maze == NULL) {
+        printf("get_mob_positions: NULL pointer provided\n");
         return NULL;
     }
 
     int point_no = 0;
     Point **points = malloc(sizeof(Point *) * maze->mob_count);
-
-    if (!points) {
+    if (points == NULL) {
         printf("get_mob_positions: malloc failed");
         return NULL;
     }
@@ -232,10 +255,14 @@ Point **(get_mob_positions) (Maze * maze) {
         for (int i = 0; i < maze->width; i++) {
             if (maze->cells[j][i] == MOB) {
                 Point *p = malloc(sizeof(Point));
-                 if (!p) {
+                if (p == NULL) {
                     printf("get_mob_positions: malloc failed");
+                    for (int k = 0; k < point_no; k++) {
+                        free(points[k]);
+                    }
                     return NULL;
                 }
+
                 p->x = i;
                 p->y = j;
                 points[point_no] = p;
@@ -257,8 +284,8 @@ bool(check_rectangle_collision)(int x1, int y1, int width1, int height1, int x2,
 }
 
 bool(check_sprite_collision)(Sprite *a, Sprite *b) {
-    if (!a || !b) {
-        printf("check_sprite_collision: NULL pointer provided");
+    if (a == NULL || b == NULL) {
+        printf("check_sprite_collision: NULL pointer provided\n");
         return false;
     }
 
@@ -266,7 +293,7 @@ bool(check_sprite_collision)(Sprite *a, Sprite *b) {
 }
 
 bool(check_wall_collision)(Maze *maze, Sprite *sprite) {
-    if (!maze || !sprite) {
+    if (maze == NULL || sprite == NULL) {
         printf("check_wall_collision: NULL pointer provided.\n");
         return false;
     }
@@ -294,7 +321,7 @@ bool(check_wall_collision)(Maze *maze, Sprite *sprite) {
 /* Draw section */
 
 int(draw_maze)(Maze *maze, uint8_t *frame_buffer) {
-    if (!maze || !frame_buffer) {
+    if (maze == NULL || frame_buffer == NULL) {
         printf("Error: Maze or frame buffer is NULL\n");
         return 1;
     }
@@ -328,7 +355,7 @@ int(draw_maze)(Maze *maze, uint8_t *frame_buffer) {
 }
 
 int draw_maze_outer(Maze *maze, uint8_t *frame_buffer) {
-    if (!maze || !frame_buffer) {
+    if (maze == NULL || frame_buffer == NULL) {
         printf("draw_maze_outer: NULL pointer provided\n");
         return 1;
     }
