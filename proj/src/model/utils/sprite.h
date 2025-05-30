@@ -39,8 +39,24 @@ Sprite *create_sprite(xpm_map_t xpm, int16_t x, int16_t y, double xspeed, double
  */
 void destroy_sprite(Sprite *sp);
 
+/**
+ * @brief Draws the Sprite on the given frame buffer.
+ *
+ * @param sprite Pointer to the AnimatedSprite structure to draw.
+ * @param frame_buffer Pointer to the frame buffer to draw the sprite on.
+ *
+ * @return 1 on success, 0 on failure.
+ */
 int draw_sprite(Sprite *sprite, uint8_t *frame_buffer);
 
-int(draw_transparent_sprite)(Sprite *sprite, uint8_t *frame_buffer);
+/**
+ * @brief Draws a transparent Sprite on the given frame buffer, only drawing non-transparent pixels.
+ *
+ * @param sprite Pointer to the Sprite structure to draw.
+ * @param frame_buffer Pointer to the frame buffer to draw the sprite on.
+ *
+ * @return 1 on success, 0 on failure.
+ */
+int draw_transparent_sprite(Sprite *sprite, uint8_t *frame_buffer);
 
 #endif /* SPRITE_H */

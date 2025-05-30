@@ -28,9 +28,9 @@ struct \mbox{\hyperlink{structSprite}{Sprite}}
 void \mbox{\hyperlink{sprite_8h_af16c6befaac9ffb673b9e3c798d542ed}{destroy\+\_\+sprite}} (\mbox{\hyperlink{structSprite}{Sprite}} \texorpdfstring{$\ast$}{*}sp)
 \begin{DoxyCompactList}\small\item\em Frees the memory associated with the sprite. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{sprite_8h_a19fc6a20e805ce39e63df0f0ec93e6eb}{draw\+\_\+sprite}} (\mbox{\hyperlink{structSprite}{Sprite}} \texorpdfstring{$\ast$}{*}sprite, uint8\+\_\+t \texorpdfstring{$\ast$}{*}frame\+\_\+buffer)
-\item 
-int() \mbox{\hyperlink{sprite_8h_aa6052f79c4aa16b533ec6037f0cebbe6}{draw\+\_\+transparent\+\_\+sprite}} (\mbox{\hyperlink{structSprite}{Sprite}} \texorpdfstring{$\ast$}{*}sprite, uint8\+\_\+t \texorpdfstring{$\ast$}{*}frame\+\_\+buffer)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Draws the \doxylink{structSprite}{Sprite} on the given frame buffer. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{sprite_8h_abc42c36ae1b9e1f82ad0d22e845910ce}{draw\+\_\+transparent\+\_\+sprite}} (\mbox{\hyperlink{structSprite}{Sprite}} \texorpdfstring{$\ast$}{*}sprite, uint8\+\_\+t \texorpdfstring{$\ast$}{*}frame\+\_\+buffer)
+\begin{DoxyCompactList}\small\item\em Draws a transparent \doxylink{structSprite}{Sprite} on the given frame buffer, only drawing non-\/transparent pixels. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
@@ -90,12 +90,40 @@ Frees the memory associated with the sprite.
 \doxysubsubsection{\texorpdfstring{draw\_sprite()}{draw\_sprite()}}
 {\footnotesize\ttfamily int draw\+\_\+sprite (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structSprite}{Sprite}} \texorpdfstring{$\ast$}{*}}]{sprite,  }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{frame\+\_\+buffer }\end{DoxyParamCaption})}
 
-\Hypertarget{sprite_8h_aa6052f79c4aa16b533ec6037f0cebbe6}\label{sprite_8h_aa6052f79c4aa16b533ec6037f0cebbe6} 
+
+
+Draws the \doxylink{structSprite}{Sprite} on the given frame buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sprite} & Pointer to the \doxylink{structAnimatedSprite}{Animated\+Sprite} structure to draw. \\
+\hline
+{\em frame\+\_\+buffer} & Pointer to the frame buffer to draw the sprite on.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 on success, 0 on failure. 
+\end{DoxyReturn}
+\Hypertarget{sprite_8h_abc42c36ae1b9e1f82ad0d22e845910ce}\label{sprite_8h_abc42c36ae1b9e1f82ad0d22e845910ce} 
 \index{sprite.h@{sprite.h}!draw\_transparent\_sprite@{draw\_transparent\_sprite}}
 \index{draw\_transparent\_sprite@{draw\_transparent\_sprite}!sprite.h@{sprite.h}}
 \doxysubsubsection{\texorpdfstring{draw\_transparent\_sprite()}{draw\_transparent\_sprite()}}
-{\footnotesize\ttfamily int() draw\+\_\+transparent\+\_\+sprite (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structSprite}{Sprite}} \texorpdfstring{$\ast$}{*}}]{sprite,  }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{frame\+\_\+buffer }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int draw\+\_\+transparent\+\_\+sprite (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structSprite}{Sprite}} \texorpdfstring{$\ast$}{*}}]{sprite,  }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{frame\+\_\+buffer }\end{DoxyParamCaption})}
 
+
+
+Draws a transparent \doxylink{structSprite}{Sprite} on the given frame buffer, only drawing non-\/transparent pixels. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sprite} & Pointer to the \doxylink{structSprite}{Sprite} structure to draw. \\
+\hline
+{\em frame\+\_\+buffer} & Pointer to the frame buffer to draw the sprite on.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 on success, 0 on failure. 
+\end{DoxyReturn}
 
 
 \doxysubsection{Variable Documentation}
