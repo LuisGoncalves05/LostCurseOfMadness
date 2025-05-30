@@ -56,22 +56,22 @@ GameOver *create_game_over() {
     return game_over;
 }
 
-void destroy_game_over(GameOver *game_over) {
+int destroy_game_over(GameOver *game_over) {
     if (game_over == NULL) {
         printf("destroy_game_over: NULL pointer provided\n");
-        return;
+        return 1;
     }
     destroy_sprite(game_over->title);
     if (destroy_button(game_over->menuButton)) {
         printf("destroy_game_over: destroy_button failed\n");
-        return;
+        return 1;
     }
     if (destroy_button(game_over->exitButton)) {
         printf("destroy_game_over: destroy_button failed\n");
-        return;
+        return 1;
     }
     free(game_over);
-    return;
+    return 0;
 }
 
 /* Getter and setter section */
@@ -93,10 +93,10 @@ ButtonType game_over_get_button(GameOver *game_over) {
 
 /* Others section */
 
-void game_over_change_button(GameOver *game_over) {
+int game_over_change_button(GameOver *game_over) {
     if (game_over == NULL) {
         printf("game_over_change_button: NULL pointer provided\n");
-        return;
+        return 1;
     }
 
     bool menu_selected = button_get_selected(game_over->menuButton);
@@ -108,6 +108,8 @@ void game_over_change_button(GameOver *game_over) {
         button_set_selected(game_over->menuButton, !menu_selected);
         button_set_selected(game_over->exitButton, !exit_selected);
     }
+
+    return 0;
 }
 
 ButtonType game_over_click_handler(GameOver *game_over, uint16_t x, uint16_t y) {
@@ -126,19 +128,21 @@ ButtonType game_over_click_handler(GameOver *game_over, uint16_t x, uint16_t y) 
 
 /* Draw section */
 
-void draw_game_over(GameOver *game_over, uint8_t *frame_buffer) {
+int draw_game_over(GameOver *game_over, uint8_t *frame_buffer) {
     if (game_over == NULL) {
         printf("draw_game_over: NULL pointer provided\n");
-        return;
+        return 1;
     }
 
     draw_sprite(game_over->title, frame_buffer);
     if (draw_button(game_over->menuButton, frame_buffer)) {
         printf("draw_game_over: draw_button (menuButton) failed\n");
-        return;
+        return 1;
     }
     if (draw_button(game_over->exitButton, frame_buffer)) {
         printf("draw_game_over: draw_button (exitButton) failed\n");
-        return;
+        return 1;
     }
+    
+    return 0;
 }

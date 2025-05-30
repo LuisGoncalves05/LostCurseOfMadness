@@ -54,21 +54,22 @@ Victory *create_victory() {
     return victory;
 }
 
-void destroy_victory(Victory *victory) {
+int destroy_victory(Victory *victory) {
     if (victory == NULL) {
         printf("destroy_victory: NULL pointer provided\n");
-        return;
+        return 1;
     }
     destroy_sprite(victory->title);
     if (destroy_button(victory->nextButton)) {
             printf("create_victory: destroy_button failed\n");
-            return;
+            return 1;
         }
         if (destroy_button(victory->exitButton)) {
             printf("create_victory: destroy_button failed\n");
-            return;
+            return 1;
         }
     free(victory);
+    return 0;
 }
 
 ButtonType victory_get_button(Victory *victory) {
@@ -84,10 +85,10 @@ ButtonType victory_get_button(Victory *victory) {
     return BUTTON_NONE;
 }
 
-void victory_change_button(Victory *victory) {
+int victory_change_button(Victory *victory) {
     if (victory == NULL) {
         printf("victory_change_button: NULL pointer provided\n");
-        return;
+        return 1;
     }
     bool next_selected = button_get_selected(victory->nextButton);
     bool exit_selected = button_get_selected(victory->exitButton);
@@ -98,6 +99,7 @@ void victory_change_button(Victory *victory) {
         button_set_selected(victory->nextButton, !next_selected);
         button_set_selected(victory->exitButton, !exit_selected);
     }
+    return 0;
 }
 
 ButtonType victory_click_handler(Victory *victory, uint16_t x, uint16_t y) {
@@ -114,18 +116,19 @@ ButtonType victory_click_handler(Victory *victory, uint16_t x, uint16_t y) {
     return BUTTON_NONE;
 }
 
-void draw_victory(Victory *victory, uint8_t *frame_buffer) {
+int draw_victory(Victory *victory, uint8_t *frame_buffer) {
     if (victory == NULL) {
         printf("draw_victory: NULL pointer provided\n");
-        return;
+        return 1;
     }
     draw_sprite(victory->title, frame_buffer);
     if (draw_button(victory->nextButton, frame_buffer)) {
         printf("draw_victory: draw_button (nextButton) failed\n");
-        return;
+        return 1;
     }
     if (draw_button(victory->exitButton, frame_buffer)) {
         printf("draw_victory: draw_button (exitButton) failed\n");
-        return;
+        return 1;
     }
+    return 0;
 }

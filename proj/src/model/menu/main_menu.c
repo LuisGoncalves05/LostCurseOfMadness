@@ -56,21 +56,22 @@ MainMenu *create_main_menu() {
     return main_menu;
 }
 
-void destroy_main_menu(MainMenu *main_menu) {
+int destroy_main_menu(MainMenu *main_menu) {
     if (main_menu == NULL) {
         printf("destroy_main_menu: NULL pointer provided\n");
-        return;
+        return 1;
     }
     destroy_sprite(main_menu->title);
     if (destroy_button(main_menu->playButton)) {
         printf("destroy_main_menu: destroy_button failed\n");
-        return;
+        return 1;
     }
     if (destroy_button(main_menu->exitButton)) {
         printf("destroy_main_menu: destroy_button failed\n");
-        return;
+        return 1;
     }
     free(main_menu);
+    return 0;
 }
 
 /* Getter and setter section */
@@ -92,10 +93,10 @@ ButtonType main_menu_get_button(MainMenu *main_menu) {
 
 /* Others section */
 
-void main_menu_change_button(MainMenu *main_menu) {
+int main_menu_change_button(MainMenu *main_menu) {
     if (main_menu == NULL) {
         printf("main_menu_change_button: NULL pointer provided\n");
-        return;
+        return 1;
     }
     bool play_selected = button_get_selected(main_menu->playButton);
     bool exit_selected = button_get_selected(main_menu->exitButton);
@@ -106,6 +107,7 @@ void main_menu_change_button(MainMenu *main_menu) {
         button_set_selected(main_menu->playButton, !play_selected);
         button_set_selected(main_menu->exitButton, !exit_selected);
     }
+    return 0;
 }
 
 ButtonType main_menu_click_handler(MainMenu *main_menu, uint16_t x, uint16_t y) {
@@ -124,18 +126,19 @@ ButtonType main_menu_click_handler(MainMenu *main_menu, uint16_t x, uint16_t y) 
 
 /* Draw section */
 
-void draw_main_menu(MainMenu *main_menu, uint8_t *frame_buffer) {
+int draw_main_menu(MainMenu *main_menu, uint8_t *frame_buffer) {
     if (main_menu == NULL) {
         printf("draw_main_menu: NULL pointer provided\n");
-        return;
+        return 1;
     }
     draw_sprite(main_menu->title, frame_buffer);
     if (draw_button(main_menu->playButton, frame_buffer)) {
         printf("draw_main_menu: draw_button (playButton) failed\n");
-        return;
+        return 1;
     }
     if (draw_button(main_menu->exitButton, frame_buffer)) {
         printf("draw_main_menu: draw_button (exitButton) failed\n");
-        return;
+        return 1;
     }
+    return 0;
 }

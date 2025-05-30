@@ -32,8 +32,9 @@ Victory *create_victory();
  * @brief Frees the memory associated with the Victory instance.
  *
  * @param victory Pointer to the Victory structure to destroy.
+ * @return 0 for success, 1 for failure.
  */
-void destroy_victory(Victory *victory);
+int destroy_victory(Victory *victory);
 
 /**
  * @brief Gets the currently selected button in the victory menu.
@@ -47,8 +48,9 @@ ButtonType victory_get_button(Victory *victory);
  * @brief Cycles to the next selectable button in the victory menu.
  *
  * @param victory Pointer to the Victory structure.
+ * @return 0 for success, 1 for failure.
  */
-void victory_change_button(Victory *victory);
+int victory_change_button(Victory *victory);
 
 /**
  * @brief Handles a mouse click and determines if a button was clicked.
@@ -65,7 +67,8 @@ ButtonType victory_click_handler(Victory *victory, uint16_t x, uint16_t y);
  *
  * @param victory Pointer to the Victory structure.
  * @param frame_buffer Pointer to the frame buffer.
+ * @return 0 for success, 1 for failure.
  */
-void draw_victory(Victory *victory, uint8_t *frame_buffer);
+int draw_victory(Victory *victory, uint8_t *frame_buffer);
 
 #endif

@@ -119,7 +119,10 @@ static void menu_destroy(Game *game) {
     if (game == NULL) {
         return;
     }
-    destroy_main_menu(game->menu.main_menu);
+    if (destroy_main_menu(game->menu.main_menu)) {
+        printf("menu_destroy: destroy_main_menu failed\n");
+        return;
+    }
 }
 
 static void level_destroy(Game *game) {
@@ -133,14 +136,20 @@ static void victory_destroy(Game *game) {
     if (game == NULL) {
         return;
     }
-    destroy_victory(game->menu.victory);
+    if (destroy_victory(game->menu.victory)) {
+        printf("victory_destroy: destroy_victory failed\n");
+        return;
+    }
 }
 
 static void game_over_destroy(Game *game) {
     if (game == NULL) {
         return;
     }
-    destroy_game_over(game->menu.game_over);
+    if (destroy_game_over(game->menu.game_over)) {
+        printf("game_over_destroy: destroy_game_over failed\n");
+        return;
+    }
 }
 
 static void exit_destroy(Game *game) {
@@ -181,7 +190,10 @@ static void menu_timer_handler(Game *game) {
     }
     clear_frame_buffer(secondary_frame_buffer, 0);
 
-    draw_main_menu(game->menu.main_menu, secondary_frame_buffer);
+    if (draw_main_menu(game->menu.main_menu, secondary_frame_buffer)) {
+        printf("menu_timer_handler: draw_main_menu failed\n");
+        return;
+    }
     draw_cursor(game->cursor, secondary_frame_buffer);
 
     vga_flip_pages();
@@ -215,7 +227,10 @@ static void victory_timer_handler(Game *game) {
     }
     clear_frame_buffer(secondary_frame_buffer, 0);
 
-    draw_victory(game->menu.victory, secondary_frame_buffer);
+    if (draw_victory(game->menu.victory, secondary_frame_buffer)) {
+        printf("victory_timer_handler: draw_victory failed\n");
+        return;
+    }
     draw_cursor(game->cursor, secondary_frame_buffer);
 
     vga_flip_pages();
@@ -227,7 +242,10 @@ static void game_over_timer_handler(Game *game) {
     }
     clear_frame_buffer(secondary_frame_buffer, 0);
 
-    draw_game_over(game->menu.game_over, secondary_frame_buffer);
+    if (draw_game_over(game->menu.game_over, secondary_frame_buffer)) {
+        printf("game_over_timer_handler: draw_game_over failed\n");
+        return;
+    }
     draw_cursor(game->cursor, secondary_frame_buffer);
 
     vga_flip_pages();
@@ -265,7 +283,10 @@ static void menu_keyboard_handler(Game *game) {
         return;
     }
     if (scan_code == KEY_W || scan_code == KEY_S || scan_code == KEY_A || scan_code == KEY_D)
-        main_menu_change_button(game->menu.main_menu);
+        if (main_menu_change_button(game->menu.main_menu)) {
+            printf("menu_keyboard_handler: main_menu_change_button failed\n");
+            return;
+        }
     if (scan_code == KEY_ENTER) {
         ButtonType button = main_menu_get_button(game->menu.main_menu);
         if (button == BUTTON_PLAY) {
@@ -301,7 +322,10 @@ static void game_over_keyboard_handler(Game *game) {
         return;
     }
     if (scan_code == KEY_W || scan_code == KEY_S || scan_code == KEY_A || scan_code == KEY_D)
-        game_over_change_button(game->menu.game_over);
+        if (game_over_change_button(game->menu.game_over)) {
+            printf("game_over_keyboard_handler: game_over_change_button failed\n");
+            return;
+        }
     if (scan_code == KEY_ENTER) {
         ButtonType button = game_over_get_button(game->menu.game_over);
         if (button == BUTTON_MENU) {
@@ -323,7 +347,10 @@ static void victory_keyboard_handler(Game *game) {
         return;
     }
     if (scan_code == KEY_W || scan_code == KEY_S || scan_code == KEY_A || scan_code == KEY_D)
-        victory_change_button(game->menu.victory);
+        if (victory_change_button(game->menu.victory)) {
+            printf("victory_keyboard_handler: victory_change_button failed\n");
+            return;
+        }
     if (scan_code == KEY_ENTER) {
         ButtonType button = victory_get_button(game->menu.victory);
         if (button == BUTTON_NEXT) {
