@@ -4,7 +4,7 @@
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="53,226,84,254,112,269,141,280,139,285,110,274,80,258,50,230"/>
 <area shape="rect" id="Node000003" href="$structAnimatedSprite.html" title="Represents an Animated Sprite for rendering animated objects on screen." alt="" coords="85,93,207,119"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="73,122,56,131,41,144,36,155,33,168,34,192,29,192,28,167,31,153,37,141,52,127,71,117"/>
-<area shape="rect" id="Node000005" href="$structPlayer.html" title=" " alt="" coords="95,192,157,217"/>
+<area shape="rect" id="Node000005" href="$structPlayer.html" title="Represents a single Player instance." alt="" coords="95,192,157,217"/>
 <area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="96,127,79,144,75,155,79,167,89,180,102,190,99,194,85,183,74,169,70,155,74,141,92,124"/>
 <area shape="rect" id="Node000006" href="$structMob.html" title="Represents a single Mob instance." alt="" coords="186,192,237,217"/>
 <area shape="poly" id="edge7_Node000006_Node000003" title=" " alt="" coords="175,126,190,141,203,167,211,191,206,193,198,169,185,144,171,129"/>

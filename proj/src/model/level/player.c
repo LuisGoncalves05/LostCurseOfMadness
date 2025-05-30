@@ -1,10 +1,15 @@
 #include "player.h"
 
+/**
+ * @brief Represents a single Player instance.
+ *
+ * The Player struct is opaque.
+ */
 struct Player {
-    AnimatedSprite *animated_sprite;
-    unsigned char health;
-    Direction direction;
-    PlayerState state;
+    AnimatedSprite *animated_sprite; /**< Pointer to the player's animated sprite */
+    unsigned char health;            /**< Current Player's health */
+    Direction direction;             /**< Current direction of the player */
+    PlayerState state;               /**< Current state of the player */
 };
 
 /* Create and destroy section */
@@ -32,7 +37,7 @@ Player *create_player() {
         free(new_sprite);
         return NULL;
     }
-    
+
     player->direction = DOWN;
     return player;
 }
@@ -162,7 +167,7 @@ void player_set_sprite(Player *player, AnimatedSprite *sprite) {
         printf("player_set_sprite: NULL pointer provided\n");
         return;
     }
-    
+
     if (destroy_animated_sprite(player->animated_sprite)) {
         return;
     }
@@ -217,98 +222,106 @@ void player_update_state(Player *player, struct packet pp) {
 void player_update_speed(Player *player, uint8_t scan_code) {
     if (player == NULL)
         return;
-    
+
     switch (scan_code) {
         case KEY_W:
-            if (player->state != PLAYER_WALKING || player->direction != UP) player->animated_sprite = create_animated_sprite(
-                create_sprite(
-                    (xpm_map_t) player_walkW_1,
-                    player->animated_sprite->sprite->x,
-                    player->animated_sprite->sprite->y,
-                    player->animated_sprite->sprite->xspeed,
-                    -PLAYER_DEFAULT_SPEED),
-                10, 4, (xpm_map_t) player_walkW_2, (xpm_map_t) player_walkW_3, (xpm_map_t) player_walkW_2);
+            if (player->state != PLAYER_WALKING || player->direction != UP)
+                player->animated_sprite = create_animated_sprite(
+                    create_sprite(
+                        (xpm_map_t) player_walkW_1,
+                        player->animated_sprite->sprite->x,
+                        player->animated_sprite->sprite->y,
+                        player->animated_sprite->sprite->xspeed,
+                        -PLAYER_DEFAULT_SPEED),
+                    10, 4, (xpm_map_t) player_walkW_2, (xpm_map_t) player_walkW_3, (xpm_map_t) player_walkW_2);
             player->state = PLAYER_WALKING;
             player->direction = UP;
             break;
         case KEY_A:
-            if (player->state != PLAYER_WALKING || player->direction != LEFT) player->animated_sprite = create_animated_sprite(
-                create_sprite(
-                    (xpm_map_t) player_walkA_1,
-                    player->animated_sprite->sprite->x,
-                    player->animated_sprite->sprite->y,
-                    -PLAYER_DEFAULT_SPEED,
-                    player->animated_sprite->sprite->yspeed),
-                10, 4, (xpm_map_t) player_walkA_2, (xpm_map_t) player_walkA_3, (xpm_map_t) player_walkA_2);
+            if (player->state != PLAYER_WALKING || player->direction != LEFT)
+                player->animated_sprite = create_animated_sprite(
+                    create_sprite(
+                        (xpm_map_t) player_walkA_1,
+                        player->animated_sprite->sprite->x,
+                        player->animated_sprite->sprite->y,
+                        -PLAYER_DEFAULT_SPEED,
+                        player->animated_sprite->sprite->yspeed),
+                    10, 4, (xpm_map_t) player_walkA_2, (xpm_map_t) player_walkA_3, (xpm_map_t) player_walkA_2);
             player->state = PLAYER_WALKING;
             player->direction = LEFT;
             break;
         case KEY_S:
-            if (player->state != PLAYER_WALKING || player->direction != DOWN) player->animated_sprite = create_animated_sprite(
-                create_sprite(
-                    (xpm_map_t) player_walkS_3,
-                    player->animated_sprite->sprite->x,
-                    player->animated_sprite->sprite->y,
-                    player->animated_sprite->sprite->xspeed,
-                    PLAYER_DEFAULT_SPEED),
-                10, 4, (xpm_map_t) player_walkS_2, (xpm_map_t) player_walkS_1, (xpm_map_t) player_walkS_2);
+            if (player->state != PLAYER_WALKING || player->direction != DOWN)
+                player->animated_sprite = create_animated_sprite(
+                    create_sprite(
+                        (xpm_map_t) player_walkS_3,
+                        player->animated_sprite->sprite->x,
+                        player->animated_sprite->sprite->y,
+                        player->animated_sprite->sprite->xspeed,
+                        PLAYER_DEFAULT_SPEED),
+                    10, 4, (xpm_map_t) player_walkS_2, (xpm_map_t) player_walkS_1, (xpm_map_t) player_walkS_2);
             player->state = PLAYER_WALKING;
             player->direction = DOWN;
             break;
         case KEY_D:
-            if (player->state != PLAYER_WALKING || player->direction != RIGHT) player->animated_sprite = create_animated_sprite(
-                create_sprite(
-                    (xpm_map_t) player_walkD_1,
-                    player->animated_sprite->sprite->x,
-                    player->animated_sprite->sprite->y,
-                    PLAYER_DEFAULT_SPEED,
-                    player->animated_sprite->sprite->yspeed),
-                10, 4, (xpm_map_t) player_walkD_2, (xpm_map_t) player_walkD_3, (xpm_map_t) player_walkD_2);
+            if (player->state != PLAYER_WALKING || player->direction != RIGHT)
+                player->animated_sprite = create_animated_sprite(
+                    create_sprite(
+                        (xpm_map_t) player_walkD_1,
+                        player->animated_sprite->sprite->x,
+                        player->animated_sprite->sprite->y,
+                        PLAYER_DEFAULT_SPEED,
+                        player->animated_sprite->sprite->yspeed),
+                    10, 4, (xpm_map_t) player_walkD_2, (xpm_map_t) player_walkD_3, (xpm_map_t) player_walkD_2);
             player->state = PLAYER_WALKING;
             player->direction = RIGHT;
             break;
         case KEY_BREAK_W:
-            if (player->state != PLAYER_WALKING || player->direction == UP) player->animated_sprite = create_animated_sprite(
-                create_sprite(
-                    (xpm_map_t) player_walkW_1,
-                    player->animated_sprite->sprite->x,
-                    player->animated_sprite->sprite->y,
-                    player->animated_sprite->sprite->xspeed,
-                    0),
-                45, 2, (xpm_map_t) player_idleW_2);
+            if (player->state != PLAYER_WALKING || player->direction == UP)
+                player->animated_sprite = create_animated_sprite(
+                    create_sprite(
+                        (xpm_map_t) player_walkW_1,
+                        player->animated_sprite->sprite->x,
+                        player->animated_sprite->sprite->y,
+                        player->animated_sprite->sprite->xspeed,
+                        0),
+                    45, 2, (xpm_map_t) player_idleW_2);
             player->state = PLAYER_IDLE;
             break;
         case KEY_BREAK_A:
-            if (player->state != PLAYER_WALKING || player->direction == LEFT) player->animated_sprite = create_animated_sprite(
-                create_sprite(
-                    (xpm_map_t) player_idleA_1,
-                    player->animated_sprite->sprite->x,
-                    player->animated_sprite->sprite->y,
-                    0,
-                    player->animated_sprite->sprite->yspeed),
-                45, 2, (xpm_map_t) player_idleA_2);
+            if (player->state != PLAYER_WALKING || player->direction == LEFT)
+                player->animated_sprite = create_animated_sprite(
+                    create_sprite(
+                        (xpm_map_t) player_idleA_1,
+                        player->animated_sprite->sprite->x,
+                        player->animated_sprite->sprite->y,
+                        0,
+                        player->animated_sprite->sprite->yspeed),
+                    45, 2, (xpm_map_t) player_idleA_2);
             player->state = PLAYER_IDLE;
             break;
         case KEY_BREAK_S:
-            if (player->state != PLAYER_WALKING || player->direction == DOWN) player->animated_sprite = create_animated_sprite(
-                create_sprite(
-                    (xpm_map_t) player_idleS_1,
-                    player->animated_sprite->sprite->x,
-                    player->animated_sprite->sprite->y,
-                    player->animated_sprite->sprite->xspeed,
-                    0),
-                45, 2, (xpm_map_t) player_idleS_2);
+            if (player->state != PLAYER_WALKING || player->direction == DOWN)
+                player->animated_sprite = create_animated_sprite(
+                    create_sprite(
+                        (xpm_map_t) player_idleS_1,
+                        player->animated_sprite->sprite->x,
+                        player->animated_sprite->sprite->y,
+                        player->animated_sprite->sprite->xspeed,
+                        0),
+                    45, 2, (xpm_map_t) player_idleS_2);
             player->state = PLAYER_IDLE;
             break;
         case KEY_BREAK_D:
-            if (player->state != PLAYER_WALKING || player->direction == RIGHT) player->animated_sprite = create_animated_sprite(
-                create_sprite(
-                    (xpm_map_t) player_idleD_1,
-                    player->animated_sprite->sprite->x,
-                    player->animated_sprite->sprite->y,
-                    0,
-                    player->animated_sprite->sprite->yspeed),
-                45, 2, (xpm_map_t) player_idleD_2);
+            if (player->state != PLAYER_WALKING || player->direction == RIGHT)
+                player->animated_sprite = create_animated_sprite(
+                    create_sprite(
+                        (xpm_map_t) player_idleD_1,
+                        player->animated_sprite->sprite->x,
+                        player->animated_sprite->sprite->y,
+                        0,
+                        player->animated_sprite->sprite->yspeed),
+                    45, 2, (xpm_map_t) player_idleD_2);
             player->state = PLAYER_IDLE;
             break;
         default:
@@ -319,7 +332,7 @@ void player_update_speed(Player *player, uint8_t scan_code) {
 void player_lose_health(Player *player) {
     if (player == NULL)
         return;
-        
+
     if (player->health > 0)
         player->health--;
 }
