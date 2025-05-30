@@ -1,9 +1,14 @@
 #include "victory.h"
 
+/**
+ * @brief Represents a single Victory menu instance.
+ *
+ * The Victory struct is opaque.
+ */
 struct Victory {
-    Button *nextButton;
-    Button *exitButton;
-    Sprite *title;
+    Button *nextButton; /**< Pointer to the next button */
+    Button *exitButton; /**< Pointer to the exit button */
+    Sprite *title;      /**< Pointer to the menu text sprite */
 };
 
 Victory *create_victory() {

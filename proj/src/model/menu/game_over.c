@@ -1,9 +1,14 @@
 #include "game_over.h"
 
+/**
+ * @brief Represents a single GameOver menu instance.
+ *
+ * The GameOver struct is opaque.
+ */
 struct GameOver {
-    Button *menuButton;
-    Button *exitButton;
-    Sprite *title;
+    Button *menuButton; /**< Pointer to the menu button */
+    Button *exitButton; /**< Pointer to the exit button */
+    Sprite *title;      /**< Pointer to the menu text sprite */
 };
 
 /* Create and destroy section */
@@ -109,7 +114,7 @@ void draw_game_over(GameOver *game_over, uint8_t *frame_buffer) {
         printf("draw_game_over: NULL pointer provided\n");
         return;
     }
-    
+
     draw_sprite(game_over->title, frame_buffer);
     draw_button(game_over->menuButton, frame_buffer);
     draw_button(game_over->exitButton, frame_buffer);
