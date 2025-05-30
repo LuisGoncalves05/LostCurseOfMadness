@@ -10,7 +10,7 @@ struct Mob {
 
 /* Create and destroy section */
 
-Mob *create_mob(uint16_t x, uint16_t y) {
+Mob *create_mob(int16_t x, int16_t y) {
     Mob *mob = (Mob *) malloc(sizeof(Mob));
     if (mob == NULL) {
         printf("create_mob: NULL pointer provided\n");
@@ -48,11 +48,11 @@ void destroy_mob(Mob *mob) {
         printf("destroy_mob: NULL pointer provided\n");
         return;
     }
-    
+
     if (destroy_animated_sprite(mob->animated_sprite)) {
         printf("destroy_mob: destroy_animated_sprite failed\n");
     }
-    
+
     free(mob);
 }
 
@@ -65,6 +65,54 @@ Sprite *mob_get_sprite(Mob *mob) {
     }
 
     return mob->animated_sprite->sprite;
+}
+
+int16_t mob_get_x(Mob *mob) {
+    if (!mob) {
+        printf("mob_get_x: NULL pointer provided\n");
+        return 0;
+    }
+    return mob->animated_sprite->sprite->x;
+}
+
+void mob_set_x(Mob *mob, int16_t x) {
+    if (!mob) {
+        printf("mob_set_x: NULL pointer provided\n");
+        return;
+    }
+    mob->animated_sprite->sprite->x = x;
+}
+
+int16_t mob_get_y(Mob *mob) {
+    if (!mob) {
+        printf("mob_get_y: NULL pointer provided\n");
+        return 0;
+    }
+    return mob->animated_sprite->sprite->y;
+}
+
+void mob_set_y(Mob *mob, int16_t y) {
+    if (!mob) {
+        printf("mob_set_y: NULL pointer provided\n");
+        return;
+    }
+    mob->animated_sprite->sprite->y = y;
+}
+
+double mob_get_xspeed(Mob *mob) {
+    if (!mob) {
+        printf("mob_get_xspeed: NULL pointer provided\n");
+        return 0;
+    }
+    return mob->animated_sprite->sprite->xspeed;
+}
+
+double mob_get_yspeed(Mob *mob) {
+    if (!mob) {
+        printf("mob_get_yspeed: NULL pointer provided\n");
+        return 0;
+    }
+    return mob->animated_sprite->sprite->yspeed;
 }
 
 unsigned char mob_get_health(Mob *mob) {
@@ -107,7 +155,7 @@ MobState mob_get_state(Mob *mob) {
 
 /* Others section */
 
-void mob_update_state(Mob *mob, uint16_t player_cx, uint16_t player_cy) {
+void mob_update_state(Mob *mob, int16_t player_cx, int16_t player_cy) {
     if (mob == NULL) {
         printf("mob_update_state: NULL pointer provided\n");
         return;
@@ -119,11 +167,11 @@ void mob_update_state(Mob *mob, uint16_t player_cx, uint16_t player_cy) {
     }
 
     Sprite *sprite = mob->animated_sprite->sprite;
-    uint16_t mob_x = sprite->x;
-    uint16_t mob_y = sprite->y;
+    int16_t mob_x = sprite->x;
+    int16_t mob_y = sprite->y;
 
-    uint16_t mob_cx = mob_x + sprite->width / 2;
-    uint16_t mob_cy = mob_y + sprite->height / 2;
+    int16_t mob_cx = mob_x + sprite->width / 2;
+    int16_t mob_cy = mob_y + sprite->height / 2;
 
     int dx = player_cx - mob_cx;
     int dy = player_cy - mob_cy;

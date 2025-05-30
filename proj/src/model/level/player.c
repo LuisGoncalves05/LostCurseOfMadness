@@ -74,6 +74,14 @@ uint16_t player_get_x(Player *player) {
     return player->animated_sprite->sprite->x;
 }
 
+void player_set_x(Player *player, uint16_t x) {
+    if (player == NULL) {
+        printf("player_set_x: NULL pointer provided\n");
+        return;
+    }
+    player->animated_sprite->sprite->x = x;
+}
+
 uint16_t player_get_y(Player *player) {
     if (player == NULL) {
         printf("player_get_y: NULL pointer provided\n");
@@ -81,6 +89,46 @@ uint16_t player_get_y(Player *player) {
     }
 
     return player->animated_sprite->sprite->y;
+}
+
+void player_set_y(Player *player, uint16_t y) {
+    if (player == NULL) {
+        printf("player_set_y: NULL pointer provided\n");
+        return;
+    }
+    player->animated_sprite->sprite->y = y;
+}
+
+double player_get_xspeed(Player *player) {
+    if (player == NULL) {
+        printf("player_get_xspeed: NULL pointer provided\n");
+        return 0;
+    }
+    return player->animated_sprite->sprite->xspeed;
+}
+
+void player_set_xspeed(Player *player, double xspeed) {
+    if (player == NULL) {
+        printf("player_set_xspeed: NULL pointer provided\n");
+        return;
+    }
+    player->animated_sprite->sprite->xspeed = xspeed;
+}
+
+double player_get_yspeed(Player *player) {
+    if (player == NULL) {
+        printf("player_get_yspeed: NULL pointer provided\n");
+        return 0;
+    }
+    return player->animated_sprite->sprite->yspeed;
+}
+
+void player_set_yspeed(Player *player, double yspeed) {
+    if (player == NULL) {
+        printf("player_set_yspeed: NULL pointer provided\n");
+        return;
+    }
+    player->animated_sprite->sprite->yspeed = yspeed;
 }
 
 uint16_t player_get_width(Player *player) {
@@ -92,9 +140,9 @@ uint16_t player_get_width(Player *player) {
     return player->animated_sprite->sprite->width;
 }
 
-uint16_t player_get_heigth(Player *player) {
+uint16_t player_get_height(Player *player) {
     if (player == NULL) {
-        printf("player_get_heigth: NULL pointer provided\n");
+        printf("player_get_height: NULL pointer provided\n");
         return 0;
     }
 

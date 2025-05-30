@@ -134,6 +134,14 @@ Mob **get_mobs(Level *level) {
     return level->mobs;
 }
 
+PlayerState level_get_player_state(Level *level) {
+    if (!level) {
+        printf("level_get_player_state: NULL pointer provided\n");
+        return PLAYER_DEAD;
+    }
+    return player_get_state(level->player);
+}
+
 /* Statics section */
 
 static bool(check_mob_collisions)(Level *level) {
@@ -228,24 +236,28 @@ static int player_update_position(Level *level) {
     }
 
     Player *player = level->player;
-    Sprite *player_sprite = player_get_sprite(player);
     Maze *maze = level->maze;
 
-    player_sprite->x += player_sprite->xspeed;
-    if (check_wall_collision(maze, player_sprite)) {
-        player_sprite->x -= player_sprite->xspeed;
+    uint16_t x = player_get_x(player);
+    uint16_t y = player_get_y(player);
+    double xspeed = player_get_xspeed(player);
+    double yspeed = player_get_yspeed(player);
+
+    player_set_x(player, x + xspeed);
+    if (check_wall_collision(maze, player_get_sprite(player))) {
+        player_set_x(player, x);
     }
 
-    player_sprite->y += player_sprite->yspeed;
-    if (check_wall_collision(maze, player_sprite)) {
-        player_sprite->y -= player_sprite->yspeed;
+    player_set_y(player, y + yspeed);
+    if (check_wall_collision(maze, player_get_sprite(player))) {
+        player_set_y(player, y);
     }
 
     if (check_mob_collisions(level)) {
         player_lose_health(player);
     }
 
-    if (player_get_state(player) != PLAYER_DEAD && check_win(player_sprite, maze)) {
+    if (player_get_state(player) != PLAYER_DEAD && check_win(player_get_sprite(player), maze)) {
         player_set_state(player, PLAYER_WIN);
     }
 
@@ -282,7 +294,7 @@ static void level_update_all_mobs(Level *level) {
     Player *player = level->player;
     for (int i = 0; i < get_mob_count(maze);) {
         Mob *mob = mobs[i];
-        mob_update_state(mob, player_get_x(player) + player_get_width(player) / 2, player_get_y(player) + player_get_heigth(player) / 2);
+        mob_update_state(mob, player_get_x(player) + player_get_width(player) / 2, player_get_y(player) + player_get_height(player) / 2);
         if (mob_get_state(mob) == MOB_DEAD) {
             destroy_mob(mob);
             set_mob_count(maze, get_mob_count(maze) - 1);
@@ -293,13 +305,18 @@ static void level_update_all_mobs(Level *level) {
 
         if (mob_get_state(mob) == MOB_ATTACKING) {
             Sprite *mob_sprite = mob_get_sprite(mob);
-            mob_sprite->x += mob_sprite->xspeed;
+            int16_t x = mob_get_x(mob);
+            int16_t y = mob_get_y(mob);
+            double xspeed = mob_get_xspeed(mob);
+            double yspeed = mob_get_yspeed(mob);
+            
+            mob_set_x(mob, x + xspeed);
             if (check_wall_collision(maze, mob_sprite)) {
-                mob_sprite->x -= mob_sprite->xspeed;
+                mob_set_x(mob, x);
             }
-            mob_sprite->y += mob_sprite->yspeed;
+            mob_set_y(mob, y + yspeed);
             if (check_wall_collision(maze, mob_sprite)) {
-                mob_sprite->y -= mob_sprite->yspeed;
+                mob_set_y(mob, y);
             }
         }
     }
@@ -327,11 +344,16 @@ static void draw_fov_cone(Level *level) {
         return;
     }
     double delta = level->delta;
-    Sprite *player_sprite = player_get_sprite(level->player);
+    Player *player = level->player;
+    Maze *maze = level->maze;
+    if (!player || !maze) {
+        printf("draw_fov_cone: NULL player or maze\n");
+        return;
+    }
 
     // Player center coordinates
-    double cx = player_sprite->x + player_sprite->width / 2.0;
-    double cy = player_sprite->y + player_sprite->height / 2.0;
+    double cx = player_get_x(player) + player_get_width(player) / 2.0;
+    double cy = player_get_y(player) + player_get_height(player) / 2.0;
 
     double fov_radius = FOV_RADIUS;
     double cone_half_angle = level->fov_angle * M_PI / 360.0;
@@ -444,6 +466,7 @@ static void draw_fov_cone(Level *level) {
 
 static void draw_all_bullets(Level *level, uint8_t *frame_buffer) {
     if (level == NULL || frame_buffer == NULL) {
+        printf("draw_all_bullets: NULL pointer provided\n");
         return;
     }
 
@@ -459,12 +482,12 @@ static void draw_all_bullets(Level *level, uint8_t *frame_buffer) {
 
 void level_update_delta(Level *level, double mouse_x, double mouse_y) {
     if (level == NULL) {
+        printf("level_update_delta: NULL pointer provided\n");
         return;
     }
-
-    Sprite *player_sprite = player_get_sprite(level->player);
-    double player_center_x = player_sprite->x + player_sprite->width / 2.0;
-    double player_center_y = player_sprite->y + player_sprite->height / 2.0;
+    Player *player = level->player;
+    double player_center_x = player_get_x(player) + player_get_width(player) / 2.0;
+    double player_center_y = player_get_y(player) + player_get_height(player) / 2.0;
 
     double dx = mouse_x - player_center_x;
     double dy = mouse_y - player_center_y;
@@ -484,15 +507,9 @@ void level_shoot(Level *level) {
     if (level->bullet_count >= MAX_BULLETS)
         return;
 
-    Sprite *sprite = player_get_sprite(level->player);
-    Direction direction = player_get_direction(level->player);
-    double draw_origin_y = sprite->y + sprite->height / 2;
-    double draw_origin_x;
-    if (direction == RIGHT || direction == UP) {
-        draw_origin_x = sprite->x + sprite->width;
-    } else {
-        draw_origin_x = sprite->x;
-    }
+    Player *player = level->player;
+    double draw_origin_x = player_get_x(player) + player_get_width(player) / 2.0;
+    double draw_origin_y = player_get_y(player) + player_get_height(player) / 2.0;
 
     double bullet_randomizer = ((rand() % BULLET_DEVIANCE) - BULLET_DEVIANCE / 2) * 2 * M_PI / 360.0;
     Bullet *bullet = create_bullet(draw_origin_x, draw_origin_y, level->delta + bullet_randomizer);

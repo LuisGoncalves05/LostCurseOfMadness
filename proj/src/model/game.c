@@ -200,7 +200,7 @@ static void level_timer_handler(Game *game) {
         return;
     }
 
-    if (player_get_state(get_player(game->level)) == PLAYER_WIN) {
+    if (level_get_player_state(game->level) == PLAYER_WIN) {
         set_state(game, VICTORY);
         return;
     }
