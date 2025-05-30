@@ -106,7 +106,7 @@ void button_set_selected(Button *button, bool selected);
  * @param y Y-coordinate of the click.
  * @return true if the button was clicked, false otherwise.
  */
-bool button_is_clicked(Button *button, uint16_t x, uint16_t y);
+bool button_is_selected(Button *button, uint16_t x, uint16_t y);
 
 /**
  * @brief Draws the button onto the given frame buffer.
