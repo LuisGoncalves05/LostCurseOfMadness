@@ -1,16 +1,21 @@
 #include "maze.h"
 
+/**
+ * @brief Represents a single Maze instance.
+ *
+ * The Maze struct is opaque.
+ */
 struct Maze {
-    uint8_t width;
-    uint8_t height;
-    maze_entity **cells;
-    uint8_t mob_count;
-    AnimatedSprite *key;
+    uint8_t width;       /**< Width of the maze in cells */
+    uint8_t height;      /**< Height of the maze in cells */
+    maze_entity **cells; /**< 2D array of maze entities representing the maze structure */
+    uint8_t mob_count;   /**< Number of active mobs in the maze */
+    AnimatedSprite *key; /**< Pointer to the key sprite */
 };
 
 /* Create and destroy section */
 
-static void(shuffle)(int *arr, int n) {
+static void shuffle(int *arr, int n) {
     if (arr == NULL) {
         printf("shuffle: NULL pointer provided\n");
         return;
@@ -24,7 +29,7 @@ static void(shuffle)(int *arr, int n) {
     }
 }
 
-static void(dfs)(Maze *maze, int x, int y) {
+static void dfs(Maze *maze, int x, int y) {
     if (maze == NULL) {
         printf("dfs: NULL pointer provided\n");
         return;
@@ -49,7 +54,7 @@ static void(dfs)(Maze *maze, int x, int y) {
     }
 }
 
-static int(initialize_maze)(Maze *maze, uint8_t width, uint8_t height) {
+static int initialize_maze(Maze *maze, uint8_t width, uint8_t height) {
     if (maze == NULL) {
         printf("dfs: NULL pointer provided\n");
         return 1;
@@ -91,7 +96,7 @@ static int(initialize_maze)(Maze *maze, uint8_t width, uint8_t height) {
     return 0;
 }
 
-static int(generate_mob_positions)(Maze *maze, uint8_t mob_count) {
+static int generate_mob_positions(Maze *maze, uint8_t mob_count) {
     if (maze == NULL) {
         printf("generate_mob_positions: NULL pointer provided\n");
         return 1;
@@ -113,7 +118,7 @@ static int(generate_mob_positions)(Maze *maze, uint8_t mob_count) {
     return 0;
 }
 
-static int(open_maze)(Maze *maze, uint8_t percentage) {
+static int open_maze(Maze *maze, uint8_t percentage) {
     if (maze == NULL) {
         printf("open_maze: NULL pointer provided\n");
         return 1;
@@ -138,7 +143,7 @@ static int(open_maze)(Maze *maze, uint8_t percentage) {
     return 0;
 }
 
-Maze *(create_maze) (uint8_t width, uint8_t height, uint8_t mob_count) {
+Maze *create_maze(uint8_t width, uint8_t height, uint8_t mob_count) {
     Maze *maze = (Maze *) malloc(sizeof(Maze));
     if (maze == NULL) {
         printf("create_maze: malloc failed\n");
@@ -177,7 +182,7 @@ void destroy_maze(Maze *maze) {
         printf("destroy_maze: NULL pointer provided\n");
         return;
     }
-    
+
     for (int i = 0; i < maze->height; i++) {
         free(maze->cells[i]);
     }
@@ -188,7 +193,7 @@ void destroy_maze(Maze *maze) {
 
 /* Getter and setter section */
 
-uint8_t(get_width)(Maze *maze) {
+uint8_t get_width(Maze *maze) {
     if (maze == NULL) {
         printf("get_width: NULL pointer provided\n");
         return 0;
@@ -197,7 +202,7 @@ uint8_t(get_width)(Maze *maze) {
     return maze->width;
 }
 
-uint8_t(get_height)(Maze *maze) {
+uint8_t get_height(Maze *maze) {
     if (maze == NULL) {
         printf("get_height: NULL pointer provided\n");
         return 0;
@@ -206,7 +211,7 @@ uint8_t(get_height)(Maze *maze) {
     return maze->height;
 }
 
-uint8_t(get_mob_count)(Maze *maze) {
+uint8_t get_mob_count(Maze *maze) {
     if (maze == NULL) {
         printf("get_mob_count: NULL pointer provided\n");
         return 0;
@@ -237,7 +242,7 @@ Sprite *get_key_sprite(Maze *maze) {
 
 /* Others section */
 
-Point **(get_mob_positions) (Maze * maze) {
+Point **get_mob_positions(Maze *maze) {
     if (maze == NULL) {
         printf("get_mob_positions: NULL pointer provided\n");
         return NULL;
@@ -249,7 +254,7 @@ Point **(get_mob_positions) (Maze * maze) {
         printf("get_mob_positions: malloc failed");
         return NULL;
     }
-    
+
     for (int j = 0; j < maze->height; j++) {
         for (int i = 0; i < maze->width; i++) {
             if (maze->cells[j][i] == MOB) {
@@ -273,7 +278,7 @@ Point **(get_mob_positions) (Maze * maze) {
     return points;
 }
 
-bool(check_rectangle_collision)(int x1, int y1, int width1, int height1, int x2, int y2, int width2, int height2) {
+bool check_rectangle_collision(int x1, int y1, int width1, int height1, int x2, int y2, int width2, int height2) {
     return !(
         x1 + width1 < x2 ||  // a to the left of b
         x1 > x2 + width2 ||  // b to the left of a
@@ -282,7 +287,7 @@ bool(check_rectangle_collision)(int x1, int y1, int width1, int height1, int x2,
     );
 }
 
-bool(check_sprite_collision)(Sprite *a, Sprite *b) {
+bool check_sprite_collision(Sprite *a, Sprite *b) {
     if (a == NULL || b == NULL) {
         printf("check_sprite_collision: NULL pointer provided\n");
         return false;
@@ -291,7 +296,7 @@ bool(check_sprite_collision)(Sprite *a, Sprite *b) {
     return check_rectangle_collision(a->x, a->y, a->width, a->height, b->x, b->y, b->width, b->height);
 }
 
-bool(check_wall_collision)(Maze *maze, Sprite *sprite) {
+bool check_wall_collision(Maze *maze, Sprite *sprite) {
     if (maze == NULL || sprite == NULL) {
         printf("check_wall_collision: NULL pointer provided.\n");
         return false;
@@ -319,7 +324,7 @@ bool(check_wall_collision)(Maze *maze, Sprite *sprite) {
 
 /* Draw section */
 
-int(draw_maze)(Maze *maze, uint8_t *frame_buffer) {
+int draw_maze(Maze *maze, uint8_t *frame_buffer) {
     if (maze == NULL || frame_buffer == NULL) {
         printf("Error: Maze or frame buffer is NULL\n");
         return 1;

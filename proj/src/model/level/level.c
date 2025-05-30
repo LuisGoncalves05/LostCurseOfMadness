@@ -10,7 +10,7 @@ struct Level {
     Maze *maze;                   /**< Pointer to the Maze structure */
     Player *player;               /**< Pointer to the Player structure */
     double delta;                 /**< Angle of the player's direction (in relation to mouse position) in radians */
-    double fov_angle;             /**< Field of view angle in radians */
+    double fov_angle;             /**< Field of view angle ing radians */
     Mob **mobs;                   /**< Array of pointers to Mob structures */
     Bullet *bullets[MAX_BULLETS]; /**< Array of pointers to Bullet structures */
     uint8_t bullet_count;         /**< Current number of active bullets */
@@ -21,7 +21,7 @@ struct Level {
 Level *create_level(uint8_t number) {
     Level *level = malloc(sizeof(Level));
     if (level == NULL) {
-        printf("create_level: NULL pointer providede\n");
+        printf("create_level: NULL pointer provided\n");
         return NULL;
     }
 
