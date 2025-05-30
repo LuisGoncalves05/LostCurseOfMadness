@@ -347,6 +347,7 @@ static void draw_fov_cone(Level *level) {
         printf("draw_fov_cone: NULL pointer provided\n");
         return;
     }
+
     double delta = level->delta;
     Player *player = level->player;
     Maze *maze = level->maze;
@@ -466,9 +467,9 @@ static void draw_fov_cone(Level *level) {
     }
 
     vga_draw_rectangle(0, 0, x_res, box_min_y, OUT_OF_FOV_COLOR, secondary_frame_buffer);
-    vga_draw_rectangle(0, box_min_y, box_min_x, box_max_y, OUT_OF_FOV_COLOR, secondary_frame_buffer);
-    vga_draw_rectangle(max_x, box_min_y, x_res, box_max_y, OUT_OF_FOV_COLOR, secondary_frame_buffer);
-    vga_draw_rectangle(0, box_max_y, x_res, y_res, OUT_OF_FOV_COLOR, secondary_frame_buffer);
+    vga_draw_rectangle(0, box_min_y, box_min_x, box_max_y - box_min_y, OUT_OF_FOV_COLOR, secondary_frame_buffer);
+    vga_draw_rectangle(box_max_x, box_min_y, x_res - box_max_x, box_max_y - box_min_y, OUT_OF_FOV_COLOR, secondary_frame_buffer);
+    vga_draw_rectangle(0, box_max_y, x_res, y_res - box_max_y, OUT_OF_FOV_COLOR, secondary_frame_buffer);
 }
 
 static void draw_all_bullets(Level *level, uint8_t *frame_buffer) {
