@@ -1,5 +1,4 @@
 #include "level.h"
-#include "config.h"
 
 struct Level {
     uint8_t number;

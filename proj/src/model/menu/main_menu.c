@@ -1,5 +1,4 @@
 #include "main_menu.h"
-#include "../utils/sprite.h"
 
 struct MainMenu {
     Button *playButton;

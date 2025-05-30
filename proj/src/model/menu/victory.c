@@ -1,5 +1,4 @@
 #include "victory.h"
-#include "../utils/sprite.h"
 
 struct Victory {
     Button *nextButton;

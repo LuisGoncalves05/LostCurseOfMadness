@@ -7,6 +7,7 @@
 
 #include "assets/xpm/level/player/idle.xpm"
 #include "assets/xpm/level/player/walking.xpm"
+#include "config.h"
 #include "drivers/video/gpu.h"
 #include "model/utils/animated_sprite.h"
 #include "model/utils/keys.h"
@@ -30,7 +31,7 @@ typedef enum {
     PLAYER_WALKING,  /**< Player is walking */
     PLAYER_AIMING,   /**< Player is aiming */
     PLAYER_SHOOTING, /**< Player is shooting */
-    PLAYER_DEAD,    /**< Player is dying */
+    PLAYER_DEAD,     /**< Player is dying */
     PLAYER_WIN       /**< Player is winning */
 } PlayerState;
 

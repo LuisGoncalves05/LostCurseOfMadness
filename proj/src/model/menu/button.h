@@ -1,8 +1,10 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
-#include "drivers/video/gpu.h"
 #include <lcom/lcf.h>
+
+#include "drivers/video/gpu.h"
+#include "model/utils/sprite.h"
 
 extern uint16_t x_res; /**< X resolution of the screen */
 extern uint16_t y_res; /**< Y resolution of the screen */

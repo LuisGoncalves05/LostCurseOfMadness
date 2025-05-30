@@ -1,5 +1,4 @@
 #include "game.h"
-#include "level/bullet.h"
 
 struct Game {
     State state;

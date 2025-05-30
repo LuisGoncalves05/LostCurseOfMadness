@@ -1,5 +1,4 @@
 #include "game_over.h"
-#include "../utils/sprite.h"
 
 struct GameOver {
     Button *menuButton;

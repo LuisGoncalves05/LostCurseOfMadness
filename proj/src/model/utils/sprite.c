@@ -1,6 +1,4 @@
 #include "sprite.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 /* Create and destroy section */
 

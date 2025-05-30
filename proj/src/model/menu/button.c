@@ -1,5 +1,4 @@
 #include "button.h"
-#include "../utils/sprite.h"
 
 /**
  * @brief Represents a Button instance

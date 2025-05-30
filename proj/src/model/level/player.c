@@ -1,5 +1,4 @@
 #include "player.h"
-#include "maze.h"
 
 struct Player {
     AnimatedSprite *animated_sprite;

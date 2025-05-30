@@ -1,5 +1,4 @@
 #include "maze.h"
-#include <stdlib.h>
 
 struct Maze {
     uint8_t width;

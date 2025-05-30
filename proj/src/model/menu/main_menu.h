@@ -10,6 +10,7 @@
 #include "assets/xpm/main_menu/play_button.xpm"
 #include "assets/xpm/main_menu/play_button_selected.xpm"
 #include "button.h"
+#include "model/utils/sprite.h"
 
 extern uint16_t x_res; /**< X resolution of the screen */
 extern uint16_t y_res; /**< Y resolution of the screen */

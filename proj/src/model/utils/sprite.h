@@ -1,7 +1,10 @@
 #ifndef SPRITE_H
 #define SPRITE_H
 
-#include "../../drivers/video/gpu.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "drivers/video/gpu.h"
 
 extern uint16_t x_res; /**< X resolution of the screen */
 extern uint16_t y_res; /**< Y resolution of the screen */

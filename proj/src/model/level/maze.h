@@ -2,6 +2,7 @@
 #define MAZE_H
 
 #include <lcom/lcf.h>
+#include <stdlib.h>
 
 #include "assets/xpm/level/key.xpm"
 #include "assets/xpm/level/wall.xpm"

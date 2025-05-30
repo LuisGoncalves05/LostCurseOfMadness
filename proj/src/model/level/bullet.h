@@ -2,10 +2,13 @@
 #define BULLET_H
 
 #include <lcom/lcf.h>
+#include <math.h>
 #include <stdbool.h>
 #include <stdint.h>
+#include <stdlib.h>
 
 #include "assets/xpm/level/bullet.xpm"
+#include "drivers/video/gpu.h"
 #include "model/utils/sprite.h"
 
 #define BULLET_SPEED 10 /**< Speed of the bullet in pixels per tick */

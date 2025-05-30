@@ -1,8 +1,4 @@
-#include <math.h>
-#include <stdlib.h>
-
 #include "bullet.h"
-#include "drivers/video/gpu.h"
 
 /**
  * @brief Represents a single bullet instance.
