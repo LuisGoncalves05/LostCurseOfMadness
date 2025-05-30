@@ -186,10 +186,12 @@ static void update_bullet(Bullet *b, Level *level) {
     if (sprite->x < 0 || sprite->x > x_res ||
         sprite->y < 0 || sprite->y > y_res) {
         bullet_set_active(b, false);
+        return;
     }
 
     if (check_wall_collision(get_maze(level), sprite)) {
-        bullet_set_active(b, false); // Deactivate if it hits a wall
+        bullet_set_active(b, false);
+        return;
     }
 
     Mob **mobs = get_mobs(level);

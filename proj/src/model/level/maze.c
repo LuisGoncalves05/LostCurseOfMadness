@@ -305,8 +305,8 @@ bool(check_wall_collision)(Maze *maze, Sprite *sprite) {
         for (int j = -1; j < 2; j++) {
             int x = scaled_down_x + i;
             int y = scaled_down_y + j;
-            if (x >= 0 && x < x_res &&
-                y >= 0 && y < y_res &&
+            if (x >= 0 && x < maze->width &&
+                y >= 0 && y < maze->height &&
                 maze->cells[y][x] == WALL) {
                 if (check_rectangle_collision(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE, sprite->x, sprite->y, sprite->width, sprite->height)) {
                     return true;
