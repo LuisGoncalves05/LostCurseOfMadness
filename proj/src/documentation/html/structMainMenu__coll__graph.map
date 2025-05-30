@@ -1,6 +1,6 @@
 <map id="MainMenu" name="MainMenu">
 <area shape="rect" id="Node000001" title=" " alt="" coords="5,211,96,236"/>
-<area shape="rect" id="Node000002" href="$structButton.html" title=" " alt="" coords="74,108,139,133"/>
+<area shape="rect" id="Node000002" href="$structButton.html" title="Represents a Button instance." alt="" coords="74,108,139,133"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,147,59,212,55,209,91,144"/>
 <area shape="rect" id="Node000003" href="$structSprite.html" title="Represents a Sprite used for rendering objects on screen." alt="" coords="10,5,70,31"/>
 <area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="38,44,34,86,35,133,50,210,45,211,29,134,29,86,33,44"/>

@@ -1,14 +1,19 @@
 #include "button.h"
 #include "../utils/sprite.h"
 
+/**
+ * @brief Represents a Button instance
+ *
+ * The Button struct is opaque.
+ */
 struct Button {
-    bool selected;
-    Sprite *sprite;
-    Sprite *selected_sprite;
-    uint16_t x;
-    uint16_t y;
-    uint16_t width;
-    uint16_t height;
+    bool selected;           /**< Indicates whether the button is currently selected */
+    Sprite *sprite;          /**< Pointer to the sprite representing the button */
+    Sprite *selected_sprite; /**< Pointer to the sprite representing the button when selected */
+    uint16_t x;              /**< X-coordinate of the button */
+    uint16_t y;              /**< Y-coordinate of the button */
+    uint16_t width;          /**< Width of the button */
+    uint16_t height;         /**< Height of the button */
 };
 
 /* Create and destroy section */
@@ -58,7 +63,7 @@ void destroy_button(Button *button) {
 
 bool button_get_selected(Button *button) {
     if (button == NULL) {
-        printf("button_get_selected: NULL pointer provided\n");    
+        printf("button_get_selected: NULL pointer provided\n");
         return false;
     }
 

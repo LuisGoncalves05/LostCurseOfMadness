@@ -62,6 +62,11 @@ typedef enum {
     BUTTON_EXIT  /**< Exit button */
 } ButtonType;
 
+/**
+ * @brief Represents a Button instance
+ *
+ * The Button struct is opaque. 
+ */
 typedef struct Button Button;
 
 /**

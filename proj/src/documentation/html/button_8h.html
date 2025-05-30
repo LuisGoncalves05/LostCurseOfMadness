@@ -165,6 +165,7 @@ Macros</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:aabbec029df4131b530b45fc227cfddcc" id="r_aabbec029df4131b530b45fc227cfddcc"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structButton.html">Button</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="button_8h.html#aabbec029df4131b530b45fc227cfddcc">Button</a></td></tr>
+<tr class="memdesc:aabbec029df4131b530b45fc227cfddcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a <a class="el" href="structButton.html" title="Represents a Button instance.">Button</a> instance.  <br /></td></tr>
 <tr class="separator:aabbec029df4131b530b45fc227cfddcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
@@ -184,10 +185,10 @@ Enumerations</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a66c9ca9ef4206772ae74e8b53a9264ac" id="r_a66c9ca9ef4206772ae74e8b53a9264ac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structButton.html">Button</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="button_8h.html#a66c9ca9ef4206772ae74e8b53a9264ac">create_button</a> (xpm_map_t xpm, xpm_map_t xpm_selected, uint16_t x, uint16_t y)</td></tr>
-<tr class="memdesc:a66c9ca9ef4206772ae74e8b53a9264ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new <a class="el" href="structButton.html">Button</a> instance with the given properties.  <br /></td></tr>
+<tr class="memdesc:a66c9ca9ef4206772ae74e8b53a9264ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new <a class="el" href="structButton.html" title="Represents a Button instance.">Button</a> instance with the given properties.  <br /></td></tr>
 <tr class="separator:a66c9ca9ef4206772ae74e8b53a9264ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b75c612ee123b9b3261a831fd6d805b" id="r_a6b75c612ee123b9b3261a831fd6d805b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="button_8h.html#a6b75c612ee123b9b3261a831fd6d805b">destroy_button</a> (<a class="el" href="structButton.html">Button</a> *button)</td></tr>
-<tr class="memdesc:a6b75c612ee123b9b3261a831fd6d805b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees the memory associated with a <a class="el" href="structButton.html">Button</a>.  <br /></td></tr>
+<tr class="memdesc:a6b75c612ee123b9b3261a831fd6d805b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees the memory associated with a <a class="el" href="structButton.html" title="Represents a Button instance.">Button</a>.  <br /></td></tr>
 <tr class="separator:a6b75c612ee123b9b3261a831fd6d805b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace3dcf63fcb9a3dabe8656963ecccc8b" id="r_ace3dcf63fcb9a3dabe8656963ecccc8b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="button_8h.html#ace3dcf63fcb9a3dabe8656963ecccc8b">button_get_selected</a> (<a class="el" href="structButton.html">Button</a> *button)</td></tr>
 <tr class="memdesc:ace3dcf63fcb9a3dabe8656963ecccc8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets whether the button is currently selected.  <br /></td></tr>
@@ -367,6 +368,9 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Represents a <a class="el" href="structButton.html" title="Represents a Button instance.">Button</a> instance. </p>
+<p>The <a class="el" href="structButton.html" title="Represents a Button instance.">Button</a> struct is opaque. </p>
+
 </div>
 </div>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
@@ -418,7 +422,7 @@ Variables</h2></td></tr>
 <p>Gets whether the button is currently selected. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">button</td><td>Pointer to the <a class="el" href="structButton.html">Button</a>. </td></tr>
+    <tr><td class="paramname">button</td><td>Pointer to the <a class="el" href="structButton.html" title="Represents a Button instance.">Button</a>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -461,7 +465,7 @@ Variables</h2></td></tr>
 <p>Checks if a click at the given coordinates is within the button bounds. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">button</td><td>Pointer to the <a class="el" href="structButton.html">Button</a>. </td></tr>
+    <tr><td class="paramname">button</td><td>Pointer to the <a class="el" href="structButton.html" title="Represents a Button instance.">Button</a>. </td></tr>
     <tr><td class="paramname">x</td><td>X-coordinate of the click. </td></tr>
     <tr><td class="paramname">y</td><td>Y-coordinate of the click. </td></tr>
   </table>
@@ -500,7 +504,7 @@ Variables</h2></td></tr>
 <p>Sets the selected state of the button. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">button</td><td>Pointer to the <a class="el" href="structButton.html">Button</a>. </td></tr>
+    <tr><td class="paramname">button</td><td>Pointer to the <a class="el" href="structButton.html" title="Represents a Button instance.">Button</a>. </td></tr>
     <tr><td class="paramname">selected</td><td>Boolean value indicating whether the button is selected. </td></tr>
   </table>
   </dd>
@@ -546,7 +550,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Creates a new <a class="el" href="structButton.html">Button</a> instance with the given properties. </p>
+<p>Creates a new <a class="el" href="structButton.html" title="Represents a Button instance.">Button</a> instance with the given properties. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">xpm</td><td>XPM image for the button in default state. </td></tr>
@@ -556,7 +560,7 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Pointer to the created <a class="el" href="structButton.html">Button</a> structure. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to the created <a class="el" href="structButton.html" title="Represents a Button instance.">Button</a> structure. </dd></dl>
 
 </div>
 </div>
@@ -576,10 +580,10 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Frees the memory associated with a <a class="el" href="structButton.html">Button</a>. </p>
+<p>Frees the memory associated with a <a class="el" href="structButton.html" title="Represents a Button instance.">Button</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">button</td><td>Pointer to the <a class="el" href="structButton.html">Button</a> structure to destroy. </td></tr>
+    <tr><td class="paramname">button</td><td>Pointer to the <a class="el" href="structButton.html" title="Represents a Button instance.">Button</a> structure to destroy. </td></tr>
   </table>
   </dd>
 </dl>
@@ -615,7 +619,7 @@ Variables</h2></td></tr>
 <p>Draws the button onto the given frame buffer. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">button</td><td>Pointer to the <a class="el" href="structButton.html">Button</a>. </td></tr>
+    <tr><td class="paramname">button</td><td>Pointer to the <a class="el" href="structButton.html" title="Represents a Button instance.">Button</a>. </td></tr>
     <tr><td class="paramname">frame_buffer</td><td>Pointer to the frame buffer. </td></tr>
   </table>
   </dd>
