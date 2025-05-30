@@ -13,8 +13,8 @@ extern uint16_t x_res; /**< X resolution of the screen */
 extern uint16_t y_res; /**< Y resolution of the screen */
 
 typedef enum {
-    CURSOR_DEFAULT,  // Default cursor
-    CURSOR_CROSSHAIR // Crosshair cursor
+    CURSOR_DEFAULT,  /**< Default cursor */
+    CURSOR_CROSSHAIR /**< Crosshair cursor */
 } CursorMode;
 
 /**

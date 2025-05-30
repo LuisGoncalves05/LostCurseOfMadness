@@ -1,5 +1,10 @@
 #include "cursor.h"
 
+/**
+ * @brief Represents a mouse cursor instance.
+ *
+ * The Cursor struct is opaque.
+ */
 struct Cursor {
     Sprite *sprite;
     CursorMode mode;

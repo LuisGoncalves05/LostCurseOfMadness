@@ -1,5 +1,5 @@
 <map id="Cursor" name="Cursor">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,93,69,119"/>
+<area shape="rect" id="Node000001" title="Represents a mouse cursor instance." alt="" coords="5,93,69,119"/>
 <area shape="rect" id="Node000002" href="$structSprite.html" title="Represents a Sprite used for rendering objects on screen." alt="" coords="7,5,67,31"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="40,45,40,93,35,93,35,45"/>
 </map>
