@@ -105,20 +105,6 @@ MobState mob_get_state(Mob *mob);
 void mob_update_state(Mob *mob, uint16_t player_cx, uint16_t player_cy);
 
 /**
- * @brief Caps the mob's velocity to its maximum speed.
- *
- * @param mob Pointer to the Mob structure.
- */
-void mob_limit_speed(Mob *mob);
-
-/**
- * @brief Resets the mob's velocity to default if stopped.
- *
- * @param mob Pointer to the Mob structure.
- */
-void mob_stop(Mob *mob);
-
-/**
  * @brief Renders the mob on the screen.
  *
  * @param mob Pointer to the Mob structure.
