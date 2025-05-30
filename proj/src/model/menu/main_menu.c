@@ -1,10 +1,14 @@
 #include "main_menu.h"
-#include "../utils/sprite.h"
 
+/**
+ * @brief Represents a single MainMenu instance.
+ *
+ * The MainMenu struct is opaque.
+ */
 struct MainMenu {
-    Button *playButton;
-    Button *exitButton;
-    Sprite *title;
+    Button *playButton; /**< Pointer to the play button */
+    Button *exitButton; /**< Pointer to the exit button */
+    Sprite *title;      /**< Pointer to the game text sprite */
 };
 
 /* Create and destroy section */

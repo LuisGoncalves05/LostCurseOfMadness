@@ -1,18 +1,22 @@
 #include "game.h"
-#include "level/bullet.h"
 
+/**
+ * @brief Represents a single Game instance.
+ *
+ * The Game struct is opaque.
+ */
 struct Game {
-    State state;
-    uint8_t level_number;
-    uint8_t score;
-    Level *level;
-    Cursor *cursor;
+    State state;          /**< Current state of the game */
+    uint8_t level_number; /**< Current level number */
+    uint8_t score;        /**< Max score of the player */
+    Level *level;         /**< Pointer to the current level */
+    Cursor *cursor;       /**< Pointer to the cursor instance */
     union {
-        struct MainMenu *main_menu;
-        struct Victory *victory;
-        struct GameOver *game_over;
-    } menu;
-    bool shooting;
+        struct MainMenu *main_menu; /**< Pointer to the main menu instance */
+        struct Victory *victory;    /**< Pointer to the victory menu instance */
+        struct GameOver *game_over; /**< Pointer to the game over menu instance */
+    } menu;                         /**< Union to hold different menu instances */
+    bool shooting;                  /**< Indicates if the player is shooting */
 };
 
 /* Create and destroy section */

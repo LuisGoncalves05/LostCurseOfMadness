@@ -2,16 +2,20 @@
 #define BULLET_H
 
 #include <lcom/lcf.h>
+#include <math.h>
 #include <stdbool.h>
 #include <stdint.h>
+#include <stdlib.h>
 
 #include "assets/xpm/level/bullet.xpm"
+#include "drivers/video/gpu.h"
 #include "model/utils/sprite.h"
 
 #define BULLET_SPEED 10 /**< Speed of the bullet in pixels per tick */
 #define MAX_BULLETS 50  /**< Maximum number of bullets that can exist simultaneously */
 
-extern uint16_t x_res, y_res;
+extern uint16_t x_res; /**< X resolution of the screen */
+extern uint16_t y_res; /**< Y resolution of the screen */
 
 /**
  * @brief Represents a single bullet instance.

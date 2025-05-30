@@ -1,14 +1,18 @@
 #include "player.h"
-#include "maze.h"
 
+/**
+ * @brief Represents a single Player instance.
+ *
+ * The Player struct is opaque.
+ */
 struct Player {
-    AnimatedSprite *animated_sprite;
-    unsigned char health;
-    Direction direction;
-    PlayerState state;
-    bool dirs_pressed[4];
+    AnimatedSprite *animated_sprite; /**< Pointer to the player's animated sprite */
+    unsigned char health;            /**< Current Player's health */
+    Direction direction;             /**< Current direction of the player */
+    PlayerState state;               /**< Current state of the player */
+    bool dirs_pressed[4];            /**< Directions pressed by the player */
 };
-    
+
 /* Create and destroy section */
 
 Player *create_player() {

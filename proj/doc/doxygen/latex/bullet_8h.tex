@@ -1,0 +1,330 @@
+\doxysection{src/model/level/bullet.h File Reference}
+\hypertarget{bullet_8h}{}\label{bullet_8h}\index{src/model/level/bullet.h@{src/model/level/bullet.h}}
+{\ttfamily \#include $<$lcom/lcf.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include "{}assets/xpm/level/bullet.\+xpm"{}}\newline
+{\ttfamily \#include "{}drivers/video/gpu.\+h"{}}\newline
+{\ttfamily \#include "{}model/utils/sprite.\+h"{}}\newline
+Include dependency graph for bullet.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{bullet_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{bullet_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{bullet_8h_a70b3e643b533b8f785b7912e69434161}{BULLET\+\_\+\+SPEED}}~10
+\item 
+\#define \mbox{\hyperlink{bullet_8h_a4331843c2698da5ccb18562eb1485681}{MAX\+\_\+\+BULLETS}}~50
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{structBullet}{Bullet}} \mbox{\hyperlink{bullet_8h_a16081eacbd30caf76f1b04a97eee39b9}{Bullet}}
+\begin{DoxyCompactList}\small\item\em Represents a single bullet instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structBullet}{Bullet}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{bullet_8h_a986316bffe25dffcf4b0a246fd428864}{create\+\_\+bullet}} (int x, int y, double angle)
+\begin{DoxyCompactList}\small\item\em Creates a new bullet at the specified coordinates moving in the given direction. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{bullet_8h_a2e6902c7c7d0d3651a88892991cdcfb9}{destroy\+\_\+bullet}} (\mbox{\hyperlink{structBullet}{Bullet}} \texorpdfstring{$\ast$}{*}bullet)
+\begin{DoxyCompactList}\small\item\em Frees resources used by a bullet and destroys it. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structSprite}{Sprite}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{bullet_8h_a614f7cac474f4c1091702eec6032852c}{bullet\+\_\+get\+\_\+sprite}} (\mbox{\hyperlink{structBullet}{Bullet}} \texorpdfstring{$\ast$}{*}bullet)
+\begin{DoxyCompactList}\small\item\em Gets the sprite associated with the bullet. \end{DoxyCompactList}\item 
+int16\+\_\+t \mbox{\hyperlink{bullet_8h_a7bc9f4f66e5bc3ae23688c8b6315543a}{bullet\+\_\+get\+\_\+x}} (\mbox{\hyperlink{structBullet}{Bullet}} \texorpdfstring{$\ast$}{*}bullet)
+\begin{DoxyCompactList}\small\item\em Gets the x-\/coordinate of the bullet. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{bullet_8h_a5ff350b69a202f4a00136fac76f2eab4}{bullet\+\_\+set\+\_\+x}} (\mbox{\hyperlink{structBullet}{Bullet}} \texorpdfstring{$\ast$}{*}bullet, int16\+\_\+t x)
+\begin{DoxyCompactList}\small\item\em Sets the x-\/coordinate of the bullet. \end{DoxyCompactList}\item 
+int16\+\_\+t \mbox{\hyperlink{bullet_8h_a9ed8dfc538ae073ddc82c9787d74d15a}{bullet\+\_\+get\+\_\+y}} (\mbox{\hyperlink{structBullet}{Bullet}} \texorpdfstring{$\ast$}{*}bullet)
+\begin{DoxyCompactList}\small\item\em Gets the y-\/coordinate of the bullet. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{bullet_8h_a73fbd8a45b09b1d6ff6dd8ffc1e24d30}{bullet\+\_\+set\+\_\+y}} (\mbox{\hyperlink{structBullet}{Bullet}} \texorpdfstring{$\ast$}{*}bullet, int16\+\_\+t y)
+\begin{DoxyCompactList}\small\item\em Sets the y-\/coordinate of the bullet. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{bullet_8h_aaaf771b30a788935684c8484babbf1e2}{bullet\+\_\+get\+\_\+xspeed}} (\mbox{\hyperlink{structBullet}{Bullet}} \texorpdfstring{$\ast$}{*}bullet)
+\begin{DoxyCompactList}\small\item\em Gets the horizontal velocity component of the bullet. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{bullet_8h_a3ea380df1828b016fbe2a63c3fe03c27}{bullet\+\_\+get\+\_\+yspeed}} (\mbox{\hyperlink{structBullet}{Bullet}} \texorpdfstring{$\ast$}{*}bullet)
+\begin{DoxyCompactList}\small\item\em Gets the vertical velocity component of the bullet. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{bullet_8h_a996e6445aaaf51f380278f94ef14d1ca}{bullet\+\_\+get\+\_\+active}} (\mbox{\hyperlink{structBullet}{Bullet}} \texorpdfstring{$\ast$}{*}bullet)
+\begin{DoxyCompactList}\small\item\em Checks whether the bullet is currently active. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{bullet_8h_a52057c87bf16504f4b803b2632ee2247}{bullet\+\_\+set\+\_\+active}} (\mbox{\hyperlink{structBullet}{Bullet}} \texorpdfstring{$\ast$}{*}bullet, bool active)
+\begin{DoxyCompactList}\small\item\em Sets the bullet\textquotesingle{}s active status. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{bullet_8h_a185d18f207e3e6df1a1ff7412b6eeea6}{draw\+\_\+bullet}} (\mbox{\hyperlink{structBullet}{Bullet}} \texorpdfstring{$\ast$}{*}bullet, uint8\+\_\+t \texorpdfstring{$\ast$}{*}frame\+\_\+buffer)
+\begin{DoxyCompactList}\small\item\em Draws the bullet on the provided frame buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{bullet_8h_a8c698380dc32cd8b5a19a84da1ab2ad9}{x\+\_\+res}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{bullet_8h_a1188c1e5fe37db7b55bdad91f71e26c0}{y\+\_\+res}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{bullet_8h_a70b3e643b533b8f785b7912e69434161}\label{bullet_8h_a70b3e643b533b8f785b7912e69434161} 
+\index{bullet.h@{bullet.h}!BULLET\_SPEED@{BULLET\_SPEED}}
+\index{BULLET\_SPEED@{BULLET\_SPEED}!bullet.h@{bullet.h}}
+\doxysubsubsection{\texorpdfstring{BULLET\_SPEED}{BULLET\_SPEED}}
+{\footnotesize\ttfamily \#define BULLET\+\_\+\+SPEED~10}
+
+Speed of the bullet in pixels per tick \Hypertarget{bullet_8h_a4331843c2698da5ccb18562eb1485681}\label{bullet_8h_a4331843c2698da5ccb18562eb1485681} 
+\index{bullet.h@{bullet.h}!MAX\_BULLETS@{MAX\_BULLETS}}
+\index{MAX\_BULLETS@{MAX\_BULLETS}!bullet.h@{bullet.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_BULLETS}{MAX\_BULLETS}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+BULLETS~50}
+
+Maximum number of bullets that can exist simultaneously 
+
+\doxysubsection{Typedef Documentation}
+\Hypertarget{bullet_8h_a16081eacbd30caf76f1b04a97eee39b9}\label{bullet_8h_a16081eacbd30caf76f1b04a97eee39b9} 
+\index{bullet.h@{bullet.h}!Bullet@{Bullet}}
+\index{Bullet@{Bullet}!bullet.h@{bullet.h}}
+\doxysubsubsection{\texorpdfstring{Bullet}{Bullet}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structBullet}{Bullet}} \mbox{\hyperlink{structBullet}{Bullet}}}
+
+
+
+Represents a single bullet instance. 
+
+The \doxylink{structBullet}{Bullet} struct is opaque. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{bullet_8h_a996e6445aaaf51f380278f94ef14d1ca}\label{bullet_8h_a996e6445aaaf51f380278f94ef14d1ca} 
+\index{bullet.h@{bullet.h}!bullet\_get\_active@{bullet\_get\_active}}
+\index{bullet\_get\_active@{bullet\_get\_active}!bullet.h@{bullet.h}}
+\doxysubsubsection{\texorpdfstring{bullet\_get\_active()}{bullet\_get\_active()}}
+{\footnotesize\ttfamily bool bullet\+\_\+get\+\_\+active (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structBullet}{Bullet}} \texorpdfstring{$\ast$}{*}}]{bullet }\end{DoxyParamCaption})}
+
+
+
+Checks whether the bullet is currently active. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bullet} & Pointer to the \doxylink{structBullet}{Bullet}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if active, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{bullet_8h_a614f7cac474f4c1091702eec6032852c}\label{bullet_8h_a614f7cac474f4c1091702eec6032852c} 
+\index{bullet.h@{bullet.h}!bullet\_get\_sprite@{bullet\_get\_sprite}}
+\index{bullet\_get\_sprite@{bullet\_get\_sprite}!bullet.h@{bullet.h}}
+\doxysubsubsection{\texorpdfstring{bullet\_get\_sprite()}{bullet\_get\_sprite()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structSprite}{Sprite}} \texorpdfstring{$\ast$}{*} bullet\+\_\+get\+\_\+sprite (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structBullet}{Bullet}} \texorpdfstring{$\ast$}{*}}]{bullet }\end{DoxyParamCaption})}
+
+
+
+Gets the sprite associated with the bullet. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bullet} & Pointer to the \doxylink{structBullet}{Bullet}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the \doxylink{structSprite}{Sprite}. 
+\end{DoxyReturn}
+\Hypertarget{bullet_8h_a7bc9f4f66e5bc3ae23688c8b6315543a}\label{bullet_8h_a7bc9f4f66e5bc3ae23688c8b6315543a} 
+\index{bullet.h@{bullet.h}!bullet\_get\_x@{bullet\_get\_x}}
+\index{bullet\_get\_x@{bullet\_get\_x}!bullet.h@{bullet.h}}
+\doxysubsubsection{\texorpdfstring{bullet\_get\_x()}{bullet\_get\_x()}}
+{\footnotesize\ttfamily int16\+\_\+t bullet\+\_\+get\+\_\+x (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structBullet}{Bullet}} \texorpdfstring{$\ast$}{*}}]{bullet }\end{DoxyParamCaption})}
+
+
+
+Gets the x-\/coordinate of the bullet. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bullet} & Pointer to the \doxylink{structBullet}{Bullet}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The x-\/coordinate of the bullet. 
+\end{DoxyReturn}
+\Hypertarget{bullet_8h_aaaf771b30a788935684c8484babbf1e2}\label{bullet_8h_aaaf771b30a788935684c8484babbf1e2} 
+\index{bullet.h@{bullet.h}!bullet\_get\_xspeed@{bullet\_get\_xspeed}}
+\index{bullet\_get\_xspeed@{bullet\_get\_xspeed}!bullet.h@{bullet.h}}
+\doxysubsubsection{\texorpdfstring{bullet\_get\_xspeed()}{bullet\_get\_xspeed()}}
+{\footnotesize\ttfamily double bullet\+\_\+get\+\_\+xspeed (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structBullet}{Bullet}} \texorpdfstring{$\ast$}{*}}]{bullet }\end{DoxyParamCaption})}
+
+
+
+Gets the horizontal velocity component of the bullet. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bullet} & Pointer to the \doxylink{structBullet}{Bullet}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Velocity in the x-\/direction (pixels per tick). 
+\end{DoxyReturn}
+\Hypertarget{bullet_8h_a9ed8dfc538ae073ddc82c9787d74d15a}\label{bullet_8h_a9ed8dfc538ae073ddc82c9787d74d15a} 
+\index{bullet.h@{bullet.h}!bullet\_get\_y@{bullet\_get\_y}}
+\index{bullet\_get\_y@{bullet\_get\_y}!bullet.h@{bullet.h}}
+\doxysubsubsection{\texorpdfstring{bullet\_get\_y()}{bullet\_get\_y()}}
+{\footnotesize\ttfamily int16\+\_\+t bullet\+\_\+get\+\_\+y (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structBullet}{Bullet}} \texorpdfstring{$\ast$}{*}}]{bullet }\end{DoxyParamCaption})}
+
+
+
+Gets the y-\/coordinate of the bullet. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bullet} & Pointer to the \doxylink{structBullet}{Bullet}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The y-\/coordinate of the bullet. 
+\end{DoxyReturn}
+\Hypertarget{bullet_8h_a3ea380df1828b016fbe2a63c3fe03c27}\label{bullet_8h_a3ea380df1828b016fbe2a63c3fe03c27} 
+\index{bullet.h@{bullet.h}!bullet\_get\_yspeed@{bullet\_get\_yspeed}}
+\index{bullet\_get\_yspeed@{bullet\_get\_yspeed}!bullet.h@{bullet.h}}
+\doxysubsubsection{\texorpdfstring{bullet\_get\_yspeed()}{bullet\_get\_yspeed()}}
+{\footnotesize\ttfamily double bullet\+\_\+get\+\_\+yspeed (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structBullet}{Bullet}} \texorpdfstring{$\ast$}{*}}]{bullet }\end{DoxyParamCaption})}
+
+
+
+Gets the vertical velocity component of the bullet. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bullet} & Pointer to the \doxylink{structBullet}{Bullet}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Velocity in the y-\/direction (pixels per tick). 
+\end{DoxyReturn}
+\Hypertarget{bullet_8h_a52057c87bf16504f4b803b2632ee2247}\label{bullet_8h_a52057c87bf16504f4b803b2632ee2247} 
+\index{bullet.h@{bullet.h}!bullet\_set\_active@{bullet\_set\_active}}
+\index{bullet\_set\_active@{bullet\_set\_active}!bullet.h@{bullet.h}}
+\doxysubsubsection{\texorpdfstring{bullet\_set\_active()}{bullet\_set\_active()}}
+{\footnotesize\ttfamily void bullet\+\_\+set\+\_\+active (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structBullet}{Bullet}} \texorpdfstring{$\ast$}{*}}]{bullet,  }\item[{bool}]{active }\end{DoxyParamCaption})}
+
+
+
+Sets the bullet\textquotesingle{}s active status. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bullet} & Pointer to the \doxylink{structBullet}{Bullet}. \\
+\hline
+{\em active} & New active status to set. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{bullet_8h_a5ff350b69a202f4a00136fac76f2eab4}\label{bullet_8h_a5ff350b69a202f4a00136fac76f2eab4} 
+\index{bullet.h@{bullet.h}!bullet\_set\_x@{bullet\_set\_x}}
+\index{bullet\_set\_x@{bullet\_set\_x}!bullet.h@{bullet.h}}
+\doxysubsubsection{\texorpdfstring{bullet\_set\_x()}{bullet\_set\_x()}}
+{\footnotesize\ttfamily void bullet\+\_\+set\+\_\+x (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structBullet}{Bullet}} \texorpdfstring{$\ast$}{*}}]{bullet,  }\item[{int16\+\_\+t}]{x }\end{DoxyParamCaption})}
+
+
+
+Sets the x-\/coordinate of the bullet. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bullet} & Pointer to the \doxylink{structBullet}{Bullet}. \\
+\hline
+{\em x} & The x-\/coordinate of the bullet. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{bullet_8h_a73fbd8a45b09b1d6ff6dd8ffc1e24d30}\label{bullet_8h_a73fbd8a45b09b1d6ff6dd8ffc1e24d30} 
+\index{bullet.h@{bullet.h}!bullet\_set\_y@{bullet\_set\_y}}
+\index{bullet\_set\_y@{bullet\_set\_y}!bullet.h@{bullet.h}}
+\doxysubsubsection{\texorpdfstring{bullet\_set\_y()}{bullet\_set\_y()}}
+{\footnotesize\ttfamily void bullet\+\_\+set\+\_\+y (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structBullet}{Bullet}} \texorpdfstring{$\ast$}{*}}]{bullet,  }\item[{int16\+\_\+t}]{y }\end{DoxyParamCaption})}
+
+
+
+Sets the y-\/coordinate of the bullet. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bullet} & Pointer to the \doxylink{structBullet}{Bullet}. \\
+\hline
+{\em y} & The y-\/coordinate of the bullet. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{bullet_8h_a986316bffe25dffcf4b0a246fd428864}\label{bullet_8h_a986316bffe25dffcf4b0a246fd428864} 
+\index{bullet.h@{bullet.h}!create\_bullet@{create\_bullet}}
+\index{create\_bullet@{create\_bullet}!bullet.h@{bullet.h}}
+\doxysubsubsection{\texorpdfstring{create\_bullet()}{create\_bullet()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structBullet}{Bullet}} \texorpdfstring{$\ast$}{*} create\+\_\+bullet (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{double}]{angle }\end{DoxyParamCaption})}
+
+
+
+Creates a new bullet at the specified coordinates moving in the given direction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The initial x-\/coordinate (in pixels). \\
+\hline
+{\em y} & The initial y-\/coordinate (in pixels). \\
+\hline
+{\em angle} & The movement direction in radians.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the created \doxylink{structBullet}{Bullet} on success, or NULL on failure. 
+\end{DoxyReturn}
+\Hypertarget{bullet_8h_a2e6902c7c7d0d3651a88892991cdcfb9}\label{bullet_8h_a2e6902c7c7d0d3651a88892991cdcfb9} 
+\index{bullet.h@{bullet.h}!destroy\_bullet@{destroy\_bullet}}
+\index{destroy\_bullet@{destroy\_bullet}!bullet.h@{bullet.h}}
+\doxysubsubsection{\texorpdfstring{destroy\_bullet()}{destroy\_bullet()}}
+{\footnotesize\ttfamily void destroy\+\_\+bullet (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structBullet}{Bullet}} \texorpdfstring{$\ast$}{*}}]{bullet }\end{DoxyParamCaption})}
+
+
+
+Frees resources used by a bullet and destroys it. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bullet} & Pointer to the \doxylink{structBullet}{Bullet} to destroy. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{bullet_8h_a185d18f207e3e6df1a1ff7412b6eeea6}\label{bullet_8h_a185d18f207e3e6df1a1ff7412b6eeea6} 
+\index{bullet.h@{bullet.h}!draw\_bullet@{draw\_bullet}}
+\index{draw\_bullet@{draw\_bullet}!bullet.h@{bullet.h}}
+\doxysubsubsection{\texorpdfstring{draw\_bullet()}{draw\_bullet()}}
+{\footnotesize\ttfamily void draw\+\_\+bullet (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structBullet}{Bullet}} \texorpdfstring{$\ast$}{*}}]{bullet,  }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{frame\+\_\+buffer }\end{DoxyParamCaption})}
+
+
+
+Draws the bullet on the provided frame buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bullet} & Pointer to the \doxylink{structBullet}{Bullet} to draw. \\
+\hline
+{\em frame\+\_\+buffer} & Pointer to the frame buffer where the bullet will be rendered. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{bullet_8h_a8c698380dc32cd8b5a19a84da1ab2ad9}\label{bullet_8h_a8c698380dc32cd8b5a19a84da1ab2ad9} 
+\index{bullet.h@{bullet.h}!x\_res@{x\_res}}
+\index{x\_res@{x\_res}!bullet.h@{bullet.h}}
+\doxysubsubsection{\texorpdfstring{x\_res}{x\_res}}
+{\footnotesize\ttfamily uint16\+\_\+t x\+\_\+res\hspace{0.3cm}{\ttfamily [extern]}}
+
+X resolution of the screen \Hypertarget{bullet_8h_a1188c1e5fe37db7b55bdad91f71e26c0}\label{bullet_8h_a1188c1e5fe37db7b55bdad91f71e26c0} 
+\index{bullet.h@{bullet.h}!y\_res@{y\_res}}
+\index{y\_res@{y\_res}!bullet.h@{bullet.h}}
+\doxysubsubsection{\texorpdfstring{y\_res}{y\_res}}
+{\footnotesize\ttfamily uint16\+\_\+t y\+\_\+res\hspace{0.3cm}{\ttfamily [extern]}}
+
+Y resolution of the screen 

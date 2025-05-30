@@ -1,0 +1,5 @@
+<map id="Button" name="Button">
+<area shape="rect" id="Node000001" title="Represents a Button instance." alt="" coords="5,108,71,133"/>
+<area shape="rect" id="Node000002" href="$structSprite.html" title="Represents a Sprite used for rendering objects on screen." alt="" coords="8,5,68,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="41,45,41,108,35,108,35,45"/>
+</map>

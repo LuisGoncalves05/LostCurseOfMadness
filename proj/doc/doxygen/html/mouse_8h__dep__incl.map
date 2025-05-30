@@ -1,0 +1,12 @@
+<map id="src/drivers/mouse/mouse.h" name="src/drivers/mouse/mouse.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="141,5,339,31"/>
+<area shape="rect" id="Node000002" href="$mouse_8c.html" title=" " alt="" coords="5,79,203,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="208,39,127,81,125,76,205,34"/>
+<area shape="rect" id="Node000003" href="$main_8c.html" title=" " alt="" coords="195,152,285,177"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="243,45,243,152,237,152,237,45"/>
+<area shape="rect" id="Node000004" href="$game_8h.html" title=" " alt="" coords="277,79,416,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="270,36,331,76,328,81,267,40"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="320,114,259,154,256,150,317,109"/>
+<area shape="rect" id="Node000005" href="$game_8c.html" title=" " alt="" coords="309,152,448,177"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="360,116,376,151,371,153,355,118"/>
+</map>

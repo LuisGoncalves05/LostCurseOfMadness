@@ -1,15 +1,19 @@
 #include "level.h"
-#include "config.h"
 
+/**
+ * @brief Represents a single Level instance.
+ *
+ * The Level struct is opaque.
+ */
 struct Level {
-    uint8_t number;
-    Maze *maze;
-    Player *player;
-    double delta;
-    double fov_angle;
-    Mob **mobs;
-    Bullet *bullets[MAX_BULLETS];
-    uint8_t bullet_count;
+    uint8_t number;               /**< Identifier number for the level */
+    Maze *maze;                   /**< Pointer to the Maze structure */
+    Player *player;               /**< Pointer to the Player structure */
+    double delta;                 /**< Angle of the player's direction (in relation to mouse position) in radians */
+    double fov_angle;             /**< Field of view angle ing radians */
+    Mob **mobs;                   /**< Array of pointers to Mob structures */
+    Bullet *bullets[MAX_BULLETS]; /**< Array of pointers to Bullet structures */
+    uint8_t bullet_count;         /**< Current number of active bullets */
 };
 
 /* Create and destroy section */
@@ -17,7 +21,7 @@ struct Level {
 Level *create_level(uint8_t number) {
     Level *level = malloc(sizeof(Level));
     if (level == NULL) {
-        printf("create_level: NULL pointer providede\n");
+        printf("create_level: NULL pointer provided\n");
         return NULL;
     }
 
@@ -145,7 +149,7 @@ PlayerState level_get_player_state(Level *level) {
 /* Statics section */
 
 static bool(check_mob_collisions)(Level *level) {
-    if (level == NULL){
+    if (level == NULL) {
         printf("check_mob_collisions: NULL pointer provided\n");
         return false;
     }
@@ -157,13 +161,13 @@ static bool(check_mob_collisions)(Level *level) {
         return false;
     }
 
-    Sprite *player_sprite = player_get_sprite(level->player);
+    Sprite *player = player_get_sprite(get_player(level));
     for (int i = 0; i < mob_count; i++) {
-        if (player_sprite == NULL) {
+        if (player == NULL) {
             printf("check_mob_collisions: player_get_sprite failed\n");
             return false;
         }
-        if (check_sprite_collision(mob_get_sprite(mobs[i]), player_sprite)) {
+        if (check_sprite_collision(mob_get_sprite(mobs[i]), player)) {
             return true;
         }
     }
@@ -182,23 +186,22 @@ static void update_bullet(Bullet *b, Level *level) {
         return;
     }
 
-    Sprite *bullet_sprite = bullet_get_sprite(b);
-    if (bullet_sprite == NULL) {
+    Sprite *sprite = bullet_get_sprite(b);
+    if (sprite == NULL) {
         printf("update_bullet: bullet_get_sprite failed\n");
         return;
     }
 
-    bullet_set_x(b, bullet_get_x(b) + (int) round(bullet_get_xspeed(b)));
-    bullet_set_y(b, bullet_get_y(b) + (int) round(bullet_get_yspeed(b)));
+    sprite->x += (int) round(bullet_get_xspeed(b));
+    sprite->y += (int) round(bullet_get_yspeed(b));
 
-    int16_t x = bullet_get_x(b);
-    int16_t y = bullet_get_y(b);
-    if (x < 0 || x > x_res || y < 0 || y > y_res) {
+    if (sprite->x < 0 || sprite->x > x_res ||
+        sprite->y < 0 || sprite->y > y_res) {
         bullet_set_active(b, false);
         return;
     }
 
-    if (check_wall_collision(get_maze(level), bullet_sprite)) {
+    if (check_wall_collision(get_maze(level), sprite)) {
         bullet_set_active(b, false);
         return;
     }
@@ -208,12 +211,12 @@ static void update_bullet(Bullet *b, Level *level) {
         printf("update_bullet: get_mobs failed\n");
         return;
     }
-    
+
     int mob_count = get_mob_count(get_maze(level));
     for (int i = 0; i < mob_count; i++) {
         Mob *mob = mobs[i];
         Sprite *mob_sprite = mob_get_sprite(mob);
-        if (check_sprite_collision(bullet_sprite, mob_sprite)) {
+        if (check_sprite_collision(sprite, mob_sprite)) {
             mob_set_health(mob, mob_get_health(mob) - 1);
             bullet_set_active(b, false);
             break;
@@ -310,7 +313,7 @@ static void level_update_all_mobs(Level *level) {
             int16_t y = mob_get_y(mob);
             double xspeed = mob_get_xspeed(mob);
             double yspeed = mob_get_yspeed(mob);
-            
+
             mob_set_x(mob, x + xspeed);
             if (check_wall_collision(maze, mob_sprite)) {
                 mob_set_x(mob, x);
@@ -421,18 +424,21 @@ static void draw_fov_cone(Level *level) {
     max_y = fmax(max_y, cy + CLOSE_RADIUS);
 
     // Check screen bounds
-    int box_min_x = (int)(min_x);
-    if (box_min_x < 0) box_min_x = 0;
+    int box_min_x = (int) (min_x);
+    if (box_min_x < 0)
+        box_min_x = 0;
 
-    int box_max_x = (int)(max_x + 1);
-    if (box_max_x >= x_res) box_max_x = x_res - 1;
+    int box_max_x = (int) (max_x + 1);
+    if (box_max_x >= x_res)
+        box_max_x = x_res - 1;
 
-    int box_min_y = (int)(min_y);
-    if (box_min_y < 0) box_min_y = 0;
+    int box_min_y = (int) (min_y);
+    if (box_min_y < 0)
+        box_min_y = 0;
 
-    int box_max_y = (int)(max_y + 1);
-    if (box_max_y >= y_res) box_max_y = y_res - 1;
-
+    int box_max_y = (int) (max_y + 1);
+    if (box_max_y >= y_res)
+        box_max_y = y_res - 1;
 
     // Unit vector direction
     double dir_x = cos(delta);

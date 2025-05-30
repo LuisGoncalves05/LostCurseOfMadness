@@ -1,15 +1,9 @@
 #ifndef MOUSE_H
 #define MOUSE_H
 
-#include "../keyboard/kbc.h"
+#include "drivers/keyboard/kbc.h"
 
-extern int32_t kbd_subscription_id;
-
-/** @defgroup mouse mouse
- * @{
- *
- * Functions for using the Mouse.
- */
+extern int32_t kbd_subscription_id; /**< Keyboard subscription ID */
 
 /**
  * @brief Subscribes and enables Mouse interrupts.

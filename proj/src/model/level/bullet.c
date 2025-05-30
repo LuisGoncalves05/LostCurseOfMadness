@@ -1,9 +1,10 @@
-#include <math.h>
-#include <stdlib.h>
-
 #include "bullet.h"
-#include "drivers/video/gpu.h"
 
+/**
+ * @brief Represents a single bullet instance.
+ *
+ * The Bullet struct is opaque.
+ */
 struct Bullet {
     Sprite *sprite; /**< Underlying sprite */
     bool active;    /**< Active flag */

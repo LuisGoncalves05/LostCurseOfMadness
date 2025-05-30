@@ -3,7 +3,5 @@
 proj
 .gdbinit
 
-palette.*
-
 output.txt
 trace.txt

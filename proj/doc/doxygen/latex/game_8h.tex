@@ -1,0 +1,257 @@
+\doxysection{src/model/game.h File Reference}
+\hypertarget{game_8h}{}\label{game_8h}\index{src/model/game.h@{src/model/game.h}}
+{\ttfamily \#include $<$lcom/lcf.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include "{}drivers/keyboard/keyboard.\+h"{}}\newline
+{\ttfamily \#include "{}drivers/mouse/mouse.\+h"{}}\newline
+{\ttfamily \#include "{}drivers/timer/i8254.\+h"{}}\newline
+{\ttfamily \#include "{}drivers/video/gpu.\+h"{}}\newline
+{\ttfamily \#include "{}model/level/level.\+h"{}}\newline
+{\ttfamily \#include "{}model/menu/game\+\_\+over.\+h"{}}\newline
+{\ttfamily \#include "{}model/menu/main\+\_\+menu.\+h"{}}\newline
+{\ttfamily \#include "{}model/menu/victory.\+h"{}}\newline
+{\ttfamily \#include "{}model/utils/cursor.\+h"{}}\newline
+{\ttfamily \#include "{}model/utils/keys.\+h"{}}\newline
+{\ttfamily \#include "{}model/utils/sprite.\+h"{}}\newline
+Include dependency graph for game.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{game_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=270pt]{game_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{structGame}{Game}} \mbox{\hyperlink{game_8h_a69b5df78d315f81ed77df30fdbfb7002}{Game}}
+\begin{DoxyCompactList}\small\item\em Represents a single \doxylink{structGame}{Game} instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{game_8h_a5d74787dedbc4e11c1ab15bf487e61f8}{State}} \{ \newline
+\mbox{\hyperlink{game_8h_a5d74787dedbc4e11c1ab15bf487e61f8a4c40e60bc71a32b924ce1f08d57f9721}{MENU}}
+, \mbox{\hyperlink{game_8h_a5d74787dedbc4e11c1ab15bf487e61f8aa4b1e64b6e370537f87e5806385ee069}{LEVEL}}
+, \mbox{\hyperlink{game_8h_a5d74787dedbc4e11c1ab15bf487e61f8a38088c60165dc5b369946da1d8797d00}{VICTORY}}
+, \mbox{\hyperlink{game_8h_a5d74787dedbc4e11c1ab15bf487e61f8a871723195985a4ae22d7e10d99bf8a00}{GAME\+\_\+\+OVER}}
+, \newline
+\mbox{\hyperlink{game_8h_a5d74787dedbc4e11c1ab15bf487e61f8a7a10b5d68d31711288e1fe0fa17dbf4f}{EXIT}}
+ \}
+\begin{DoxyCompactList}\small\item\em Possible states of the game. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structGame}{Game}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{game_8h_ab92fa427cf97afa616cd950c04314fab}{create\+\_\+game}} ()
+\begin{DoxyCompactList}\small\item\em Creates and initializes a new \doxylink{structGame}{Game} instance. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{game_8h_a761139cc81603d38d5c391927f336bd1}{destroy\+\_\+game}} (\mbox{\hyperlink{structGame}{Game}} \texorpdfstring{$\ast$}{*}game)
+\begin{DoxyCompactList}\small\item\em Frees the memory associated with the \doxylink{structGame}{Game} instance. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{game_8h_a3300af26c2f7dfc209867338e6d9fb16}{game\+\_\+timer\+\_\+handler}} (\mbox{\hyperlink{structGame}{Game}} \texorpdfstring{$\ast$}{*}game)
+\begin{DoxyCompactList}\small\item\em Handles timer interrupts and updates game logic accordingly. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{game_8h_ae511145684a97aaa9bc733c2ff2e65a5}{game\+\_\+keyboard\+\_\+handler}} (\mbox{\hyperlink{structGame}{Game}} \texorpdfstring{$\ast$}{*}game)
+\begin{DoxyCompactList}\small\item\em Handles keyboard input events and updates game state. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{game_8h_aeab649b09cee37a399122003159054b1}{game\+\_\+mouse\+\_\+handler}} (\mbox{\hyperlink{structGame}{Game}} \texorpdfstring{$\ast$}{*}game)
+\begin{DoxyCompactList}\small\item\em Handles mouse input events and updates game state. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{game_8h_a5d74787dedbc4e11c1ab15bf487e61f8}{State}} \mbox{\hyperlink{game_8h_a63c18ae831ce1abd39d3f42a6aae4142}{get\+\_\+state}} (\mbox{\hyperlink{structGame}{Game}} \texorpdfstring{$\ast$}{*}game)
+\begin{DoxyCompactList}\small\item\em Returns the current state of the game. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{game_8h_af4aead9dfdc0d2f7e93662387a21e0bc}{scan\+\_\+code}}
+\item 
+struct \mbox{\hyperlink{mouse_8c_ab234504ae156fa5b250e34cbb65a7807}{packet}} \mbox{\hyperlink{game_8h_a26e83eca70c2b9169fbbb0eac7e32e32}{pp}}
+\item 
+int \mbox{\hyperlink{game_8h_a314b72c8b8d68e6dbc30c4d374912519}{frame\+\_\+counter}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{game_8h_a8c698380dc32cd8b5a19a84da1ab2ad9}{x\+\_\+res}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{game_8h_a1188c1e5fe37db7b55bdad91f71e26c0}{y\+\_\+res}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\Hypertarget{game_8h_a69b5df78d315f81ed77df30fdbfb7002}\label{game_8h_a69b5df78d315f81ed77df30fdbfb7002} 
+\index{game.h@{game.h}!Game@{Game}}
+\index{Game@{Game}!game.h@{game.h}}
+\doxysubsubsection{\texorpdfstring{Game}{Game}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structGame}{Game}} \mbox{\hyperlink{structGame}{Game}}}
+
+
+
+Represents a single \doxylink{structGame}{Game} instance. 
+
+The \doxylink{structGame}{Game} struct is opaque. 
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{game_8h_a5d74787dedbc4e11c1ab15bf487e61f8}\label{game_8h_a5d74787dedbc4e11c1ab15bf487e61f8} 
+\index{game.h@{game.h}!State@{State}}
+\index{State@{State}!game.h@{game.h}}
+\doxysubsubsection{\texorpdfstring{State}{State}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{game_8h_a5d74787dedbc4e11c1ab15bf487e61f8}{State}}}
+
+
+
+Possible states of the game. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MENU@{MENU}!game.h@{game.h}}\index{game.h@{game.h}!MENU@{MENU}}}\Hypertarget{game_8h_a5d74787dedbc4e11c1ab15bf487e61f8a4c40e60bc71a32b924ce1f08d57f9721}\label{game_8h_a5d74787dedbc4e11c1ab15bf487e61f8a4c40e60bc71a32b924ce1f08d57f9721} 
+MENU&Main menu state \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LEVEL@{LEVEL}!game.h@{game.h}}\index{game.h@{game.h}!LEVEL@{LEVEL}}}\Hypertarget{game_8h_a5d74787dedbc4e11c1ab15bf487e61f8aa4b1e64b6e370537f87e5806385ee069}\label{game_8h_a5d74787dedbc4e11c1ab15bf487e61f8aa4b1e64b6e370537f87e5806385ee069} 
+LEVEL&Active game level state \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{VICTORY@{VICTORY}!game.h@{game.h}}\index{game.h@{game.h}!VICTORY@{VICTORY}}}\Hypertarget{game_8h_a5d74787dedbc4e11c1ab15bf487e61f8a38088c60165dc5b369946da1d8797d00}\label{game_8h_a5d74787dedbc4e11c1ab15bf487e61f8a38088c60165dc5b369946da1d8797d00} 
+VICTORY&\doxylink{structGame}{Game} victory state \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GAME\_OVER@{GAME\_OVER}!game.h@{game.h}}\index{game.h@{game.h}!GAME\_OVER@{GAME\_OVER}}}\Hypertarget{game_8h_a5d74787dedbc4e11c1ab15bf487e61f8a871723195985a4ae22d7e10d99bf8a00}\label{game_8h_a5d74787dedbc4e11c1ab15bf487e61f8a871723195985a4ae22d7e10d99bf8a00} 
+GAME\+\_\+\+OVER&\doxylink{structGame}{Game} over state \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EXIT@{EXIT}!game.h@{game.h}}\index{game.h@{game.h}!EXIT@{EXIT}}}\Hypertarget{game_8h_a5d74787dedbc4e11c1ab15bf487e61f8a7a10b5d68d31711288e1fe0fa17dbf4f}\label{game_8h_a5d74787dedbc4e11c1ab15bf487e61f8a7a10b5d68d31711288e1fe0fa17dbf4f} 
+EXIT&Exit state \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{game_8h_ab92fa427cf97afa616cd950c04314fab}\label{game_8h_ab92fa427cf97afa616cd950c04314fab} 
+\index{game.h@{game.h}!create\_game@{create\_game}}
+\index{create\_game@{create\_game}!game.h@{game.h}}
+\doxysubsubsection{\texorpdfstring{create\_game()}{create\_game()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structGame}{Game}} \texorpdfstring{$\ast$}{*} create\+\_\+game (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Creates and initializes a new \doxylink{structGame}{Game} instance. 
+
+\begin{DoxyReturn}{Returns}
+Pointer to the created \doxylink{structGame}{Game} structure. 
+\end{DoxyReturn}
+\Hypertarget{game_8h_a761139cc81603d38d5c391927f336bd1}\label{game_8h_a761139cc81603d38d5c391927f336bd1} 
+\index{game.h@{game.h}!destroy\_game@{destroy\_game}}
+\index{destroy\_game@{destroy\_game}!game.h@{game.h}}
+\doxysubsubsection{\texorpdfstring{destroy\_game()}{destroy\_game()}}
+{\footnotesize\ttfamily void destroy\+\_\+game (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGame}{Game}} \texorpdfstring{$\ast$}{*}}]{game }\end{DoxyParamCaption})}
+
+
+
+Frees the memory associated with the \doxylink{structGame}{Game} instance. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game} & Pointer to the \doxylink{structGame}{Game} structure to destroy. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{game_8h_ae511145684a97aaa9bc733c2ff2e65a5}\label{game_8h_ae511145684a97aaa9bc733c2ff2e65a5} 
+\index{game.h@{game.h}!game\_keyboard\_handler@{game\_keyboard\_handler}}
+\index{game\_keyboard\_handler@{game\_keyboard\_handler}!game.h@{game.h}}
+\doxysubsubsection{\texorpdfstring{game\_keyboard\_handler()}{game\_keyboard\_handler()}}
+{\footnotesize\ttfamily void game\+\_\+keyboard\+\_\+handler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGame}{Game}} \texorpdfstring{$\ast$}{*}}]{game }\end{DoxyParamCaption})}
+
+
+
+Handles keyboard input events and updates game state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game} & Pointer to the \doxylink{structGame}{Game} structure. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{game_8h_aeab649b09cee37a399122003159054b1}\label{game_8h_aeab649b09cee37a399122003159054b1} 
+\index{game.h@{game.h}!game\_mouse\_handler@{game\_mouse\_handler}}
+\index{game\_mouse\_handler@{game\_mouse\_handler}!game.h@{game.h}}
+\doxysubsubsection{\texorpdfstring{game\_mouse\_handler()}{game\_mouse\_handler()}}
+{\footnotesize\ttfamily void game\+\_\+mouse\+\_\+handler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGame}{Game}} \texorpdfstring{$\ast$}{*}}]{game }\end{DoxyParamCaption})}
+
+
+
+Handles mouse input events and updates game state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game} & Pointer to the \doxylink{structGame}{Game} structure. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{game_8h_a3300af26c2f7dfc209867338e6d9fb16}\label{game_8h_a3300af26c2f7dfc209867338e6d9fb16} 
+\index{game.h@{game.h}!game\_timer\_handler@{game\_timer\_handler}}
+\index{game\_timer\_handler@{game\_timer\_handler}!game.h@{game.h}}
+\doxysubsubsection{\texorpdfstring{game\_timer\_handler()}{game\_timer\_handler()}}
+{\footnotesize\ttfamily void game\+\_\+timer\+\_\+handler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGame}{Game}} \texorpdfstring{$\ast$}{*}}]{game }\end{DoxyParamCaption})}
+
+
+
+Handles timer interrupts and updates game logic accordingly. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game} & Pointer to the \doxylink{structGame}{Game} structure. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{game_8h_a63c18ae831ce1abd39d3f42a6aae4142}\label{game_8h_a63c18ae831ce1abd39d3f42a6aae4142} 
+\index{game.h@{game.h}!get\_state@{get\_state}}
+\index{get\_state@{get\_state}!game.h@{game.h}}
+\doxysubsubsection{\texorpdfstring{get\_state()}{get\_state()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{game_8h_a5d74787dedbc4e11c1ab15bf487e61f8}{State}} get\+\_\+state (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGame}{Game}} \texorpdfstring{$\ast$}{*}}]{game }\end{DoxyParamCaption})}
+
+
+
+Returns the current state of the game. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game} & Pointer to the \doxylink{structGame}{Game} structure. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Current game state. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{game_8h_a314b72c8b8d68e6dbc30c4d374912519}\label{game_8h_a314b72c8b8d68e6dbc30c4d374912519} 
+\index{game.h@{game.h}!frame\_counter@{frame\_counter}}
+\index{frame\_counter@{frame\_counter}!game.h@{game.h}}
+\doxysubsubsection{\texorpdfstring{frame\_counter}{frame\_counter}}
+{\footnotesize\ttfamily int frame\+\_\+counter\hspace{0.3cm}{\ttfamily [extern]}}
+
+Frame counter for the game
+
+Frame counter for the game loop \Hypertarget{game_8h_a26e83eca70c2b9169fbbb0eac7e32e32}\label{game_8h_a26e83eca70c2b9169fbbb0eac7e32e32} 
+\index{game.h@{game.h}!pp@{pp}}
+\index{pp@{pp}!game.h@{game.h}}
+\doxysubsubsection{\texorpdfstring{pp}{pp}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{mouse_8c_ab234504ae156fa5b250e34cbb65a7807}{packet}} pp\hspace{0.3cm}{\ttfamily [extern]}}
+
+Mouse packet
+
+Mouse packet structure \Hypertarget{game_8h_af4aead9dfdc0d2f7e93662387a21e0bc}\label{game_8h_af4aead9dfdc0d2f7e93662387a21e0bc} 
+\index{game.h@{game.h}!scan\_code@{scan\_code}}
+\index{scan\_code@{scan\_code}!game.h@{game.h}}
+\doxysubsubsection{\texorpdfstring{scan\_code}{scan\_code}}
+{\footnotesize\ttfamily uint8\+\_\+t scan\+\_\+code\hspace{0.3cm}{\ttfamily [extern]}}
+
+Keyboard scan code
+
+Scan code read from keyboard \Hypertarget{game_8h_a8c698380dc32cd8b5a19a84da1ab2ad9}\label{game_8h_a8c698380dc32cd8b5a19a84da1ab2ad9} 
+\index{game.h@{game.h}!x\_res@{x\_res}}
+\index{x\_res@{x\_res}!game.h@{game.h}}
+\doxysubsubsection{\texorpdfstring{x\_res}{x\_res}}
+{\footnotesize\ttfamily uint16\+\_\+t x\+\_\+res\hspace{0.3cm}{\ttfamily [extern]}}
+
+X resolution of the screen \Hypertarget{game_8h_a1188c1e5fe37db7b55bdad91f71e26c0}\label{game_8h_a1188c1e5fe37db7b55bdad91f71e26c0} 
+\index{game.h@{game.h}!y\_res@{y\_res}}
+\index{y\_res@{y\_res}!game.h@{game.h}}
+\doxysubsubsection{\texorpdfstring{y\_res}{y\_res}}
+{\footnotesize\ttfamily uint16\+\_\+t y\+\_\+res\hspace{0.3cm}{\ttfamily [extern]}}
+
+Y resolution of the screen 

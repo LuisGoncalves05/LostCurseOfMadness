@@ -4,13 +4,14 @@
 
 #include "gpu.h"
 
-vbe_mode_info_t vg_mode_info;
-uint8_t bytes_per_pixel;
-uint16_t x_res, y_res;
-uint32_t frame_size;
-bool frame_start = true;
-uint8_t *main_frame_buffer;
-uint8_t *secondary_frame_buffer;
+vbe_mode_info_t vg_mode_info;    /**< Video mode information */
+uint8_t bytes_per_pixel;         /**< Bytes per pixel */
+uint16_t x_res;                  /**< X resolution of the screen */
+uint16_t y_res;                  /**< Y resolution of the screen */
+uint32_t frame_size;             /**< Size of the framebuffer */
+bool frame_start = true;         /**< Indicates if the current frame is the start frame */
+uint8_t *main_frame_buffer;      /**< Pointer to the main framebuffer */
+uint8_t *secondary_frame_buffer; /**< Pointer to the secondary framebuffer */
 
 int(set_graphic_mode)(uint16_t mode) {
     reg86_t reg86;
@@ -76,8 +77,8 @@ int(vga_draw_pixel)(uint16_t x, uint16_t y, uint32_t color, uint8_t *frame_buffe
 }
 
 int(vga_draw_hline)(uint16_t x, uint16_t y, uint16_t len, uint32_t color, uint8_t *frame_buffer) {
-    if (len == 0 || x >= x_res || y >= y_res) {
-        // printf("vga_draw_hline: invalid coordinates/dimensions, x:%u y:%u len:%u.\n", x, y, len);
+    if (x >= x_res || y >= y_res) {
+        printf("vga_draw_hline: invalid coordinates/dimensions, x:%u y:%u len:%u.\n", x, y, len);
         return 1;
     }
 
@@ -90,8 +91,8 @@ int(vga_draw_hline)(uint16_t x, uint16_t y, uint16_t len, uint32_t color, uint8_
 }
 
 int(vga_draw_rectangle)(uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint32_t color, uint8_t *frame_buffer) {
-    if (width == 0 || height == 0 || x >= x_res || y >= y_res) {
-        // printf("vg_draw_rectangle: invalid coordinates/dimensions, x:%u y:%u width:%u height:%u.\n", x, y, width, height);
+    if (x >= x_res || y >= y_res) {
+        printf("vg_draw_rectangle: invalid coordinates/dimensions, x:%u y:%u width:%u height:%u.\n", x, y, width, height);
         return 1;
     }
 

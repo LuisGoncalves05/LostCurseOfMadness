@@ -1,0 +1,113 @@
+\doxysection{Game Struct Reference}
+\hypertarget{structGame}{}\label{structGame}\index{Game@{Game}}
+
+
+Represents a single \doxylink{structGame}{Game} instance.  
+
+
+
+
+Collaboration diagram for Game\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structGame__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{game_8h_a5d74787dedbc4e11c1ab15bf487e61f8}{State}} \mbox{\hyperlink{structGame_a5791ba44fba153d53e2ded354e927c34}{state}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structGame_a1c128b180c299b5d7b397349a043d344}{level\+\_\+number}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structGame_aa71f3cd093c6433cb08874efc3a6beb7}{score}}
+\item 
+\mbox{\hyperlink{structLevel}{Level}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structGame_a80f3380b4378e8969e230242c56a3361}{level}}
+\item 
+\mbox{\hyperlink{structCursor}{Cursor}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structGame_a8b78c9e4ad2d603ec2c57404def327fd}{cursor}}
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+union \{\\
+\>struct \mbox{\hyperlink{structMainMenu}{MainMenu}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structGame_a461b57de562454f03fece75d9bfab871}{main\_menu}}\\
+\>struct \mbox{\hyperlink{structVictory}{Victory}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structGame_a38c6831b607283f439cb6d42e3b5851e}{victory}}\\
+\>struct \mbox{\hyperlink{structGameOver}{GameOver}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structGame_a3ad66c7c48b9f17ac03ca950ae9e911c}{game\_over}}\\
+\} \mbox{\hyperlink{structGame_aeaab243058b014fe0a5d0e97beffdb4d}{menu}}\\
+
+\end{tabbing}\item 
+bool \mbox{\hyperlink{structGame_a58c7fc1dfd9e12ede9466bf092792720}{shooting}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a single \doxylink{structGame}{Game} instance. 
+
+The \doxylink{structGame}{Game} struct is opaque. 
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structGame_a8b78c9e4ad2d603ec2c57404def327fd}\label{structGame_a8b78c9e4ad2d603ec2c57404def327fd} 
+\index{Game@{Game}!cursor@{cursor}}
+\index{cursor@{cursor}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{cursor}{cursor}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structCursor}{Cursor}}\texorpdfstring{$\ast$}{*} Game\+::cursor}
+
+Pointer to the cursor instance \Hypertarget{structGame_a3ad66c7c48b9f17ac03ca950ae9e911c}\label{structGame_a3ad66c7c48b9f17ac03ca950ae9e911c} 
+\index{Game@{Game}!game\_over@{game\_over}}
+\index{game\_over@{game\_over}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{game\_over}{game\_over}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structGameOver}{Game\+Over}}\texorpdfstring{$\ast$}{*} Game\+::game\+\_\+over}
+
+Pointer to the game over menu instance \Hypertarget{structGame_a80f3380b4378e8969e230242c56a3361}\label{structGame_a80f3380b4378e8969e230242c56a3361} 
+\index{Game@{Game}!level@{level}}
+\index{level@{level}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{level}{level}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structLevel}{Level}}\texorpdfstring{$\ast$}{*} Game\+::level}
+
+Pointer to the current level \Hypertarget{structGame_a1c128b180c299b5d7b397349a043d344}\label{structGame_a1c128b180c299b5d7b397349a043d344} 
+\index{Game@{Game}!level\_number@{level\_number}}
+\index{level\_number@{level\_number}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{level\_number}{level\_number}}
+{\footnotesize\ttfamily uint8\+\_\+t Game\+::level\+\_\+number}
+
+Current level number \Hypertarget{structGame_a461b57de562454f03fece75d9bfab871}\label{structGame_a461b57de562454f03fece75d9bfab871} 
+\index{Game@{Game}!main\_menu@{main\_menu}}
+\index{main\_menu@{main\_menu}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{main\_menu}{main\_menu}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structMainMenu}{Main\+Menu}}\texorpdfstring{$\ast$}{*} Game\+::main\+\_\+menu}
+
+Pointer to the main menu instance \Hypertarget{structGame_aeaab243058b014fe0a5d0e97beffdb4d}\label{structGame_aeaab243058b014fe0a5d0e97beffdb4d} 
+\index{Game@{Game}!menu@{menu}}
+\index{menu@{menu}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{[union]}{[union]}}
+{\footnotesize\ttfamily union  \{ ... \}  Game\+::menu}
+
+Union to hold different menu instances \Hypertarget{structGame_aa71f3cd093c6433cb08874efc3a6beb7}\label{structGame_aa71f3cd093c6433cb08874efc3a6beb7} 
+\index{Game@{Game}!score@{score}}
+\index{score@{score}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{score}{score}}
+{\footnotesize\ttfamily uint8\+\_\+t Game\+::score}
+
+Max score of the player \Hypertarget{structGame_a58c7fc1dfd9e12ede9466bf092792720}\label{structGame_a58c7fc1dfd9e12ede9466bf092792720} 
+\index{Game@{Game}!shooting@{shooting}}
+\index{shooting@{shooting}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{shooting}{shooting}}
+{\footnotesize\ttfamily bool Game\+::shooting}
+
+Indicates if the player is shooting \Hypertarget{structGame_a5791ba44fba153d53e2ded354e927c34}\label{structGame_a5791ba44fba153d53e2ded354e927c34} 
+\index{Game@{Game}!state@{state}}
+\index{state@{state}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{state}{state}}
+{\footnotesize\ttfamily \mbox{\hyperlink{game_8h_a5d74787dedbc4e11c1ab15bf487e61f8}{State}} Game\+::state}
+
+Current state of the game \Hypertarget{structGame_a38c6831b607283f439cb6d42e3b5851e}\label{structGame_a38c6831b607283f439cb6d42e3b5851e} 
+\index{Game@{Game}!victory@{victory}}
+\index{victory@{victory}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{victory}{victory}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structVictory}{Victory}}\texorpdfstring{$\ast$}{*} Game\+::victory}
+
+Pointer to the victory menu instance 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/model/\mbox{\hyperlink{game_8c}{game.\+c}}\end{DoxyCompactItemize}

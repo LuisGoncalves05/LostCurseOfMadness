@@ -1,11 +1,16 @@
 #include "mob.h"
 
+/**
+ * @brief Represents a single Mob instance.
+ *
+ * The Mob struct is opaque.
+ */
 struct Mob {
-    unsigned char health;
-    int max_speed;
-    AnimatedSprite *animated_sprite;
-    MobState state;
-    bool direction; // true for right, false for left
+    unsigned char health;            /**< Current health of the mob */
+    int max_speed;                   /**< Maximum speed of the mob */
+    AnimatedSprite *animated_sprite; /**< Pointer to the animated sprite of the mob */
+    MobState state;                  /**< Current state of the mob */
+    bool direction;                  /**< Direction of the mob (true for right, false for left) */
 };
 
 /* Create and destroy section */

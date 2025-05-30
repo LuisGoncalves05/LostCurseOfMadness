@@ -1,0 +1,8 @@
+<map id="GameOver" name="GameOver">
+<area shape="rect" id="Node000001" title="Represents a single GameOver menu instance." alt="" coords="5,211,97,236"/>
+<area shape="rect" id="Node000002" href="$structButton.html" title="Represents a Button instance." alt="" coords="75,108,140,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,147,60,212,55,209,92,144"/>
+<area shape="rect" id="Node000003" href="$structSprite.html" title="Represents a Sprite used for rendering objects on screen." alt="" coords="11,5,71,31"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="39,44,35,86,35,133,51,210,46,211,30,134,29,86,34,44"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="58,41,102,107,98,109,54,44"/>
+</map>
