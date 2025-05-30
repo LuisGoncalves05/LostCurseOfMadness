@@ -501,10 +501,22 @@ static int draw_fov_cone(Level *level) {
         }
     }
 
-    vga_draw_rectangle(0, 0, x_res, box_min_y, OUT_OF_FOV_COLOR, secondary_frame_buffer);
-    vga_draw_rectangle(0, box_min_y, box_min_x, box_max_y - box_min_y, OUT_OF_FOV_COLOR, secondary_frame_buffer);
-    vga_draw_rectangle(box_max_x, box_min_y, x_res - box_max_x, box_max_y - box_min_y, OUT_OF_FOV_COLOR, secondary_frame_buffer);
-    vga_draw_rectangle(0, box_max_y, x_res, y_res - box_max_y, OUT_OF_FOV_COLOR, secondary_frame_buffer);
+    if (vga_draw_rectangle(0, 0, x_res, box_min_y, OUT_OF_FOV_COLOR, secondary_frame_buffer)) {
+        printf("draw_fov_cone: vga_draw_rectangle failed\n");
+        return 1;
+    }
+    if (vga_draw_rectangle(0, box_min_y, box_min_x, box_max_y - box_min_y, OUT_OF_FOV_COLOR, secondary_frame_buffer)) {
+        printf("draw_fov_cone: vga_draw_rectangle failed\n");
+        return 1;
+    }
+    if (vga_draw_rectangle(box_max_x, box_min_y, x_res - box_max_x, box_max_y - box_min_y, OUT_OF_FOV_COLOR, secondary_frame_buffer)) {
+        printf("draw_fov_cone: vga_draw_rectangle failed\n");
+        return 1;
+    }
+    if (vga_draw_rectangle(0, box_max_y, x_res, y_res - box_max_y, OUT_OF_FOV_COLOR, secondary_frame_buffer)) {
+        printf("draw_fov_cone: vga_draw_rectangle failed\n");
+        return 1;
+    }
 
     return 0;
 }
