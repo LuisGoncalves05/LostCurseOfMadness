@@ -9,10 +9,13 @@ extern uint16_t x_res, y_res;
  * @brief Represents a Sprite used for rendering objects on screen.
  */
 typedef struct {
-    int x, y;              /**< X and Y position of the sprite */
-    int width, height;     /**< Dimensions of the sprite */
-    double xspeed, yspeed; /**< Velocity in the X and Y direction */
-    uint8_t *map;          /**< Pointer to the sprite's pixel data */
+    int16_t x;       /**< X-coordinate of the sprite's top-left corner */
+    int16_t y;       /**< Y-coordinate of the sprite's top-left corner */
+    uint16_t width;  /**< Width of the sprite in pixels */
+    uint16_t height; /**< Height of the sprite in pixels */
+    double xspeed;   /**< Horizontal speed (pixels per frame or unit time) */
+    double yspeed;   /**< Vertical speed (pixels per frame or unit time) */
+    uint8_t *map;    /**< Pointer to the sprite's pixel data (e.g., XPM image) */
 } Sprite;
 
 /**
@@ -27,7 +30,7 @@ typedef struct {
  * @param yspeed Speed in the Y direction.
  * @return Pointer to the created Sprite, or NULL on failure.
  */
-Sprite *create_sprite(xpm_map_t xpm, int x, int y, double xspeed, double yspeed);
+Sprite *create_sprite(xpm_map_t xpm, int16_t x, int16_t y, double xspeed, double yspeed);
 
 /**
  * @brief Frees the memory associated with the sprite.
