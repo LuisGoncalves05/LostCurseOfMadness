@@ -39,7 +39,7 @@ typedef enum {
  * @param sprite Pointer to the Sprite structure used for the mob.
  * @return Pointer to the created Mob structure.
  */
-Mob *create_mob(uint16_t x, uint16_t y);
+Mob *create_mob(int16_t x, int16_t y);
 
 /**
  * @brief Frees the memory associated with the mob.
@@ -70,7 +70,7 @@ void mob_set_sprite(Mob *mob, Sprite *sprite);
  * @param mob Pointer to the Mob structure.
  * @return The mob's x-coordinate.
  */
-uint16_t mob_get_x(Mob *mob);
+int16_t mob_get_x(Mob *mob);
 
 /**
  * @brief Sets the x of the mob.
@@ -78,7 +78,7 @@ uint16_t mob_get_x(Mob *mob);
  * @param mob Pointer to the Mob structure.
  * @param x New x value.
  */
-void mob_set_x(Mob *mob, uint16_t x);
+void mob_set_x(Mob *mob, int16_t x);
 
 /**
  * @brief Returns the y-coordinate of the mob.
@@ -86,7 +86,7 @@ void mob_set_x(Mob *mob, uint16_t x);
  * @param mob Pointer to the Mob structure.
  * @return The mob's y-coordinate.
  */
-uint16_t mob_get_y(Mob *mob);
+int16_t mob_get_y(Mob *mob);
 
 /**
  * @brief Sets the yx of the mob.
@@ -94,7 +94,7 @@ uint16_t mob_get_y(Mob *mob);
  * @param mob Pointer to the Mob structure.
  * @param y New y value.
  */
-void mob_set_y(Mob *mob, uint16_t y);
+void mob_set_y(Mob *mob, int16_t y);
 
 /**
  * @brief Returns the x-speed of the mob.
@@ -159,7 +159,7 @@ MobState mob_get_state(Mob *mob);
  * @param mob_cx X coordinate of the center of the mob.
  * @param mob_cy Y coordinate of the center of the mob.
  */
-void mob_update_state(Mob *mob, uint16_t mob_cx, uint16_t mob_cy);
+void mob_update_state(Mob *mob, int16_t mob_cx, int16_t mob_cy);
 
 /**
  * @brief Caps the mob's velocity to its maximum speed.

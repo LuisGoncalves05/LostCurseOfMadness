@@ -219,13 +219,18 @@ static void level_update_all_mobs(Level *level) {
 
         if (mob_get_state(mob) == MOB_ATTACKING) {
             Sprite *mob_sprite = mob_get_sprite(mob);
-            mob_sprite->x += mob_sprite->xspeed;
+            int16_t x = mob_get_x(mob);
+            int16_t y = mob_get_y(mob);
+            double xspeed = mob_get_xspeed(mob);
+            double yspeed = mob_get_yspeed(mob);
+            
+            mob_set_x(mob, x + xspeed);
             if (check_wall_collision(maze, mob_sprite)) {
-                mob_sprite->x -= mob_sprite->xspeed;
+                mob_set_x(mob, x);
             }
-            mob_sprite->y += mob_sprite->yspeed;
+            mob_set_y(mob, y + yspeed);
             if (check_wall_collision(maze, mob_sprite)) {
-                mob_sprite->y -= mob_sprite->yspeed;
+                mob_set_y(mob, y);
             }
         }
     }
