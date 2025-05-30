@@ -35,8 +35,9 @@ Level *create_level(uint8_t number);
  * @brief Frees the memory associated with the level.
  *
  * @param level Pointer to the Level structure to destroy.
+ * @return 0 on success, 1 on failure.
  */
-void destroy_level(Level *level);
+int destroy_level(Level *level);
 
 /**
  * @brief Returns the Maze associated with the given level.
@@ -84,23 +85,26 @@ PlayerState level_get_player_state(Level *level);
  * @param level Pointer to the Level structure.
  * @param mouse_x X coordinate of the mouse cursor.
  * @param mouse_y Y coordinate of the mouse cursor.
+ * @return 0 on success, 1 on failure.
  */
-void level_update_delta(Level *level, double mouse_x, double mouse_y);
+int level_update_delta(Level *level, double mouse_x, double mouse_y);
 
 /**
  * @brief Processes keyboard input to move the player.
  *
  * @param level Pointer to the Level structure.
  * @param scan_code Scan code from keyboard input.
+ * @return 0 on success, 1 on failure.
  */
-void level_update_position(Level *level, uint8_t scan_code);
+int level_update_position(Level *level, uint8_t scan_code);
 
 /**
  * @brief Triggers a projectile from the player's position and direction.
  *
  * @param level Pointer to the Level structure.
+ * @return 0 on success, 1 on failure.
  */
-void level_shoot(Level *level);
+int level_shoot(Level *level);
 
 /**
  * @brief Renders the entire level state including player, mobs, maze, and bullets.

@@ -85,10 +85,10 @@ Level *create_level(uint8_t number) {
     return level;
 }
 
-void destroy_level(Level *level) {
+int destroy_level(Level *level) {
     if (level == NULL) {
         printf("destroy_level: NULL pointer provided\n");
-        return;
+        return 1;
     }
 
     destroy_player(level->player);
@@ -98,6 +98,7 @@ void destroy_level(Level *level) {
     }
     free(level->mobs);
     free(level);
+    return 0;
 }
 
 /* Getter and setter section */
@@ -175,21 +176,20 @@ static bool(check_mob_collisions)(Level *level) {
     return false;
 }
 
-static void update_bullet(Bullet *b, Level *level) {
+static int update_bullet(Bullet *b, Level *level) {
     if (b == NULL || level == NULL) {
         printf("update_bullet: NULL pointer provided\n");
-        return;
+        return 1;
     }
 
     if (!bullet_get_active(b)) {
-        printf("update_bullet: inactive bullet\n");
-        return;
+        return 0;
     }
 
     Sprite *sprite = bullet_get_sprite(b);
     if (sprite == NULL) {
         printf("update_bullet: bullet_get_sprite failed\n");
-        return;
+        return 1;
     }
 
     sprite->x += (int) round(bullet_get_xspeed(b));
@@ -198,18 +198,18 @@ static void update_bullet(Bullet *b, Level *level) {
     if (sprite->x < 0 || sprite->x > x_res ||
         sprite->y < 0 || sprite->y > y_res) {
         bullet_set_active(b, false);
-        return;
+        return 0;
     }
 
     if (check_wall_collision(get_maze(level), sprite)) {
         bullet_set_active(b, false);
-        return;
+        return 0;
     }
 
     Mob **mobs = get_mobs(level);
     if (mobs == NULL) {
         printf("update_bullet: get_mobs failed\n");
-        return;
+        return 1;
     }
 
     int mob_count = get_mob_count(get_maze(level));
@@ -222,6 +222,8 @@ static void update_bullet(Bullet *b, Level *level) {
             break;
         }
     }
+
+    return 0;
 }
 
 static bool check_win(Sprite *sprite, Maze *maze) {
@@ -268,18 +270,21 @@ static int player_update_position(Level *level) {
     return 0;
 }
 
-static void level_update_all_bullets(Level *level) {
+static int level_update_all_bullets(Level *level) {
     if (level == NULL) {
         printf("level_update_all_bullets: NULL pointer provided\n");
-        return;
+        return 1;
     }
 
     for (int i = 0; i < level->bullet_count;) {
-        update_bullet(level->bullets[i], level);
+        if (update_bullet(level->bullets[i], level)) {
+            printf("level_update_all_bullets: update_bullet failed\n");
+            return 1;
+        }
         if (!bullet_get_active(level->bullets[i])) {
             if (destroy_bullet(level->bullets[i])) {
                 printf("level_update_all_bullets: destroy_bullet failed\n");
-                return;
+                return 1;
             }
             level->bullet_count--;
             level->bullets[i] = level->bullets[level->bullet_count];
@@ -288,12 +293,13 @@ static void level_update_all_bullets(Level *level) {
             i++;
         }
     }
+    return 0;
 }
 
-static void level_update_all_mobs(Level *level) {
+static int level_update_all_mobs(Level *level) {
     if (level == NULL) {
         printf("level_update_all_mobs: NULL pointer provided\n");
-        return;
+        return 1;
     }
 
     Mob **mobs = level->mobs;
@@ -327,6 +333,8 @@ static void level_update_all_mobs(Level *level) {
             }
         }
     }
+    
+    return 0;
 }
 
 static int draw_mobs(Level *level) {
@@ -345,17 +353,17 @@ static int draw_mobs(Level *level) {
     return 0;
 }
 
-static void draw_fov_cone(Level *level) {
+static int draw_fov_cone(Level *level) {
     if (level == NULL) {
         printf("draw_fov_cone: NULL pointer provided\n");
-        return;
+        return 1;
     }
     double delta = level->delta;
     Player *player = level->player;
     Maze *maze = level->maze;
     if (!player || !maze) {
         printf("draw_fov_cone: NULL player or maze\n");
-        return;
+        return 1;
     }
 
     // Player center coordinates
@@ -472,12 +480,14 @@ static void draw_fov_cone(Level *level) {
     vga_draw_rectangle(0, box_min_y, box_min_x, box_max_y, OUT_OF_FOV_COLOR, secondary_frame_buffer);
     vga_draw_rectangle(max_x, box_min_y, x_res, box_max_y, OUT_OF_FOV_COLOR, secondary_frame_buffer);
     vga_draw_rectangle(0, box_max_y, x_res, y_res, OUT_OF_FOV_COLOR, secondary_frame_buffer);
+
+    return 0;
 }
 
-static void draw_all_bullets(Level *level, uint8_t *frame_buffer) {
+static int draw_all_bullets(Level *level, uint8_t *frame_buffer) {
     if (level == NULL || frame_buffer == NULL) {
         printf("draw_all_bullets: NULL pointer provided\n");
-        return;
+        return 1;
     }
 
     for (int i = 0; i < level->bullet_count; i++) {
@@ -485,18 +495,20 @@ static void draw_all_bullets(Level *level, uint8_t *frame_buffer) {
         if (bullet_get_active(bullet)) {
             if (draw_bullet(bullet, frame_buffer)) {
                 printf("draw_all_bullets: draw_bullet failed\n");
-                return;
+                return 1;
             }
         }
     }
+
+    return 0;
 }
 
 /* Others section */
 
-void level_update_delta(Level *level, double mouse_x, double mouse_y) {
+int level_update_delta(Level *level, double mouse_x, double mouse_y) {
     if (level == NULL) {
         printf("level_update_delta: NULL pointer provided\n");
-        return;
+        return 1;
     }
     Player *player = level->player;
     double player_center_x = player_get_x(player) + player_get_width(player) / 2.0;
@@ -506,19 +518,28 @@ void level_update_delta(Level *level, double mouse_x, double mouse_y) {
     double dy = mouse_y - player_center_y;
 
     level->delta = atan2(dy, dx);
+    return 0;
 }
 
-void level_update_position(Level *level, uint8_t scan_code) {
-    if (level == NULL)
-        return;
+int level_update_position(Level *level, uint8_t scan_code) {
+    if (level == NULL) {
+        printf("level_update_position: NULL pointer provided\n");
+        return 1;
+    }
+
     player_update_speed(level->player, scan_code);
+    return 0;
 }
 
-void level_shoot(Level *level) {
-    if (level == NULL || level->player == NULL)
-        return;
-    if (level->bullet_count >= MAX_BULLETS)
-        return;
+int level_shoot(Level *level) {
+    if (level == NULL) {
+        printf("level_shoot: NULL pointer provided\n");
+        return 1;
+    }
+    if (level->bullet_count >= MAX_BULLETS) {
+        printf("level_shoot: bullet limit reached\n");
+        return 1;
+    }
 
     Player *player = level->player;
     double draw_origin_x = player_get_x(player) + player_get_width(player) / 2.0;
@@ -528,9 +549,11 @@ void level_shoot(Level *level) {
     Bullet *bullet = create_bullet(draw_origin_x, draw_origin_y, level->delta + bullet_randomizer);
     if (bullet == NULL) {
         printf("level_shoot: create_bullet failed\n");
-        return;
+        return 1;
     }
     level->bullets[level->bullet_count++] = bullet;
+
+    return 0;
 }
 
 /* Draw section */
@@ -546,20 +569,36 @@ int draw_level(Level *level, struct packet pp) {
     draw_maze_outer(level->maze, secondary_frame_buffer);
 
     // Mob logic
-    level_update_all_mobs(level);
+    if (level_update_all_mobs(level)) {
+        printf("draw_level: level_update_all_mobs failed\n");
+        return 1;
+    }
     if (draw_mobs(level)) {
+        printf("draw_level: draw_mobs failed\n");
         return 1;
     }
 
     // Player logic
-    player_update_position(level);
+    if (player_update_position(level)) {
+        printf("draw_level: player_update_position failed\n");
+        return 1;
+    }
     player_update_state(level->player, pp);
-    draw_fov_cone(level);
+    if (draw_fov_cone(level)) {
+        printf("draw_level: draw_fov_cone failed\n");
+        return 1;
+    }
     draw_player(level->player, level->delta, secondary_frame_buffer);
 
     // Level logic
-    level_update_all_bullets(level);
-    draw_all_bullets(level, secondary_frame_buffer);
+    if (level_update_all_bullets(level)) {
+        printf("draw_level: level_update_all_bullets failed\n");
+        return 1;
+    }
+    if (draw_all_bullets(level, secondary_frame_buffer)) {
+        printf("draw_level: draw_all_bullets failed\n");
+        return 1;
+    }
 
     return 0;
 }

@@ -107,8 +107,7 @@ Game *create_game() {
 
 void destroy_game(Game *game) {
     if (game != NULL) {
-        if (game->state == LEVEL)
-            destroy_level(game->level);
+        destroy_cursor(game->cursor);
         free(game);
     }
 }
@@ -283,7 +282,10 @@ static void level_keyboard_handler(Game *game) {
     if (game == NULL) {
         return;
     }
-    level_update_position(game->level, scan_code);
+    if (level_update_position(game->level, scan_code)) {
+        printf("level_keyboard_handler: level_update_position failed\n");
+        return;
+    }
     if (scan_code == ESC_BREAK_CODE) {
         set_state(game, MENU);
         return;
@@ -377,10 +379,16 @@ static void level_mouse_handler(Game *game) {
     if (game == NULL) {
         return;
     }
-    level_update_delta(game->level, cursor_get_x(game->cursor), cursor_get_y(game->cursor));
+    if (level_update_delta(game->level, cursor_get_x(game->cursor), cursor_get_y(game->cursor))) {
+        printf("level_mouse_handler: level_update_delta failed\n");
+        return;
+    }
     if (pp.lb) {
         if (!game->shooting)
-            level_shoot(game->level);
+            if (level_shoot(game->level)) {
+                printf("level_mouse_handler: level_shoot failed\n");
+                return;
+            }
         game->shooting = true;
     } else {
         game->shooting = false;
