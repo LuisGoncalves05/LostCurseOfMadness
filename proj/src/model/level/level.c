@@ -182,22 +182,23 @@ static void update_bullet(Bullet *b, Level *level) {
         return;
     }
 
-    Sprite *sprite = bullet_get_sprite(b);
-    if (sprite == NULL) {
+    Sprite *bullet_sprite = bullet_get_sprite(b);
+    if (bullet_sprite == NULL) {
         printf("update_bullet: bullet_get_sprite failed\n");
         return;
     }
 
-    sprite->x += (int) round(bullet_get_xspeed(b));
-    sprite->y += (int) round(bullet_get_yspeed(b));
+    bullet_set_x(b, bullet_get_x(b) + (int) round(bullet_get_xspeed(b)));
+    bullet_set_y(b, bullet_get_y(b) + (int) round(bullet_get_yspeed(b)));
 
-    if (sprite->x < 0 || sprite->x > x_res ||
-        sprite->y < 0 || sprite->y > y_res) {
+    int16_t x = bullet_get_x(b);
+    int16_t y = bullet_get_y(b);
+    if (x < 0 || x > x_res || y < 0 || y > y_res) {
         bullet_set_active(b, false);
         return;
     }
 
-    if (check_wall_collision(get_maze(level), sprite)) {
+    if (check_wall_collision(get_maze(level), bullet_sprite)) {
         bullet_set_active(b, false);
         return;
     }
@@ -212,7 +213,7 @@ static void update_bullet(Bullet *b, Level *level) {
     for (int i = 0; i < mob_count; i++) {
         Mob *mob = mobs[i];
         Sprite *mob_sprite = mob_get_sprite(mob);
-        if (check_sprite_collision(sprite, mob_sprite)) {
+        if (check_sprite_collision(bullet_sprite, mob_sprite)) {
             mob_set_health(mob, mob_get_health(mob) - 1);
             bullet_set_active(b, false);
             break;
