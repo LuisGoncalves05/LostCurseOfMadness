@@ -28,7 +28,10 @@ Victory *create_victory() {
     victory->exitButton = create_button((xpm_map_t) victory_exit_button, (xpm_map_t) victory_exit_button_selected, BUTTON_EXIT_START_X, VICTORY_BUTTON_START_Y);
     if (victory->exitButton == NULL) {
         printf("create_victory: create_button (exitButton) failed\n");
-        destroy_button(victory->nextButton);
+        if (destroy_button(victory->nextButton)) {
+            printf("create_victory: destroy_button failed\n");
+            return NULL;
+        }
         free(victory);
         return NULL;
     }
@@ -36,8 +39,14 @@ Victory *create_victory() {
     victory->title = create_sprite(victory_xpm, x_res / 2 - 715 / 2, y_res / 2 - 129, 0, 0);
     if (!victory->title) {
         printf("create_victory: create_sprite failed\n");
-        destroy_button(victory->nextButton);
-        destroy_button(victory->exitButton);
+        if (destroy_button(victory->nextButton)) {
+            printf("create_victory: destroy_button failed\n");
+            return NULL;
+        }
+        if (destroy_button(victory->exitButton)) {
+            printf("create_victory: destroy_button failed\n");
+            return NULL;
+        }
         free(victory);
         return NULL;
     }
@@ -51,8 +60,14 @@ void destroy_victory(Victory *victory) {
         return;
     }
     destroy_sprite(victory->title);
-    destroy_button(victory->nextButton);
-    destroy_button(victory->exitButton);
+    if (destroy_button(victory->nextButton)) {
+            printf("create_victory: destroy_button failed\n");
+            return;
+        }
+        if (destroy_button(victory->exitButton)) {
+            printf("create_victory: destroy_button failed\n");
+            return;
+        }
     free(victory);
 }
 
@@ -105,6 +120,12 @@ void draw_victory(Victory *victory, uint8_t *frame_buffer) {
         return;
     }
     draw_sprite(victory->title, frame_buffer);
-    draw_button(victory->nextButton, frame_buffer);
-    draw_button(victory->exitButton, frame_buffer);
+    if (draw_button(victory->nextButton, frame_buffer)) {
+        printf("draw_victory: draw_button (nextButton) failed\n");
+        return;
+    }
+    if (draw_button(victory->exitButton, frame_buffer)) {
+        printf("draw_victory: draw_button (exitButton) failed\n");
+        return;
+    }
 }

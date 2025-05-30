@@ -48,14 +48,15 @@ Button *create_button(xpm_map_t xpm, xpm_map_t xpm_selected, uint16_t x, uint16_
     return button;
 }
 
-void destroy_button(Button *button) {
+int destroy_button(Button *button) {
     if (button == NULL) {
         printf("destroy_button: NULL pointer provided\n");
-        return;
+        return 1;
     }
     destroy_sprite(button->sprite);
     destroy_sprite(button->selected_sprite);
     free(button);
+    return 0;
 }
 
 /* Getter and setter section */
@@ -94,10 +95,10 @@ bool button_is_selected(Button *button, uint16_t x, uint16_t y) {
 
 /* Draw section */
 
-void draw_button(Button *button, uint8_t *frame_buffer) {
+int draw_button(Button *button, uint8_t *frame_buffer) {
     if (button == NULL || frame_buffer == NULL) {
         printf("draw_button: NULL pointer provided");
-        return;
+        return 1;
     }
 
     if (button->selected) {
@@ -105,4 +106,6 @@ void draw_button(Button *button, uint8_t *frame_buffer) {
     } else {
         draw_sprite(button->sprite, frame_buffer);
     }
+
+    return 0;
 }

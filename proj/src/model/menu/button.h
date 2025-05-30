@@ -87,8 +87,9 @@ Button *create_button(xpm_map_t xpm, xpm_map_t xpm_selected, uint16_t x, uint16_
  * @brief Frees the memory associated with a Button.
  *
  * @param button Pointer to the Button structure to destroy.
+ * @return 0 for success, 1 for failure.
  */
-void destroy_button(Button *button);
+int destroy_button(Button *button);
 
 /**
  * @brief Gets whether the button is currently selected.
@@ -121,7 +122,8 @@ bool button_is_selected(Button *button, uint16_t x, uint16_t y);
  *
  * @param button Pointer to the Button.
  * @param frame_buffer Pointer to the frame buffer.
+ * @return 0 for success, 1 for failure.
  */
-void draw_button(Button *button, uint8_t *frame_buffer);
+int draw_button(Button *button, uint8_t *frame_buffer);
 
 #endif /* BUTTON_H */
