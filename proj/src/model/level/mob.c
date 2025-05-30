@@ -48,17 +48,19 @@ Mob *create_mob(int16_t x, int16_t y) {
     return mob;
 }
 
-void destroy_mob(Mob *mob) {
+int destroy_mob(Mob *mob) {
     if (mob == NULL) {
         printf("destroy_mob: NULL pointer provided\n");
-        return;
+        return 1;
     }
 
     if (destroy_animated_sprite(mob->animated_sprite)) {
         printf("destroy_mob: destroy_animated_sprite failed\n");
+        return 1;
     }
 
     free(mob);
+    return 0;
 }
 
 /* Getter and setter section */
@@ -160,15 +162,15 @@ MobState mob_get_state(Mob *mob) {
 
 /* Others section */
 
-void mob_update_state(Mob *mob, int16_t player_cx, int16_t player_cy) {
+int mob_update_state(Mob *mob, int16_t player_cx, int16_t player_cy) {
     if (mob == NULL) {
         printf("mob_update_state: NULL pointer provided\n");
-        return;
+        return 1;
     }
 
     if (mob->health == 0) {
         mob->state = MOB_DEAD;
-        return;
+        return 0;
     }
 
     Sprite *sprite = mob->animated_sprite->sprite;
@@ -201,10 +203,17 @@ void mob_update_state(Mob *mob, int16_t player_cx, int16_t player_cy) {
         }
         mob->state = MOB_IDLE;
     }
+
+    return 0;
 }
 
 /* Draw section */
 
-void draw_mob(Mob *mob, uint8_t *frame_buffer) {
+int draw_mob(Mob *mob, uint8_t *frame_buffer) {
+    if (mob == NULL || frame_buffer == NULL) {
+        printf("draw_mob: NULL pointer provided\n");
+        return 1;
+    }
     draw_animated_sprite(mob->animated_sprite, frame_buffer);
+    return 0;
 }

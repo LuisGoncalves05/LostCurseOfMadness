@@ -44,8 +44,9 @@ Mob *create_mob(int16_t x, int16_t y);
  * @brief Frees the memory associated with the mob.
  *
  * @param mob Pointer to the Mob structure to destroy.
+ * @return 0 on success, 1 on failure.
  */
-void destroy_mob(Mob *mob);
+int destroy_mob(Mob *mob);
 
 /**
  * @brief Returns the Sprite associated with the given mob.
@@ -149,15 +150,17 @@ MobState mob_get_state(Mob *mob);
  * @param mob Pointer to the Mob structure.
  * @param mob_cx X coordinate of the center of the mob.
  * @param mob_cy Y coordinate of the center of the mob.
+ * @return 0 on success, 1 on failure.
  */
-void mob_update_state(Mob *mob, int16_t mob_cx, int16_t mob_cy);
+int mob_update_state(Mob *mob, int16_t mob_cx, int16_t mob_cy);
 
 /**
  * @brief Renders the mob on the screen.
  *
  * @param mob Pointer to the Mob structure.
  * @param frame_buffer Pointer to the frame buffer.
+ * @return 0 on success, 1 on failure.
  */
-void draw_mob(Mob *mob, uint8_t *frame_buffer);
+int draw_mob(Mob *mob, uint8_t *frame_buffer);
 
 #endif /* MOB_H */

@@ -68,7 +68,10 @@ Level *create_level(uint8_t number) {
         if (level->mobs[i] == NULL) {
             printf("create_level: create_mob failed\n");
             for (int j = i - 1; j >= 0; j--) {
-                destroy_mob(level->mobs[j]);
+                if (destroy_mob(level->mobs[j])) {
+                    printf("create_level: destroy_mob failed\n");
+                    return 1;
+                }
                 free(level->maze);
                 free(level->player);
                 free(level);
@@ -92,9 +95,15 @@ int destroy_level(Level *level) {
     }
 
     destroy_player(level->player);
-    destroy_maze(level->maze);
+    if (destroy_maze(level->maze)) {
+        printf("destroy_level: destroy_maze failed\n");
+        return 1;
+    }
     for (int i = 0; i < get_mob_count(get_maze(level)); i++) {
-        destroy_mob(level->mobs[i]);
+        if (destroy_mob(level->mobs[i])) {
+            prinf("create_level: destroy_mob failed\n");
+            return 1;
+        }
     }
     free(level->mobs);
     free(level);
@@ -307,9 +316,15 @@ static int level_update_all_mobs(Level *level) {
     Player *player = level->player;
     for (int i = 0; i < get_mob_count(maze);) {
         Mob *mob = mobs[i];
-        mob_update_state(mob, player_get_x(player) + player_get_width(player) / 2, player_get_y(player) + player_get_height(player) / 2);
+        if (mob_update_state(mob, player_get_x(player) + player_get_width(player) / 2, player_get_y(player) + player_get_height(player) / 2)) {
+            printf("level_update_all_mobs: mob_update_state failed\n");
+            return 1;
+        }
         if (mob_get_state(mob) == MOB_DEAD) {
-            destroy_mob(mob);
+            if (destroy_mob(mob)) {
+                printf("level_update_all_mobs: destroy_mob failed\n");
+                return 1;
+            }
             set_mob_count(maze, get_mob_count(maze) - 1);
             mobs[i] = mobs[get_mob_count(maze)];
         } else {
@@ -347,7 +362,10 @@ static int draw_mobs(Level *level) {
     uint8_t mob_count = get_mob_count(level->maze);
     for (int i = 0; i < mob_count; i++) {
         Mob *mob = mobs[i];
-        draw_mob(mob, secondary_frame_buffer);
+        if(draw_mob(mob, secondary_frame_buffer)) {
+            printf("draw_mobs: draw_mob failed\n");
+            return 1;
+        }
     }
 
     return 0;
