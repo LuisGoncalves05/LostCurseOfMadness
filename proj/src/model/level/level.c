@@ -70,7 +70,7 @@ Level *create_level(uint8_t number) {
             for (int j = i - 1; j >= 0; j--) {
                 if (destroy_mob(level->mobs[j])) {
                     printf("create_level: destroy_mob failed\n");
-                    return 1;
+                    return NULL;
                 }
                 free(level->maze);
                 free(level->player);
@@ -94,14 +94,17 @@ int destroy_level(Level *level) {
         return 1;
     }
 
-    destroy_player(level->player);
+    if (destroy_player(level->player)) {
+        printf("destroy_level: destroy_player failed\n");
+        return 1;
+    }
     if (destroy_maze(level->maze)) {
         printf("destroy_level: destroy_maze failed\n");
         return 1;
     }
     for (int i = 0; i < get_mob_count(get_maze(level)); i++) {
         if (destroy_mob(level->mobs[i])) {
-            prinf("create_level: destroy_mob failed\n");
+            printf("create_level: destroy_mob failed\n");
             return 1;
         }
     }
@@ -269,7 +272,10 @@ static int player_update_position(Level *level) {
     }
 
     if (check_mob_collisions(level)) {
-        player_lose_health(player);
+        if (player_lose_health(player)) {
+            printf("player_update_position: player_lose_health failed\n");
+            return 1;
+        }
     }
 
     if (player_get_state(player) != PLAYER_DEAD && check_win(player_get_sprite(player), maze)) {
@@ -546,7 +552,10 @@ int level_update_position(Level *level, uint8_t scan_code) {
         return 1;
     }
 
-    player_update_speed(level->player, scan_code);
+    if (player_update_speed(level->player, scan_code)) {
+        printf("level_update_position: player_update_speed failed\n");
+        return 1;
+    }
     return 0;
 }
 
@@ -602,12 +611,18 @@ int draw_level(Level *level, struct packet pp) {
         printf("draw_level: player_update_position failed\n");
         return 1;
     }
-    player_update_state(level->player, pp);
+    if (player_update_state(level->player, pp)) {
+        printf("draw_level: player_update_state failed\n");
+        return 1;
+    }
     if (draw_fov_cone(level)) {
         printf("draw_level: draw_fov_cone failed\n");
         return 1;
     }
-    draw_player(level->player, level->delta, secondary_frame_buffer);
+    if (draw_player(level->player, level->delta, secondary_frame_buffer)) {
+        printf("draw_level: draw_player failed\n");
+        return 1;
+    }
 
     // Level logic
     if (level_update_all_bullets(level)) {

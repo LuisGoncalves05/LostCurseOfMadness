@@ -45,13 +45,14 @@ Player *create_player() {
     return player;
 }
 
-void destroy_player(Player *player) {
+int destroy_player(Player *player) {
     if (player == NULL) {
         printf("destroy_player: NULL pointer provided\n");
-        return;
+        return 1;
     }
     destroy_animated_sprite(player->animated_sprite);
     free(player);
+    return 1;
 }
 
 AnimatedSprite *player_get_animated_sprite(Player *player) {
@@ -199,14 +200,14 @@ void player_set_state(Player *player, PlayerState state) {
 
 /* Others section */
 
-void player_update_state(Player *player, struct packet pp) {
+int player_update_state(Player *player, struct packet pp) {
     if (player == NULL) {
         printf("player_update_state: NULL pointer provided\n");
-        return;
+        return 1;
     }
 
     if (player->state == PLAYER_WIN) {
-        return;
+        return 0;
     }
 
     if (player->animated_sprite->sprite->xspeed == 0 && player->animated_sprite->sprite->yspeed == 0) {
@@ -220,12 +221,14 @@ void player_update_state(Player *player, struct packet pp) {
     if (player->health == 0) {
         player->state = PLAYER_DEAD;
     }
+
+    return 0;
 }
 
-void player_update_speed(Player *player, uint8_t scan_code) {
+int player_update_speed(Player *player, uint8_t scan_code) {
     if (player == NULL) {
         printf("player_update_speed: NULL pointer provided\n");
-        return;
+        return 1;
     }
 
     bool *dirs_pressed = player->dirs_pressed;
@@ -239,7 +242,7 @@ void player_update_speed(Player *player, uint8_t scan_code) {
         case KEY_BREAK_S: dirs_pressed[DOWN] = false; break;
         case KEY_BREAK_A: dirs_pressed[LEFT] = false; break;
         case KEY_BREAK_D: dirs_pressed[RIGHT] = false; break;
-        default: return; // ignore other keys
+        default: return 0; // ignore other keys
     }
 
     double xspeed = 0, yspeed = 0;
@@ -349,24 +352,28 @@ void player_update_speed(Player *player, uint8_t scan_code) {
             player->direction = new_direction;
         }
     }
+    
+    return 0;
 }
 
-void player_lose_health(Player *player) {
+int player_lose_health(Player *player) {
     if (player == NULL) {
         printf("player_lose_health: NULL pointer provided\n");
-        return;
+        return 1;
     }
 
     if (player->health > 0) {
         player->health--;
     }
+    return 0;
 }
 
 /* Draw section */
 
-void draw_player(Player *player, double delta, uint8_t *frame_buffer) {
+int draw_player(Player *player, double delta, uint8_t *frame_buffer) {
     if (draw_animated_sprite(player->animated_sprite, frame_buffer)) {
         printf("draw_player: draw_animated_sprite failed\n");
-        return;
+        return 1;
     }
+    return 0;
 }

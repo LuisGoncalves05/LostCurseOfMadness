@@ -53,8 +53,9 @@ Player *create_player();
  * @brief Frees the memory associated with the player.
  *
  * @param player Pointer to the Player structure to destroy.
+ * @return 0 on success, 1 on failure.
  */
-void destroy_player(Player *player);
+int destroy_player(Player *player);
 
 /**
  * @brief Returns the Sprite associated with the player.
@@ -181,23 +182,26 @@ void player_set_state(Player *player, PlayerState state);
  *
  * @param player Pointer to the Player structure.
  * @param pp Mouse packet used to determine action.
+ * @return 0 on success, 1 on failure.
  */
-void player_update_state(Player *player, struct packet pp);
+int player_update_state(Player *player, struct packet pp);
 
 /**
  * @brief Updates the player's speed based on keyboard input.
  *
  * @param player Pointer to the Player structure.
  * @param scan_code Keyboard scan code.
+ * @return 0 on success, 1 on failure.
  */
-void player_update_speed(Player *player, uint8_t scan_code);
+int player_update_speed(Player *player, uint8_t scan_code);
 
 /**
  * @brief Decreases the player's health by one.
  *
  * @param player Pointer to the Player structure.
+ * @return 0 on success, 1 on failure.
  */
-void player_lose_health(Player *player);
+int player_lose_health(Player *player);
 
 /**
  * @brief Renders the player on the screen.
@@ -205,7 +209,8 @@ void player_lose_health(Player *player);
  * @param player Pointer to the Player structure.
  * @param delta Direction angle in radians.
  * @param frame_buffer Pointer to the frame buffer.
+ * @return 0 on success, 1 on failure.
  */
-void draw_player(Player *player, double delta, uint8_t *frame_buffer);
+int draw_player(Player *player, double delta, uint8_t *frame_buffer);
 
 #endif /* PLAYER_H */
