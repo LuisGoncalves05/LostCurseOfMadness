@@ -35,14 +35,18 @@ Cursor *create_cursor(CursorMode mode, int x, int y) {
     return cursor;
 }
 
-void destroy_cursor(Cursor *cursor) {
+int destroy_cursor(Cursor *cursor) {
     if (cursor == NULL) {
         printf("destroy_cursor: NULL pointer provided\n");
-        return;
+        return 1;
     }
 
-    destroy_sprite(cursor->sprite);
+    if (destroy_sprite(cursor->sprite)) {
+        printf("destroy_cursor: destroy_sprite failed\n");
+        return 1;
+    }
     free(cursor);
+    return 0;
 }
 
 /* Getter and setter section */
@@ -79,37 +83,46 @@ static inline int clamp(int val, int min, int max) {
     return (val < min) ? min : (val > max) ? max : val;
 }
 
-static void cursor_check_bound(Cursor *cursor) {
+static int cursor_check_bound(Cursor *cursor) {
     if (cursor == NULL) {
         printf("cursor_check_bound: NULL pointer provided\n");
-        return;
+        return 1;
     }
 
     Sprite *s = cursor->sprite;
     s->x = clamp(s->x, 0, x_res - s->width);
     s->y = clamp(s->y, 0, y_res - s->height);
+    return 0;
 }
 
 /* Others section */
 
-void cursor_update(Cursor *cursor, double dx, double dy) {
+int cursor_update(Cursor *cursor, double dx, double dy) {
     if (cursor == NULL) {
         printf("cursor_update: NULL pointer provided\n");
-        return;
+        return 1;
     }
 
     cursor->sprite->x += dx;
     cursor->sprite->y += dy;
-    cursor_check_bound(cursor);
+    if (cursor_check_bound(cursor)) {
+        printf("cursor_update: cursor_check_bound failed\n");
+        return 1;
+    }
+    return 0;
 }
 
 /* Draw section */
 
-void draw_cursor(Cursor *cursor, uint8_t *frame_buffer) {
+int draw_cursor(Cursor *cursor, uint8_t *frame_buffer) {
     if (cursor == NULL) {
         printf("draw_cursor: NULL pointer provided\n");
-        return;
+        return 1;
     }
 
-    draw_transparent_sprite(cursor->sprite, frame_buffer);
+    if (draw_transparent_sprite(cursor->sprite, frame_buffer)) {
+        printf("draw_cursor: draw_transparent_sprite failed\n");
+        return 1;
+    }
+    return 0;
 }

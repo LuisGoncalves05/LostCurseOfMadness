@@ -27,7 +27,10 @@ static void set_cursor(Game *game, CursorMode mode) {
     }
     uint16_t x = cursor_get_x(game->cursor);
     uint16_t y = cursor_get_y(game->cursor);
-    destroy_cursor(game->cursor);
+    if (destroy_cursor(game->cursor)) {
+        printf("set_cursor: destroy_cursor failed\n");
+        return;
+    }
     game->cursor = create_cursor(mode, x, y);
 }
 
@@ -107,7 +110,10 @@ Game *create_game() {
 
 void destroy_game(Game *game) {
     if (game != NULL) {
-        destroy_cursor(game->cursor);
+        if (destroy_cursor(game->cursor)) {
+            printf("destroy_game: destroy_cursor failed\n");
+            return;
+        }
         free(game);
     }
 }
@@ -194,7 +200,10 @@ static void menu_timer_handler(Game *game) {
         printf("menu_timer_handler: draw_main_menu failed\n");
         return;
     }
-    draw_cursor(game->cursor, secondary_frame_buffer);
+    if (draw_cursor(game->cursor, secondary_frame_buffer)) {
+        printf("menu_timer_handler: draw_cursor failed\n");
+        return;
+    }
 
     vga_flip_pages();
 }
@@ -204,9 +213,15 @@ static void level_timer_handler(Game *game) {
     }
     clear_frame_buffer(secondary_frame_buffer, IN_FOV_COLOR);
 
-    draw_level(game->level, pp);
+    if (draw_level(game->level, pp)) {
+        printf("level_timer_handler: draw_level failed\n");
+        return;
+    }
 
-    draw_cursor(game->cursor, secondary_frame_buffer);
+    if (draw_cursor(game->cursor, secondary_frame_buffer)) {
+        printf("level_timer_handler: draw_cursor failed\n");
+        return;
+    }
 
     vga_flip_pages();
 
@@ -231,7 +246,10 @@ static void victory_timer_handler(Game *game) {
         printf("victory_timer_handler: draw_victory failed\n");
         return;
     }
-    draw_cursor(game->cursor, secondary_frame_buffer);
+    if (draw_cursor(game->cursor, secondary_frame_buffer)) {
+        printf("victory_timer_handler: draw_cursor failed\n");
+        return;
+    }
 
     vga_flip_pages();
 }
@@ -246,13 +264,17 @@ static void game_over_timer_handler(Game *game) {
         printf("game_over_timer_handler: draw_game_over failed\n");
         return;
     }
-    draw_cursor(game->cursor, secondary_frame_buffer);
+    if (draw_cursor(game->cursor, secondary_frame_buffer)) {
+        printf("game_over_timer_handler: draw_cursor failed\n");
+        return;
+    }
 
     vga_flip_pages();
 }
 
 static void exit_timer_handler(Game *game) {
     if (game == NULL) {
+        printf("exit_timer_handler: NULL pointer provided.\n");
         return;
     }
     printf("exiting\n");
@@ -472,7 +494,10 @@ void game_mouse_handler(Game *game) {
     if (game == NULL) {
         return;
     }
-    cursor_update(game->cursor, pp.delta_x, -pp.delta_y);
+    if (cursor_update(game->cursor, pp.delta_x, -pp.delta_y)) {
+        printf("game_mouse_handler: cursor_update failed\n");
+        return;
+    }
     game_mouse_handlers[game->state](game);
 }
 

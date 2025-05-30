@@ -40,7 +40,10 @@ Button *create_button(xpm_map_t xpm, xpm_map_t xpm_selected, uint16_t x, uint16_
     button->selected_sprite = create_sprite(xpm_selected, x, y, 0, 0);
     if (!button->selected_sprite) {
         printf("create_button: create_sprite failed\n");
-        destroy_sprite(button->sprite);
+        if (destroy_sprite(button->sprite)) {
+            printf("create_button: destroy_sprite failed\n");
+            return NULL;
+        }
         free(button);
         return NULL;
     }
@@ -53,8 +56,14 @@ int destroy_button(Button *button) {
         printf("destroy_button: NULL pointer provided\n");
         return 1;
     }
-    destroy_sprite(button->sprite);
-    destroy_sprite(button->selected_sprite);
+    if (destroy_sprite(button->sprite)) {
+        printf("destroy_button: destroy sprite failed\n");
+        return 1;
+    }
+    if (destroy_sprite(button->selected_sprite)) {
+        printf("destroy_button: destroy selected sprite failed\n");
+        return 1;
+    }
     free(button);
     return 0;
 }
@@ -102,9 +111,15 @@ int draw_button(Button *button, uint8_t *frame_buffer) {
     }
 
     if (button->selected) {
-        draw_sprite(button->selected_sprite, frame_buffer);
+        if (draw_sprite(button->selected_sprite, frame_buffer)) {
+            printf("draw_button: draw_sprite failed\n");
+            return 1;
+        }
     } else {
-        draw_sprite(button->sprite, frame_buffer);
+        if (draw_sprite(button->sprite, frame_buffer)) {
+            printf("draw_button: draw_sprite failed\n");
+            return 1;
+        }
     }
 
     return 0;

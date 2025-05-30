@@ -35,6 +35,7 @@ AnimatedSprite *create_animated_sprite(Sprite *sprite, uint32_t frames_per_sprit
  * @brief Frees the memory associated with the animated sprite.
  *
  * @param anim_sprite Pointer to the AnimatedSprite structure to destroy.
+ * @return 0 for success, 1 for failure.
  */
 int destroy_animated_sprite(AnimatedSprite *anim_sprite);
 
@@ -44,7 +45,7 @@ int destroy_animated_sprite(AnimatedSprite *anim_sprite);
  * @param anim_sprite Pointer to the AnimatedSprite structure to draw.
  * @param frame_buffer Pointer to the frame buffer to draw the sprite on.
  *
- * @return 1 on success, 0 on failure.
+ * @return 0 on success, 1 on failure.
  */
 int draw_animated_sprite(AnimatedSprite *anim_sprite, uint8_t *frame_buffer);
 

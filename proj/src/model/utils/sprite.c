@@ -27,17 +27,14 @@ Sprite *create_sprite(xpm_map_t xpm, int16_t x, int16_t y, double xspeed, double
     return sp;
 }
 
-void destroy_sprite(Sprite *sp) {
+int destroy_sprite(Sprite *sp) {
     if (sp == NULL) {
         printf("destroy_sprite: NULL pointer provided\n");
-        return;
+        return 1;
     }
-
-    if (sp->map != NULL) {
-        free(sp->map);
-    }
-
+    free(sp->map);
     free(sp);
+    return 0;
 }
 
 /* Getter and setter section */

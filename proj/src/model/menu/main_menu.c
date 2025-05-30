@@ -61,7 +61,10 @@ int destroy_main_menu(MainMenu *main_menu) {
         printf("destroy_main_menu: NULL pointer provided\n");
         return 1;
     }
-    destroy_sprite(main_menu->title);
+    if (destroy_sprite(main_menu->title)) {
+        printf("destroy_main_menu: destroy_sprite failed\n");
+        return 1;
+    }
     if (destroy_button(main_menu->playButton)) {
         printf("destroy_main_menu: destroy_button failed\n");
         return 1;
@@ -131,7 +134,10 @@ int draw_main_menu(MainMenu *main_menu, uint8_t *frame_buffer) {
         printf("draw_main_menu: NULL pointer provided\n");
         return 1;
     }
-    draw_sprite(main_menu->title, frame_buffer);
+    if (draw_sprite(main_menu->title, frame_buffer)) {
+        printf("draw_main_menu: draw_sprite (title) failed\n");
+        return 1;
+    }
     if (draw_button(main_menu->playButton, frame_buffer)) {
         printf("draw_main_menu: draw_button (playButton) failed\n");
         return 1;

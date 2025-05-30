@@ -36,8 +36,9 @@ Cursor *create_cursor(CursorMode mode, int x, int y);
  * @brief Frees the memory associated with the cursor.
  *
  * @param cursor Pointer to the Cursor structure to destroy.
+ * @return 0 for success, 1 for failure.
  */
-void destroy_cursor(Cursor *cursor);
+int destroy_cursor(Cursor *cursor);
 
 /**
  * @brief Returns the current X position of the cursor.
@@ -61,15 +62,17 @@ uint16_t cursor_get_y(Cursor *cursor);
  * @param cursor Pointer to the Cursor structure.
  * @param dx Horizontal movement delta.
  * @param dy Vertical movement delta.
+ * @return 0 for success, 1 for failure.
  */
-void cursor_update(Cursor *cursor, double dx, double dy);
+int cursor_update(Cursor *cursor, double dx, double dy);
 
 /**
  * @brief Draws the cursor to the given frame buffer.
  *
  * @param cursor Pointer to the Cursor structure.
  * @param buffer Pointer to the frame buffer.
+ * @return 0 for success, 1 for failure.
  */
-void draw_cursor(Cursor *cursor, uint8_t *buffer);
+int draw_cursor(Cursor *cursor, uint8_t *buffer);
 
 #endif /* CURSOR_H */

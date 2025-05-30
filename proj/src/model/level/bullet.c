@@ -37,7 +37,10 @@ int destroy_bullet(Bullet *bullet) {
         return 1;
     }
     
-    destroy_sprite(bullet->sprite);
+    if (destroy_sprite(bullet->sprite)) {
+        printf("destroy_bullet: destroy_sprite failed\n");
+        return 1;
+    }
     free(bullet);
     return 0;
 }

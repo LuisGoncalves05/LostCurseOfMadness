@@ -50,9 +50,12 @@ int destroy_player(Player *player) {
         printf("destroy_player: NULL pointer provided\n");
         return 1;
     }
-    destroy_animated_sprite(player->animated_sprite);
+    if (destroy_animated_sprite(player->animated_sprite)) {
+        printf("destroy_player: destroy_animated_sprite failed\n");
+        return 1;
+    }
     free(player);
-    return 1;
+    return 0;
 }
 
 AnimatedSprite *player_get_animated_sprite(Player *player) {

@@ -214,6 +214,9 @@ int draw_mob(Mob *mob, uint8_t *frame_buffer) {
         printf("draw_mob: NULL pointer provided\n");
         return 1;
     }
-    draw_animated_sprite(mob->animated_sprite, frame_buffer);
+    if (draw_animated_sprite(mob->animated_sprite, frame_buffer)) {
+        printf("draw_mob: draw_animated_sprite failed\n");
+        return 1;
+    }
     return 0;
 }

@@ -61,7 +61,10 @@ int destroy_game_over(GameOver *game_over) {
         printf("destroy_game_over: NULL pointer provided\n");
         return 1;
     }
-    destroy_sprite(game_over->title);
+    if (destroy_sprite(game_over->title)) {
+        printf("destroy_game_over: destroy_sprite failed\n");
+        return 1;
+    }
     if (destroy_button(game_over->menuButton)) {
         printf("destroy_game_over: destroy_button failed\n");
         return 1;
@@ -134,7 +137,10 @@ int draw_game_over(GameOver *game_over, uint8_t *frame_buffer) {
         return 1;
     }
 
-    draw_sprite(game_over->title, frame_buffer);
+    if (draw_sprite(game_over->title, frame_buffer)) {
+        printf("draw_game_over: draw_sprite (title) failed\n");
+        return 1;
+    }
     if (draw_button(game_over->menuButton, frame_buffer)) {
         printf("draw_game_over: draw_button (menuButton) failed\n");
         return 1;

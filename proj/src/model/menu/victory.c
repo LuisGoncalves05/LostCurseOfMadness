@@ -59,7 +59,10 @@ int destroy_victory(Victory *victory) {
         printf("destroy_victory: NULL pointer provided\n");
         return 1;
     }
-    destroy_sprite(victory->title);
+    if (destroy_sprite(victory->title)) {
+        printf("destroy_victory: destroy_sprite failed\n");
+        return 1;
+    }
     if (destroy_button(victory->nextButton)) {
             printf("create_victory: destroy_button failed\n");
             return 1;
@@ -121,7 +124,10 @@ int draw_victory(Victory *victory, uint8_t *frame_buffer) {
         printf("draw_victory: NULL pointer provided\n");
         return 1;
     }
-    draw_sprite(victory->title, frame_buffer);
+    if (draw_sprite(victory->title, frame_buffer)) {
+        printf("draw_victory: draw_sprite (title) failed\n");
+        return 1;
+    }
     if (draw_button(victory->nextButton, frame_buffer)) {
         printf("draw_victory: draw_button (nextButton) failed\n");
         return 1;
