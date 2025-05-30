@@ -15,10 +15,10 @@ struct Maze {
 
 /* Create and destroy section */
 
-static void shuffle(int *arr, int n) {
+static int shuffle(int *arr, int n) {
     if (arr == NULL) {
         printf("shuffle: NULL pointer provided\n");
-        return;
+        return 1;
     }
 
     for (int i = n - 1; i > 0; i--) {
@@ -27,12 +27,13 @@ static void shuffle(int *arr, int n) {
         arr[i] = arr[j];
         arr[j] = tmp;
     }
+    return 0;
 }
 
-static void dfs(Maze *maze, int x, int y) {
+static int dfs(Maze *maze, int x, int y) {
     if (maze == NULL) {
         printf("dfs: NULL pointer provided\n");
-        return;
+        return 1;
     }
 
     maze->cells[y][x] = EMPTY;
@@ -40,7 +41,10 @@ static void dfs(Maze *maze, int x, int y) {
     int dx[] = {2, -2, 0, 0};
     int dy[] = {0, 0, 2, -2};
     int dirs[] = {0, 1, 2, 3};
-    shuffle(dirs, 4);
+    if (shuffle(dirs, 4)) {
+        printf("maze dfs: suffle failed\n");
+        return 1;
+    }
 
     for (int i = 0; i < 4; i++) {
         int dir = dirs[i];
@@ -49,9 +53,13 @@ static void dfs(Maze *maze, int x, int y) {
 
         if (new_x > 0 && new_x < maze->width - 1 && new_y > 0 && new_y < maze->height - 1 && maze->cells[new_y][new_x] == WALL) { // Position inside the maze and there is a wall
             maze->cells[y + dy[dir] / 2][x + dx[dir] / 2] = EMPTY;                                                                // Remove wall
-            dfs(maze, new_x, new_y);
+            if (dfs(maze, new_x, new_y)) {
+                printf("maze dfs: failed to find path\n");
+                return 1;
+            }
         }
     }
+    return 0;
 }
 
 static int initialize_maze(Maze *maze, uint8_t width, uint8_t height) {
@@ -60,8 +68,8 @@ static int initialize_maze(Maze *maze, uint8_t width, uint8_t height) {
         return 1;
     }
 
-    uint8_t w = width + (width % 2 == 0);
-    uint8_t h = height + (height % 2 == 0);
+    uint8_t w = width - (width % 2 == 0);
+    uint8_t h = height - (height % 2 == 0);
 
     maze->width = w > x_res / CELL_SIZE ? x_res / CELL_SIZE : w;
     maze->height = h > y_res / CELL_SIZE ? y_res / CELL_SIZE : h;
@@ -90,7 +98,10 @@ static int initialize_maze(Maze *maze, uint8_t width, uint8_t height) {
     }
 
     maze->cells = mz;
-    dfs(maze, 1, 1);
+    if (dfs(maze, 1, 1)) {
+        printf("initialize_maze: dfs failed\n");
+        return 1;
+    }
     mz[maze->height - 2][maze->width - 2] = WIN;
 
     return 0;
@@ -177,10 +188,10 @@ Maze *create_maze(uint8_t width, uint8_t height, uint8_t mob_count) {
     return maze;
 }
 
-void destroy_maze(Maze *maze) {
+int destroy_maze(Maze *maze) {
     if (maze == NULL) {
         printf("destroy_maze: NULL pointer provided\n");
-        return;
+        return 1;
     }
 
     for (int i = 0; i < maze->height; i++) {
@@ -189,6 +200,7 @@ void destroy_maze(Maze *maze) {
     free(maze->cells);
 
     free(maze);
+    return 0;
 }
 
 /* Getter and setter section */

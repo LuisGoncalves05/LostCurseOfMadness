@@ -57,8 +57,9 @@ Maze *create_maze(uint8_t width, uint8_t height, uint8_t mob_count);
  * @brief Frees the memory associated with the maze.
  *
  * @param maze Pointer to the Maze structure to free.
+ * @return 0 for success, 1 for failure.
  */
-void destroy_maze(Maze *maze);
+int destroy_maze(Maze *maze);
 
 /**
  * @brief Returns the width of the maze in cells.
