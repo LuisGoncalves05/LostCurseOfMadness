@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['background_5fcolor_0',['BACKGROUND_COLOR',['../group__gpu.html#ga61ae6f1ae401c962137f2ae1d2a158df',1,'gpu.h']]],
-  ['bios_5fvideo_5fmode_5fset_1',['BIOS_VIDEO_MODE_SET',['../group__gpu.html#gaae8eb6db344d27a4a8b2dbe111f5d514',1,'gpu.h']]],
-  ['bios_5fvideocard_5fserv_2',['BIOS_VIDEOCARD_SERV',['../group__gpu.html#gac4d721714eb997cb83831b97296c009f',1,'gpu.h']]],
+  ['background_5fcolor_0',['BACKGROUND_COLOR',['../gpu_8h.html#a61ae6f1ae401c962137f2ae1d2a158df',1,'gpu.h']]],
+  ['bios_5fvideo_5fmode_5fset_1',['BIOS_VIDEO_MODE_SET',['../gpu_8h.html#aae8eb6db344d27a4a8b2dbe111f5d514',1,'gpu.h']]],
+  ['bios_5fvideocard_5fserv_2',['BIOS_VIDEOCARD_SERV',['../gpu_8h.html#ac4d721714eb997cb83831b97296c009f',1,'gpu.h']]],
   ['break_3',['BREAK',['../group__i8042.html#gabe022c8f09db1f0680a92293523f25dd',1,'i8042.h']]],
   ['bullet_4',['bullet',['../structBullet.html',1,'Bullet'],['../bullet_8h.html#a16081eacbd30caf76f1b04a97eee39b9',1,'Bullet:&#160;bullet.h']]],
   ['bullet_2ec_5',['bullet.c',['../bullet_8c.html',1,'']]],

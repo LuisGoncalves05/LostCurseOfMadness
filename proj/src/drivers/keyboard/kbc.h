@@ -1,18 +1,13 @@
 #ifndef KBC_H
 #define KBC_H
 
+#include <lcom/lcf.h>
 #include <stdbool.h>
 #include <stdint.h>
 
 #include "i8042.h"
 
-extern int32_t kbd_subscription_id;
-
-/** @defgroup kbc kbc
- * @{
- *
- * Functions for using the i8042 kbc.
- */
+extern int32_t kbd_subscription_id; /**< Keyboard subscription ID */
 
 /**
  * @brief Writes byte in KBC port.

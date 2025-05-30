@@ -96,10 +96,13 @@ Include dependency graph for utils.c:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a81621440b3d65680979425e39aa8c789" id="r_a81621440b3d65680979425e39aa8c789"><td class="memItemLeft" align="right" valign="top">int()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8c.html#a81621440b3d65680979425e39aa8c789">util_get_LSB</a> (uint16_t val, uint8_t *lsb)</td></tr>
+<tr class="memdesc:a81621440b3d65680979425e39aa8c789"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the least significant byte (LSB) of a 16-bit value.  <br /></td></tr>
 <tr class="separator:a81621440b3d65680979425e39aa8c789"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a880076cd2ec468834438b6e0c58836" id="r_a6a880076cd2ec468834438b6e0c58836"><td class="memItemLeft" align="right" valign="top">int()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8c.html#a6a880076cd2ec468834438b6e0c58836">util_get_MSB</a> (uint16_t val, uint8_t *msb)</td></tr>
+<tr class="memdesc:a6a880076cd2ec468834438b6e0c58836"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the most significant byte (MSB) of a 16-bit value.  <br /></td></tr>
 <tr class="separator:a6a880076cd2ec468834438b6e0c58836"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79a031a8611f5b2d6afa4158e92b0fb4" id="r_a79a031a8611f5b2d6afa4158e92b0fb4"><td class="memItemLeft" align="right" valign="top">int()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8c.html#a79a031a8611f5b2d6afa4158e92b0fb4">util_sys_inb</a> (int port, uint8_t *value)</td></tr>
+<tr class="memdesc:a79a031a8611f5b2d6afa4158e92b0fb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a byte from a specified port.  <br /></td></tr>
 <tr class="separator:a79a031a8611f5b2d6afa4158e92b0fb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -129,6 +132,16 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Gets the least significant byte (LSB) of a 16-bit value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">val</td><td>The 16-bit value. </td></tr>
+    <tr><td class="paramname">lsb</td><td>Pointer to store the LSB. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, 1 on failure. </dd></dl>
+
 </div>
 </div>
 <a id="a6a880076cd2ec468834438b6e0c58836" name="a6a880076cd2ec468834438b6e0c58836"></a>
@@ -157,6 +170,16 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Gets the most significant byte (MSB) of a 16-bit value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">val</td><td>The 16-bit value. </td></tr>
+    <tr><td class="paramname">msb</td><td>Pointer to store the MSB. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, 1 on failure. </dd></dl>
+
 </div>
 </div>
 <a id="a79a031a8611f5b2d6afa4158e92b0fb4" name="a79a031a8611f5b2d6afa4158e92b0fb4"></a>
@@ -184,6 +207,16 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Reads a byte from a specified port. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">port</td><td>The port to read from. </td></tr>
+    <tr><td class="paramname">value</td><td>Pointer to store the read value. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, 1 on failure. </dd></dl>
 
 </div>
 </div>

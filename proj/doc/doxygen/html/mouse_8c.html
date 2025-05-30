@@ -80,55 +80,54 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="mouse_8h_source.html">mouse.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="kbc_8h_source.html">../keyboard/kbc.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for mouse.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="mouse_8c__incl.png" border="0" usemap="#asrc_2drivers_2mouse_2mouse_8c" alt=""/></div>
 <map name="asrc_2drivers_2mouse_2mouse_8c" id="asrc_2drivers_2mouse_2mouse_8c">
-<area shape="rect" title=" " alt="" coords="49,5,247,31"/>
-<area shape="rect" href="mouse_8h.html" title=" " alt="" coords="70,79,149,104"/>
-<area shape="poly" title=" " alt="" coords="144,32,124,68,120,65,139,30"/>
-<area shape="rect" href="kbc_8h.html" title=" " alt="" coords="81,152,215,177"/>
-<area shape="poly" title=" " alt="" coords="154,31,163,78,162,110,157,139,152,138,157,110,157,79,148,32"/>
-<area shape="poly" title=" " alt="" coords="118,103,138,139,133,141,113,106"/>
-<area shape="rect" title=" " alt="" coords="5,225,88,251"/>
-<area shape="poly" title=" " alt="" coords="133,180,76,219,73,215,130,175"/>
-<area shape="rect" title=" " alt="" coords="113,225,183,251"/>
-<area shape="poly" title=" " alt="" coords="151,178,151,212,145,212,145,178"/>
-<area shape="rect" href="i8042_8h.html" title=" " alt="" coords="207,225,278,251"/>
-<area shape="poly" title=" " alt="" coords="165,175,218,215,215,219,162,179"/>
-<area shape="rect" title=" " alt="" coords="200,299,285,324"/>
-<area shape="poly" title=" " alt="" coords="245,251,245,285,240,285,240,251"/>
+<area shape="rect" title=" " alt="" coords="16,5,213,31"/>
+<area shape="rect" href="mouse_8h.html" title=" " alt="" coords="75,79,154,104"/>
+<area shape="poly" title=" " alt="" coords="117,31,117,65,112,65,112,31"/>
+<area shape="rect" href="kbc_8h.html" title=" " alt="" coords="29,152,200,177"/>
+<area shape="poly" title=" " alt="" coords="117,104,117,138,112,138,112,104"/>
+<area shape="rect" title=" " alt="" coords="80,299,165,324"/>
+<area shape="poly" title=" " alt="" coords="79,180,50,192,24,209,10,228,8,238,12,249,37,275,68,292,66,297,33,279,8,252,3,239,5,226,21,205,48,188,77,175"/>
+<area shape="rect" title=" " alt="" coords="22,225,105,251"/>
+<area shape="poly" title=" " alt="" coords="108,179,82,216,78,213,104,176"/>
+<area shape="rect" title=" " alt="" coords="130,225,200,251"/>
+<area shape="poly" title=" " alt="" coords="125,176,151,213,147,216,120,179"/>
+<area shape="rect" href="i8042_8h.html" title=" " alt="" coords="224,225,295,251"/>
+<area shape="poly" title=" " alt="" coords="139,175,225,217,223,222,136,180"/>
+<area shape="poly" title=" " alt="" coords="239,253,158,295,155,290,236,248"/>
 </map>
 </div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga20285aed4b3ef45812cd967532dd09db" id="r_ga20285aed4b3ef45812cd967532dd09db"><td class="memItemLeft" align="right" valign="top">int()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mouse.html#ga20285aed4b3ef45812cd967532dd09db">mouse_subscribe_int</a> (uint8_t *bit_no)</td></tr>
-<tr class="memdesc:ga20285aed4b3ef45812cd967532dd09db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscribes and enables Mouse interrupts.  <br /></td></tr>
-<tr class="separator:ga20285aed4b3ef45812cd967532dd09db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gacc3d97e33f3dea8c4b626cac59e5d5a4" id="r_gacc3d97e33f3dea8c4b626cac59e5d5a4"><td class="memItemLeft" align="right" valign="top">int()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mouse.html#gacc3d97e33f3dea8c4b626cac59e5d5a4">mouse_unsubscribe_int</a> (void)</td></tr>
-<tr class="memdesc:gacc3d97e33f3dea8c4b626cac59e5d5a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unsubscribes Mouse interrupts.  <br /></td></tr>
-<tr class="separator:gacc3d97e33f3dea8c4b626cac59e5d5a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad8f8ec7da847f2b278554aeef9652d55" id="r_gad8f8ec7da847f2b278554aeef9652d55"><td class="memItemLeft" align="right" valign="top">void()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mouse.html#gad8f8ec7da847f2b278554aeef9652d55">mouse_int_handler</a> (void)</td></tr>
-<tr class="memdesc:gad8f8ec7da847f2b278554aeef9652d55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mouse interrupt handler.  <br /></td></tr>
-<tr class="separator:gad8f8ec7da847f2b278554aeef9652d55"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaed4404005e4c565ac36656307386e0ac" id="r_gaed4404005e4c565ac36656307386e0ac"><td class="memItemLeft" align="right" valign="top">void()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mouse.html#gaed4404005e4c565ac36656307386e0ac">mouse_ih</a> (void)</td></tr>
-<tr class="memdesc:gaed4404005e4c565ac36656307386e0ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper of mouse_int_handler.  <br /></td></tr>
-<tr class="separator:gaed4404005e4c565ac36656307386e0ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga14db367991a7f78daae7b197742a432b" id="r_ga14db367991a7f78daae7b197742a432b"><td class="memItemLeft" align="right" valign="top">int()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mouse.html#ga14db367991a7f78daae7b197742a432b">mouse_read_packet</a> (void)</td></tr>
-<tr class="memdesc:ga14db367991a7f78daae7b197742a432b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads packets from the Mouse.  <br /></td></tr>
-<tr class="separator:ga14db367991a7f78daae7b197742a432b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5d8468900d4d4e0a69c35b0b65567f8a" id="r_ga5d8468900d4d4e0a69c35b0b65567f8a"><td class="memItemLeft" align="right" valign="top">int()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mouse.html#ga5d8468900d4d4e0a69c35b0b65567f8a">mouse_sync_packets</a> (uint8_t *<a class="el" href="mouse_8c.html#ab234504ae156fa5b250e34cbb65a7807">packet</a>, uint8_t *<a class="el" href="main_8c.html#adbc7ba6354e62de69b8312b2ecc6a98f">packet_idx</a>, uint8_t <a class="el" href="mouse_8c.html#aa930701390a0652cab793497401d4736">packet_byte</a>)</td></tr>
-<tr class="memdesc:ga5d8468900d4d4e0a69c35b0b65567f8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads packets from the Mouse.  <br /></td></tr>
-<tr class="separator:ga5d8468900d4d4e0a69c35b0b65567f8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1cab3b30437d4d8a81e4627dbdc42103" id="r_ga1cab3b30437d4d8a81e4627dbdc42103"><td class="memItemLeft" align="right" valign="top">int()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mouse.html#ga1cab3b30437d4d8a81e4627dbdc42103">mouse_build_packet</a> (uint8_t *<a class="el" href="mouse_8c.html#ab234504ae156fa5b250e34cbb65a7807">packet</a>, uint8_t *<a class="el" href="main_8c.html#adbc7ba6354e62de69b8312b2ecc6a98f">packet_idx</a>, struct <a class="el" href="mouse_8c.html#ab234504ae156fa5b250e34cbb65a7807">packet</a> *<a class="el" href="main_8c.html#a26e83eca70c2b9169fbbb0eac7e32e32">pp</a>)</td></tr>
-<tr class="memdesc:ga1cab3b30437d4d8a81e4627dbdc42103"><td class="mdescLeft">&#160;</td><td class="mdescRight">Builds packets read from the Mouse.  <br /></td></tr>
-<tr class="separator:ga1cab3b30437d4d8a81e4627dbdc42103"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae8beed6c3873a9c2d3f929061ee61d90" id="r_gae8beed6c3873a9c2d3f929061ee61d90"><td class="memItemLeft" align="right" valign="top">int()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mouse.html#gae8beed6c3873a9c2d3f929061ee61d90">mouse_set_data_reporting</a> (bool b)</td></tr>
-<tr class="memdesc:gae8beed6c3873a9c2d3f929061ee61d90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets/Unsets data reporting.  <br /></td></tr>
-<tr class="separator:gae8beed6c3873a9c2d3f929061ee61d90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20285aed4b3ef45812cd967532dd09db" id="r_a20285aed4b3ef45812cd967532dd09db"><td class="memItemLeft" align="right" valign="top">int()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mouse_8c.html#a20285aed4b3ef45812cd967532dd09db">mouse_subscribe_int</a> (uint8_t *bit_no)</td></tr>
+<tr class="memdesc:a20285aed4b3ef45812cd967532dd09db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscribes and enables Mouse interrupts.  <br /></td></tr>
+<tr class="separator:a20285aed4b3ef45812cd967532dd09db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc3d97e33f3dea8c4b626cac59e5d5a4" id="r_acc3d97e33f3dea8c4b626cac59e5d5a4"><td class="memItemLeft" align="right" valign="top">int()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mouse_8c.html#acc3d97e33f3dea8c4b626cac59e5d5a4">mouse_unsubscribe_int</a> (void)</td></tr>
+<tr class="memdesc:acc3d97e33f3dea8c4b626cac59e5d5a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unsubscribes Mouse interrupts.  <br /></td></tr>
+<tr class="separator:acc3d97e33f3dea8c4b626cac59e5d5a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8f8ec7da847f2b278554aeef9652d55" id="r_ad8f8ec7da847f2b278554aeef9652d55"><td class="memItemLeft" align="right" valign="top">void()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mouse_8c.html#ad8f8ec7da847f2b278554aeef9652d55">mouse_int_handler</a> (void)</td></tr>
+<tr class="memdesc:ad8f8ec7da847f2b278554aeef9652d55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mouse interrupt handler.  <br /></td></tr>
+<tr class="separator:ad8f8ec7da847f2b278554aeef9652d55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed4404005e4c565ac36656307386e0ac" id="r_aed4404005e4c565ac36656307386e0ac"><td class="memItemLeft" align="right" valign="top">void()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mouse_8c.html#aed4404005e4c565ac36656307386e0ac">mouse_ih</a> (void)</td></tr>
+<tr class="memdesc:aed4404005e4c565ac36656307386e0ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper of mouse_int_handler.  <br /></td></tr>
+<tr class="separator:aed4404005e4c565ac36656307386e0ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14db367991a7f78daae7b197742a432b" id="r_a14db367991a7f78daae7b197742a432b"><td class="memItemLeft" align="right" valign="top">int()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mouse_8c.html#a14db367991a7f78daae7b197742a432b">mouse_read_packet</a> (void)</td></tr>
+<tr class="memdesc:a14db367991a7f78daae7b197742a432b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads packets from the Mouse.  <br /></td></tr>
+<tr class="separator:a14db367991a7f78daae7b197742a432b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d8468900d4d4e0a69c35b0b65567f8a" id="r_a5d8468900d4d4e0a69c35b0b65567f8a"><td class="memItemLeft" align="right" valign="top">int()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mouse_8c.html#a5d8468900d4d4e0a69c35b0b65567f8a">mouse_sync_packets</a> (uint8_t *<a class="el" href="mouse_8c.html#ab234504ae156fa5b250e34cbb65a7807">packet</a>, uint8_t *<a class="el" href="main_8c.html#adbc7ba6354e62de69b8312b2ecc6a98f">packet_idx</a>, uint8_t <a class="el" href="mouse_8c.html#aa930701390a0652cab793497401d4736">packet_byte</a>)</td></tr>
+<tr class="memdesc:a5d8468900d4d4e0a69c35b0b65567f8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads packets from the Mouse.  <br /></td></tr>
+<tr class="separator:a5d8468900d4d4e0a69c35b0b65567f8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cab3b30437d4d8a81e4627dbdc42103" id="r_a1cab3b30437d4d8a81e4627dbdc42103"><td class="memItemLeft" align="right" valign="top">int()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mouse_8c.html#a1cab3b30437d4d8a81e4627dbdc42103">mouse_build_packet</a> (uint8_t *<a class="el" href="mouse_8c.html#ab234504ae156fa5b250e34cbb65a7807">packet</a>, uint8_t *<a class="el" href="main_8c.html#adbc7ba6354e62de69b8312b2ecc6a98f">packet_idx</a>, struct <a class="el" href="mouse_8c.html#ab234504ae156fa5b250e34cbb65a7807">packet</a> *<a class="el" href="main_8c.html#a26e83eca70c2b9169fbbb0eac7e32e32">pp</a>)</td></tr>
+<tr class="memdesc:a1cab3b30437d4d8a81e4627dbdc42103"><td class="mdescLeft">&#160;</td><td class="mdescRight">Builds packets read from the Mouse.  <br /></td></tr>
+<tr class="separator:a1cab3b30437d4d8a81e4627dbdc42103"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8beed6c3873a9c2d3f929061ee61d90" id="r_ae8beed6c3873a9c2d3f929061ee61d90"><td class="memItemLeft" align="right" valign="top">int()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mouse_8c.html#ae8beed6c3873a9c2d3f929061ee61d90">mouse_set_data_reporting</a> (bool b)</td></tr>
+<tr class="memdesc:ae8beed6c3873a9c2d3f929061ee61d90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets/Unsets data reporting.  <br /></td></tr>
+<tr class="separator:ae8beed6c3873a9c2d3f929061ee61d90"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -139,6 +138,235 @@ Variables</h2></td></tr>
 <tr class="memitem:ab234504ae156fa5b250e34cbb65a7807" id="r_ab234504ae156fa5b250e34cbb65a7807"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mouse_8c.html#ab234504ae156fa5b250e34cbb65a7807">packet</a> [3]</td></tr>
 <tr class="separator:ab234504ae156fa5b250e34cbb65a7807"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a1cab3b30437d4d8a81e4627dbdc42103" name="a1cab3b30437d4d8a81e4627dbdc42103"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1cab3b30437d4d8a81e4627dbdc42103">&#9670;&#160;</a></span>mouse_build_packet()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int() mouse_build_packet </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>packet</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>packet_idx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="mouse_8c.html#ab234504ae156fa5b250e34cbb65a7807">packet</a> *&#160;</td>
+          <td class="paramname"><em>pp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Builds packets read from the Mouse. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">packet</td><td>array that stores packet bytes. </td></tr>
+    <tr><td class="paramname">packet_idx</td><td>index in the packet array. </td></tr>
+    <tr><td class="paramname">pp</td><td>packet returned. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Return 0 upon success and non-zero otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="aed4404005e4c565ac36656307386e0ac" name="aed4404005e4c565ac36656307386e0ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed4404005e4c565ac36656307386e0ac">&#9670;&#160;</a></span>mouse_ih()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void() mouse_ih </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Wrapper of mouse_int_handler. </p>
+<p>Used to pass tests, should not be used so that IH names are coherent. </p>
+
+</div>
+</div>
+<a id="ad8f8ec7da847f2b278554aeef9652d55" name="ad8f8ec7da847f2b278554aeef9652d55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8f8ec7da847f2b278554aeef9652d55">&#9670;&#160;</a></span>mouse_int_handler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void() mouse_int_handler </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Mouse interrupt handler. </p>
+<p>Tries to read a packet byte from the kbc, if any error occurs tries again until READ_ATTEMPT_LIMIT. </p>
+
+</div>
+</div>
+<a id="a14db367991a7f78daae7b197742a432b" name="a14db367991a7f78daae7b197742a432b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14db367991a7f78daae7b197742a432b">&#9670;&#160;</a></span>mouse_read_packet()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int() mouse_read_packet </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reads packets from the Mouse. </p>
+<dl class="section return"><dt>Returns</dt><dd>Return 0 upon success and non-zero otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="ae8beed6c3873a9c2d3f929061ee61d90" name="ae8beed6c3873a9c2d3f929061ee61d90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8beed6c3873a9c2d3f929061ee61d90">&#9670;&#160;</a></span>mouse_set_data_reporting()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int() mouse_set_data_reporting </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>b</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets/Unsets data reporting. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">b</td><td>set/unset data reporting. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Return 0 upon success and non-zero otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a20285aed4b3ef45812cd967532dd09db" name="a20285aed4b3ef45812cd967532dd09db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20285aed4b3ef45812cd967532dd09db">&#9670;&#160;</a></span>mouse_subscribe_int()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int() mouse_subscribe_int </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>bit_no</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Subscribes and enables Mouse interrupts. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bit_no</td><td>Will hold the bit (BIT(hook_id)) to be set in the mask returned upon an interrupt. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Return 0 upon success and non-zero otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a5d8468900d4d4e0a69c35b0b65567f8a" name="a5d8468900d4d4e0a69c35b0b65567f8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d8468900d4d4e0a69c35b0b65567f8a">&#9670;&#160;</a></span>mouse_sync_packets()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int() mouse_sync_packets </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>packet</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>packet_idx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>packet_byte</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reads packets from the Mouse. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">packet</td><td>Packet array to be synced. </td></tr>
+    <tr><td class="paramname">packet_idx</td><td>Index in the packet array. </td></tr>
+    <tr><td class="paramname">packet_byte</td><td>Last packet byte read from the mouse. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Return 0 upon success and non-zero otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="acc3d97e33f3dea8c4b626cac59e5d5a4" name="acc3d97e33f3dea8c4b626cac59e5d5a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc3d97e33f3dea8c4b626cac59e5d5a4">&#9670;&#160;</a></span>mouse_unsubscribe_int()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int() mouse_unsubscribe_int </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Unsubscribes Mouse interrupts. </p>
+<dl class="section return"><dt>Returns</dt><dd>Return 0 upon success and non-zero otherwise. </dd></dl>
+
+</div>
+</div>
 <h2 class="groupheader">Variable Documentation</h2>
 <a id="aab49305493b4a360de0bc2c1a809d484" name="aab49305493b4a360de0bc2c1a809d484"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aab49305493b4a360de0bc2c1a809d484">&#9670;&#160;</a></span>mouse_hook_id</h2>
@@ -151,6 +379,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Mouse subscription ID </p>
 
 </div>
 </div>
@@ -165,6 +394,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Mouse packet </p>
 
 </div>
 </div>
@@ -179,6 +409,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Byte read from mouse </p>
 
 </div>
 </div>

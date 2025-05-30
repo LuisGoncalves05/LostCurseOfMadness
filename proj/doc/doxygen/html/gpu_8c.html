@@ -105,45 +105,45 @@ Include dependency graph for gpu.c:</div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:gaa2ac3ebc7870950bab4c0fc90f113155" id="r_gaa2ac3ebc7870950bab4c0fc90f113155"><td class="memItemLeft" align="right" valign="top">int()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__gpu.html#gaa2ac3ebc7870950bab4c0fc90f113155">set_graphic_mode</a> (uint16_t mode)</td></tr>
-<tr class="memdesc:gaa2ac3ebc7870950bab4c0fc90f113155"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the VBE graphics mode.  <br /></td></tr>
-<tr class="separator:gaa2ac3ebc7870950bab4c0fc90f113155"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac7aece56d0d111161c91b4b9cddfaf40" id="r_gac7aece56d0d111161c91b4b9cddfaf40"><td class="memItemLeft" align="right" valign="top">int()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__gpu.html#gac7aece56d0d111161c91b4b9cddfaf40">set_frame_buffers</a> (uint16_t mode)</td></tr>
-<tr class="memdesc:gac7aece56d0d111161c91b4b9cddfaf40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the frame buffers.  <br /></td></tr>
-<tr class="separator:gac7aece56d0d111161c91b4b9cddfaf40"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5440ee2a33422daec40d52c856f06f0d" id="r_ga5440ee2a33422daec40d52c856f06f0d"><td class="memItemLeft" align="right" valign="top">int()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__gpu.html#ga5440ee2a33422daec40d52c856f06f0d">clear_frame_buffer</a> (uint8_t *frame_buffer, uint16_t color)</td></tr>
-<tr class="memdesc:ga5440ee2a33422daec40d52c856f06f0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the given frame buffer with the specified color.  <br /></td></tr>
-<tr class="separator:ga5440ee2a33422daec40d52c856f06f0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga158f5f764abb0712e5ddb77378f130b8" id="r_ga158f5f764abb0712e5ddb77378f130b8"><td class="memItemLeft" align="right" valign="top">void()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__gpu.html#ga158f5f764abb0712e5ddb77378f130b8">set_display_start</a> ()</td></tr>
-<tr class="memdesc:ga158f5f764abb0712e5ddb77378f130b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the video memory display start to point to a new buffer (page flipping).  <br /></td></tr>
-<tr class="separator:ga158f5f764abb0712e5ddb77378f130b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6c42ab5cf5efa4bebdf1d551d9b4b992" id="r_ga6c42ab5cf5efa4bebdf1d551d9b4b992"><td class="memItemLeft" align="right" valign="top">void()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__gpu.html#ga6c42ab5cf5efa4bebdf1d551d9b4b992">vga_flip_pages</a> ()</td></tr>
-<tr class="memdesc:ga6c42ab5cf5efa4bebdf1d551d9b4b992"><td class="mdescLeft">&#160;</td><td class="mdescRight">Swaps the main and secondary frame buffers.  <br /></td></tr>
-<tr class="separator:ga6c42ab5cf5efa4bebdf1d551d9b4b992"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaaa50b3bc2107baef0cf60d5df69b210e" id="r_gaaa50b3bc2107baef0cf60d5df69b210e"><td class="memItemLeft" align="right" valign="top">uint8_t *()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__gpu.html#gaaa50b3bc2107baef0cf60d5df69b210e">get_position</a> (uint16_t x, uint16_t y, uint8_t *frame_buffer)</td></tr>
-<tr class="memdesc:gaaa50b3bc2107baef0cf60d5df69b210e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a pointer to the video memory location of a specific pixel.  <br /></td></tr>
-<tr class="separator:gaaa50b3bc2107baef0cf60d5df69b210e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga977f69173a6e3f6a29bac3bc8c979b3b" id="r_ga977f69173a6e3f6a29bac3bc8c979b3b"><td class="memItemLeft" align="right" valign="top">int()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__gpu.html#ga977f69173a6e3f6a29bac3bc8c979b3b">vga_draw_pixel</a> (uint16_t x, uint16_t y, uint32_t color, uint8_t *frame_buffer)</td></tr>
-<tr class="memdesc:ga977f69173a6e3f6a29bac3bc8c979b3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws a single pixel of a specified color at (x, y).  <br /></td></tr>
-<tr class="separator:ga977f69173a6e3f6a29bac3bc8c979b3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa85985050e66b912d4d79e5473f5ce64" id="r_gaa85985050e66b912d4d79e5473f5ce64"><td class="memItemLeft" align="right" valign="top">int()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__gpu.html#gaa85985050e66b912d4d79e5473f5ce64">vga_draw_hline</a> (uint16_t x, uint16_t y, uint16_t len, uint32_t color, uint8_t *frame_buffer)</td></tr>
-<tr class="memdesc:gaa85985050e66b912d4d79e5473f5ce64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws a horizontal line of a specified color.  <br /></td></tr>
-<tr class="separator:gaa85985050e66b912d4d79e5473f5ce64"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3d6e0aee4bb5869ca78545150957562d" id="r_ga3d6e0aee4bb5869ca78545150957562d"><td class="memItemLeft" align="right" valign="top">int()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__gpu.html#ga3d6e0aee4bb5869ca78545150957562d">vga_draw_rectangle</a> (uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint32_t color, uint8_t *frame_buffer)</td></tr>
-<tr class="memdesc:ga3d6e0aee4bb5869ca78545150957562d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws a filled rectangle of a specified color.  <br /></td></tr>
-<tr class="separator:ga3d6e0aee4bb5869ca78545150957562d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf882fe6872cbcffaea9a7abdb6cd131e" id="r_gaf882fe6872cbcffaea9a7abdb6cd131e"><td class="memItemLeft" align="right" valign="top">uint32_t()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__gpu.html#gaf882fe6872cbcffaea9a7abdb6cd131e">direct_mode</a> (uint16_t i, uint16_t j, uint8_t step, uint32_t first)</td></tr>
-<tr class="memdesc:gaf882fe6872cbcffaea9a7abdb6cd131e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the color for a rectangle in direct color mode.  <br /></td></tr>
-<tr class="separator:gaf882fe6872cbcffaea9a7abdb6cd131e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga637e88062e9ad734e410b79592a8cf82" id="r_ga637e88062e9ad734e410b79592a8cf82"><td class="memItemLeft" align="right" valign="top">uint32_t()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__gpu.html#ga637e88062e9ad734e410b79592a8cf82">indexed_mode</a> (uint8_t no_rectangles, uint16_t i, uint16_t j, uint8_t step, uint32_t first)</td></tr>
-<tr class="memdesc:ga637e88062e9ad734e410b79592a8cf82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the color for a rectangle in indexed color mode.  <br /></td></tr>
-<tr class="separator:ga637e88062e9ad734e410b79592a8cf82"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gabae175d4c9f748b52f41dca9cdd97c09" id="r_gabae175d4c9f748b52f41dca9cdd97c09"><td class="memItemLeft" align="right" valign="top">int()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__gpu.html#gabae175d4c9f748b52f41dca9cdd97c09">vga_draw_loaded_xpm</a> (uint8_t *xpm_data, uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint8_t *frame_buffer)</td></tr>
-<tr class="memdesc:gabae175d4c9f748b52f41dca9cdd97c09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws a preloaded XPM image at the specified coordinates.  <br /></td></tr>
-<tr class="separator:gabae175d4c9f748b52f41dca9cdd97c09"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa11ffc7226e6fc0f1cb3b7c4308ffff5" id="r_gaa11ffc7226e6fc0f1cb3b7c4308ffff5"><td class="memItemLeft" align="right" valign="top">int()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__gpu.html#gaa11ffc7226e6fc0f1cb3b7c4308ffff5">vga_draw_xpm</a> (xpm_map_t xpm, uint16_t x, uint16_t y, uint8_t *frame_buffer)</td></tr>
-<tr class="memdesc:gaa11ffc7226e6fc0f1cb3b7c4308ffff5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws an XPM image at the specified coordinates.  <br /></td></tr>
-<tr class="separator:gaa11ffc7226e6fc0f1cb3b7c4308ffff5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2ac3ebc7870950bab4c0fc90f113155" id="r_aa2ac3ebc7870950bab4c0fc90f113155"><td class="memItemLeft" align="right" valign="top">int()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpu_8c.html#aa2ac3ebc7870950bab4c0fc90f113155">set_graphic_mode</a> (uint16_t mode)</td></tr>
+<tr class="memdesc:aa2ac3ebc7870950bab4c0fc90f113155"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the VBE graphics mode.  <br /></td></tr>
+<tr class="separator:aa2ac3ebc7870950bab4c0fc90f113155"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7aece56d0d111161c91b4b9cddfaf40" id="r_ac7aece56d0d111161c91b4b9cddfaf40"><td class="memItemLeft" align="right" valign="top">int()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpu_8c.html#ac7aece56d0d111161c91b4b9cddfaf40">set_frame_buffers</a> (uint16_t mode)</td></tr>
+<tr class="memdesc:ac7aece56d0d111161c91b4b9cddfaf40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the frame buffers.  <br /></td></tr>
+<tr class="separator:ac7aece56d0d111161c91b4b9cddfaf40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5440ee2a33422daec40d52c856f06f0d" id="r_a5440ee2a33422daec40d52c856f06f0d"><td class="memItemLeft" align="right" valign="top">int()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpu_8c.html#a5440ee2a33422daec40d52c856f06f0d">clear_frame_buffer</a> (uint8_t *frame_buffer, uint16_t color)</td></tr>
+<tr class="memdesc:a5440ee2a33422daec40d52c856f06f0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the given frame buffer with the specified color.  <br /></td></tr>
+<tr class="separator:a5440ee2a33422daec40d52c856f06f0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a158f5f764abb0712e5ddb77378f130b8" id="r_a158f5f764abb0712e5ddb77378f130b8"><td class="memItemLeft" align="right" valign="top">void()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpu_8c.html#a158f5f764abb0712e5ddb77378f130b8">set_display_start</a> ()</td></tr>
+<tr class="memdesc:a158f5f764abb0712e5ddb77378f130b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the video memory display start to point to a new buffer (page flipping).  <br /></td></tr>
+<tr class="separator:a158f5f764abb0712e5ddb77378f130b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c42ab5cf5efa4bebdf1d551d9b4b992" id="r_a6c42ab5cf5efa4bebdf1d551d9b4b992"><td class="memItemLeft" align="right" valign="top">void()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpu_8c.html#a6c42ab5cf5efa4bebdf1d551d9b4b992">vga_flip_pages</a> ()</td></tr>
+<tr class="memdesc:a6c42ab5cf5efa4bebdf1d551d9b4b992"><td class="mdescLeft">&#160;</td><td class="mdescRight">Swaps the main and secondary frame buffers.  <br /></td></tr>
+<tr class="separator:a6c42ab5cf5efa4bebdf1d551d9b4b992"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa50b3bc2107baef0cf60d5df69b210e" id="r_aaa50b3bc2107baef0cf60d5df69b210e"><td class="memItemLeft" align="right" valign="top">uint8_t *()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpu_8c.html#aaa50b3bc2107baef0cf60d5df69b210e">get_position</a> (uint16_t x, uint16_t y, uint8_t *frame_buffer)</td></tr>
+<tr class="memdesc:aaa50b3bc2107baef0cf60d5df69b210e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a pointer to the video memory location of a specific pixel.  <br /></td></tr>
+<tr class="separator:aaa50b3bc2107baef0cf60d5df69b210e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a977f69173a6e3f6a29bac3bc8c979b3b" id="r_a977f69173a6e3f6a29bac3bc8c979b3b"><td class="memItemLeft" align="right" valign="top">int()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpu_8c.html#a977f69173a6e3f6a29bac3bc8c979b3b">vga_draw_pixel</a> (uint16_t x, uint16_t y, uint32_t color, uint8_t *frame_buffer)</td></tr>
+<tr class="memdesc:a977f69173a6e3f6a29bac3bc8c979b3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws a single pixel of a specified color at (x, y).  <br /></td></tr>
+<tr class="separator:a977f69173a6e3f6a29bac3bc8c979b3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa85985050e66b912d4d79e5473f5ce64" id="r_aa85985050e66b912d4d79e5473f5ce64"><td class="memItemLeft" align="right" valign="top">int()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpu_8c.html#aa85985050e66b912d4d79e5473f5ce64">vga_draw_hline</a> (uint16_t x, uint16_t y, uint16_t len, uint32_t color, uint8_t *frame_buffer)</td></tr>
+<tr class="memdesc:aa85985050e66b912d4d79e5473f5ce64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws a horizontal line of a specified color.  <br /></td></tr>
+<tr class="separator:aa85985050e66b912d4d79e5473f5ce64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d6e0aee4bb5869ca78545150957562d" id="r_a3d6e0aee4bb5869ca78545150957562d"><td class="memItemLeft" align="right" valign="top">int()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpu_8c.html#a3d6e0aee4bb5869ca78545150957562d">vga_draw_rectangle</a> (uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint32_t color, uint8_t *frame_buffer)</td></tr>
+<tr class="memdesc:a3d6e0aee4bb5869ca78545150957562d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws a filled rectangle of a specified color.  <br /></td></tr>
+<tr class="separator:a3d6e0aee4bb5869ca78545150957562d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af882fe6872cbcffaea9a7abdb6cd131e" id="r_af882fe6872cbcffaea9a7abdb6cd131e"><td class="memItemLeft" align="right" valign="top">uint32_t()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpu_8c.html#af882fe6872cbcffaea9a7abdb6cd131e">direct_mode</a> (uint16_t i, uint16_t j, uint8_t step, uint32_t first)</td></tr>
+<tr class="memdesc:af882fe6872cbcffaea9a7abdb6cd131e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the color for a rectangle in direct color mode.  <br /></td></tr>
+<tr class="separator:af882fe6872cbcffaea9a7abdb6cd131e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a637e88062e9ad734e410b79592a8cf82" id="r_a637e88062e9ad734e410b79592a8cf82"><td class="memItemLeft" align="right" valign="top">uint32_t()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpu_8c.html#a637e88062e9ad734e410b79592a8cf82">indexed_mode</a> (uint8_t no_rectangles, uint16_t i, uint16_t j, uint8_t step, uint32_t first)</td></tr>
+<tr class="memdesc:a637e88062e9ad734e410b79592a8cf82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the color for a rectangle in indexed color mode.  <br /></td></tr>
+<tr class="separator:a637e88062e9ad734e410b79592a8cf82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abae175d4c9f748b52f41dca9cdd97c09" id="r_abae175d4c9f748b52f41dca9cdd97c09"><td class="memItemLeft" align="right" valign="top">int()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpu_8c.html#abae175d4c9f748b52f41dca9cdd97c09">vga_draw_loaded_xpm</a> (uint8_t *xpm_data, uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint8_t *frame_buffer)</td></tr>
+<tr class="memdesc:abae175d4c9f748b52f41dca9cdd97c09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws a preloaded XPM image at the specified coordinates.  <br /></td></tr>
+<tr class="separator:abae175d4c9f748b52f41dca9cdd97c09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa11ffc7226e6fc0f1cb3b7c4308ffff5" id="r_aa11ffc7226e6fc0f1cb3b7c4308ffff5"><td class="memItemLeft" align="right" valign="top">int()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpu_8c.html#aa11ffc7226e6fc0f1cb3b7c4308ffff5">vga_draw_xpm</a> (xpm_map_t xpm, uint16_t x, uint16_t y, uint8_t *frame_buffer)</td></tr>
+<tr class="memdesc:aa11ffc7226e6fc0f1cb3b7c4308ffff5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws an XPM image at the specified coordinates.  <br /></td></tr>
+<tr class="separator:aa11ffc7226e6fc0f1cb3b7c4308ffff5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -164,6 +164,588 @@ Variables</h2></td></tr>
 <tr class="memitem:aa0b878733cd01083e20d9c85310285b7" id="r_aa0b878733cd01083e20d9c85310285b7"><td class="memItemLeft" align="right" valign="top">uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpu_8c.html#aa0b878733cd01083e20d9c85310285b7">secondary_frame_buffer</a></td></tr>
 <tr class="separator:aa0b878733cd01083e20d9c85310285b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a5440ee2a33422daec40d52c856f06f0d" name="a5440ee2a33422daec40d52c856f06f0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5440ee2a33422daec40d52c856f06f0d">&#9670;&#160;</a></span>clear_frame_buffer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int() clear_frame_buffer </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>frame_buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>color</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clears the given frame buffer with the specified color. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">frame_buffer</td><td>Pointer to the frame buffer. </td></tr>
+    <tr><td class="paramname">color</td><td>Color used to clear (format depends on color depth). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, non-zero on failure. </dd></dl>
+
+</div>
+</div>
+<a id="af882fe6872cbcffaea9a7abdb6cd131e" name="af882fe6872cbcffaea9a7abdb6cd131e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af882fe6872cbcffaea9a7abdb6cd131e">&#9670;&#160;</a></span>direct_mode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t() direct_mode </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>j</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>step</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>first</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculates the color for a rectangle in direct color mode. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i</td><td>Row index. </td></tr>
+    <tr><td class="paramname">j</td><td>Column index. </td></tr>
+    <tr><td class="paramname">step</td><td>Color step value. </td></tr>
+    <tr><td class="paramname">first</td><td>Base color. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Computed color value. </dd></dl>
+
+</div>
+</div>
+<a id="aaa50b3bc2107baef0cf60d5df69b210e" name="aaa50b3bc2107baef0cf60d5df69b210e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa50b3bc2107baef0cf60d5df69b210e">&#9670;&#160;</a></span>get_position()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t *() get_position </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>frame_buffer</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns a pointer to the video memory location of a specific pixel. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>X-coordinate. </td></tr>
+    <tr><td class="paramname">y</td><td>Y-coordinate. </td></tr>
+    <tr><td class="paramname">frame_buffer</td><td>Pointer to the frame buffer. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to the memory location for pixel (x, y). </dd></dl>
+
+</div>
+</div>
+<a id="a637e88062e9ad734e410b79592a8cf82" name="a637e88062e9ad734e410b79592a8cf82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a637e88062e9ad734e410b79592a8cf82">&#9670;&#160;</a></span>indexed_mode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t() indexed_mode </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>no_rectangles</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>j</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>step</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>first</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculates the color for a rectangle in indexed color mode. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">no_rectangles</td><td>Total rectangles per row/column. </td></tr>
+    <tr><td class="paramname">i</td><td>Row index. </td></tr>
+    <tr><td class="paramname">j</td><td>Column index. </td></tr>
+    <tr><td class="paramname">step</td><td>Color increment step. </td></tr>
+    <tr><td class="paramname">first</td><td>Initial color value. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Computed color. </dd></dl>
+
+</div>
+</div>
+<a id="a158f5f764abb0712e5ddb77378f130b8" name="a158f5f764abb0712e5ddb77378f130b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a158f5f764abb0712e5ddb77378f130b8">&#9670;&#160;</a></span>set_display_start()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void() set_display_start </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the video memory display start to point to a new buffer (page flipping). </p>
+
+</div>
+</div>
+<a id="ac7aece56d0d111161c91b4b9cddfaf40" name="ac7aece56d0d111161c91b4b9cddfaf40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7aece56d0d111161c91b4b9cddfaf40">&#9670;&#160;</a></span>set_frame_buffers()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int() set_frame_buffers </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>mode</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initializes the frame buffers. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mode</td><td>VBE mode to be used. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, non-zero on failure. </dd></dl>
+
+</div>
+</div>
+<a id="aa2ac3ebc7870950bab4c0fc90f113155" name="aa2ac3ebc7870950bab4c0fc90f113155"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2ac3ebc7870950bab4c0fc90f113155">&#9670;&#160;</a></span>set_graphic_mode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int() set_graphic_mode </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>mode</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the VBE graphics mode. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mode</td><td>VBE mode number to set (e.g., VBE_MODE1). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, non-zero on failure. </dd></dl>
+
+</div>
+</div>
+<a id="aa85985050e66b912d4d79e5473f5ce64" name="aa85985050e66b912d4d79e5473f5ce64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa85985050e66b912d4d79e5473f5ce64">&#9670;&#160;</a></span>vga_draw_hline()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int() vga_draw_hline </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>color</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>frame_buffer</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Draws a horizontal line of a specified color. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>X-coordinate of the starting point. </td></tr>
+    <tr><td class="paramname">y</td><td>Y-coordinate of the line. </td></tr>
+    <tr><td class="paramname">len</td><td>Length of the line. </td></tr>
+    <tr><td class="paramname">color</td><td>Color to draw. </td></tr>
+    <tr><td class="paramname">frame_buffer</td><td>Pointer to the frame buffer. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, non-zero on failure. </dd></dl>
+
+</div>
+</div>
+<a id="abae175d4c9f748b52f41dca9cdd97c09" name="abae175d4c9f748b52f41dca9cdd97c09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abae175d4c9f748b52f41dca9cdd97c09">&#9670;&#160;</a></span>vga_draw_loaded_xpm()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int() vga_draw_loaded_xpm </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>xpm_data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>height</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>frame_buffer</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Draws a preloaded XPM image at the specified coordinates. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">xpm_data</td><td>Pointer to pixel data. </td></tr>
+    <tr><td class="paramname">x</td><td>X-coordinate. </td></tr>
+    <tr><td class="paramname">y</td><td>Y-coordinate. </td></tr>
+    <tr><td class="paramname">width</td><td>Image width. </td></tr>
+    <tr><td class="paramname">height</td><td>Image height. </td></tr>
+    <tr><td class="paramname">frame_buffer</td><td>Pointer to the frame buffer. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, non-zero on failure. </dd></dl>
+
+</div>
+</div>
+<a id="a977f69173a6e3f6a29bac3bc8c979b3b" name="a977f69173a6e3f6a29bac3bc8c979b3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a977f69173a6e3f6a29bac3bc8c979b3b">&#9670;&#160;</a></span>vga_draw_pixel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int() vga_draw_pixel </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>color</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>frame_buffer</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Draws a single pixel of a specified color at (x, y). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>X-coordinate. </td></tr>
+    <tr><td class="paramname">y</td><td>Y-coordinate. </td></tr>
+    <tr><td class="paramname">color</td><td>Color to draw. </td></tr>
+    <tr><td class="paramname">frame_buffer</td><td>Pointer to the frame buffer. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, non-zero on failure. </dd></dl>
+
+</div>
+</div>
+<a id="a3d6e0aee4bb5869ca78545150957562d" name="a3d6e0aee4bb5869ca78545150957562d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d6e0aee4bb5869ca78545150957562d">&#9670;&#160;</a></span>vga_draw_rectangle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int() vga_draw_rectangle </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>height</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>color</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>frame_buffer</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Draws a filled rectangle of a specified color. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>X-coordinate of the top-left corner. </td></tr>
+    <tr><td class="paramname">y</td><td>Y-coordinate of the top-left corner. </td></tr>
+    <tr><td class="paramname">width</td><td>Width of the rectangle. </td></tr>
+    <tr><td class="paramname">height</td><td>Height of the rectangle. </td></tr>
+    <tr><td class="paramname">color</td><td>Color to draw. </td></tr>
+    <tr><td class="paramname">frame_buffer</td><td>Pointer to the frame buffer. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, non-zero on failure. </dd></dl>
+
+</div>
+</div>
+<a id="aa11ffc7226e6fc0f1cb3b7c4308ffff5" name="aa11ffc7226e6fc0f1cb3b7c4308ffff5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa11ffc7226e6fc0f1cb3b7c4308ffff5">&#9670;&#160;</a></span>vga_draw_xpm()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int() vga_draw_xpm </td>
+          <td>(</td>
+          <td class="paramtype">xpm_map_t&#160;</td>
+          <td class="paramname"><em>xpm</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>frame_buffer</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Draws an XPM image at the specified coordinates. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">xpm</td><td>XPM map to be drawn. </td></tr>
+    <tr><td class="paramname">x</td><td>X-coordinate. </td></tr>
+    <tr><td class="paramname">y</td><td>Y-coordinate. </td></tr>
+    <tr><td class="paramname">frame_buffer</td><td>Pointer to the frame buffer. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, non-zero on failure. </dd></dl>
+
+</div>
+</div>
+<a id="a6c42ab5cf5efa4bebdf1d551d9b4b992" name="a6c42ab5cf5efa4bebdf1d551d9b4b992"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c42ab5cf5efa4bebdf1d551d9b4b992">&#9670;&#160;</a></span>vga_flip_pages()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void() vga_flip_pages </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Swaps the main and secondary frame buffers. </p>
+
+</div>
+</div>
 <h2 class="groupheader">Variable Documentation</h2>
 <a id="a36b87dc42923f704d16a629834a21b1e" name="a36b87dc42923f704d16a629834a21b1e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a36b87dc42923f704d16a629834a21b1e">&#9670;&#160;</a></span>bytes_per_pixel</h2>

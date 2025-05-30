@@ -4,12 +4,6 @@
 #include <lcom/lcf.h>
 #include <stdint.h>
 
-/**
- * @defgroup gpu gpu
- * @brief Functions and constants for handling Gpu operations.
- * @{
- */
-
 /** @name VBE BIOS Function Codes */
 /** @{ */
 #define VBE_CONTROLLER_INFO 0x4F00   /**< Request VBE controller information. */
@@ -43,7 +37,7 @@
 #define DIRECT_MODE 6              /**< Direct color memory model identifier. */
 #define BACKGROUND_COLOR 0         /**< Default background color. */
 
-extern uint32_t interrupt_counter;
+extern uint32_t interrupt_counter; /**< Timer interrupt counter. */
 
 /**
  * @brief Sets the VBE graphics mode.

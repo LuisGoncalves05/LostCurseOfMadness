@@ -8,8 +8,8 @@ var indexSectionsWithContent =
   5: "bcglmpv",
   6: "bcdmps",
   7: "bcdeglmpruvw",
-  8: "bcfgikmnopv",
-  9: "gikm"
+  8: "bcdfgiklmnopuv",
+  9: "i"
 };
 
 var indexSectionNames =

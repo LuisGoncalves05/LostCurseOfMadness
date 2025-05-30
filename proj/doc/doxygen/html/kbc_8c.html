@@ -78,46 +78,221 @@ $(function() {
   <div class="headertitle"><div class="title">kbc.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;lcom/lcf.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="kbc_8h_source.html">kbc.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="kbc_8h_source.html">kbc.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for kbc.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="kbc_8c__incl.png" border="0" usemap="#asrc_2drivers_2keyboard_2kbc_8c" alt=""/></div>
 <map name="asrc_2drivers_2keyboard_2kbc_8c" id="asrc_2drivers_2keyboard_2kbc_8c">
-<area shape="rect" title=" " alt="" coords="5,5,160,45"/>
-<area shape="rect" title=" " alt="" coords="139,240,224,265"/>
-<area shape="poly" title=" " alt="" coords="77,46,67,76,59,114,59,154,64,173,72,191,96,216,127,233,125,238,93,220,67,193,58,175,54,154,54,113,62,75,72,45"/>
-<area shape="rect" href="kbc_8h.html" title=" " alt="" coords="145,93,202,119"/>
-<area shape="poly" title=" " alt="" coords="106,44,151,82,148,86,103,48"/>
-<area shape="rect" title=" " alt="" coords="81,167,164,192"/>
-<area shape="poly" title=" " alt="" coords="167,121,141,157,137,154,163,117"/>
-<area shape="rect" title=" " alt="" coords="189,167,259,192"/>
-<area shape="poly" title=" " alt="" coords="184,117,210,154,206,157,180,121"/>
-<area shape="rect" href="i8042_8h.html" title=" " alt="" coords="283,167,354,192"/>
-<area shape="poly" title=" " alt="" coords="198,116,284,158,282,163,196,121"/>
-<area shape="poly" title=" " alt="" coords="298,194,217,236,215,231,295,190"/>
+<area shape="rect" title=" " alt="" coords="37,5,191,45"/>
+<area shape="rect" href="kbc_8h.html" title=" " alt="" coords="85,93,143,119"/>
+<area shape="poly" title=" " alt="" coords="117,46,117,79,111,79,111,46"/>
+<area shape="rect" title=" " alt="" coords="79,240,165,265"/>
+<area shape="poly" title=" " alt="" coords="86,119,56,131,27,148,10,168,8,179,12,191,37,216,68,233,66,238,33,220,8,193,3,179,5,166,24,144,53,126,84,114"/>
+<area shape="rect" title=" " alt="" coords="22,167,105,192"/>
+<area shape="poly" title=" " alt="" coords="108,121,82,157,77,154,104,117"/>
+<area shape="rect" title=" " alt="" coords="129,167,200,192"/>
+<area shape="poly" title=" " alt="" coords="125,117,151,154,146,157,120,121"/>
+<area shape="rect" href="i8042_8h.html" title=" " alt="" coords="224,167,295,192"/>
+<area shape="poly" title=" " alt="" coords="139,116,225,158,223,163,136,121"/>
+<area shape="poly" title=" " alt="" coords="239,194,158,236,155,231,236,190"/>
 </map>
 </div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga6e4c8161555142e0aeb980bc11fcf0df" id="r_ga6e4c8161555142e0aeb980bc11fcf0df"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__kbc.html#ga6e4c8161555142e0aeb980bc11fcf0df">kbc_write_byte</a> (uint8_t port, uint8_t byte)</td></tr>
-<tr class="memdesc:ga6e4c8161555142e0aeb980bc11fcf0df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes byte in KBC port.  <br /></td></tr>
-<tr class="separator:ga6e4c8161555142e0aeb980bc11fcf0df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf25521ad95cbbd5d2965a8638186e377" id="r_gaf25521ad95cbbd5d2965a8638186e377"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__kbc.html#gaf25521ad95cbbd5d2965a8638186e377">kbc_write_command</a> (uint8_t command)</td></tr>
-<tr class="memdesc:gaf25521ad95cbbd5d2965a8638186e377"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes command to KBC_COMMAND_REGISTER.  <br /></td></tr>
-<tr class="separator:gaf25521ad95cbbd5d2965a8638186e377"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga982f5ea059db5e8b36f0587fd8d77b13" id="r_ga982f5ea059db5e8b36f0587fd8d77b13"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__kbc.html#ga982f5ea059db5e8b36f0587fd8d77b13">kbc_write_command_arguments</a> (uint8_t argument)</td></tr>
-<tr class="memdesc:ga982f5ea059db5e8b36f0587fd8d77b13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a command's argument to KBC_ARGUMENT_REGISTER.  <br /></td></tr>
-<tr class="separator:ga982f5ea059db5e8b36f0587fd8d77b13"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga78fe030da7a9419d1a9cb14148bfdc81" id="r_ga78fe030da7a9419d1a9cb14148bfdc81"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__kbc.html#ga78fe030da7a9419d1a9cb14148bfdc81">kbc_read_byte</a> (uint8_t port, uint8_t *byte, bool mouse)</td></tr>
-<tr class="memdesc:ga78fe030da7a9419d1a9cb14148bfdc81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads byte from KBC port.  <br /></td></tr>
-<tr class="separator:ga78fe030da7a9419d1a9cb14148bfdc81"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaccdb52bec497936f6ffa8bcaab5092aa" id="r_gaccdb52bec497936f6ffa8bcaab5092aa"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__kbc.html#gaccdb52bec497936f6ffa8bcaab5092aa">kbc_read_command_return</a> (uint8_t *retv, bool mouse)</td></tr>
-<tr class="memdesc:gaccdb52bec497936f6ffa8bcaab5092aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a command's return value. Reads the return value of a command from KBC_RETURN_REGISTER to retv.  <br /></td></tr>
-<tr class="separator:gaccdb52bec497936f6ffa8bcaab5092aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bff4775ca596880f858eb35f16b4a03" id="r_a9bff4775ca596880f858eb35f16b4a03"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kbc_8c.html#a9bff4775ca596880f858eb35f16b4a03">kbc_write_byte</a> (uint8_t port, uint8_t byte)</td></tr>
+<tr class="memdesc:a9bff4775ca596880f858eb35f16b4a03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes byte in KBC port.  <br /></td></tr>
+<tr class="separator:a9bff4775ca596880f858eb35f16b4a03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c467e640bc33719fe3ed7bcb73f2121" id="r_a8c467e640bc33719fe3ed7bcb73f2121"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kbc_8c.html#a8c467e640bc33719fe3ed7bcb73f2121">kbc_write_command</a> (uint8_t command)</td></tr>
+<tr class="memdesc:a8c467e640bc33719fe3ed7bcb73f2121"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes command to KBC_COMMAND_REGISTER.  <br /></td></tr>
+<tr class="separator:a8c467e640bc33719fe3ed7bcb73f2121"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0652f8668cc6d1a930bbb8988e74163c" id="r_a0652f8668cc6d1a930bbb8988e74163c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kbc_8c.html#a0652f8668cc6d1a930bbb8988e74163c">kbc_write_command_arguments</a> (uint8_t argument)</td></tr>
+<tr class="memdesc:a0652f8668cc6d1a930bbb8988e74163c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a command's argument to KBC_ARGUMENT_REGISTER.  <br /></td></tr>
+<tr class="separator:a0652f8668cc6d1a930bbb8988e74163c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22cab41c29e78f4c8ba1e86e3713b8ec" id="r_a22cab41c29e78f4c8ba1e86e3713b8ec"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kbc_8c.html#a22cab41c29e78f4c8ba1e86e3713b8ec">kbc_read_byte</a> (uint8_t port, uint8_t *byte, bool mouse)</td></tr>
+<tr class="memdesc:a22cab41c29e78f4c8ba1e86e3713b8ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads byte from KBC port.  <br /></td></tr>
+<tr class="separator:a22cab41c29e78f4c8ba1e86e3713b8ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a292fbad264069af1effd1c2961b47873" id="r_a292fbad264069af1effd1c2961b47873"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kbc_8c.html#a292fbad264069af1effd1c2961b47873">kbc_read_command_return</a> (uint8_t *retv, bool mouse)</td></tr>
+<tr class="memdesc:a292fbad264069af1effd1c2961b47873"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a command's return value. Reads the return value of a command from KBC_RETURN_REGISTER to retv.  <br /></td></tr>
+<tr class="separator:a292fbad264069af1effd1c2961b47873"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a22cab41c29e78f4c8ba1e86e3713b8ec" name="a22cab41c29e78f4c8ba1e86e3713b8ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22cab41c29e78f4c8ba1e86e3713b8ec">&#9670;&#160;</a></span>kbc_read_byte()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int kbc_read_byte </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>port</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>byte</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>mouse</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reads byte from KBC port. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">port</td><td>KBC port to read command from. </td></tr>
+    <tr><td class="paramname">byte</td><td>Will hold the value read from port. </td></tr>
+    <tr><td class="paramname">mouse</td><td>Reading for mouse if true else for keyboard. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Return 0 upon success and non-zero otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a292fbad264069af1effd1c2961b47873" name="a292fbad264069af1effd1c2961b47873"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a292fbad264069af1effd1c2961b47873">&#9670;&#160;</a></span>kbc_read_command_return()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int kbc_read_command_return </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>retv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>mouse</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reads a command's return value. Reads the return value of a command from KBC_RETURN_REGISTER to retv. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">retv</td><td>Will hold the value returned by command. </td></tr>
+    <tr><td class="paramname">mouse</td><td>Reading for mouse if true else for keyboard. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Return 0 upon success and non-zero otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a9bff4775ca596880f858eb35f16b4a03" name="a9bff4775ca596880f858eb35f16b4a03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9bff4775ca596880f858eb35f16b4a03">&#9670;&#160;</a></span>kbc_write_byte()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int kbc_write_byte </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>port</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>byte</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Writes byte in KBC port. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">port</td><td>KBC port to write command into. </td></tr>
+    <tr><td class="paramname">byte</td><td>Byte to write in port. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Return 0 upon success and non-zero otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a8c467e640bc33719fe3ed7bcb73f2121" name="a8c467e640bc33719fe3ed7bcb73f2121"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c467e640bc33719fe3ed7bcb73f2121">&#9670;&#160;</a></span>kbc_write_command()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int kbc_write_command </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>command</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Writes command to KBC_COMMAND_REGISTER. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">command</td><td>Command to be written in port. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Return 0 upon success and non-zero otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a0652f8668cc6d1a930bbb8988e74163c" name="a0652f8668cc6d1a930bbb8988e74163c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0652f8668cc6d1a930bbb8988e74163c">&#9670;&#160;</a></span>kbc_write_command_arguments()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int kbc_write_command_arguments </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>argument</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Writes a command's argument to KBC_ARGUMENT_REGISTER. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">argument</td><td>Argument to be written. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Return 0 upon success and non-zero otherwise. </dd></dl>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

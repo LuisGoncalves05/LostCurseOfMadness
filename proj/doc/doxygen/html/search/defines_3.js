@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['game_5ffrequency_0',['GAME_FREQUENCY',['../config_8h.html#a710f214d9e57597d4b73a7d4f8c59035',1,'config.h']]],
-  ['game_5fover_5fbutton_5fstart_5fy_1',['GAME_OVER_BUTTON_START_Y',['../button_8h.html#a3754b4e4d519402e742990c9ca6c27db',1,'button.h']]]
+  ['fov_5fangle_0',['FOV_ANGLE',['../config_8h.html#a6973b979d486fa3ca8a9fc3bce39f2c2',1,'config.h']]],
+  ['fov_5fradius_1',['FOV_RADIUS',['../config_8h.html#a4470b0329c65a88ae1e6f52911a7bdcf',1,'config.h']]]
 ];

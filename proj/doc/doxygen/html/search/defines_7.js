@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['no_5fmonster_5fsquare_0',['NO_MONSTER_SQUARE',['../maze_8h.html#a5eb656eae4a364e27f32e1b7b31dd5b1',1,'maze.h']]]
+  ['linear_5fframebuffer_0',['LINEAR_FRAMEBUFFER',['../gpu_8h.html#a3312425e69ec8a661be936cfb6a0b447',1,'gpu.h']]]
 ];

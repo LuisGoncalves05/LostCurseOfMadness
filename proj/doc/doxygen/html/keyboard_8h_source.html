@@ -84,28 +84,29 @@ $(document).ready(function() { init_codefold(0); });
 <a href="keyboard_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef KEYBOARD_H</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define KEYBOARD_H</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="kbc_8h.html">kbc.h</a>&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;lcom/lcf.h&gt;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">extern</span> int32_t <a class="code hl_variable" href="keyboard_8h.html#a99f6dd9e05ab5b5e95e9083b0c4ca79d">kbd_subscription_id</a>;</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="kbc_8h.html">kbc.h</a>&quot;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>int(<a class="code hl_function" href="group__keyboard.html#ga4ac9231a99a664d6a9f0b69767e0d707">kbd_subscribe_int</a>)(uint8_t *bit_no);</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>int(<a class="code hl_function" href="group__keyboard.html#ga9ac1d7eb2c00a2dc838368ad99390d98">kbd_unsubscribe_int</a>)(void);</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>void(<a class="code hl_function" href="group__keyboard.html#gaf6a1b33161b368c9825215b8dea79a31">kbd_int_handler</a>)(void);</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>int(<a class="code hl_function" href="group__keyboard.html#ga2efea1c1ffbe188b91071e708087489d">kbd_read_scan_code</a>)(void);</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>bool(<a class="code hl_function" href="group__keyboard.html#gaff8bfbfaab98da0e4c36b3c5487cbc10">kbd_handle_scan_code</a>)();</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="preprocessor">#endif </span><span class="comment">/* __KBC_H */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="agroup__keyboard_html_ga2efea1c1ffbe188b91071e708087489d"><div class="ttname"><a href="group__keyboard.html#ga2efea1c1ffbe188b91071e708087489d">kbd_read_scan_code</a></div><div class="ttdeci">int() kbd_read_scan_code(void)</div><div class="ttdoc">Reads scan codes from the keyboard.</div><div class="ttdef"><b>Definition</b> keyboard.c:31</div></div>
-<div class="ttc" id="agroup__keyboard_html_ga4ac9231a99a664d6a9f0b69767e0d707"><div class="ttname"><a href="group__keyboard.html#ga4ac9231a99a664d6a9f0b69767e0d707">kbd_subscribe_int</a></div><div class="ttdeci">int() kbd_subscribe_int(uint8_t *bit_no)</div><div class="ttdoc">Subscribes and enables Keyboard interrupts.</div><div class="ttdef"><b>Definition</b> keyboard.c:10</div></div>
-<div class="ttc" id="agroup__keyboard_html_ga9ac1d7eb2c00a2dc838368ad99390d98"><div class="ttname"><a href="group__keyboard.html#ga9ac1d7eb2c00a2dc838368ad99390d98">kbd_unsubscribe_int</a></div><div class="ttdeci">int() kbd_unsubscribe_int(void)</div><div class="ttdoc">Unsubscribes Keyboard interrupts.</div><div class="ttdef"><b>Definition</b> keyboard.c:17</div></div>
-<div class="ttc" id="agroup__keyboard_html_gaf6a1b33161b368c9825215b8dea79a31"><div class="ttname"><a href="group__keyboard.html#gaf6a1b33161b368c9825215b8dea79a31">kbd_int_handler</a></div><div class="ttdeci">void() kbd_int_handler(void)</div><div class="ttdoc">Keyboard interrupt handler.</div><div class="ttdef"><b>Definition</b> keyboard.c:21</div></div>
-<div class="ttc" id="agroup__keyboard_html_gaff8bfbfaab98da0e4c36b3c5487cbc10"><div class="ttname"><a href="group__keyboard.html#gaff8bfbfaab98da0e4c36b3c5487cbc10">kbd_handle_scan_code</a></div><div class="ttdeci">bool() kbd_handle_scan_code()</div><div class="ttdoc">Checks if the scancode is complete.</div><div class="ttdef"><b>Definition</b> keyboard.c:43</div></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">extern</span> int32_t <a class="code hl_variable" href="keyboard_8h.html#a99f6dd9e05ab5b5e95e9083b0c4ca79d">kbd_subscription_id</a>; </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>int(<a class="code hl_function" href="keyboard_8h.html#a4ac9231a99a664d6a9f0b69767e0d707">kbd_subscribe_int</a>)(uint8_t *bit_no);</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>int(<a class="code hl_function" href="keyboard_8h.html#a9ac1d7eb2c00a2dc838368ad99390d98">kbd_unsubscribe_int</a>)(void);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>void(<a class="code hl_function" href="keyboard_8h.html#af6a1b33161b368c9825215b8dea79a31">kbd_int_handler</a>)(void);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>int(<a class="code hl_function" href="keyboard_8h.html#a2efea1c1ffbe188b91071e708087489d">kbd_read_scan_code</a>)(void);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>bool(<a class="code hl_function" href="keyboard_8h.html#aff8bfbfaab98da0e4c36b3c5487cbc10">kbd_handle_scan_code</a>)();</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#endif </span><span class="comment">/* __KBC_H */</span><span class="preprocessor"></span></div>
 <div class="ttc" id="akbc_8h_html"><div class="ttname"><a href="kbc_8h.html">kbc.h</a></div></div>
+<div class="ttc" id="akeyboard_8h_html_a2efea1c1ffbe188b91071e708087489d"><div class="ttname"><a href="keyboard_8h.html#a2efea1c1ffbe188b91071e708087489d">kbd_read_scan_code</a></div><div class="ttdeci">int() kbd_read_scan_code(void)</div><div class="ttdoc">Reads scan codes from the keyboard.</div><div class="ttdef"><b>Definition</b> keyboard.c:29</div></div>
+<div class="ttc" id="akeyboard_8h_html_a4ac9231a99a664d6a9f0b69767e0d707"><div class="ttname"><a href="keyboard_8h.html#a4ac9231a99a664d6a9f0b69767e0d707">kbd_subscribe_int</a></div><div class="ttdeci">int() kbd_subscribe_int(uint8_t *bit_no)</div><div class="ttdoc">Subscribes and enables Keyboard interrupts.</div><div class="ttdef"><b>Definition</b> keyboard.c:8</div></div>
 <div class="ttc" id="akeyboard_8h_html_a99f6dd9e05ab5b5e95e9083b0c4ca79d"><div class="ttname"><a href="keyboard_8h.html#a99f6dd9e05ab5b5e95e9083b0c4ca79d">kbd_subscription_id</a></div><div class="ttdeci">int32_t kbd_subscription_id</div></div>
+<div class="ttc" id="akeyboard_8h_html_a9ac1d7eb2c00a2dc838368ad99390d98"><div class="ttname"><a href="keyboard_8h.html#a9ac1d7eb2c00a2dc838368ad99390d98">kbd_unsubscribe_int</a></div><div class="ttdeci">int() kbd_unsubscribe_int(void)</div><div class="ttdoc">Unsubscribes Keyboard interrupts.</div><div class="ttdef"><b>Definition</b> keyboard.c:15</div></div>
+<div class="ttc" id="akeyboard_8h_html_af6a1b33161b368c9825215b8dea79a31"><div class="ttname"><a href="keyboard_8h.html#af6a1b33161b368c9825215b8dea79a31">kbd_int_handler</a></div><div class="ttdeci">void() kbd_int_handler(void)</div><div class="ttdoc">Keyboard interrupt handler.</div><div class="ttdef"><b>Definition</b> keyboard.c:19</div></div>
+<div class="ttc" id="akeyboard_8h_html_aff8bfbfaab98da0e4c36b3c5487cbc10"><div class="ttname"><a href="keyboard_8h.html#aff8bfbfaab98da0e4c36b3c5487cbc10">kbd_handle_scan_code</a></div><div class="ttdeci">bool() kbd_handle_scan_code()</div><div class="ttdoc">Checks if the scancode is complete.</div><div class="ttdef"><b>Definition</b> keyboard.c:41</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

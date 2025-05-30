@@ -1,15 +1,11 @@
 #ifndef KEYBOARD_H
 #define KEYBOARD_H
 
+#include <lcom/lcf.h>
+
 #include "kbc.h"
 
-extern int32_t kbd_subscription_id;
-
-/** @defgroup keyboard keyboard
- * @{
- *
- * Functions for using the Keyboard.
- */
+extern int32_t kbd_subscription_id; /**< Keyboard subscription ID */
 
 /**
  * @brief Subscribes and enables Keyboard interrupts.

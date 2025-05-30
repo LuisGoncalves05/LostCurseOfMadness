@@ -84,31 +84,31 @@ $(document).ready(function() { init_codefold(0); });
 <a href="kbc_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef KBC_H</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define KBC_H</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="i8042_8h.html">i8042.h</a>&quot;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">extern</span> int32_t <a class="code hl_variable" href="kbc_8h.html#a99f6dd9e05ab5b5e95e9083b0c4ca79d">kbd_subscription_id</a>;</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>int(<a class="code hl_function" href="group__kbc.html#ga6e4c8161555142e0aeb980bc11fcf0df">kbc_write_byte</a>)(uint8_t port, uint8_t byte);</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>int(<a class="code hl_function" href="group__kbc.html#gaf25521ad95cbbd5d2965a8638186e377">kbc_write_command</a>)(uint8_t command);</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>int(<a class="code hl_function" href="group__kbc.html#ga982f5ea059db5e8b36f0587fd8d77b13">kbc_write_command_arguments</a>)(uint8_t argument);</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>int(<a class="code hl_function" href="group__kbc.html#ga78fe030da7a9419d1a9cb14148bfdc81">kbc_read_byte</a>)(uint8_t port, uint8_t *byte, <span class="keywordtype">bool</span> mouse);</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>int(<a class="code hl_function" href="group__kbc.html#gaccdb52bec497936f6ffa8bcaab5092aa">kbc_read_command_return</a>)(uint8_t *retv, <span class="keywordtype">bool</span> mouse);</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="preprocessor">#endif </span><span class="comment">/* __KBC_H */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="agroup__kbc_html_ga6e4c8161555142e0aeb980bc11fcf0df"><div class="ttname"><a href="group__kbc.html#ga6e4c8161555142e0aeb980bc11fcf0df">kbc_write_byte</a></div><div class="ttdeci">int() kbc_write_byte(uint8_t port, uint8_t byte)</div><div class="ttdoc">Writes byte in KBC port.</div><div class="ttdef"><b>Definition</b> kbc.c:5</div></div>
-<div class="ttc" id="agroup__kbc_html_ga78fe030da7a9419d1a9cb14148bfdc81"><div class="ttname"><a href="group__kbc.html#ga78fe030da7a9419d1a9cb14148bfdc81">kbc_read_byte</a></div><div class="ttdeci">int() kbc_read_byte(uint8_t port, uint8_t *byte, bool mouse)</div><div class="ttdoc">Reads byte from KBC port.</div><div class="ttdef"><b>Definition</b> kbc.c:41</div></div>
-<div class="ttc" id="agroup__kbc_html_ga982f5ea059db5e8b36f0587fd8d77b13"><div class="ttname"><a href="group__kbc.html#ga982f5ea059db5e8b36f0587fd8d77b13">kbc_write_command_arguments</a></div><div class="ttdeci">int() kbc_write_command_arguments(uint8_t argument)</div><div class="ttdoc">Writes a command's argument to KBC_ARGUMENT_REGISTER.</div><div class="ttdef"><b>Definition</b> kbc.c:37</div></div>
-<div class="ttc" id="agroup__kbc_html_gaccdb52bec497936f6ffa8bcaab5092aa"><div class="ttname"><a href="group__kbc.html#gaccdb52bec497936f6ffa8bcaab5092aa">kbc_read_command_return</a></div><div class="ttdeci">int() kbc_read_command_return(uint8_t *retv, bool mouse)</div><div class="ttdoc">Reads a command's return value. Reads the return value of a command from KBC_RETURN_REGISTER to retv.</div><div class="ttdef"><b>Definition</b> kbc.c:85</div></div>
-<div class="ttc" id="agroup__kbc_html_gaf25521ad95cbbd5d2965a8638186e377"><div class="ttname"><a href="group__kbc.html#gaf25521ad95cbbd5d2965a8638186e377">kbc_write_command</a></div><div class="ttdeci">int() kbc_write_command(uint8_t command)</div><div class="ttdoc">Writes command to KBC_COMMAND_REGISTER.</div><div class="ttdef"><b>Definition</b> kbc.c:33</div></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;lcom/lcf.h&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="i8042_8h.html">i8042.h</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">extern</span> int32_t <a class="code hl_variable" href="kbc_8h.html#a99f6dd9e05ab5b5e95e9083b0c4ca79d">kbd_subscription_id</a>; </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>int(<a class="code hl_function" href="kbc_8h.html#a6e4c8161555142e0aeb980bc11fcf0df">kbc_write_byte</a>)(uint8_t port, uint8_t byte);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>int(<a class="code hl_function" href="kbc_8h.html#af25521ad95cbbd5d2965a8638186e377">kbc_write_command</a>)(uint8_t command);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>int(<a class="code hl_function" href="kbc_8h.html#a982f5ea059db5e8b36f0587fd8d77b13">kbc_write_command_arguments</a>)(uint8_t argument);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>int(<a class="code hl_function" href="kbc_8h.html#a78fe030da7a9419d1a9cb14148bfdc81">kbc_read_byte</a>)(uint8_t port, uint8_t *byte, <span class="keywordtype">bool</span> mouse);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>int(<a class="code hl_function" href="kbc_8h.html#accdb52bec497936f6ffa8bcaab5092aa">kbc_read_command_return</a>)(uint8_t *retv, <span class="keywordtype">bool</span> mouse);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="preprocessor">#endif </span><span class="comment">/* __KBC_H */</span><span class="preprocessor"></span></div>
 <div class="ttc" id="ai8042_8h_html"><div class="ttname"><a href="i8042_8h.html">i8042.h</a></div></div>
+<div class="ttc" id="akbc_8h_html_a6e4c8161555142e0aeb980bc11fcf0df"><div class="ttname"><a href="kbc_8h.html#a6e4c8161555142e0aeb980bc11fcf0df">kbc_write_byte</a></div><div class="ttdeci">int() kbc_write_byte(uint8_t port, uint8_t byte)</div><div class="ttdoc">Writes byte in KBC port.</div><div class="ttdef"><b>Definition</b> kbc.c:3</div></div>
+<div class="ttc" id="akbc_8h_html_a78fe030da7a9419d1a9cb14148bfdc81"><div class="ttname"><a href="kbc_8h.html#a78fe030da7a9419d1a9cb14148bfdc81">kbc_read_byte</a></div><div class="ttdeci">int() kbc_read_byte(uint8_t port, uint8_t *byte, bool mouse)</div><div class="ttdoc">Reads byte from KBC port.</div><div class="ttdef"><b>Definition</b> kbc.c:39</div></div>
+<div class="ttc" id="akbc_8h_html_a982f5ea059db5e8b36f0587fd8d77b13"><div class="ttname"><a href="kbc_8h.html#a982f5ea059db5e8b36f0587fd8d77b13">kbc_write_command_arguments</a></div><div class="ttdeci">int() kbc_write_command_arguments(uint8_t argument)</div><div class="ttdoc">Writes a command's argument to KBC_ARGUMENT_REGISTER.</div><div class="ttdef"><b>Definition</b> kbc.c:35</div></div>
 <div class="ttc" id="akbc_8h_html_a99f6dd9e05ab5b5e95e9083b0c4ca79d"><div class="ttname"><a href="kbc_8h.html#a99f6dd9e05ab5b5e95e9083b0c4ca79d">kbd_subscription_id</a></div><div class="ttdeci">int32_t kbd_subscription_id</div></div>
+<div class="ttc" id="akbc_8h_html_accdb52bec497936f6ffa8bcaab5092aa"><div class="ttname"><a href="kbc_8h.html#accdb52bec497936f6ffa8bcaab5092aa">kbc_read_command_return</a></div><div class="ttdeci">int() kbc_read_command_return(uint8_t *retv, bool mouse)</div><div class="ttdoc">Reads a command's return value. Reads the return value of a command from KBC_RETURN_REGISTER to retv.</div><div class="ttdef"><b>Definition</b> kbc.c:83</div></div>
+<div class="ttc" id="akbc_8h_html_af25521ad95cbbd5d2965a8638186e377"><div class="ttname"><a href="kbc_8h.html#af25521ad95cbbd5d2965a8638186e377">kbc_write_command</a></div><div class="ttdeci">int() kbc_write_command(uint8_t command)</div><div class="ttdoc">Writes command to KBC_COMMAND_REGISTER.</div><div class="ttdef"><b>Definition</b> kbc.c:31</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

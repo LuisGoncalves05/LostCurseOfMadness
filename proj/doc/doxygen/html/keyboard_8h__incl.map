@@ -1,13 +1,15 @@
 <map id="src/drivers/keyboard/keyboard.h" name="src/drivers/keyboard/keyboard.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="71,5,225,45"/>
-<area shape="rect" id="Node000002" href="$kbc_8h.html" title=" " alt="" coords="119,93,177,119"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="151,46,151,79,145,79,145,46"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="5,167,88,192"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="133,121,76,161,73,156,130,116"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="113,167,183,192"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="151,119,151,153,145,153,145,119"/>
-<area shape="rect" id="Node000005" href="$i8042_8h.html" title=" " alt="" coords="207,167,278,192"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="165,117,218,156,215,160,162,121"/>
-<area shape="rect" id="Node000006" title=" " alt="" coords="200,240,285,265"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="245,192,245,226,240,226,240,192"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,160,45"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="27,240,112,265"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="84,46,73,226,68,226,79,45"/>
+<area shape="rect" id="Node000003" href="$kbc_8h.html" title=" " alt="" coords="119,93,177,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="101,44,132,81,128,84,96,47"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="137,121,116,142,97,168,84,198,76,227,71,225,79,196,92,165,112,138,133,117"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="107,167,189,192"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="151,119,151,153,145,153,145,119"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="214,167,285,192"/>
+<area shape="poly" id="edge5_Node000003_Node000005" title=" " alt="" coords="166,116,223,156,220,161,163,121"/>
+<area shape="rect" id="Node000006" href="$i8042_8h.html" title=" " alt="" coords="309,167,379,192"/>
+<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="178,115,301,160,299,165,176,120"/>
+<area shape="poly" id="edge7_Node000006_Node000002" title=" " alt="" coords="309,192,126,240,125,234,308,187"/>
 </map>

@@ -3,8 +3,8 @@
 
 #include "i8254.h"
 
-int32_t timer_hook_id = TIMER;
-uint32_t interrupt_counter = 0;
+int32_t timer_hook_id = TIMER;  /**< Timer subscription ID */
+uint32_t interrupt_counter = 0; /**< Timer interrupt counter */
 
 int(timer_set_frequency)(uint8_t timer, uint32_t freq) {
     uint8_t old_config;

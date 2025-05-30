@@ -1,12 +1,12 @@
 var searchData=
 [
-  ['call_5ffail_0',['CALL_FAIL',['../group__gpu.html#gaeee98fecb76ec09ac777f97dc872d550',1,'gpu.h']]],
+  ['call_5ffail_0',['CALL_FAIL',['../gpu_8h.html#aeee98fecb76ec09ac777f97dc872d550',1,'gpu.h']]],
   ['cell_5fsize_1',['CELL_SIZE',['../config_8h.html#a7a4127f14f16563da90eb3c836bc404f',1,'config.h']]],
   ['cells_2',['cells',['../structMaze.html#a5077b2b5c433d3dd63e570141fb88dfa',1,'Maze']]],
   ['check_5frectangle_5fcollision_3',['check_rectangle_collision',['../maze_8c.html#ad9e0a160d7d9674252138b540d83014c',1,'check_rectangle_collision(int x1, int y1, int width1, int height1, int x2, int y2, int width2, int height2):&#160;maze.c'],['../maze_8h.html#ad9e0a160d7d9674252138b540d83014c',1,'check_rectangle_collision(int x1, int y1, int width1, int height1, int x2, int y2, int width2, int height2):&#160;maze.c']]],
   ['check_5fsprite_5fcollision_4',['check_sprite_collision',['../maze_8h.html#a4d30a231bae48a0f753245228236ac01',1,'check_sprite_collision(Sprite *a, Sprite *b):&#160;maze.c'],['../maze_8c.html#a4d30a231bae48a0f753245228236ac01',1,'check_sprite_collision(Sprite *a, Sprite *b):&#160;maze.c']]],
   ['check_5fwall_5fcollision_5',['check_wall_collision',['../maze_8h.html#a5843b98a70d107e4a275821981ddad5d',1,'check_wall_collision(Maze *maze, Sprite *sprite):&#160;maze.c'],['../maze_8c.html#a5843b98a70d107e4a275821981ddad5d',1,'check_wall_collision(Maze *maze, Sprite *sprite):&#160;maze.c']]],
-  ['clear_5fframe_5fbuffer_6',['clear_frame_buffer',['../group__gpu.html#ga5440ee2a33422daec40d52c856f06f0d',1,'clear_frame_buffer(uint8_t *frame_buffer, uint16_t color):&#160;gpu.c'],['../group__gpu.html#ga5440ee2a33422daec40d52c856f06f0d',1,'clear_frame_buffer(uint8_t *frame_buffer, uint16_t color):&#160;gpu.c']]],
+  ['clear_5fframe_5fbuffer_6',['clear_frame_buffer',['../gpu_8h.html#a5440ee2a33422daec40d52c856f06f0d',1,'clear_frame_buffer(uint8_t *frame_buffer, uint16_t color):&#160;gpu.c'],['../gpu_8c.html#a5440ee2a33422daec40d52c856f06f0d',1,'clear_frame_buffer(uint8_t *frame_buffer, uint16_t color):&#160;gpu.c']]],
   ['close_5fradius_7',['CLOSE_RADIUS',['../config_8h.html#a2344c831ece53bcbf5f3baa8d8a9ff18',1,'config.h']]],
   ['config_2eh_8',['config.h',['../config_8h.html',1,'']]],
   ['create_5fanimated_5fsprite_9',['create_animated_sprite',['../animated__sprite_8c.html#a4adeace6bdeca0e23ade5868621503f9',1,'create_animated_sprite(Sprite *sprite, uint32_t frames_per_sprite, uint32_t number_sprites,...):&#160;animated_sprite.c'],['../animated__sprite_8h.html#a4adeace6bdeca0e23ade5868621503f9',1,'create_animated_sprite(Sprite *sprite, uint32_t frames_per_sprite, uint32_t number_sprites,...):&#160;animated_sprite.c']]],

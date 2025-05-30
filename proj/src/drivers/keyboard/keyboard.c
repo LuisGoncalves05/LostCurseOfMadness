@@ -1,11 +1,9 @@
-#include <lcom/lcf.h>
-
 #include "keyboard.h"
 
-int32_t kbd_hook_id = KBD_IRQ;
-uint8_t scan_code;
-bool two_byte = false;
-extern uint32_t interrupt_counter;
+int32_t kbd_hook_id = KBD_IRQ;     /**< Keyboard subscription ID */
+uint8_t scan_code;                 /**< Scan code read from keyboard */
+bool two_byte = false;             /**< Whether the scan code is a two-byte code */
+extern uint32_t interrupt_counter; /**< Timer interrupt counter. */
 
 int(kbd_subscribe_int)(uint8_t *bit_no) {
     if (bit_no == NULL)

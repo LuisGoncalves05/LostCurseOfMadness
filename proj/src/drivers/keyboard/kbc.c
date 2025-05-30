@@ -1,5 +1,3 @@
-#include <lcom/lcf.h>
-
 #include "kbc.h"
 
 int kbc_write_byte(uint8_t port, uint8_t byte) {

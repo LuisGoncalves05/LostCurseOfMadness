@@ -1,24 +1,124 @@
 \doxysection{src/drivers/keyboard/kbc.c File Reference}
 \hypertarget{kbc_8c}{}\label{kbc_8c}\index{src/drivers/keyboard/kbc.c@{src/drivers/keyboard/kbc.c}}
-{\ttfamily \#include $<$lcom/lcf.\+h$>$}\newline
 {\ttfamily \#include "{}kbc.\+h"{}}\newline
 Include dependency graph for kbc.\+c\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=342pt]{kbc_8c__incl}
+\includegraphics[width=297pt]{kbc_8c__incl}
 \end{center}
 \end{figure}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-int \mbox{\hyperlink{group__kbc_ga6e4c8161555142e0aeb980bc11fcf0df}{kbc\+\_\+write\+\_\+byte}} (uint8\+\_\+t port, uint8\+\_\+t byte)
+int \mbox{\hyperlink{kbc_8c_a9bff4775ca596880f858eb35f16b4a03}{kbc\+\_\+write\+\_\+byte}} (uint8\+\_\+t port, uint8\+\_\+t byte)
 \begin{DoxyCompactList}\small\item\em Writes byte in KBC port. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{group__kbc_gaf25521ad95cbbd5d2965a8638186e377}{kbc\+\_\+write\+\_\+command}} (uint8\+\_\+t command)
+int \mbox{\hyperlink{kbc_8c_a8c467e640bc33719fe3ed7bcb73f2121}{kbc\+\_\+write\+\_\+command}} (uint8\+\_\+t command)
 \begin{DoxyCompactList}\small\item\em Writes command to KBC\+\_\+\+COMMAND\+\_\+\+REGISTER. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{group__kbc_ga982f5ea059db5e8b36f0587fd8d77b13}{kbc\+\_\+write\+\_\+command\+\_\+arguments}} (uint8\+\_\+t argument)
+int \mbox{\hyperlink{kbc_8c_a0652f8668cc6d1a930bbb8988e74163c}{kbc\+\_\+write\+\_\+command\+\_\+arguments}} (uint8\+\_\+t argument)
 \begin{DoxyCompactList}\small\item\em Writes a command\textquotesingle{}s argument to KBC\+\_\+\+ARGUMENT\+\_\+\+REGISTER. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{group__kbc_ga78fe030da7a9419d1a9cb14148bfdc81}{kbc\+\_\+read\+\_\+byte}} (uint8\+\_\+t port, uint8\+\_\+t \texorpdfstring{$\ast$}{*}byte, bool mouse)
+int \mbox{\hyperlink{kbc_8c_a22cab41c29e78f4c8ba1e86e3713b8ec}{kbc\+\_\+read\+\_\+byte}} (uint8\+\_\+t port, uint8\+\_\+t \texorpdfstring{$\ast$}{*}byte, bool mouse)
 \begin{DoxyCompactList}\small\item\em Reads byte from KBC port. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{group__kbc_gaccdb52bec497936f6ffa8bcaab5092aa}{kbc\+\_\+read\+\_\+command\+\_\+return}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}retv, bool mouse)
+int \mbox{\hyperlink{kbc_8c_a292fbad264069af1effd1c2961b47873}{kbc\+\_\+read\+\_\+command\+\_\+return}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}retv, bool mouse)
 \begin{DoxyCompactList}\small\item\em Reads a command\textquotesingle{}s return value. Reads the return value of a command from KBC\+\_\+\+RETURN\+\_\+\+REGISTER to retv. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{kbc_8c_a22cab41c29e78f4c8ba1e86e3713b8ec}\label{kbc_8c_a22cab41c29e78f4c8ba1e86e3713b8ec} 
+\index{kbc.c@{kbc.c}!kbc\_read\_byte@{kbc\_read\_byte}}
+\index{kbc\_read\_byte@{kbc\_read\_byte}!kbc.c@{kbc.c}}
+\doxysubsubsection{\texorpdfstring{kbc\_read\_byte()}{kbc\_read\_byte()}}
+{\footnotesize\ttfamily int kbc\+\_\+read\+\_\+byte (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{port,  }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{byte,  }\item[{bool}]{mouse }\end{DoxyParamCaption})}
+
+
+
+Reads byte from KBC port. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em port} & KBC port to read command from. \\
+\hline
+{\em byte} & Will hold the value read from port. \\
+\hline
+{\em mouse} & Reading for mouse if true else for keyboard. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Return 0 upon success and non-\/zero otherwise. 
+\end{DoxyReturn}
+\Hypertarget{kbc_8c_a292fbad264069af1effd1c2961b47873}\label{kbc_8c_a292fbad264069af1effd1c2961b47873} 
+\index{kbc.c@{kbc.c}!kbc\_read\_command\_return@{kbc\_read\_command\_return}}
+\index{kbc\_read\_command\_return@{kbc\_read\_command\_return}!kbc.c@{kbc.c}}
+\doxysubsubsection{\texorpdfstring{kbc\_read\_command\_return()}{kbc\_read\_command\_return()}}
+{\footnotesize\ttfamily int kbc\+\_\+read\+\_\+command\+\_\+return (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{retv,  }\item[{bool}]{mouse }\end{DoxyParamCaption})}
+
+
+
+Reads a command\textquotesingle{}s return value. Reads the return value of a command from KBC\+\_\+\+RETURN\+\_\+\+REGISTER to retv. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em retv} & Will hold the value returned by command. \\
+\hline
+{\em mouse} & Reading for mouse if true else for keyboard. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Return 0 upon success and non-\/zero otherwise. 
+\end{DoxyReturn}
+\Hypertarget{kbc_8c_a9bff4775ca596880f858eb35f16b4a03}\label{kbc_8c_a9bff4775ca596880f858eb35f16b4a03} 
+\index{kbc.c@{kbc.c}!kbc\_write\_byte@{kbc\_write\_byte}}
+\index{kbc\_write\_byte@{kbc\_write\_byte}!kbc.c@{kbc.c}}
+\doxysubsubsection{\texorpdfstring{kbc\_write\_byte()}{kbc\_write\_byte()}}
+{\footnotesize\ttfamily int kbc\+\_\+write\+\_\+byte (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{port,  }\item[{uint8\+\_\+t}]{byte }\end{DoxyParamCaption})}
+
+
+
+Writes byte in KBC port. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em port} & KBC port to write command into. \\
+\hline
+{\em byte} & Byte to write in port. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Return 0 upon success and non-\/zero otherwise. 
+\end{DoxyReturn}
+\Hypertarget{kbc_8c_a8c467e640bc33719fe3ed7bcb73f2121}\label{kbc_8c_a8c467e640bc33719fe3ed7bcb73f2121} 
+\index{kbc.c@{kbc.c}!kbc\_write\_command@{kbc\_write\_command}}
+\index{kbc\_write\_command@{kbc\_write\_command}!kbc.c@{kbc.c}}
+\doxysubsubsection{\texorpdfstring{kbc\_write\_command()}{kbc\_write\_command()}}
+{\footnotesize\ttfamily int kbc\+\_\+write\+\_\+command (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{command }\end{DoxyParamCaption})}
+
+
+
+Writes command to KBC\+\_\+\+COMMAND\+\_\+\+REGISTER. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em command} & Command to be written in port. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Return 0 upon success and non-\/zero otherwise. 
+\end{DoxyReturn}
+\Hypertarget{kbc_8c_a0652f8668cc6d1a930bbb8988e74163c}\label{kbc_8c_a0652f8668cc6d1a930bbb8988e74163c} 
+\index{kbc.c@{kbc.c}!kbc\_write\_command\_arguments@{kbc\_write\_command\_arguments}}
+\index{kbc\_write\_command\_arguments@{kbc\_write\_command\_arguments}!kbc.c@{kbc.c}}
+\doxysubsubsection{\texorpdfstring{kbc\_write\_command\_arguments()}{kbc\_write\_command\_arguments()}}
+{\footnotesize\ttfamily int kbc\+\_\+write\+\_\+command\+\_\+arguments (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{argument }\end{DoxyParamCaption})}
+
+
+
+Writes a command\textquotesingle{}s argument to KBC\+\_\+\+ARGUMENT\+\_\+\+REGISTER. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em argument} & Argument to be written. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Return 0 upon success and non-\/zero otherwise. 
+\end{DoxyReturn}

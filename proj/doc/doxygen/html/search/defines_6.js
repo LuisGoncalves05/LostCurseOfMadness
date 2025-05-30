@@ -1,12 +1,15 @@
 var searchData=
 [
-  ['main_5fmenu_5fbutton_5fstart_5fy_0',['MAIN_MENU_BUTTON_START_Y',['../button_8h.html#a5fca83d0c2b0a04154e0f143b3c9da4b',1,'button.h']]],
-  ['max_5fattempts_1',['MAX_ATTEMPTS',['../maze_8h.html#a7e1856ac7c6ed757978fc30bb92ace74',1,'maze.h']]],
-  ['max_5fbullets_2',['MAX_BULLETS',['../bullet_8h.html#a4331843c2698da5ccb18562eb1485681',1,'bullet.h']]],
-  ['maze_5fopening_5fpercentage_3',['MAZE_OPENING_PERCENTAGE',['../maze_8h.html#a8a52d81261f323364c4fcf459a7958a5',1,'maze.h']]],
-  ['mob_5fdefault_5fspeed_4',['MOB_DEFAULT_SPEED',['../mob_8h.html#ad0a2d55d022e8e1a1b5b8e14e690970f',1,'mob.h']]],
-  ['mob_5fhealth_5',['MOB_HEALTH',['../mob_8h.html#a883c84ec6965a3cb689452ccd13a8d18',1,'mob.h']]],
-  ['mob_5fmax_5fspeed_6',['MOB_MAX_SPEED',['../mob_8h.html#a7cba8052c113cf641e4d735452a17afe',1,'mob.h']]],
-  ['mob_5fmultiplier_7',['MOB_MULTIPLIER',['../maze_8h.html#aadf156ff4c4e13fd18cbb987dbd5ea6c',1,'maze.h']]],
-  ['mob_5fradius_8',['MOB_RADIUS',['../mob_8h.html#a4218fcd6d0f3a0f024e971fe43033eee',1,'mob.h']]]
+  ['key_5fa_0',['KEY_A',['../keys_8h.html#a024e62650f02bfd64a4ce2b158ec2dd7',1,'keys.h']]],
+  ['key_5fbreak_5fa_1',['KEY_BREAK_A',['../keys_8h.html#a3e4f5b2aed2fa20bb59f00dd6ced8dd7',1,'keys.h']]],
+  ['key_5fbreak_5fd_2',['KEY_BREAK_D',['../keys_8h.html#a27e569b876cf706feb8f8894a06cd31a',1,'keys.h']]],
+  ['key_5fbreak_5fs_3',['KEY_BREAK_S',['../keys_8h.html#a44ee173ba8b6c195b26cff868e2fb5b8',1,'keys.h']]],
+  ['key_5fbreak_5fw_4',['KEY_BREAK_W',['../keys_8h.html#a9c676dc9188b78b43dc93e8c3687da7a',1,'keys.h']]],
+  ['key_5fc_5',['KEY_C',['../keys_8h.html#a21db833332c950e74a8d5cd79ebffc8d',1,'keys.h']]],
+  ['key_5fd_6',['KEY_D',['../keys_8h.html#ad2017b35fcff527a10050ab7c9af2d5c',1,'keys.h']]],
+  ['key_5fenter_7',['KEY_ENTER',['../keys_8h.html#abaee5edb96e542206ae6c8102ac228af',1,'keys.h']]],
+  ['key_5fs_8',['KEY_S',['../keys_8h.html#a6f09e2899747f5db41369ce1dae11ebd',1,'keys.h']]],
+  ['key_5fspace_9',['KEY_SPACE',['../keys_8h.html#a8a5ff83d21dfa704c1c3eff56d5b3a4b',1,'keys.h']]],
+  ['key_5fw_10',['KEY_W',['../keys_8h.html#afdebd5d771ee260c703a74f459767c09',1,'keys.h']]],
+  ['key_5fx_11',['KEY_X',['../keys_8h.html#a832280ef5a7afeda19f32939951e8b10',1,'keys.h']]]
 ];

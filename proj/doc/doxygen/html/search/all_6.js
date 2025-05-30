@@ -24,10 +24,9 @@ var searchData=
   ['get_5fmob_5fpositions_21',['get_mob_positions',['../maze_8c.html#ac67f8234cfe900e992dc30c9db3fc1d2',1,'get_mob_positions(Maze *maze):&#160;maze.c'],['../maze_8h.html#ac67f8234cfe900e992dc30c9db3fc1d2',1,'get_mob_positions(Maze *maze):&#160;maze.c']]],
   ['get_5fmobs_22',['get_mobs',['../level_8h.html#a8d9c455e53ed210204e9e80073baa91a',1,'get_mobs(Level *level):&#160;level.c'],['../level_8c.html#a8d9c455e53ed210204e9e80073baa91a',1,'get_mobs(Level *level):&#160;level.c']]],
   ['get_5fplayer_23',['get_player',['../level_8c.html#a0dfbd9bae5f1f0497d33ed9ed46d79fc',1,'get_player(Level *level):&#160;level.c'],['../level_8h.html#a0dfbd9bae5f1f0497d33ed9ed46d79fc',1,'get_player(Level *level):&#160;level.c']]],
-  ['get_5fposition_24',['get_position',['../group__gpu.html#gaaa50b3bc2107baef0cf60d5df69b210e',1,'get_position(uint16_t x, uint16_t y, uint8_t *frame_buffer):&#160;gpu.c'],['../group__gpu.html#gaaa50b3bc2107baef0cf60d5df69b210e',1,'get_position(uint16_t x, uint16_t y, uint8_t *frame_buffer):&#160;gpu.c']]],
+  ['get_5fposition_24',['get_position',['../gpu_8c.html#aaa50b3bc2107baef0cf60d5df69b210e',1,'get_position(uint16_t x, uint16_t y, uint8_t *frame_buffer):&#160;gpu.c'],['../gpu_8h.html#aaa50b3bc2107baef0cf60d5df69b210e',1,'get_position(uint16_t x, uint16_t y, uint8_t *frame_buffer):&#160;gpu.c']]],
   ['get_5fstate_25',['get_state',['../game_8c.html#a63c18ae831ce1abd39d3f42a6aae4142',1,'get_state(Game *game):&#160;game.c'],['../game_8h.html#a63c18ae831ce1abd39d3f42a6aae4142',1,'get_state(Game *game):&#160;game.c']]],
   ['get_5fwidth_26',['get_width',['../maze_8c.html#a23c219b4c70ebb740255cd28dbe3b9cb',1,'get_width(Maze *maze):&#160;maze.c'],['../maze_8h.html#a23c219b4c70ebb740255cd28dbe3b9cb',1,'get_width(Maze *maze):&#160;maze.c']]],
-  ['gpu_27',['gpu',['../group__gpu.html',1,'']]],
-  ['gpu_2ec_28',['gpu.c',['../gpu_8c.html',1,'']]],
-  ['gpu_2eh_29',['gpu.h',['../gpu_8h.html',1,'']]]
+  ['gpu_2ec_27',['gpu.c',['../gpu_8c.html',1,'']]],
+  ['gpu_2eh_28',['gpu.h',['../gpu_8h.html',1,'']]]
 ];
