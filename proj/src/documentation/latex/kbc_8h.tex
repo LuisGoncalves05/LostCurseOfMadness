@@ -1,0 +1,48 @@
+\doxysection{drivers/keyboard/kbc.h File Reference}
+\hypertarget{kbc_8h}{}\label{kbc_8h}\index{drivers/keyboard/kbc.h@{drivers/keyboard/kbc.h}}
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include "{}i8042.\+h"{}}\newline
+Include dependency graph for kbc.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=290pt]{kbc_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{kbc_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int() \mbox{\hyperlink{group__kbc_ga6e4c8161555142e0aeb980bc11fcf0df}{kbc\+\_\+write\+\_\+byte}} (uint8\+\_\+t port, uint8\+\_\+t byte)
+\begin{DoxyCompactList}\small\item\em Writes byte in KBC port. \end{DoxyCompactList}\item 
+int() \mbox{\hyperlink{group__kbc_gaf25521ad95cbbd5d2965a8638186e377}{kbc\+\_\+write\+\_\+command}} (uint8\+\_\+t command)
+\begin{DoxyCompactList}\small\item\em Writes command to KBC\+\_\+\+COMMAND\+\_\+\+REGISTER. \end{DoxyCompactList}\item 
+int() \mbox{\hyperlink{group__kbc_ga982f5ea059db5e8b36f0587fd8d77b13}{kbc\+\_\+write\+\_\+command\+\_\+arguments}} (uint8\+\_\+t argument)
+\begin{DoxyCompactList}\small\item\em Writes a command\textquotesingle{}s argument to KBC\+\_\+\+ARGUMENT\+\_\+\+REGISTER. \end{DoxyCompactList}\item 
+int() \mbox{\hyperlink{group__kbc_ga78fe030da7a9419d1a9cb14148bfdc81}{kbc\+\_\+read\+\_\+byte}} (uint8\+\_\+t port, uint8\+\_\+t \texorpdfstring{$\ast$}{*}byte, bool mouse)
+\begin{DoxyCompactList}\small\item\em Reads byte from KBC port. \end{DoxyCompactList}\item 
+int() \mbox{\hyperlink{group__kbc_gaccdb52bec497936f6ffa8bcaab5092aa}{kbc\+\_\+read\+\_\+command\+\_\+return}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}retv, bool mouse)
+\begin{DoxyCompactList}\small\item\em Reads a command\textquotesingle{}s return value. Reads the return value of a command from KBC\+\_\+\+RETURN\+\_\+\+REGISTER to retv. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int32\+\_\+t \mbox{\hyperlink{kbc_8h_a99f6dd9e05ab5b5e95e9083b0c4ca79d}{kbd\+\_\+subscription\+\_\+id}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{kbc_8h_a99f6dd9e05ab5b5e95e9083b0c4ca79d}\label{kbc_8h_a99f6dd9e05ab5b5e95e9083b0c4ca79d} 
+\index{kbc.h@{kbc.h}!kbd\_subscription\_id@{kbd\_subscription\_id}}
+\index{kbd\_subscription\_id@{kbd\_subscription\_id}!kbc.h@{kbc.h}}
+\doxysubsubsection{\texorpdfstring{kbd\_subscription\_id}{kbd\_subscription\_id}}
+{\footnotesize\ttfamily int32\+\_\+t kbd\+\_\+subscription\+\_\+id\hspace{0.3cm}{\ttfamily [extern]}}
+

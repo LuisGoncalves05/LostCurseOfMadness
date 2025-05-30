@@ -1,0 +1,148 @@
+\doxysection{model/menu/button.c File Reference}
+\hypertarget{button_8c}{}\label{button_8c}\index{model/menu/button.c@{model/menu/button.c}}
+{\ttfamily \#include "{}button.\+h"{}}\newline
+{\ttfamily \#include "{}../utils/sprite.\+h"{}}\newline
+Include dependency graph for button.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=247pt]{button_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structButton}{Button}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structButton}{Button}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{button_8c_a66c9ca9ef4206772ae74e8b53a9264ac}{create\+\_\+button}} (xpm\+\_\+map\+\_\+t xpm, xpm\+\_\+map\+\_\+t xpm\+\_\+selected, uint16\+\_\+t x, uint16\+\_\+t y)
+\begin{DoxyCompactList}\small\item\em Creates a new \doxylink{structButton}{Button} instance with the given properties. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{button_8c_a6b75c612ee123b9b3261a831fd6d805b}{destroy\+\_\+button}} (\mbox{\hyperlink{structButton}{Button}} \texorpdfstring{$\ast$}{*}button)
+\begin{DoxyCompactList}\small\item\em Frees the memory associated with a \doxylink{structButton}{Button}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{button_8c_ace3dcf63fcb9a3dabe8656963ecccc8b}{button\+\_\+get\+\_\+selected}} (\mbox{\hyperlink{structButton}{Button}} \texorpdfstring{$\ast$}{*}button)
+\begin{DoxyCompactList}\small\item\em Gets whether the button is currently selected. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{button_8c_a3bc4c0eb84a599f716f155de07a651e0}{button\+\_\+set\+\_\+selected}} (\mbox{\hyperlink{structButton}{Button}} \texorpdfstring{$\ast$}{*}button, bool selected)
+\begin{DoxyCompactList}\small\item\em Sets the selected state of the button. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{button_8c_aa0d35f495817dbfafe8289cc9c55dc6a}{button\+\_\+is\+\_\+selected}} (\mbox{\hyperlink{structButton}{Button}} \texorpdfstring{$\ast$}{*}button, uint16\+\_\+t x, uint16\+\_\+t y)
+\begin{DoxyCompactList}\small\item\em Checks if a click at the given coordinates is within the button bounds. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{button_8c_a0ffccef946ac8aba881f08da535c5f9c}{draw\+\_\+button}} (\mbox{\hyperlink{structButton}{Button}} \texorpdfstring{$\ast$}{*}button, uint8\+\_\+t \texorpdfstring{$\ast$}{*}frame\+\_\+buffer)
+\begin{DoxyCompactList}\small\item\em Draws the button onto the given frame buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{button_8c_ace3dcf63fcb9a3dabe8656963ecccc8b}\label{button_8c_ace3dcf63fcb9a3dabe8656963ecccc8b} 
+\index{button.c@{button.c}!button\_get\_selected@{button\_get\_selected}}
+\index{button\_get\_selected@{button\_get\_selected}!button.c@{button.c}}
+\doxysubsubsection{\texorpdfstring{button\_get\_selected()}{button\_get\_selected()}}
+{\footnotesize\ttfamily bool button\+\_\+get\+\_\+selected (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structButton}{Button}} \texorpdfstring{$\ast$}{*}}]{button }\end{DoxyParamCaption})}
+
+
+
+Gets whether the button is currently selected. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em button} & Pointer to the \doxylink{structButton}{Button}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the button is selected, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{button_8c_aa0d35f495817dbfafe8289cc9c55dc6a}\label{button_8c_aa0d35f495817dbfafe8289cc9c55dc6a} 
+\index{button.c@{button.c}!button\_is\_selected@{button\_is\_selected}}
+\index{button\_is\_selected@{button\_is\_selected}!button.c@{button.c}}
+\doxysubsubsection{\texorpdfstring{button\_is\_selected()}{button\_is\_selected()}}
+{\footnotesize\ttfamily bool button\+\_\+is\+\_\+selected (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structButton}{Button}} \texorpdfstring{$\ast$}{*}}]{button,  }\item[{uint16\+\_\+t}]{x,  }\item[{uint16\+\_\+t}]{y }\end{DoxyParamCaption})}
+
+
+
+Checks if a click at the given coordinates is within the button bounds. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em button} & Pointer to the \doxylink{structButton}{Button}. \\
+\hline
+{\em x} & X-\/coordinate of the click. \\
+\hline
+{\em y} & Y-\/coordinate of the click. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the button was clicked, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{button_8c_a3bc4c0eb84a599f716f155de07a651e0}\label{button_8c_a3bc4c0eb84a599f716f155de07a651e0} 
+\index{button.c@{button.c}!button\_set\_selected@{button\_set\_selected}}
+\index{button\_set\_selected@{button\_set\_selected}!button.c@{button.c}}
+\doxysubsubsection{\texorpdfstring{button\_set\_selected()}{button\_set\_selected()}}
+{\footnotesize\ttfamily void button\+\_\+set\+\_\+selected (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structButton}{Button}} \texorpdfstring{$\ast$}{*}}]{button,  }\item[{bool}]{selected }\end{DoxyParamCaption})}
+
+
+
+Sets the selected state of the button. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em button} & Pointer to the \doxylink{structButton}{Button}. \\
+\hline
+{\em selected} & Boolean value indicating whether the button is selected. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{button_8c_a66c9ca9ef4206772ae74e8b53a9264ac}\label{button_8c_a66c9ca9ef4206772ae74e8b53a9264ac} 
+\index{button.c@{button.c}!create\_button@{create\_button}}
+\index{create\_button@{create\_button}!button.c@{button.c}}
+\doxysubsubsection{\texorpdfstring{create\_button()}{create\_button()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structButton}{Button}} \texorpdfstring{$\ast$}{*} create\+\_\+button (\begin{DoxyParamCaption}\item[{xpm\+\_\+map\+\_\+t}]{xpm,  }\item[{xpm\+\_\+map\+\_\+t}]{xpm\+\_\+selected,  }\item[{uint16\+\_\+t}]{x,  }\item[{uint16\+\_\+t}]{y }\end{DoxyParamCaption})}
+
+
+
+Creates a new \doxylink{structButton}{Button} instance with the given properties. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em xpm} & XPM image for the button in default state. \\
+\hline
+{\em xpm\+\_\+selected} & XPM image for the button when selected. \\
+\hline
+{\em x} & X-\/coordinate of the button. \\
+\hline
+{\em y} & Y-\/coordinate of the button. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the created \doxylink{structButton}{Button} structure. 
+\end{DoxyReturn}
+\Hypertarget{button_8c_a6b75c612ee123b9b3261a831fd6d805b}\label{button_8c_a6b75c612ee123b9b3261a831fd6d805b} 
+\index{button.c@{button.c}!destroy\_button@{destroy\_button}}
+\index{destroy\_button@{destroy\_button}!button.c@{button.c}}
+\doxysubsubsection{\texorpdfstring{destroy\_button()}{destroy\_button()}}
+{\footnotesize\ttfamily void destroy\+\_\+button (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structButton}{Button}} \texorpdfstring{$\ast$}{*}}]{button }\end{DoxyParamCaption})}
+
+
+
+Frees the memory associated with a \doxylink{structButton}{Button}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em button} & Pointer to the \doxylink{structButton}{Button} structure to destroy. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{button_8c_a0ffccef946ac8aba881f08da535c5f9c}\label{button_8c_a0ffccef946ac8aba881f08da535c5f9c} 
+\index{button.c@{button.c}!draw\_button@{draw\_button}}
+\index{draw\_button@{draw\_button}!button.c@{button.c}}
+\doxysubsubsection{\texorpdfstring{draw\_button()}{draw\_button()}}
+{\footnotesize\ttfamily void draw\+\_\+button (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structButton}{Button}} \texorpdfstring{$\ast$}{*}}]{button,  }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{frame\+\_\+buffer }\end{DoxyParamCaption})}
+
+
+
+Draws the button onto the given frame buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em button} & Pointer to the \doxylink{structButton}{Button}. \\
+\hline
+{\em frame\+\_\+buffer} & Pointer to the frame buffer. \\
+\hline
+\end{DoxyParams}

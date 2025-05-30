@@ -1,0 +1,64 @@
+\doxysection{mob.\+h}
+\hypertarget{mob_8h_source}{}\label{mob_8h_source}\index{model/level/mob.h@{model/level/mob.h}}
+\mbox{\hyperlink{mob_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ MOB\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ MOB\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <lcom/lcf.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <math.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}assets/xpm/level/mob/attacking.xpm"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}assets/xpm/level/mob/idle.xpm"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{gpu_8h}{drivers/video/gpu.h}}"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{animated__sprite_8h}{model/utils/animated\_sprite.h}}"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{sprite_8h}{model/utils/sprite.h}}"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{config_8h}{config.h}}"{}}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#define\ MOB\_RADIUS\ 250\ \ \ \ \ \ \ }}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#define\ MOB\_MAX\_SPEED\ 5\ \ \ \ \ \ }}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ MOB\_HEALTH\ 1\ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#define\ MOB\_DEFAULT\_SPEED\ 2\ \ }}
+\DoxyCodeLine{00025\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structMob}{Mob}}\ \mbox{\hyperlink{structMob}{Mob}};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{mob_8h_a4abc2498f19bcbe035b7b524e27fbb29ad848918cd55b19a92a78ad489c951c6d}{MOB\_IDLE}},\ \ \ \ \ \ }
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{mob_8h_a4abc2498f19bcbe035b7b524e27fbb29a5446b593ba3bc6940cfb329c7b57addc}{MOB\_ATTACKING}},\ }
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{mob_8h_a4abc2498f19bcbe035b7b524e27fbb29afc534363e0cf16835c359cb71b79d8da}{MOB\_DEAD}}\ \ \ \ \ \ }
+\DoxyCodeLine{00034\ \}\ \mbox{\hyperlink{mob_8h_a4abc2498f19bcbe035b7b524e27fbb29}{MobState}};}
+\DoxyCodeLine{00041\ \mbox{\hyperlink{structMob}{Mob}}\ *\mbox{\hyperlink{mob_8h_aa921782781644f21e848d193bf5e4b4d}{create\_mob}}(int16\_t\ x,\ int16\_t\ y);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00048\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{mob_8h_a6dffce9e1a708b2cd169d9590b5600a5}{destroy\_mob}}(\mbox{\hyperlink{structMob}{Mob}}\ *mob);}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00056\ \mbox{\hyperlink{structSprite}{Sprite}}\ *\mbox{\hyperlink{mob_8h_a5381b01237f48cad5a023ac326d7df52}{mob\_get\_sprite}}(\mbox{\hyperlink{structMob}{Mob}}\ *mob);}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00064\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{mob_8h_abd025ff3ab325afc40e0f36e7e0ffac6}{mob\_set\_sprite}}(\mbox{\hyperlink{structMob}{Mob}}\ *mob,\ \mbox{\hyperlink{structSprite}{Sprite}}\ *sprite);}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00072\ int16\_t\ \mbox{\hyperlink{mob_8h_a2e8c8741f20fe73527d20556b00f73b2}{mob\_get\_x}}(\mbox{\hyperlink{structMob}{Mob}}\ *mob);}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00080\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{mob_8h_a14af98d1885c2028b43f050352ae058f}{mob\_set\_x}}(\mbox{\hyperlink{structMob}{Mob}}\ *mob,\ int16\_t\ x);}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00088\ int16\_t\ \mbox{\hyperlink{mob_8h_afca567806abf3afbd4e6000c0cc49c5b}{mob\_get\_y}}(\mbox{\hyperlink{structMob}{Mob}}\ *mob);}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00096\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{mob_8h_a25413b387f3e96e5584f632b7ad349dd}{mob\_set\_y}}(\mbox{\hyperlink{structMob}{Mob}}\ *mob,\ int16\_t\ y);}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00104\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{mob_8h_a50ae69e2789f7fbf59bbb0621eb1bef0}{mob\_get\_xspeed}}(\mbox{\hyperlink{structMob}{Mob}}\ *mob);}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00112\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{mob_8h_ad27dcc7982dda3a018a9ccb05e162dfd}{mob\_get\_yspeed}}(\mbox{\hyperlink{structMob}{Mob}}\ *mob);}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00120\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{mob_8h_a82f8f6913b1d97888a9cd919da98932b}{mob\_get\_health}}(\mbox{\hyperlink{structMob}{Mob}}\ *mob);}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00128\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{mob_8h_ab8a466bb4e41da62083c0198214c3a35}{mob\_set\_health}}(\mbox{\hyperlink{structMob}{Mob}}\ *mob,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{structMob_a60b292dac527842816368be1620b9812}{health}});}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00136\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{mob_8h_a60ee26ae92c918077c10d405911585df}{mob\_get\_max\_speed}}(\mbox{\hyperlink{structMob}{Mob}}\ *mob);}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00144\ \mbox{\hyperlink{mob_8h_a4abc2498f19bcbe035b7b524e27fbb29}{MobState}}\ \mbox{\hyperlink{mob_8h_a80d30d94990fe35374ca68e79c14d7c9}{mob\_get\_state}}(\mbox{\hyperlink{structMob}{Mob}}\ *mob);}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00153\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{mob_8h_a79dbfd94639e48f4fd6da40e7c6d068c}{mob\_update\_state}}(\mbox{\hyperlink{structMob}{Mob}}\ *mob,\ int16\_t\ mob\_cx,\ int16\_t\ mob\_cy);}
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00161\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{mob_8h_a6800ec2eff68cf927f83440d98783cb7}{draw\_mob}}(\mbox{\hyperlink{structMob}{Mob}}\ *mob,\ uint8\_t\ *frame\_buffer);}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00163\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ MOB\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

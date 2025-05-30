@@ -13,11 +13,6 @@
 
 extern uint16_t x_res, y_res;
 
-/**
- * @brief Represents a single bullet instance.
- *
- * The Bullet struct is opaque.
- */
 typedef struct Bullet Bullet;
 
 /**

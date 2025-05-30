@@ -1,0 +1,24 @@
+\doxysection{palette.\+h}
+\hypertarget{palette_8h_source}{}\label{palette_8h_source}\index{drivers/video/palette.h@{drivers/video/palette.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PALLETE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PALLETE\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <lcom/lcf.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}gpu.h"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00010\ \ \ \ \ uint8\_t\ alignment;}
+\DoxyCodeLine{00011\ \ \ \ \ uint8\_t\ blue;}
+\DoxyCodeLine{00012\ \ \ \ \ uint8\_t\ green;}
+\DoxyCodeLine{00013\ \ \ \ \ uint8\_t\ red;}
+\DoxyCodeLine{00014\ \}\ \mbox{\hyperlink{struct____attribute____}{\_\_attribute\_\_}}((packed))\ VBEPaletteEntry;}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keywordtype}{int}\ set\_palette\_color(uint16\_t\ index,\ uint8\_t\ r,\ uint8\_t\ g,\ uint8\_t\ b);}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

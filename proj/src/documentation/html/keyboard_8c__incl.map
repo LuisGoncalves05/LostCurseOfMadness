@@ -1,0 +1,16 @@
+<map id="drivers/keyboard/keyboard.c" name="drivers/keyboard/keyboard.c">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,212,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="161,299,246,324"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="106,32,91,71,78,127,74,159,75,190,81,221,94,249,118,275,149,292,147,297,115,279,89,252,76,222,70,191,69,158,72,126,86,69,101,30"/>
+<area shape="rect" id="Node000003" href="$keyboard_8h.html" title=" " alt="" coords="151,79,245,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="125,29,174,68,171,72,121,33"/>
+<area shape="rect" id="Node000004" href="$kbc_8h.html" title=" " alt="" coords="193,152,251,177"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="204,103,216,138,211,140,199,105"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="103,225,186,251"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="211,179,169,218,166,214,208,175"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="211,225,281,251"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="228,177,240,211,235,213,223,179"/>
+<area shape="rect" id="Node000007" href="$i8042_8h.html" title=" " alt="" coords="305,225,376,251"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="242,175,311,216,308,220,240,180"/>
+<area shape="poly" id="edge7_Node000007_Node000002" title=" " alt="" coords="320,253,239,295,237,290,317,248"/>
+</map>

@@ -1,0 +1,213 @@
+\doxysection{model/utils/cursor.h File Reference}
+\hypertarget{cursor_8h}{}\label{cursor_8h}\index{model/utils/cursor.h@{model/utils/cursor.h}}
+{\ttfamily \#include $<$lcom/lcf.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include "{}assets/xpm/crosshair.\+xpm"{}}\newline
+{\ttfamily \#include "{}assets/xpm/cursor.\+xpm"{}}\newline
+{\ttfamily \#include "{}drivers/video/gpu.\+h"{}}\newline
+{\ttfamily \#include "{}model/utils/sprite.\+h"{}}\newline
+Include dependency graph for cursor.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{cursor_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=322pt]{cursor_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{structCursor}{Cursor}} \mbox{\hyperlink{cursor_8h_a364e9dcc08d9a51573526c0fb1d8d1d8}{Cursor}}
+\begin{DoxyCompactList}\small\item\em Represents a mouse cursor instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{cursor_8h_a3bbf59221044115f117dc97bb8930648}{Cursor\+Mode}} \{ \mbox{\hyperlink{cursor_8h_a3bbf59221044115f117dc97bb8930648ac9829fc9a37d0c79b00a3b72eaeee1d3}{CURSOR\+\_\+\+DEFAULT}}
+, \mbox{\hyperlink{cursor_8h_a3bbf59221044115f117dc97bb8930648aebf9a9908a7ce64f2022d2afed6f73c8}{CURSOR\+\_\+\+CROSSHAIR}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structCursor}{Cursor}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{cursor_8h_ac284c571fcda6c7f046a4be63f5d15ea}{create\+\_\+cursor}} (\mbox{\hyperlink{cursor_8h_a3bbf59221044115f117dc97bb8930648}{Cursor\+Mode}} mode, int x, int y)
+\begin{DoxyCompactList}\small\item\em Creates a new cursor with the specified XPM image. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{cursor_8h_a703c262b2001b4ee8aadfadd87baae71}{destroy\+\_\+cursor}} (\mbox{\hyperlink{structCursor}{Cursor}} \texorpdfstring{$\ast$}{*}cursor)
+\begin{DoxyCompactList}\small\item\em Frees the memory associated with the cursor. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{cursor_8h_ab8438ddee952a850ddc7f7b262885444}{cursor\+\_\+get\+\_\+x}} (\mbox{\hyperlink{structCursor}{Cursor}} \texorpdfstring{$\ast$}{*}cursor)
+\begin{DoxyCompactList}\small\item\em Returns the current X position of the cursor. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{cursor_8h_a8e235d292a95eb5dbff2b430721c36eb}{cursor\+\_\+get\+\_\+y}} (\mbox{\hyperlink{structCursor}{Cursor}} \texorpdfstring{$\ast$}{*}cursor)
+\begin{DoxyCompactList}\small\item\em Returns the current Y position of the cursor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{cursor_8h_a458d2027838ff5a62163c5ff04b72411}{cursor\+\_\+update}} (\mbox{\hyperlink{structCursor}{Cursor}} \texorpdfstring{$\ast$}{*}cursor, double dx, double dy)
+\begin{DoxyCompactList}\small\item\em Updates the cursor\textquotesingle{}s position based on mouse movement deltas. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{cursor_8h_aba5334dbc95c7bfebd355183c6ed3438}{draw\+\_\+cursor}} (\mbox{\hyperlink{structCursor}{Cursor}} \texorpdfstring{$\ast$}{*}cursor, uint8\+\_\+t \texorpdfstring{$\ast$}{*}buffer)
+\begin{DoxyCompactList}\small\item\em Draws the cursor to the given frame buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{cursor_8h_a8c698380dc32cd8b5a19a84da1ab2ad9}{x\+\_\+res}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{cursor_8h_a1188c1e5fe37db7b55bdad91f71e26c0}{y\+\_\+res}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\Hypertarget{cursor_8h_a364e9dcc08d9a51573526c0fb1d8d1d8}\label{cursor_8h_a364e9dcc08d9a51573526c0fb1d8d1d8} 
+\index{cursor.h@{cursor.h}!Cursor@{Cursor}}
+\index{Cursor@{Cursor}!cursor.h@{cursor.h}}
+\doxysubsubsection{\texorpdfstring{Cursor}{Cursor}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structCursor}{Cursor}} \mbox{\hyperlink{structCursor}{Cursor}}}
+
+
+
+Represents a mouse cursor instance. 
+
+The \doxylink{structCursor}{Cursor} struct is opaque. 
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{cursor_8h_a3bbf59221044115f117dc97bb8930648}\label{cursor_8h_a3bbf59221044115f117dc97bb8930648} 
+\index{cursor.h@{cursor.h}!CursorMode@{CursorMode}}
+\index{CursorMode@{CursorMode}!cursor.h@{cursor.h}}
+\doxysubsubsection{\texorpdfstring{CursorMode}{CursorMode}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{cursor_8h_a3bbf59221044115f117dc97bb8930648}{Cursor\+Mode}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CURSOR\_DEFAULT@{CURSOR\_DEFAULT}!cursor.h@{cursor.h}}\index{cursor.h@{cursor.h}!CURSOR\_DEFAULT@{CURSOR\_DEFAULT}}}\Hypertarget{cursor_8h_a3bbf59221044115f117dc97bb8930648ac9829fc9a37d0c79b00a3b72eaeee1d3}\label{cursor_8h_a3bbf59221044115f117dc97bb8930648ac9829fc9a37d0c79b00a3b72eaeee1d3} 
+CURSOR\+\_\+\+DEFAULT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CURSOR\_CROSSHAIR@{CURSOR\_CROSSHAIR}!cursor.h@{cursor.h}}\index{cursor.h@{cursor.h}!CURSOR\_CROSSHAIR@{CURSOR\_CROSSHAIR}}}\Hypertarget{cursor_8h_a3bbf59221044115f117dc97bb8930648aebf9a9908a7ce64f2022d2afed6f73c8}\label{cursor_8h_a3bbf59221044115f117dc97bb8930648aebf9a9908a7ce64f2022d2afed6f73c8} 
+CURSOR\+\_\+\+CROSSHAIR&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{cursor_8h_ac284c571fcda6c7f046a4be63f5d15ea}\label{cursor_8h_ac284c571fcda6c7f046a4be63f5d15ea} 
+\index{cursor.h@{cursor.h}!create\_cursor@{create\_cursor}}
+\index{create\_cursor@{create\_cursor}!cursor.h@{cursor.h}}
+\doxysubsubsection{\texorpdfstring{create\_cursor()}{create\_cursor()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structCursor}{Cursor}} \texorpdfstring{$\ast$}{*} create\+\_\+cursor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{cursor_8h_a3bbf59221044115f117dc97bb8930648}{Cursor\+Mode}}}]{mode,  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+
+Creates a new cursor with the specified XPM image. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em xpm} & XPM image used to represent the cursor. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the created \doxylink{structCursor}{Cursor} structure. 
+\end{DoxyReturn}
+\Hypertarget{cursor_8h_ab8438ddee952a850ddc7f7b262885444}\label{cursor_8h_ab8438ddee952a850ddc7f7b262885444} 
+\index{cursor.h@{cursor.h}!cursor\_get\_x@{cursor\_get\_x}}
+\index{cursor\_get\_x@{cursor\_get\_x}!cursor.h@{cursor.h}}
+\doxysubsubsection{\texorpdfstring{cursor\_get\_x()}{cursor\_get\_x()}}
+{\footnotesize\ttfamily uint16\+\_\+t cursor\+\_\+get\+\_\+x (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCursor}{Cursor}} \texorpdfstring{$\ast$}{*}}]{cursor }\end{DoxyParamCaption})}
+
+
+
+Returns the current X position of the cursor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cursor} & Pointer to the \doxylink{structCursor}{Cursor} structure. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+X coordinate of the cursor. 
+\end{DoxyReturn}
+\Hypertarget{cursor_8h_a8e235d292a95eb5dbff2b430721c36eb}\label{cursor_8h_a8e235d292a95eb5dbff2b430721c36eb} 
+\index{cursor.h@{cursor.h}!cursor\_get\_y@{cursor\_get\_y}}
+\index{cursor\_get\_y@{cursor\_get\_y}!cursor.h@{cursor.h}}
+\doxysubsubsection{\texorpdfstring{cursor\_get\_y()}{cursor\_get\_y()}}
+{\footnotesize\ttfamily uint16\+\_\+t cursor\+\_\+get\+\_\+y (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCursor}{Cursor}} \texorpdfstring{$\ast$}{*}}]{cursor }\end{DoxyParamCaption})}
+
+
+
+Returns the current Y position of the cursor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cursor} & Pointer to the \doxylink{structCursor}{Cursor} structure. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Y coordinate of the cursor. 
+\end{DoxyReturn}
+\Hypertarget{cursor_8h_a458d2027838ff5a62163c5ff04b72411}\label{cursor_8h_a458d2027838ff5a62163c5ff04b72411} 
+\index{cursor.h@{cursor.h}!cursor\_update@{cursor\_update}}
+\index{cursor\_update@{cursor\_update}!cursor.h@{cursor.h}}
+\doxysubsubsection{\texorpdfstring{cursor\_update()}{cursor\_update()}}
+{\footnotesize\ttfamily void cursor\+\_\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCursor}{Cursor}} \texorpdfstring{$\ast$}{*}}]{cursor,  }\item[{double}]{dx,  }\item[{double}]{dy }\end{DoxyParamCaption})}
+
+
+
+Updates the cursor\textquotesingle{}s position based on mouse movement deltas. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cursor} & Pointer to the \doxylink{structCursor}{Cursor} structure. \\
+\hline
+{\em dx} & Horizontal movement delta. \\
+\hline
+{\em dy} & Vertical movement delta. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{cursor_8h_a703c262b2001b4ee8aadfadd87baae71}\label{cursor_8h_a703c262b2001b4ee8aadfadd87baae71} 
+\index{cursor.h@{cursor.h}!destroy\_cursor@{destroy\_cursor}}
+\index{destroy\_cursor@{destroy\_cursor}!cursor.h@{cursor.h}}
+\doxysubsubsection{\texorpdfstring{destroy\_cursor()}{destroy\_cursor()}}
+{\footnotesize\ttfamily void destroy\+\_\+cursor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCursor}{Cursor}} \texorpdfstring{$\ast$}{*}}]{cursor }\end{DoxyParamCaption})}
+
+
+
+Frees the memory associated with the cursor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cursor} & Pointer to the \doxylink{structCursor}{Cursor} structure to destroy. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{cursor_8h_aba5334dbc95c7bfebd355183c6ed3438}\label{cursor_8h_aba5334dbc95c7bfebd355183c6ed3438} 
+\index{cursor.h@{cursor.h}!draw\_cursor@{draw\_cursor}}
+\index{draw\_cursor@{draw\_cursor}!cursor.h@{cursor.h}}
+\doxysubsubsection{\texorpdfstring{draw\_cursor()}{draw\_cursor()}}
+{\footnotesize\ttfamily void draw\+\_\+cursor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCursor}{Cursor}} \texorpdfstring{$\ast$}{*}}]{cursor,  }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{buffer }\end{DoxyParamCaption})}
+
+
+
+Draws the cursor to the given frame buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cursor} & Pointer to the \doxylink{structCursor}{Cursor} structure. \\
+\hline
+{\em buffer} & Pointer to the frame buffer. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{cursor_8h_a8c698380dc32cd8b5a19a84da1ab2ad9}\label{cursor_8h_a8c698380dc32cd8b5a19a84da1ab2ad9} 
+\index{cursor.h@{cursor.h}!x\_res@{x\_res}}
+\index{x\_res@{x\_res}!cursor.h@{cursor.h}}
+\doxysubsubsection{\texorpdfstring{x\_res}{x\_res}}
+{\footnotesize\ttfamily uint16\+\_\+t x\+\_\+res\hspace{0.3cm}{\ttfamily [extern]}}
+
+\Hypertarget{cursor_8h_a1188c1e5fe37db7b55bdad91f71e26c0}\label{cursor_8h_a1188c1e5fe37db7b55bdad91f71e26c0} 
+\index{cursor.h@{cursor.h}!y\_res@{y\_res}}
+\index{y\_res@{y\_res}!cursor.h@{cursor.h}}
+\doxysubsubsection{\texorpdfstring{y\_res}{y\_res}}
+{\footnotesize\ttfamily uint16\+\_\+t y\+\_\+res}
+

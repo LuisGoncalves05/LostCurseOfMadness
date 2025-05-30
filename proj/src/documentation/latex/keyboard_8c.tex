@@ -1,0 +1,63 @@
+\doxysection{drivers/keyboard/keyboard.c File Reference}
+\hypertarget{keyboard_8c}{}\label{keyboard_8c}\index{drivers/keyboard/keyboard.c@{drivers/keyboard/keyboard.c}}
+{\ttfamily \#include $<$lcom/lcf.\+h$>$}\newline
+{\ttfamily \#include "{}keyboard.\+h"{}}\newline
+Include dependency graph for keyboard.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{keyboard_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int() \mbox{\hyperlink{group__keyboard_ga4ac9231a99a664d6a9f0b69767e0d707}{kbd\+\_\+subscribe\+\_\+int}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}bit\+\_\+no)
+\begin{DoxyCompactList}\small\item\em Subscribes and enables Keyboard interrupts. \end{DoxyCompactList}\item 
+int() \mbox{\hyperlink{group__keyboard_ga9ac1d7eb2c00a2dc838368ad99390d98}{kbd\+\_\+unsubscribe\+\_\+int}} (void)
+\begin{DoxyCompactList}\small\item\em Unsubscribes Keyboard interrupts. \end{DoxyCompactList}\item 
+void() \mbox{\hyperlink{group__keyboard_gaf6a1b33161b368c9825215b8dea79a31}{kbd\+\_\+int\+\_\+handler}} (void)
+\begin{DoxyCompactList}\small\item\em Keyboard interrupt handler. \end{DoxyCompactList}\item 
+int() \mbox{\hyperlink{group__keyboard_ga2efea1c1ffbe188b91071e708087489d}{kbd\+\_\+read\+\_\+scan\+\_\+code}} (void)
+\begin{DoxyCompactList}\small\item\em Reads scan codes from the keyboard. \end{DoxyCompactList}\item 
+bool() \mbox{\hyperlink{group__keyboard_gaff8bfbfaab98da0e4c36b3c5487cbc10}{kbd\+\_\+handle\+\_\+scan\+\_\+code}} ()
+\begin{DoxyCompactList}\small\item\em Checks if the scancode is complete. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int32\+\_\+t \mbox{\hyperlink{keyboard_8c_a01fcc4069d221b236c4741a303cabbbb}{kbd\+\_\+hook\+\_\+id}} = \mbox{\hyperlink{group__i8042_ga5c1072213ce8d8cd43628c4319ae0391}{KBD\+\_\+\+IRQ}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{keyboard_8c_af4aead9dfdc0d2f7e93662387a21e0bc}{scan\+\_\+code}}
+\item 
+bool \mbox{\hyperlink{keyboard_8c_a923796b48e02f0e0c16dfff48ca1cd84}{two\+\_\+byte}} = false
+\item 
+uint32\+\_\+t \mbox{\hyperlink{keyboard_8c_ae1dde88f49a15ac8b44d187ed1a2c2f4}{interrupt\+\_\+counter}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{keyboard_8c_ae1dde88f49a15ac8b44d187ed1a2c2f4}\label{keyboard_8c_ae1dde88f49a15ac8b44d187ed1a2c2f4} 
+\index{keyboard.c@{keyboard.c}!interrupt\_counter@{interrupt\_counter}}
+\index{interrupt\_counter@{interrupt\_counter}!keyboard.c@{keyboard.c}}
+\doxysubsubsection{\texorpdfstring{interrupt\_counter}{interrupt\_counter}}
+{\footnotesize\ttfamily uint32\+\_\+t interrupt\+\_\+counter\hspace{0.3cm}{\ttfamily [extern]}}
+
+\Hypertarget{keyboard_8c_a01fcc4069d221b236c4741a303cabbbb}\label{keyboard_8c_a01fcc4069d221b236c4741a303cabbbb} 
+\index{keyboard.c@{keyboard.c}!kbd\_hook\_id@{kbd\_hook\_id}}
+\index{kbd\_hook\_id@{kbd\_hook\_id}!keyboard.c@{keyboard.c}}
+\doxysubsubsection{\texorpdfstring{kbd\_hook\_id}{kbd\_hook\_id}}
+{\footnotesize\ttfamily int32\+\_\+t kbd\+\_\+hook\+\_\+id = \mbox{\hyperlink{group__i8042_ga5c1072213ce8d8cd43628c4319ae0391}{KBD\+\_\+\+IRQ}}}
+
+\Hypertarget{keyboard_8c_af4aead9dfdc0d2f7e93662387a21e0bc}\label{keyboard_8c_af4aead9dfdc0d2f7e93662387a21e0bc} 
+\index{keyboard.c@{keyboard.c}!scan\_code@{scan\_code}}
+\index{scan\_code@{scan\_code}!keyboard.c@{keyboard.c}}
+\doxysubsubsection{\texorpdfstring{scan\_code}{scan\_code}}
+{\footnotesize\ttfamily uint8\+\_\+t scan\+\_\+code}
+
+\Hypertarget{keyboard_8c_a923796b48e02f0e0c16dfff48ca1cd84}\label{keyboard_8c_a923796b48e02f0e0c16dfff48ca1cd84} 
+\index{keyboard.c@{keyboard.c}!two\_byte@{two\_byte}}
+\index{two\_byte@{two\_byte}!keyboard.c@{keyboard.c}}
+\doxysubsubsection{\texorpdfstring{two\_byte}{two\_byte}}
+{\footnotesize\ttfamily bool two\+\_\+byte = false}
+

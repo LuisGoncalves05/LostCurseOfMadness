@@ -1,0 +1,126 @@
+\doxysection{model/game.c File Reference}
+\hypertarget{game_8c}{}\label{game_8c}\index{model/game.c@{model/game.c}}
+{\ttfamily \#include "{}game.\+h"{}}\newline
+{\ttfamily \#include "{}level/bullet.\+h"{}}\newline
+Include dependency graph for game.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{game_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structGame}{Game}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structGame}{Game}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{game_8c_ab92fa427cf97afa616cd950c04314fab}{create\+\_\+game}} ()
+\begin{DoxyCompactList}\small\item\em Creates and initializes a new \doxylink{structGame}{Game} instance. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{game_8c_a761139cc81603d38d5c391927f336bd1}{destroy\+\_\+game}} (\mbox{\hyperlink{structGame}{Game}} \texorpdfstring{$\ast$}{*}game)
+\begin{DoxyCompactList}\small\item\em Frees the memory associated with the \doxylink{structGame}{Game} instance. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{game_8c_a3300af26c2f7dfc209867338e6d9fb16}{game\+\_\+timer\+\_\+handler}} (\mbox{\hyperlink{structGame}{Game}} \texorpdfstring{$\ast$}{*}game)
+\begin{DoxyCompactList}\small\item\em Handles timer interrupts and updates game logic accordingly. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{game_8c_ae511145684a97aaa9bc733c2ff2e65a5}{game\+\_\+keyboard\+\_\+handler}} (\mbox{\hyperlink{structGame}{Game}} \texorpdfstring{$\ast$}{*}game)
+\begin{DoxyCompactList}\small\item\em Handles keyboard input events and updates game state. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{game_8c_aeab649b09cee37a399122003159054b1}{game\+\_\+mouse\+\_\+handler}} (\mbox{\hyperlink{structGame}{Game}} \texorpdfstring{$\ast$}{*}game)
+\begin{DoxyCompactList}\small\item\em Handles mouse input events and updates game state. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{game_8h_a5d74787dedbc4e11c1ab15bf487e61f8}{State}} \mbox{\hyperlink{game_8c_a63c18ae831ce1abd39d3f42a6aae4142}{get\+\_\+state}} (\mbox{\hyperlink{structGame}{Game}} \texorpdfstring{$\ast$}{*}game)
+\begin{DoxyCompactList}\small\item\em Returns the current state of the game. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{game_8c_ab92fa427cf97afa616cd950c04314fab}\label{game_8c_ab92fa427cf97afa616cd950c04314fab} 
+\index{game.c@{game.c}!create\_game@{create\_game}}
+\index{create\_game@{create\_game}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{create\_game()}{create\_game()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structGame}{Game}} \texorpdfstring{$\ast$}{*} create\+\_\+game (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Creates and initializes a new \doxylink{structGame}{Game} instance. 
+
+\begin{DoxyReturn}{Returns}
+Pointer to the created \doxylink{structGame}{Game} structure. 
+\end{DoxyReturn}
+\Hypertarget{game_8c_a761139cc81603d38d5c391927f336bd1}\label{game_8c_a761139cc81603d38d5c391927f336bd1} 
+\index{game.c@{game.c}!destroy\_game@{destroy\_game}}
+\index{destroy\_game@{destroy\_game}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{destroy\_game()}{destroy\_game()}}
+{\footnotesize\ttfamily void destroy\+\_\+game (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGame}{Game}} \texorpdfstring{$\ast$}{*}}]{game }\end{DoxyParamCaption})}
+
+
+
+Frees the memory associated with the \doxylink{structGame}{Game} instance. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game} & Pointer to the \doxylink{structGame}{Game} structure to destroy. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{game_8c_ae511145684a97aaa9bc733c2ff2e65a5}\label{game_8c_ae511145684a97aaa9bc733c2ff2e65a5} 
+\index{game.c@{game.c}!game\_keyboard\_handler@{game\_keyboard\_handler}}
+\index{game\_keyboard\_handler@{game\_keyboard\_handler}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{game\_keyboard\_handler()}{game\_keyboard\_handler()}}
+{\footnotesize\ttfamily void game\+\_\+keyboard\+\_\+handler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGame}{Game}} \texorpdfstring{$\ast$}{*}}]{game }\end{DoxyParamCaption})}
+
+
+
+Handles keyboard input events and updates game state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game} & Pointer to the \doxylink{structGame}{Game} structure. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{game_8c_aeab649b09cee37a399122003159054b1}\label{game_8c_aeab649b09cee37a399122003159054b1} 
+\index{game.c@{game.c}!game\_mouse\_handler@{game\_mouse\_handler}}
+\index{game\_mouse\_handler@{game\_mouse\_handler}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{game\_mouse\_handler()}{game\_mouse\_handler()}}
+{\footnotesize\ttfamily void game\+\_\+mouse\+\_\+handler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGame}{Game}} \texorpdfstring{$\ast$}{*}}]{game }\end{DoxyParamCaption})}
+
+
+
+Handles mouse input events and updates game state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game} & Pointer to the \doxylink{structGame}{Game} structure. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{game_8c_a3300af26c2f7dfc209867338e6d9fb16}\label{game_8c_a3300af26c2f7dfc209867338e6d9fb16} 
+\index{game.c@{game.c}!game\_timer\_handler@{game\_timer\_handler}}
+\index{game\_timer\_handler@{game\_timer\_handler}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{game\_timer\_handler()}{game\_timer\_handler()}}
+{\footnotesize\ttfamily void game\+\_\+timer\+\_\+handler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGame}{Game}} \texorpdfstring{$\ast$}{*}}]{game }\end{DoxyParamCaption})}
+
+
+
+Handles timer interrupts and updates game logic accordingly. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game} & Pointer to the \doxylink{structGame}{Game} structure. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{game_8c_a63c18ae831ce1abd39d3f42a6aae4142}\label{game_8c_a63c18ae831ce1abd39d3f42a6aae4142} 
+\index{game.c@{game.c}!get\_state@{get\_state}}
+\index{get\_state@{get\_state}!game.c@{game.c}}
+\doxysubsubsection{\texorpdfstring{get\_state()}{get\_state()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{game_8h_a5d74787dedbc4e11c1ab15bf487e61f8}{State}} get\+\_\+state (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGame}{Game}} \texorpdfstring{$\ast$}{*}}]{game }\end{DoxyParamCaption})}
+
+
+
+Returns the current state of the game. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game} & Pointer to the \doxylink{structGame}{Game} structure. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Current game state. 
+\end{DoxyReturn}
