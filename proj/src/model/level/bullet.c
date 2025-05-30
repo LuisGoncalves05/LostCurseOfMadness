@@ -51,6 +51,42 @@ Sprite *bullet_get_sprite(Bullet *bullet) {
     return bullet->sprite;
 }
 
+int16_t bullet_get_x(Bullet *bullet) {
+    if (bullet == NULL) {
+        printf("bullet_get_x: NULL pointer provided\n");
+        return 0;
+    }
+
+    return bullet->sprite->x;
+}
+
+void bullet_set_x(Bullet *bullet, int16_t x) {
+    if (bullet == NULL) {
+        printf("bullet_set_x: NULL pointer provided\n");
+        return;
+    }
+
+    bullet->sprite->x = x;
+}
+
+int16_t bullet_get_y(Bullet *bullet) {
+    if (bullet == NULL) {
+        printf("bullet_get_y: NULL pointer provided\n");
+        return 0;
+    }
+
+    return bullet->sprite->y;
+}
+
+void bullet_set_y(Bullet *bullet, int16_t y) {
+    if (bullet == NULL) {
+        printf("bullet_set_y: NULL pointer provided\n");
+        return;
+    }
+
+    bullet->sprite->y = y;
+}
+
 double bullet_get_xspeed(Bullet *bullet) {
     if (bullet == NULL) {
         printf("bullet_get_xspeed: NULL pointer provided\n");

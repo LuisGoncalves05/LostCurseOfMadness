@@ -47,6 +47,38 @@ void destroy_bullet(Bullet *bullet);
 Sprite *bullet_get_sprite(Bullet *bullet);
 
 /**
+ * @brief Gets the x-coordinate of the bullet.
+ *
+ * @param bullet Pointer to the Bullet.
+ * @return The x-coordinate of the bullet.
+ */
+int16_t bullet_get_x(Bullet *bullet);
+
+/**
+ * @brief Sets the x-coordinate of the bullet.
+ *
+ * @param bullet Pointer to the Bullet.
+ * @param x The x-coordinate of the bullet.
+ */
+void bullet_set_x(Bullet *bullet, int16_t x);
+
+/**
+ * @brief Gets the y-coordinate of the bullet.
+ *
+ * @param bullet Pointer to the Bullet.
+ * @return The y-coordinate of the bullet.
+ */
+int16_t bullet_get_y(Bullet *bullet);
+
+/**
+ * @brief Sets the y-coordinate of the bullet.
+ *
+ * @param bullet Pointer to the Bullet.
+ * @param y The y-coordinate of the bullet.
+ */
+void bullet_set_y(Bullet *bullet, int16_t y);
+
+/**
  * @brief Gets the horizontal velocity component of the bullet.
  *
  * @param bullet Pointer to the Bullet.

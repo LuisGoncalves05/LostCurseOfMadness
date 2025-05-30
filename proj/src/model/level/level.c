@@ -157,13 +157,13 @@ static bool(check_mob_collisions)(Level *level) {
         return false;
     }
 
-    Sprite *player = player_get_sprite(get_player(level));
+    Sprite *player_sprite = player_get_sprite(level->player);
     for (int i = 0; i < mob_count; i++) {
-        if (player == NULL) {
+        if (player_sprite == NULL) {
             printf("check_mob_collisions: player_get_sprite failed\n");
             return false;
         }
-        if (check_sprite_collision(mob_get_sprite(mobs[i]), player)) {
+        if (check_sprite_collision(mob_get_sprite(mobs[i]), player_sprite)) {
             return true;
         }
     }
