@@ -68,11 +68,14 @@ static int initialize_maze(Maze *maze, uint8_t width, uint8_t height) {
         return 1;
     }
 
-    uint8_t w = width - (width % 2 == 0);
-    uint8_t h = height - (height % 2 == 0);
+    uint8_t w = width > x_res / CELL_SIZE ? x_res / CELL_SIZE : width;
+    uint8_t h = height > y_res / CELL_SIZE ? y_res / CELL_SIZE : height;
 
-    maze->width = w > x_res / CELL_SIZE ? x_res / CELL_SIZE : w;
-    maze->height = h > y_res / CELL_SIZE ? y_res / CELL_SIZE : h;
+    w -= (w % 2 == 0);
+    h -= (h % 2 == 0);
+
+    maze->width = w;
+    maze->height = h;
 
     maze_entity **mz = (maze_entity **) malloc(maze->height * sizeof(maze_entity *));
     if (mz == NULL) {
@@ -367,6 +370,7 @@ int draw_maze(Maze *maze, uint8_t *frame_buffer) {
         }
     }
 
+    free(data);
     return 0;
 }
 
@@ -394,6 +398,8 @@ int draw_maze_outer(Maze *maze, uint8_t *frame_buffer) {
             }
         }
     }
+
+    free(data);
 
     return 0;
 }

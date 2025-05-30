@@ -108,16 +108,6 @@ Game *create_game() {
     return game;
 }
 
-void destroy_game(Game *game) {
-    if (game != NULL) {
-        if (destroy_cursor(game->cursor)) {
-            printf("destroy_game: destroy_cursor failed\n");
-            return;
-        }
-        free(game);
-    }
-}
-
 /* Statics section */
 
 // Destroy
@@ -177,6 +167,17 @@ static void state_destroy(Game *game) {
         return;
     }
     game_destroy[game->state](game);
+}
+
+void destroy_game(Game *game) {
+    if (game == NULL) {
+        printf("destroy_game: NULL pointer provided\n");
+        return;
+    }
+
+    state_destroy(game);
+    destroy_cursor(game->cursor);
+    free(game);
 }
 
 static void set_state(Game *game, State new_state) {
@@ -304,11 +305,13 @@ static void menu_keyboard_handler(Game *game) {
         set_state(game, EXIT);
         return;
     }
-    if (scan_code == KEY_W || scan_code == KEY_S || scan_code == KEY_A || scan_code == KEY_D)
+    if (scan_code == KEY_W || scan_code == KEY_S || scan_code == KEY_A || scan_code == KEY_D) {
         if (main_menu_change_button(game->menu.main_menu)) {
             printf("menu_keyboard_handler: main_menu_change_button failed\n");
             return;
         }
+    }
+    
     if (scan_code == KEY_ENTER) {
         ButtonType button = main_menu_get_button(game->menu.main_menu);
         if (button == BUTTON_PLAY) {

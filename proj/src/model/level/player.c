@@ -278,6 +278,7 @@ int player_update_speed(Player *player, uint8_t scan_code) {
     // no key pressed then idle
     if (xspeed == 0 && yspeed == 0) {
         if (player->state != PLAYER_IDLE) {
+            AnimatedSprite *old_sprite = player->animated_sprite;
             switch (player->direction) {
                 case UP:
                     player->animated_sprite = create_animated_sprite(
@@ -312,11 +313,14 @@ int player_update_speed(Player *player, uint8_t scan_code) {
                         45, 2, (xpm_map_t) player_idleD_2);
                     break;
             }
+
+            destroy_animated_sprite(old_sprite);
             player->state = PLAYER_IDLE;
         }
     } else {
         // moving, if needed update animation
         if (player->state != PLAYER_WALKING || player->direction != new_direction) {
+            AnimatedSprite *old_sprite = player->animated_sprite;
             switch (new_direction) {
                 case UP:
                     player->animated_sprite = create_animated_sprite(
@@ -351,6 +355,8 @@ int player_update_speed(Player *player, uint8_t scan_code) {
                         10, 4, (xpm_map_t) player_walkD_2, (xpm_map_t) player_walkD_3, (xpm_map_t) player_walkD_2);
                     break;
             }
+            destroy_animated_sprite(old_sprite);
+            
             player->state = PLAYER_WALKING;
             player->direction = new_direction;
         }
