@@ -1,0 +1,52 @@
+\doxysection{src/drivers/mouse/mouse.h File Reference}
+\hypertarget{mouse_8h}{}\label{mouse_8h}\index{src/drivers/mouse/mouse.h@{src/drivers/mouse/mouse.h}}
+{\ttfamily \#include "{}../keyboard/kbc.\+h"{}}\newline
+Include dependency graph for mouse.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=290pt]{mouse_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mouse_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int() \mbox{\hyperlink{group__mouse_ga20285aed4b3ef45812cd967532dd09db}{mouse\+\_\+subscribe\+\_\+int}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}bit\+\_\+no)
+\begin{DoxyCompactList}\small\item\em Subscribes and enables Mouse interrupts. \end{DoxyCompactList}\item 
+int() \mbox{\hyperlink{group__mouse_gacc3d97e33f3dea8c4b626cac59e5d5a4}{mouse\+\_\+unsubscribe\+\_\+int}} (void)
+\begin{DoxyCompactList}\small\item\em Unsubscribes Mouse interrupts. \end{DoxyCompactList}\item 
+void() \mbox{\hyperlink{group__mouse_gad8f8ec7da847f2b278554aeef9652d55}{mouse\+\_\+int\+\_\+handler}} (void)
+\begin{DoxyCompactList}\small\item\em Mouse interrupt handler. \end{DoxyCompactList}\item 
+void() \mbox{\hyperlink{group__mouse_gaed4404005e4c565ac36656307386e0ac}{mouse\+\_\+ih}} (void)
+\begin{DoxyCompactList}\small\item\em Wrapper of mouse\+\_\+int\+\_\+handler. \end{DoxyCompactList}\item 
+int() \mbox{\hyperlink{group__mouse_ga14db367991a7f78daae7b197742a432b}{mouse\+\_\+read\+\_\+packet}} (void)
+\begin{DoxyCompactList}\small\item\em Reads packets from the Mouse. \end{DoxyCompactList}\item 
+int() \mbox{\hyperlink{group__mouse_ga5d8468900d4d4e0a69c35b0b65567f8a}{mouse\+\_\+sync\+\_\+packets}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{mouse_8c_ab234504ae156fa5b250e34cbb65a7807}{packet}}, uint8\+\_\+t \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{main_8c_adbc7ba6354e62de69b8312b2ecc6a98f}{packet\+\_\+idx}}, uint8\+\_\+t \mbox{\hyperlink{mouse_8c_aa930701390a0652cab793497401d4736}{packet\+\_\+byte}})
+\begin{DoxyCompactList}\small\item\em Reads packets from the Mouse. \end{DoxyCompactList}\item 
+int() \mbox{\hyperlink{group__mouse_ga1cab3b30437d4d8a81e4627dbdc42103}{mouse\+\_\+build\+\_\+packet}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{mouse_8c_ab234504ae156fa5b250e34cbb65a7807}{packet}}, uint8\+\_\+t \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{main_8c_adbc7ba6354e62de69b8312b2ecc6a98f}{packet\+\_\+idx}}, struct \mbox{\hyperlink{mouse_8c_ab234504ae156fa5b250e34cbb65a7807}{packet}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{main_8c_a26e83eca70c2b9169fbbb0eac7e32e32}{pp}})
+\begin{DoxyCompactList}\small\item\em Builds packets read from the Mouse. \end{DoxyCompactList}\item 
+int() \mbox{\hyperlink{group__mouse_gae8beed6c3873a9c2d3f929061ee61d90}{mouse\+\_\+set\+\_\+data\+\_\+reporting}} (bool b)
+\begin{DoxyCompactList}\small\item\em Sets/\+Unsets data reporting. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int32\+\_\+t \mbox{\hyperlink{mouse_8h_a99f6dd9e05ab5b5e95e9083b0c4ca79d}{kbd\+\_\+subscription\+\_\+id}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{mouse_8h_a99f6dd9e05ab5b5e95e9083b0c4ca79d}\label{mouse_8h_a99f6dd9e05ab5b5e95e9083b0c4ca79d} 
+\index{mouse.h@{mouse.h}!kbd\_subscription\_id@{kbd\_subscription\_id}}
+\index{kbd\_subscription\_id@{kbd\_subscription\_id}!mouse.h@{mouse.h}}
+\doxysubsubsection{\texorpdfstring{kbd\_subscription\_id}{kbd\_subscription\_id}}
+{\footnotesize\ttfamily int32\+\_\+t kbd\+\_\+subscription\+\_\+id\hspace{0.3cm}{\ttfamily [extern]}}
+

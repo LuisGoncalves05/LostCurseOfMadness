@@ -1,0 +1,37 @@
+\doxysection{game\+\_\+over.\+h}
+\hypertarget{game__over_8h_source}{}\label{game__over_8h_source}\index{src/model/menu/game\_over.h@{src/model/menu/game\_over.h}}
+\mbox{\hyperlink{game__over_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ GAME\_OVER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ GAME\_OVER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <lcom/lcf.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}assets/xpm/game\_over/exit\_button.xpm"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}assets/xpm/game\_over/exit\_button\_selected.xpm"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}assets/xpm/game\_over/game\_over.xpm"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}assets/xpm/game\_over/menu\_button.xpm"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}assets/xpm/game\_over/menu\_button\_selected.xpm"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{button_8h}{button.h}}"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{sprite_8h}{model/utils/sprite.h}}"{}}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{extern}\ uint16\_t\ \mbox{\hyperlink{game__over_8h_a8c698380dc32cd8b5a19a84da1ab2ad9}{x\_res}};\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{extern}\ uint16\_t\ \mbox{\hyperlink{game__over_8h_a1188c1e5fe37db7b55bdad91f71e26c0}{y\_res}};\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structGameOver}{GameOver}}\ \mbox{\hyperlink{structGameOver}{GameOver}};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00030\ \mbox{\hyperlink{structGameOver}{GameOver}}\ *\mbox{\hyperlink{game__over_8h_a39519e291a04b6e4a139863076934c24}{create\_game\_over}}();}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00037\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{game__over_8h_ad219eb49d3a49c46606bfb35069b66ce}{destroy\_game\_over}}(\mbox{\hyperlink{structGameOver}{GameOver}}\ *game\_over);}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00045\ \mbox{\hyperlink{button_8h_ae2d5c50fae96a83cc4f5974af78e6943}{ButtonType}}\ \mbox{\hyperlink{game__over_8h_a88988718d51865e3b4076d9998d37f70}{game\_over\_get\_button}}(\mbox{\hyperlink{structGameOver}{GameOver}}\ *game\_over);}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00052\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{game__over_8h_a73ad500e6399d93a106367a242ad777a}{game\_over\_change\_button}}(\mbox{\hyperlink{structGameOver}{GameOver}}\ *game\_over);}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00062\ \mbox{\hyperlink{button_8h_ae2d5c50fae96a83cc4f5974af78e6943}{ButtonType}}\ \mbox{\hyperlink{game__over_8h_af88c58ad9d2726b540489a7cb0502ae4}{game\_over\_click\_handler}}(\mbox{\hyperlink{structGameOver}{GameOver}}\ *game\_over,\ uint16\_t\ x,\ uint16\_t\ y);}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00070\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{game__over_8h_a1ebaae6c79f3bb086139ab173c6194a8}{draw\_game\_over}}(\mbox{\hyperlink{structGameOver}{GameOver}}\ *game\_over,\ uint8\_t\ *frame\_buffer);}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ GAME\_OVER\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

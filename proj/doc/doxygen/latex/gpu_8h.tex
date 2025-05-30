@@ -1,0 +1,109 @@
+\doxysection{src/drivers/video/gpu.h File Reference}
+\hypertarget{gpu_8h}{}\label{gpu_8h}\index{src/drivers/video/gpu.h@{src/drivers/video/gpu.h}}
+{\ttfamily \#include $<$lcom/lcf.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+Include dependency graph for gpu.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=216pt]{gpu_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{gpu_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{group__gpu_ga3312425e69ec8a661be936cfb6a0b447}{LINEAR\+\_\+\+FRAMEBUFFER}}~BIT(14)
+\item 
+\#define \mbox{\hyperlink{group__gpu_ga3f50ba498d7dc2b629c51723073d44f0}{VERTICAL\+\_\+\+RETRACE}}~0x0080
+\item 
+\#define \mbox{\hyperlink{group__gpu_ga9d120d89092a608ee5baf2000c0cd5af}{VBE}}~0x10
+\item 
+\#define \mbox{\hyperlink{group__gpu_ga1557992a96abd6a3b57d591e562954a6}{DIRECT\+\_\+\+MODE}}~6
+\item 
+\#define \mbox{\hyperlink{group__gpu_ga61ae6f1ae401c962137f2ae1d2a158df}{BACKGROUND\+\_\+\+COLOR}}~0
+\end{DoxyCompactItemize}
+\begin{Indent}\textbf{ VBE BIOS Function Codes}\par
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{group__gpu_gab3ae6cab04af0d37663adf157287f987}{VBE\+\_\+\+CONTROLLER\+\_\+\+INFO}}~0x4\+F00
+\item 
+\#define \mbox{\hyperlink{group__gpu_ga2ecbf8f92f9322fedec91461747c4843}{VBE\+\_\+\+MODE\+\_\+\+INFO}}~0x4\+F01
+\item 
+\#define \mbox{\hyperlink{group__gpu_gab1daaa52e370c2e7c04dd389eacf4e73}{VBE\+\_\+\+MODE\+\_\+\+SET}}~0x4\+F02
+\item 
+\#define \mbox{\hyperlink{group__gpu_ga6e2673bdce19546528658717e42f045b}{VBE\+\_\+\+DISPLAY\+\_\+\+START\+\_\+\+SET}}~0x4\+F07
+\item 
+\#define \mbox{\hyperlink{group__gpu_gaae8eb6db344d27a4a8b2dbe111f5d514}{BIOS\+\_\+\+VIDEO\+\_\+\+MODE\+\_\+\+SET}}~0x0003
+\item 
+\#define \mbox{\hyperlink{group__gpu_gac4d721714eb997cb83831b97296c009f}{BIOS\+\_\+\+VIDEOCARD\+\_\+\+SERV}}~0x10
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Supported VBE Modes}\par
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{group__gpu_ga7de8dd99bfb999cbba85fcd17adbedd0}{VBE\+\_\+\+MODE1}}~0x105
+\item 
+\#define \mbox{\hyperlink{group__gpu_ga17ac8561108eed5bf35db00858433774}{VBE\+\_\+\+MODE2}}~0x110
+\item 
+\#define \mbox{\hyperlink{group__gpu_ga787b754323c5dab22a3793453b294293}{VBE\+\_\+\+MODE3}}~0x115
+\item 
+\#define \mbox{\hyperlink{group__gpu_gaba022136887a9b7c7764f39876616dbd}{VBE\+\_\+\+MODE4}}~0x11A
+\item 
+\#define \mbox{\hyperlink{group__gpu_gac3ebb6e3dc9854ce46250ada5142922a}{VBE\+\_\+\+MODE5}}~0x14C
+\item 
+\#define \mbox{\hyperlink{group__gpu_gae753debee995e8ddb7d31a8f55c398c6}{VBE\+\_\+\+MODE6}}~0x107
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ VBE Return Status Codes}\par
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{group__gpu_gaeee98fecb76ec09ac777f97dc872d550}{CALL\+\_\+\+FAIL}}~0x01
+\item 
+\#define \mbox{\hyperlink{group__gpu_gaabe280b1c2d2b83c931b5af0c5c83bcd}{UNSUPPORTED\+\_\+\+FUNCTION}}~0x02
+\item 
+\#define \mbox{\hyperlink{group__gpu_ga94969747a647bc3309c40344ac68032f}{INVALID\+\_\+\+FUNCTION}}~0x03
+\end{DoxyCompactItemize}
+\end{Indent}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int() \mbox{\hyperlink{group__gpu_gaa2ac3ebc7870950bab4c0fc90f113155}{set\+\_\+graphic\+\_\+mode}} (uint16\+\_\+t mode)
+\begin{DoxyCompactList}\small\item\em Sets the VBE graphics mode. \end{DoxyCompactList}\item 
+int() \mbox{\hyperlink{group__gpu_gac7aece56d0d111161c91b4b9cddfaf40}{set\+\_\+frame\+\_\+buffers}} (uint16\+\_\+t mode)
+\begin{DoxyCompactList}\small\item\em Initializes the frame buffers. \end{DoxyCompactList}\item 
+uint8\+\_\+t \texorpdfstring{$\ast$}{*}() \mbox{\hyperlink{group__gpu_gaaa50b3bc2107baef0cf60d5df69b210e}{get\+\_\+position}} (uint16\+\_\+t x, uint16\+\_\+t y, uint8\+\_\+t \texorpdfstring{$\ast$}{*}frame\+\_\+buffer)
+\begin{DoxyCompactList}\small\item\em Returns a pointer to the video memory location of a specific pixel. \end{DoxyCompactList}\item 
+int() \mbox{\hyperlink{group__gpu_ga977f69173a6e3f6a29bac3bc8c979b3b}{vga\+\_\+draw\+\_\+pixel}} (uint16\+\_\+t x, uint16\+\_\+t y, uint32\+\_\+t color, uint8\+\_\+t \texorpdfstring{$\ast$}{*}frame\+\_\+buffer)
+\begin{DoxyCompactList}\small\item\em Draws a single pixel of a specified color at (x, y). \end{DoxyCompactList}\item 
+int() \mbox{\hyperlink{group__gpu_gaa85985050e66b912d4d79e5473f5ce64}{vga\+\_\+draw\+\_\+hline}} (uint16\+\_\+t x, uint16\+\_\+t y, uint16\+\_\+t len, uint32\+\_\+t color, uint8\+\_\+t \texorpdfstring{$\ast$}{*}frame\+\_\+buffer)
+\begin{DoxyCompactList}\small\item\em Draws a horizontal line of a specified color. \end{DoxyCompactList}\item 
+int() \mbox{\hyperlink{group__gpu_ga3d6e0aee4bb5869ca78545150957562d}{vga\+\_\+draw\+\_\+rectangle}} (uint16\+\_\+t x, uint16\+\_\+t y, uint16\+\_\+t width, uint16\+\_\+t height, uint32\+\_\+t color, uint8\+\_\+t \texorpdfstring{$\ast$}{*}frame\+\_\+buffer)
+\begin{DoxyCompactList}\small\item\em Draws a filled rectangle of a specified color. \end{DoxyCompactList}\item 
+uint32\+\_\+t() \mbox{\hyperlink{group__gpu_gaf882fe6872cbcffaea9a7abdb6cd131e}{direct\+\_\+mode}} (uint16\+\_\+t i, uint16\+\_\+t j, uint8\+\_\+t step, uint32\+\_\+t first)
+\begin{DoxyCompactList}\small\item\em Calculates the color for a rectangle in direct color mode. \end{DoxyCompactList}\item 
+uint32\+\_\+t() \mbox{\hyperlink{group__gpu_ga637e88062e9ad734e410b79592a8cf82}{indexed\+\_\+mode}} (uint8\+\_\+t no\+\_\+rectangles, uint16\+\_\+t i, uint16\+\_\+t j, uint8\+\_\+t step, uint32\+\_\+t first)
+\begin{DoxyCompactList}\small\item\em Calculates the color for a rectangle in indexed color mode. \end{DoxyCompactList}\item 
+int() \mbox{\hyperlink{group__gpu_gaa11ffc7226e6fc0f1cb3b7c4308ffff5}{vga\+\_\+draw\+\_\+xpm}} (xpm\+\_\+map\+\_\+t xpm, uint16\+\_\+t x, uint16\+\_\+t y, uint8\+\_\+t \texorpdfstring{$\ast$}{*}frame\+\_\+buffer)
+\begin{DoxyCompactList}\small\item\em Draws an XPM image at the specified coordinates. \end{DoxyCompactList}\item 
+int() \mbox{\hyperlink{group__gpu_gabae175d4c9f748b52f41dca9cdd97c09}{vga\+\_\+draw\+\_\+loaded\+\_\+xpm}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}xpm\+\_\+data, uint16\+\_\+t x, uint16\+\_\+t y, uint16\+\_\+t width, uint16\+\_\+t height, uint8\+\_\+t \texorpdfstring{$\ast$}{*}frame\+\_\+buffer)
+\begin{DoxyCompactList}\small\item\em Draws a preloaded XPM image at the specified coordinates. \end{DoxyCompactList}\item 
+int() \mbox{\hyperlink{group__gpu_ga5440ee2a33422daec40d52c856f06f0d}{clear\+\_\+frame\+\_\+buffer}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}frame\+\_\+buffer, uint16\+\_\+t color)
+\begin{DoxyCompactList}\small\item\em Clears the given frame buffer with the specified color. \end{DoxyCompactList}\item 
+void() \mbox{\hyperlink{group__gpu_ga158f5f764abb0712e5ddb77378f130b8}{set\+\_\+display\+\_\+start}} ()
+\begin{DoxyCompactList}\small\item\em Sets the video memory display start to point to a new buffer (page flipping). \end{DoxyCompactList}\item 
+void() \mbox{\hyperlink{group__gpu_ga6c42ab5cf5efa4bebdf1d551d9b4b992}{vga\+\_\+flip\+\_\+pages}} ()
+\begin{DoxyCompactList}\small\item\em Swaps the main and secondary frame buffers. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{group__gpu_gae1dde88f49a15ac8b44d187ed1a2c2f4}{interrupt\+\_\+counter}}
+\end{DoxyCompactItemize}

@@ -1,0 +1,437 @@
+\doxysection{src/model/level/mob.h File Reference}
+\hypertarget{mob_8h}{}\label{mob_8h}\index{src/model/level/mob.h@{src/model/level/mob.h}}
+{\ttfamily \#include $<$lcom/lcf.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include "{}assets/xpm/level/mob/attacking.\+xpm"{}}\newline
+{\ttfamily \#include "{}assets/xpm/level/mob/idle.\+xpm"{}}\newline
+{\ttfamily \#include "{}drivers/video/gpu.\+h"{}}\newline
+{\ttfamily \#include "{}model/utils/animated\+\_\+sprite.\+h"{}}\newline
+{\ttfamily \#include "{}model/utils/sprite.\+h"{}}\newline
+{\ttfamily \#include "{}config.\+h"{}}\newline
+Include dependency graph for mob.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mob_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mob_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{mob_8h_a4218fcd6d0f3a0f024e971fe43033eee}{MOB\+\_\+\+RADIUS}}~250
+\item 
+\#define \mbox{\hyperlink{mob_8h_a7cba8052c113cf641e4d735452a17afe}{MOB\+\_\+\+MAX\+\_\+\+SPEED}}~5
+\item 
+\#define \mbox{\hyperlink{mob_8h_a883c84ec6965a3cb689452ccd13a8d18}{MOB\+\_\+\+HEALTH}}~1
+\item 
+\#define \mbox{\hyperlink{mob_8h_ad0a2d55d022e8e1a1b5b8e14e690970f}{MOB\+\_\+\+DEFAULT\+\_\+\+SPEED}}~2
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{structMob}{Mob}} \mbox{\hyperlink{mob_8h_a69ca8896e886ae87cf658a5530eedcc7}{Mob}}
+\begin{DoxyCompactList}\small\item\em Represents a single \doxylink{structMob}{Mob} instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{mob_8h_a4abc2498f19bcbe035b7b524e27fbb29}{Mob\+State}} \{ \mbox{\hyperlink{mob_8h_a4abc2498f19bcbe035b7b524e27fbb29ad848918cd55b19a92a78ad489c951c6d}{MOB\+\_\+\+IDLE}}
+, \mbox{\hyperlink{mob_8h_a4abc2498f19bcbe035b7b524e27fbb29a5446b593ba3bc6940cfb329c7b57addc}{MOB\+\_\+\+ATTACKING}}
+, \mbox{\hyperlink{mob_8h_a4abc2498f19bcbe035b7b524e27fbb29afc534363e0cf16835c359cb71b79d8da}{MOB\+\_\+\+DEAD}}
+ \}
+\begin{DoxyCompactList}\small\item\em Possible states of the mob for animations and logic. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{mob_8h_aa921782781644f21e848d193bf5e4b4d}{create\+\_\+mob}} (int16\+\_\+t x, int16\+\_\+t y)
+\begin{DoxyCompactList}\small\item\em Creates a new mob instance with the specified sprite. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{mob_8h_a6dffce9e1a708b2cd169d9590b5600a5}{destroy\+\_\+mob}} (\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}mob)
+\begin{DoxyCompactList}\small\item\em Frees the memory associated with the mob. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structSprite}{Sprite}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{mob_8h_a5381b01237f48cad5a023ac326d7df52}{mob\+\_\+get\+\_\+sprite}} (\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}mob)
+\begin{DoxyCompactList}\small\item\em Returns the \doxylink{structSprite}{Sprite} associated with the given mob. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{mob_8h_abd025ff3ab325afc40e0f36e7e0ffac6}{mob\+\_\+set\+\_\+sprite}} (\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}mob, \mbox{\hyperlink{structSprite}{Sprite}} \texorpdfstring{$\ast$}{*}sprite)
+\begin{DoxyCompactList}\small\item\em Sets the mob\textquotesingle{}s sprite to a new one. \end{DoxyCompactList}\item 
+int16\+\_\+t \mbox{\hyperlink{mob_8h_a2e8c8741f20fe73527d20556b00f73b2}{mob\+\_\+get\+\_\+x}} (\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}mob)
+\begin{DoxyCompactList}\small\item\em Returns the x-\/coordinate of the mob. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{mob_8h_a14af98d1885c2028b43f050352ae058f}{mob\+\_\+set\+\_\+x}} (\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}mob, int16\+\_\+t x)
+\begin{DoxyCompactList}\small\item\em Sets the x of the mob. \end{DoxyCompactList}\item 
+int16\+\_\+t \mbox{\hyperlink{mob_8h_afca567806abf3afbd4e6000c0cc49c5b}{mob\+\_\+get\+\_\+y}} (\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}mob)
+\begin{DoxyCompactList}\small\item\em Returns the y-\/coordinate of the mob. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{mob_8h_a25413b387f3e96e5584f632b7ad349dd}{mob\+\_\+set\+\_\+y}} (\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}mob, int16\+\_\+t y)
+\begin{DoxyCompactList}\small\item\em Sets the yx of the mob. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{mob_8h_a50ae69e2789f7fbf59bbb0621eb1bef0}{mob\+\_\+get\+\_\+xspeed}} (\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}mob)
+\begin{DoxyCompactList}\small\item\em Returns the x-\/speed of the mob. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{mob_8h_ad27dcc7982dda3a018a9ccb05e162dfd}{mob\+\_\+get\+\_\+yspeed}} (\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}mob)
+\begin{DoxyCompactList}\small\item\em Returns the y-\/speed of the mob. \end{DoxyCompactList}\item 
+unsigned char \mbox{\hyperlink{mob_8h_a82f8f6913b1d97888a9cd919da98932b}{mob\+\_\+get\+\_\+health}} (\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}mob)
+\begin{DoxyCompactList}\small\item\em Returns the current health of the mob. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{mob_8h_ab8a466bb4e41da62083c0198214c3a35}{mob\+\_\+set\+\_\+health}} (\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}mob, unsigned char health)
+\begin{DoxyCompactList}\small\item\em Sets the current health of the mob. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{mob_8h_a60ee26ae92c918077c10d405911585df}{mob\+\_\+get\+\_\+max\+\_\+speed}} (\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}mob)
+\begin{DoxyCompactList}\small\item\em Returns the maximum speed of the mob. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{mob_8h_a4abc2498f19bcbe035b7b524e27fbb29}{Mob\+State}} \mbox{\hyperlink{mob_8h_a80d30d94990fe35374ca68e79c14d7c9}{mob\+\_\+get\+\_\+state}} (\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}mob)
+\begin{DoxyCompactList}\small\item\em Returns the current state of the mob. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{mob_8h_a79dbfd94639e48f4fd6da40e7c6d068c}{mob\+\_\+update\+\_\+state}} (\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}mob, int16\+\_\+t mob\+\_\+cx, int16\+\_\+t mob\+\_\+cy)
+\begin{DoxyCompactList}\small\item\em Updates the state of the mob based on its context. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{mob_8h_a6800ec2eff68cf927f83440d98783cb7}{draw\+\_\+mob}} (\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}mob, uint8\+\_\+t \texorpdfstring{$\ast$}{*}frame\+\_\+buffer)
+\begin{DoxyCompactList}\small\item\em Renders the mob on the screen. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{mob_8h_ad0a2d55d022e8e1a1b5b8e14e690970f}\label{mob_8h_ad0a2d55d022e8e1a1b5b8e14e690970f} 
+\index{mob.h@{mob.h}!MOB\_DEFAULT\_SPEED@{MOB\_DEFAULT\_SPEED}}
+\index{MOB\_DEFAULT\_SPEED@{MOB\_DEFAULT\_SPEED}!mob.h@{mob.h}}
+\doxysubsubsection{\texorpdfstring{MOB\_DEFAULT\_SPEED}{MOB\_DEFAULT\_SPEED}}
+{\footnotesize\ttfamily \#define MOB\+\_\+\+DEFAULT\+\_\+\+SPEED~2}
+
+Default speed of the mob \Hypertarget{mob_8h_a883c84ec6965a3cb689452ccd13a8d18}\label{mob_8h_a883c84ec6965a3cb689452ccd13a8d18} 
+\index{mob.h@{mob.h}!MOB\_HEALTH@{MOB\_HEALTH}}
+\index{MOB\_HEALTH@{MOB\_HEALTH}!mob.h@{mob.h}}
+\doxysubsubsection{\texorpdfstring{MOB\_HEALTH}{MOB\_HEALTH}}
+{\footnotesize\ttfamily \#define MOB\+\_\+\+HEALTH~1}
+
+Health of the mob \Hypertarget{mob_8h_a7cba8052c113cf641e4d735452a17afe}\label{mob_8h_a7cba8052c113cf641e4d735452a17afe} 
+\index{mob.h@{mob.h}!MOB\_MAX\_SPEED@{MOB\_MAX\_SPEED}}
+\index{MOB\_MAX\_SPEED@{MOB\_MAX\_SPEED}!mob.h@{mob.h}}
+\doxysubsubsection{\texorpdfstring{MOB\_MAX\_SPEED}{MOB\_MAX\_SPEED}}
+{\footnotesize\ttfamily \#define MOB\+\_\+\+MAX\+\_\+\+SPEED~5}
+
+Maximum speed of the mob \Hypertarget{mob_8h_a4218fcd6d0f3a0f024e971fe43033eee}\label{mob_8h_a4218fcd6d0f3a0f024e971fe43033eee} 
+\index{mob.h@{mob.h}!MOB\_RADIUS@{MOB\_RADIUS}}
+\index{MOB\_RADIUS@{MOB\_RADIUS}!mob.h@{mob.h}}
+\doxysubsubsection{\texorpdfstring{MOB\_RADIUS}{MOB\_RADIUS}}
+{\footnotesize\ttfamily \#define MOB\+\_\+\+RADIUS~250}
+
+Radius of the mob\textquotesingle{}s field of view 
+
+\doxysubsection{Typedef Documentation}
+\Hypertarget{mob_8h_a69ca8896e886ae87cf658a5530eedcc7}\label{mob_8h_a69ca8896e886ae87cf658a5530eedcc7} 
+\index{mob.h@{mob.h}!Mob@{Mob}}
+\index{Mob@{Mob}!mob.h@{mob.h}}
+\doxysubsubsection{\texorpdfstring{Mob}{Mob}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structMob}{Mob}} \mbox{\hyperlink{structMob}{Mob}}}
+
+
+
+Represents a single \doxylink{structMob}{Mob} instance. 
+
+The \doxylink{structMob}{Mob} struct is opaque. 
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{mob_8h_a4abc2498f19bcbe035b7b524e27fbb29}\label{mob_8h_a4abc2498f19bcbe035b7b524e27fbb29} 
+\index{mob.h@{mob.h}!MobState@{MobState}}
+\index{MobState@{MobState}!mob.h@{mob.h}}
+\doxysubsubsection{\texorpdfstring{MobState}{MobState}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{mob_8h_a4abc2498f19bcbe035b7b524e27fbb29}{Mob\+State}}}
+
+
+
+Possible states of the mob for animations and logic. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MOB\_IDLE@{MOB\_IDLE}!mob.h@{mob.h}}\index{mob.h@{mob.h}!MOB\_IDLE@{MOB\_IDLE}}}\Hypertarget{mob_8h_a4abc2498f19bcbe035b7b524e27fbb29ad848918cd55b19a92a78ad489c951c6d}\label{mob_8h_a4abc2498f19bcbe035b7b524e27fbb29ad848918cd55b19a92a78ad489c951c6d} 
+MOB\+\_\+\+IDLE&\doxylink{structMob}{Mob} is idle \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MOB\_ATTACKING@{MOB\_ATTACKING}!mob.h@{mob.h}}\index{mob.h@{mob.h}!MOB\_ATTACKING@{MOB\_ATTACKING}}}\Hypertarget{mob_8h_a4abc2498f19bcbe035b7b524e27fbb29a5446b593ba3bc6940cfb329c7b57addc}\label{mob_8h_a4abc2498f19bcbe035b7b524e27fbb29a5446b593ba3bc6940cfb329c7b57addc} 
+MOB\+\_\+\+ATTACKING&\doxylink{structMob}{Mob} is attacking \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MOB\_DEAD@{MOB\_DEAD}!mob.h@{mob.h}}\index{mob.h@{mob.h}!MOB\_DEAD@{MOB\_DEAD}}}\Hypertarget{mob_8h_a4abc2498f19bcbe035b7b524e27fbb29afc534363e0cf16835c359cb71b79d8da}\label{mob_8h_a4abc2498f19bcbe035b7b524e27fbb29afc534363e0cf16835c359cb71b79d8da} 
+MOB\+\_\+\+DEAD&\doxylink{structMob}{Mob} is dying \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{mob_8h_aa921782781644f21e848d193bf5e4b4d}\label{mob_8h_aa921782781644f21e848d193bf5e4b4d} 
+\index{mob.h@{mob.h}!create\_mob@{create\_mob}}
+\index{create\_mob@{create\_mob}!mob.h@{mob.h}}
+\doxysubsubsection{\texorpdfstring{create\_mob()}{create\_mob()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*} create\+\_\+mob (\begin{DoxyParamCaption}\item[{int16\+\_\+t}]{x,  }\item[{int16\+\_\+t}]{y }\end{DoxyParamCaption})}
+
+
+
+Creates a new mob instance with the specified sprite. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sprite} & Pointer to the \doxylink{structSprite}{Sprite} structure used for the mob. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the created \doxylink{structMob}{Mob} structure. 
+\end{DoxyReturn}
+\Hypertarget{mob_8h_a6dffce9e1a708b2cd169d9590b5600a5}\label{mob_8h_a6dffce9e1a708b2cd169d9590b5600a5} 
+\index{mob.h@{mob.h}!destroy\_mob@{destroy\_mob}}
+\index{destroy\_mob@{destroy\_mob}!mob.h@{mob.h}}
+\doxysubsubsection{\texorpdfstring{destroy\_mob()}{destroy\_mob()}}
+{\footnotesize\ttfamily void destroy\+\_\+mob (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}}]{mob }\end{DoxyParamCaption})}
+
+
+
+Frees the memory associated with the mob. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mob} & Pointer to the \doxylink{structMob}{Mob} structure to destroy. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{mob_8h_a6800ec2eff68cf927f83440d98783cb7}\label{mob_8h_a6800ec2eff68cf927f83440d98783cb7} 
+\index{mob.h@{mob.h}!draw\_mob@{draw\_mob}}
+\index{draw\_mob@{draw\_mob}!mob.h@{mob.h}}
+\doxysubsubsection{\texorpdfstring{draw\_mob()}{draw\_mob()}}
+{\footnotesize\ttfamily void draw\+\_\+mob (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}}]{mob,  }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{frame\+\_\+buffer }\end{DoxyParamCaption})}
+
+
+
+Renders the mob on the screen. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mob} & Pointer to the \doxylink{structMob}{Mob} structure. \\
+\hline
+{\em frame\+\_\+buffer} & Pointer to the frame buffer. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{mob_8h_a82f8f6913b1d97888a9cd919da98932b}\label{mob_8h_a82f8f6913b1d97888a9cd919da98932b} 
+\index{mob.h@{mob.h}!mob\_get\_health@{mob\_get\_health}}
+\index{mob\_get\_health@{mob\_get\_health}!mob.h@{mob.h}}
+\doxysubsubsection{\texorpdfstring{mob\_get\_health()}{mob\_get\_health()}}
+{\footnotesize\ttfamily unsigned char mob\+\_\+get\+\_\+health (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}}]{mob }\end{DoxyParamCaption})}
+
+
+
+Returns the current health of the mob. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mob} & Pointer to the \doxylink{structMob}{Mob} structure. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The mob\textquotesingle{}s health. 
+\end{DoxyReturn}
+\Hypertarget{mob_8h_a60ee26ae92c918077c10d405911585df}\label{mob_8h_a60ee26ae92c918077c10d405911585df} 
+\index{mob.h@{mob.h}!mob\_get\_max\_speed@{mob\_get\_max\_speed}}
+\index{mob\_get\_max\_speed@{mob\_get\_max\_speed}!mob.h@{mob.h}}
+\doxysubsubsection{\texorpdfstring{mob\_get\_max\_speed()}{mob\_get\_max\_speed()}}
+{\footnotesize\ttfamily int mob\+\_\+get\+\_\+max\+\_\+speed (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}}]{mob }\end{DoxyParamCaption})}
+
+
+
+Returns the maximum speed of the mob. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mob} & Pointer to the \doxylink{structMob}{Mob} structure. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The mob\textquotesingle{}s maximum speed. 
+\end{DoxyReturn}
+\Hypertarget{mob_8h_a5381b01237f48cad5a023ac326d7df52}\label{mob_8h_a5381b01237f48cad5a023ac326d7df52} 
+\index{mob.h@{mob.h}!mob\_get\_sprite@{mob\_get\_sprite}}
+\index{mob\_get\_sprite@{mob\_get\_sprite}!mob.h@{mob.h}}
+\doxysubsubsection{\texorpdfstring{mob\_get\_sprite()}{mob\_get\_sprite()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structSprite}{Sprite}} \texorpdfstring{$\ast$}{*} mob\+\_\+get\+\_\+sprite (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}}]{mob }\end{DoxyParamCaption})}
+
+
+
+Returns the \doxylink{structSprite}{Sprite} associated with the given mob. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mob} & Pointer to the \doxylink{structMob}{Mob} structure. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the \doxylink{structSprite}{Sprite} structure. 
+\end{DoxyReturn}
+\Hypertarget{mob_8h_a80d30d94990fe35374ca68e79c14d7c9}\label{mob_8h_a80d30d94990fe35374ca68e79c14d7c9} 
+\index{mob.h@{mob.h}!mob\_get\_state@{mob\_get\_state}}
+\index{mob\_get\_state@{mob\_get\_state}!mob.h@{mob.h}}
+\doxysubsubsection{\texorpdfstring{mob\_get\_state()}{mob\_get\_state()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{mob_8h_a4abc2498f19bcbe035b7b524e27fbb29}{Mob\+State}} mob\+\_\+get\+\_\+state (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}}]{mob }\end{DoxyParamCaption})}
+
+
+
+Returns the current state of the mob. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mob} & Pointer to the \doxylink{structMob}{Mob} structure. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Current mob state. 
+\end{DoxyReturn}
+\Hypertarget{mob_8h_a2e8c8741f20fe73527d20556b00f73b2}\label{mob_8h_a2e8c8741f20fe73527d20556b00f73b2} 
+\index{mob.h@{mob.h}!mob\_get\_x@{mob\_get\_x}}
+\index{mob\_get\_x@{mob\_get\_x}!mob.h@{mob.h}}
+\doxysubsubsection{\texorpdfstring{mob\_get\_x()}{mob\_get\_x()}}
+{\footnotesize\ttfamily int16\+\_\+t mob\+\_\+get\+\_\+x (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}}]{mob }\end{DoxyParamCaption})}
+
+
+
+Returns the x-\/coordinate of the mob. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mob} & Pointer to the \doxylink{structMob}{Mob} structure. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The mob\textquotesingle{}s x-\/coordinate. 
+\end{DoxyReturn}
+\Hypertarget{mob_8h_a50ae69e2789f7fbf59bbb0621eb1bef0}\label{mob_8h_a50ae69e2789f7fbf59bbb0621eb1bef0} 
+\index{mob.h@{mob.h}!mob\_get\_xspeed@{mob\_get\_xspeed}}
+\index{mob\_get\_xspeed@{mob\_get\_xspeed}!mob.h@{mob.h}}
+\doxysubsubsection{\texorpdfstring{mob\_get\_xspeed()}{mob\_get\_xspeed()}}
+{\footnotesize\ttfamily double mob\+\_\+get\+\_\+xspeed (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}}]{mob }\end{DoxyParamCaption})}
+
+
+
+Returns the x-\/speed of the mob. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mob} & Pointer to the \doxylink{structMob}{Mob} structure. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The mob\textquotesingle{}s x-\/speed. 
+\end{DoxyReturn}
+\Hypertarget{mob_8h_afca567806abf3afbd4e6000c0cc49c5b}\label{mob_8h_afca567806abf3afbd4e6000c0cc49c5b} 
+\index{mob.h@{mob.h}!mob\_get\_y@{mob\_get\_y}}
+\index{mob\_get\_y@{mob\_get\_y}!mob.h@{mob.h}}
+\doxysubsubsection{\texorpdfstring{mob\_get\_y()}{mob\_get\_y()}}
+{\footnotesize\ttfamily int16\+\_\+t mob\+\_\+get\+\_\+y (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}}]{mob }\end{DoxyParamCaption})}
+
+
+
+Returns the y-\/coordinate of the mob. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mob} & Pointer to the \doxylink{structMob}{Mob} structure. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The mob\textquotesingle{}s y-\/coordinate. 
+\end{DoxyReturn}
+\Hypertarget{mob_8h_ad27dcc7982dda3a018a9ccb05e162dfd}\label{mob_8h_ad27dcc7982dda3a018a9ccb05e162dfd} 
+\index{mob.h@{mob.h}!mob\_get\_yspeed@{mob\_get\_yspeed}}
+\index{mob\_get\_yspeed@{mob\_get\_yspeed}!mob.h@{mob.h}}
+\doxysubsubsection{\texorpdfstring{mob\_get\_yspeed()}{mob\_get\_yspeed()}}
+{\footnotesize\ttfamily double mob\+\_\+get\+\_\+yspeed (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}}]{mob }\end{DoxyParamCaption})}
+
+
+
+Returns the y-\/speed of the mob. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mob} & Pointer to the \doxylink{structMob}{Mob} structure. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The mob\textquotesingle{}s y-\/speed. 
+\end{DoxyReturn}
+\Hypertarget{mob_8h_ab8a466bb4e41da62083c0198214c3a35}\label{mob_8h_ab8a466bb4e41da62083c0198214c3a35} 
+\index{mob.h@{mob.h}!mob\_set\_health@{mob\_set\_health}}
+\index{mob\_set\_health@{mob\_set\_health}!mob.h@{mob.h}}
+\doxysubsubsection{\texorpdfstring{mob\_set\_health()}{mob\_set\_health()}}
+{\footnotesize\ttfamily void mob\+\_\+set\+\_\+health (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}}]{mob,  }\item[{unsigned char}]{health }\end{DoxyParamCaption})}
+
+
+
+Sets the current health of the mob. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mob} & Pointer to the \doxylink{structMob}{Mob} structure. \\
+\hline
+{\em health} & New health value. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{mob_8h_abd025ff3ab325afc40e0f36e7e0ffac6}\label{mob_8h_abd025ff3ab325afc40e0f36e7e0ffac6} 
+\index{mob.h@{mob.h}!mob\_set\_sprite@{mob\_set\_sprite}}
+\index{mob\_set\_sprite@{mob\_set\_sprite}!mob.h@{mob.h}}
+\doxysubsubsection{\texorpdfstring{mob\_set\_sprite()}{mob\_set\_sprite()}}
+{\footnotesize\ttfamily void mob\+\_\+set\+\_\+sprite (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}}]{mob,  }\item[{\mbox{\hyperlink{structSprite}{Sprite}} \texorpdfstring{$\ast$}{*}}]{sprite }\end{DoxyParamCaption})}
+
+
+
+Sets the mob\textquotesingle{}s sprite to a new one. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mob} & Pointer to the \doxylink{structMob}{Mob} structure. \\
+\hline
+{\em sprite} & Pointer to the new \doxylink{structSprite}{Sprite}. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{mob_8h_a14af98d1885c2028b43f050352ae058f}\label{mob_8h_a14af98d1885c2028b43f050352ae058f} 
+\index{mob.h@{mob.h}!mob\_set\_x@{mob\_set\_x}}
+\index{mob\_set\_x@{mob\_set\_x}!mob.h@{mob.h}}
+\doxysubsubsection{\texorpdfstring{mob\_set\_x()}{mob\_set\_x()}}
+{\footnotesize\ttfamily void mob\+\_\+set\+\_\+x (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}}]{mob,  }\item[{int16\+\_\+t}]{x }\end{DoxyParamCaption})}
+
+
+
+Sets the x of the mob. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mob} & Pointer to the \doxylink{structMob}{Mob} structure. \\
+\hline
+{\em x} & New x value. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{mob_8h_a25413b387f3e96e5584f632b7ad349dd}\label{mob_8h_a25413b387f3e96e5584f632b7ad349dd} 
+\index{mob.h@{mob.h}!mob\_set\_y@{mob\_set\_y}}
+\index{mob\_set\_y@{mob\_set\_y}!mob.h@{mob.h}}
+\doxysubsubsection{\texorpdfstring{mob\_set\_y()}{mob\_set\_y()}}
+{\footnotesize\ttfamily void mob\+\_\+set\+\_\+y (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}}]{mob,  }\item[{int16\+\_\+t}]{y }\end{DoxyParamCaption})}
+
+
+
+Sets the yx of the mob. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mob} & Pointer to the \doxylink{structMob}{Mob} structure. \\
+\hline
+{\em y} & New y value. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{mob_8h_a79dbfd94639e48f4fd6da40e7c6d068c}\label{mob_8h_a79dbfd94639e48f4fd6da40e7c6d068c} 
+\index{mob.h@{mob.h}!mob\_update\_state@{mob\_update\_state}}
+\index{mob\_update\_state@{mob\_update\_state}!mob.h@{mob.h}}
+\doxysubsubsection{\texorpdfstring{mob\_update\_state()}{mob\_update\_state()}}
+{\footnotesize\ttfamily void mob\+\_\+update\+\_\+state (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMob}{Mob}} \texorpdfstring{$\ast$}{*}}]{mob,  }\item[{int16\+\_\+t}]{mob\+\_\+cx,  }\item[{int16\+\_\+t}]{mob\+\_\+cy }\end{DoxyParamCaption})}
+
+
+
+Updates the state of the mob based on its context. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mob} & Pointer to the \doxylink{structMob}{Mob} structure. \\
+\hline
+{\em mob\+\_\+cx} & X coordinate of the center of the mob. \\
+\hline
+{\em mob\+\_\+cy} & Y coordinate of the center of the mob. \\
+\hline
+\end{DoxyParams}

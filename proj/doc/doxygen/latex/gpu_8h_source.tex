@@ -1,0 +1,61 @@
+\doxysection{gpu.\+h}
+\hypertarget{gpu_8h_source}{}\label{gpu_8h_source}\index{src/drivers/video/gpu.h@{src/drivers/video/gpu.h}}
+\mbox{\hyperlink{gpu_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ GPU\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ GPU\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <lcom/lcf.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#define\ VBE\_CONTROLLER\_INFO\ 0x4F00\ \ \ }}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#define\ VBE\_MODE\_INFO\ 0x4F01\ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ VBE\_MODE\_SET\ 0x4F02\ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#define\ VBE\_DISPLAY\_START\_SET\ 0x4F07\ }}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#define\ BIOS\_VIDEO\_MODE\_SET\ 0x0003\ \ \ }}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ BIOS\_VIDEOCARD\_SERV\ 0x10\ \ \ \ \ }}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#define\ VBE\_MODE1\ 0x105\ }}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ VBE\_MODE2\ 0x110\ }}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#define\ VBE\_MODE3\ 0x115\ }}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#define\ VBE\_MODE4\ 0x11A\ }}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#define\ VBE\_MODE5\ 0x14C\ }}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#define\ VBE\_MODE6\ 0x107\ }}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#define\ CALL\_FAIL\ 0x01\ \ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#define\ UNSUPPORTED\_FUNCTION\ 0x02\ }}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#define\ INVALID\_FUNCTION\ 0x03\ \ \ \ \ }}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#define\ LINEAR\_FRAMEBUFFER\ BIT(14)\ }}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#define\ VERTICAL\_RETRACE\ 0x0080\ \ \ \ }}
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#define\ VBE\ 0x10\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#define\ DIRECT\_MODE\ 6\ \ \ \ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#define\ BACKGROUND\_COLOR\ 0\ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00046\ \textcolor{keyword}{extern}\ uint32\_t\ \mbox{\hyperlink{group__gpu_gae1dde88f49a15ac8b44d187ed1a2c2f4}{interrupt\_counter}};}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00054\ int(\mbox{\hyperlink{group__gpu_gaa2ac3ebc7870950bab4c0fc90f113155}{set\_graphic\_mode}})(uint16\_t\ mode);}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00062\ int(\mbox{\hyperlink{group__gpu_gac7aece56d0d111161c91b4b9cddfaf40}{set\_frame\_buffers}})(uint16\_t\ mode);}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00072\ uint8\_t\ *(\mbox{\hyperlink{group__gpu_gaaa50b3bc2107baef0cf60d5df69b210e}{get\_position}})\ (uint16\_t\ x,\ uint16\_t\ y,\ uint8\_t\ *frame\_buffer);}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00083\ int(\mbox{\hyperlink{group__gpu_ga977f69173a6e3f6a29bac3bc8c979b3b}{vga\_draw\_pixel}})(uint16\_t\ x,\ uint16\_t\ y,\ uint32\_t\ color,\ uint8\_t\ *frame\_buffer);}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00095\ int(\mbox{\hyperlink{group__gpu_gaa85985050e66b912d4d79e5473f5ce64}{vga\_draw\_hline}})(uint16\_t\ x,\ uint16\_t\ y,\ uint16\_t\ len,\ uint32\_t\ color,\ uint8\_t\ *frame\_buffer);}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00108\ int(\mbox{\hyperlink{group__gpu_ga3d6e0aee4bb5869ca78545150957562d}{vga\_draw\_rectangle}})(uint16\_t\ x,\ uint16\_t\ y,\ uint16\_t\ width,\ uint16\_t\ height,\ uint32\_t\ color,\ uint8\_t\ *frame\_buffer);}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00119\ uint32\_t(\mbox{\hyperlink{group__gpu_gaf882fe6872cbcffaea9a7abdb6cd131e}{direct\_mode}})(uint16\_t\ i,\ uint16\_t\ j,\ uint8\_t\ step,\ uint32\_t\ first);}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00131\ uint32\_t(\mbox{\hyperlink{group__gpu_ga637e88062e9ad734e410b79592a8cf82}{indexed\_mode}})(uint8\_t\ no\_rectangles,\ uint16\_t\ i,\ uint16\_t\ j,\ uint8\_t\ step,\ uint32\_t\ first);}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00142\ int(\mbox{\hyperlink{group__gpu_gaa11ffc7226e6fc0f1cb3b7c4308ffff5}{vga\_draw\_xpm}})(xpm\_map\_t\ xpm,\ uint16\_t\ x,\ uint16\_t\ y,\ uint8\_t\ *frame\_buffer);}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00155\ int(\mbox{\hyperlink{group__gpu_gabae175d4c9f748b52f41dca9cdd97c09}{vga\_draw\_loaded\_xpm}})(uint8\_t\ *xpm\_data,\ uint16\_t\ x,\ uint16\_t\ y,\ uint16\_t\ width,\ uint16\_t\ height,\ uint8\_t\ *frame\_buffer);}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00164\ int(\mbox{\hyperlink{group__gpu_ga5440ee2a33422daec40d52c856f06f0d}{clear\_frame\_buffer}})(uint8\_t\ *frame\_buffer,\ uint16\_t\ color);}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00169\ void(\mbox{\hyperlink{group__gpu_ga158f5f764abb0712e5ddb77378f130b8}{set\_display\_start}})();}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00174\ void(\mbox{\hyperlink{group__gpu_ga6c42ab5cf5efa4bebdf1d551d9b4b992}{vga\_flip\_pages}})();}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ GPU\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

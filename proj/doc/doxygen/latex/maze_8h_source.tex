@@ -1,0 +1,69 @@
+\doxysection{maze.\+h}
+\hypertarget{maze_8h_source}{}\label{maze_8h_source}\index{src/model/level/maze.h@{src/model/level/maze.h}}
+\mbox{\hyperlink{maze_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ MAZE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ MAZE\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <lcom/lcf.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}assets/xpm/level/key.xpm"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}assets/xpm/level/wall.xpm"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{config_8h}{config.h}}"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{gpu_8h}{drivers/video/gpu.h}}"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{animated__sprite_8h}{model/utils/animated\_sprite.h}}"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{sprite_8h}{model/utils/sprite.h}}"{}}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{maze_8h_af15e4117fa1b557306831177de4781cba2f0d18fc0d0fa4a6cd92dc328501874d}{EMPTY}},\ }
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{maze_8h_af15e4117fa1b557306831177de4781cbafca2faad41310c7e71ec303ef789c53a}{WALL}},\ \ }
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{maze_8h_af15e4117fa1b557306831177de4781cba82116f124e183fc36e07cc4a847e3a01}{MOB}},\ \ \ }
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{maze_8h_af15e4117fa1b557306831177de4781cba843dff91ff0b0e5b98a110a512b2f531}{WIN}},\ \ \ }
+\DoxyCodeLine{00019\ \}\ \mbox{\hyperlink{maze_8h_af15e4117fa1b557306831177de4781cb}{maze\_entity}};}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#define\ MAZE\_OPENING\_PERCENTAGE\ 20\ }}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#define\ NO\_MONSTER\_SQUARE\ 2\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#define\ MOB\_MULTIPLIER\ 4\ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#define\ MAX\_ATTEMPTS\ 1000\ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00026\ \textcolor{keyword}{extern}\ uint8\_t\ *\mbox{\hyperlink{maze_8h_aa0b878733cd01083e20d9c85310285b7}{secondary\_frame\_buffer}};\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{extern}\ uint32\_t\ \mbox{\hyperlink{maze_8h_a0229abcfe4414f86dcf52c5ebf84311c}{frame\_size}};\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{extern}\ uint16\_t\ \mbox{\hyperlink{maze_8h_a8c698380dc32cd8b5a19a84da1ab2ad9}{x\_res}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00029\ \textcolor{keyword}{extern}\ uint16\_t\ \mbox{\hyperlink{maze_8h_a1188c1e5fe37db7b55bdad91f71e26c0}{y\_res}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structMaze}{Maze}}\ \mbox{\hyperlink{structMaze}{Maze}};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00041\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structPoint}{Point}}\ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structPoint_a8c779e11e694b20e0946105a9f5de842}{x}},\ \mbox{\hyperlink{structPoint_a2e1b5fb2b2a83571f5c0bc0f66a73cf7}{y}};}
+\DoxyCodeLine{00043\ \}\ \mbox{\hyperlink{structPoint}{Point}};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00053\ \mbox{\hyperlink{structMaze}{Maze}}\ *\mbox{\hyperlink{maze_8h_a56e4bc51ed7d7cd3456a377d5acf43b8}{create\_maze}}(uint8\_t\ width,\ uint8\_t\ height,\ uint8\_t\ mob\_count);}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00060\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{maze_8h_a544eaa1afdb894c6e85c0f0c8006e862}{destroy\_maze}}(\mbox{\hyperlink{structMaze}{Maze}}\ *maze);}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00068\ uint8\_t\ \mbox{\hyperlink{maze_8h_a23c219b4c70ebb740255cd28dbe3b9cb}{get\_width}}(\mbox{\hyperlink{structMaze}{Maze}}\ *maze);}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00076\ uint8\_t\ \mbox{\hyperlink{maze_8h_ad103779407126f585bea2401f784553e}{get\_height}}(\mbox{\hyperlink{structMaze}{Maze}}\ *maze);}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00084\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{maze_8h_abe62c9c46900a39571bbf4cbfdfb5334}{get\_line\_count}}(\mbox{\hyperlink{structMaze}{Maze}}\ *maze);}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00092\ uint8\_t\ \mbox{\hyperlink{maze_8h_a1e3f5000a48eefefac29358e3beefa05}{get\_mob\_count}}(\mbox{\hyperlink{structMaze}{Maze}}\ *maze);}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00099\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{maze_8h_ad20bc65cad4929bc4138f5e5d21e2c17}{set\_mob\_count}}(\mbox{\hyperlink{structMaze}{Maze}}\ *maze,\ uint8\_t\ mob\_count);}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00107\ \mbox{\hyperlink{structPoint}{Point}}\ **\mbox{\hyperlink{maze_8h_ac67f8234cfe900e992dc30c9db3fc1d2}{get\_mob\_positions}}(\mbox{\hyperlink{structMaze}{Maze}}\ *maze);}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00115\ \mbox{\hyperlink{structSprite}{Sprite}}\ *\mbox{\hyperlink{maze_8h_ae6f03a900245d2c5fe071c13a0fea626}{get\_key\_sprite}}(\mbox{\hyperlink{structMaze}{Maze}}\ *maze);}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00130\ bool(\mbox{\hyperlink{maze_8h_acf167b01a026f1e031ab8d19d456f506}{check\_rectangle\_collision}})(\textcolor{keywordtype}{int}\ x1,\ \textcolor{keywordtype}{int}\ y1,\ \textcolor{keywordtype}{int}\ width1,\ \textcolor{keywordtype}{int}\ height1,\ \textcolor{keywordtype}{int}\ x2,\ \textcolor{keywordtype}{int}\ y2,\ \textcolor{keywordtype}{int}\ width2,\ \textcolor{keywordtype}{int}\ height2);}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00139\ bool(\mbox{\hyperlink{maze_8h_a38699c3fd7b528d1ee65ff8870487973}{check\_sprite\_collision}})(\mbox{\hyperlink{structSprite}{Sprite}}\ *a,\ \mbox{\hyperlink{structSprite}{Sprite}}\ *b);}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00150\ bool(\mbox{\hyperlink{maze_8h_a44aae104e868b664e5b7fea7cc171754}{check\_wall\_collision}})(\mbox{\hyperlink{structMaze}{Maze}}\ *maze,\ \mbox{\hyperlink{structSprite}{Sprite}}\ *sprite);}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00159\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{maze_8h_afaf42773ea1deee01263aa7b7c694eca}{draw\_maze}}(\mbox{\hyperlink{structMaze}{Maze}}\ *maze,\ uint8\_t\ *frame\_buffer);}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00168\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{maze_8h_aae73a9f86fce188474eb598ad1cf0392}{draw\_maze\_outer}}(\mbox{\hyperlink{structMaze}{Maze}}\ *maze,\ uint8\_t\ *frame\_buffer);}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00170\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ MAZE\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

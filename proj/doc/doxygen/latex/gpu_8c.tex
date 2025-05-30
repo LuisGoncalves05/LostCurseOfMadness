@@ -1,0 +1,114 @@
+\doxysection{src/drivers/video/gpu.c File Reference}
+\hypertarget{gpu_8c}{}\label{gpu_8c}\index{src/drivers/video/gpu.c@{src/drivers/video/gpu.c}}
+{\ttfamily \#include $<$lcom/lcf.\+h$>$}\newline
+{\ttfamily \#include $<$machine/int86.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include "{}gpu.\+h"{}}\newline
+Include dependency graph for gpu.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=325pt]{gpu_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int() \mbox{\hyperlink{group__gpu_gaa2ac3ebc7870950bab4c0fc90f113155}{set\+\_\+graphic\+\_\+mode}} (uint16\+\_\+t mode)
+\begin{DoxyCompactList}\small\item\em Sets the VBE graphics mode. \end{DoxyCompactList}\item 
+int() \mbox{\hyperlink{group__gpu_gac7aece56d0d111161c91b4b9cddfaf40}{set\+\_\+frame\+\_\+buffers}} (uint16\+\_\+t mode)
+\begin{DoxyCompactList}\small\item\em Initializes the frame buffers. \end{DoxyCompactList}\item 
+int() \mbox{\hyperlink{group__gpu_ga5440ee2a33422daec40d52c856f06f0d}{clear\+\_\+frame\+\_\+buffer}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}frame\+\_\+buffer, uint16\+\_\+t color)
+\begin{DoxyCompactList}\small\item\em Clears the given frame buffer with the specified color. \end{DoxyCompactList}\item 
+void() \mbox{\hyperlink{group__gpu_ga158f5f764abb0712e5ddb77378f130b8}{set\+\_\+display\+\_\+start}} ()
+\begin{DoxyCompactList}\small\item\em Sets the video memory display start to point to a new buffer (page flipping). \end{DoxyCompactList}\item 
+void() \mbox{\hyperlink{group__gpu_ga6c42ab5cf5efa4bebdf1d551d9b4b992}{vga\+\_\+flip\+\_\+pages}} ()
+\begin{DoxyCompactList}\small\item\em Swaps the main and secondary frame buffers. \end{DoxyCompactList}\item 
+uint8\+\_\+t \texorpdfstring{$\ast$}{*}() \mbox{\hyperlink{group__gpu_gaaa50b3bc2107baef0cf60d5df69b210e}{get\+\_\+position}} (uint16\+\_\+t x, uint16\+\_\+t y, uint8\+\_\+t \texorpdfstring{$\ast$}{*}frame\+\_\+buffer)
+\begin{DoxyCompactList}\small\item\em Returns a pointer to the video memory location of a specific pixel. \end{DoxyCompactList}\item 
+int() \mbox{\hyperlink{group__gpu_ga977f69173a6e3f6a29bac3bc8c979b3b}{vga\+\_\+draw\+\_\+pixel}} (uint16\+\_\+t x, uint16\+\_\+t y, uint32\+\_\+t color, uint8\+\_\+t \texorpdfstring{$\ast$}{*}frame\+\_\+buffer)
+\begin{DoxyCompactList}\small\item\em Draws a single pixel of a specified color at (x, y). \end{DoxyCompactList}\item 
+int() \mbox{\hyperlink{group__gpu_gaa85985050e66b912d4d79e5473f5ce64}{vga\+\_\+draw\+\_\+hline}} (uint16\+\_\+t x, uint16\+\_\+t y, uint16\+\_\+t len, uint32\+\_\+t color, uint8\+\_\+t \texorpdfstring{$\ast$}{*}frame\+\_\+buffer)
+\begin{DoxyCompactList}\small\item\em Draws a horizontal line of a specified color. \end{DoxyCompactList}\item 
+int() \mbox{\hyperlink{group__gpu_ga3d6e0aee4bb5869ca78545150957562d}{vga\+\_\+draw\+\_\+rectangle}} (uint16\+\_\+t x, uint16\+\_\+t y, uint16\+\_\+t width, uint16\+\_\+t height, uint32\+\_\+t color, uint8\+\_\+t \texorpdfstring{$\ast$}{*}frame\+\_\+buffer)
+\begin{DoxyCompactList}\small\item\em Draws a filled rectangle of a specified color. \end{DoxyCompactList}\item 
+uint32\+\_\+t() \mbox{\hyperlink{group__gpu_gaf882fe6872cbcffaea9a7abdb6cd131e}{direct\+\_\+mode}} (uint16\+\_\+t i, uint16\+\_\+t j, uint8\+\_\+t step, uint32\+\_\+t first)
+\begin{DoxyCompactList}\small\item\em Calculates the color for a rectangle in direct color mode. \end{DoxyCompactList}\item 
+uint32\+\_\+t() \mbox{\hyperlink{group__gpu_ga637e88062e9ad734e410b79592a8cf82}{indexed\+\_\+mode}} (uint8\+\_\+t no\+\_\+rectangles, uint16\+\_\+t i, uint16\+\_\+t j, uint8\+\_\+t step, uint32\+\_\+t first)
+\begin{DoxyCompactList}\small\item\em Calculates the color for a rectangle in indexed color mode. \end{DoxyCompactList}\item 
+int() \mbox{\hyperlink{group__gpu_gabae175d4c9f748b52f41dca9cdd97c09}{vga\+\_\+draw\+\_\+loaded\+\_\+xpm}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}xpm\+\_\+data, uint16\+\_\+t x, uint16\+\_\+t y, uint16\+\_\+t width, uint16\+\_\+t height, uint8\+\_\+t \texorpdfstring{$\ast$}{*}frame\+\_\+buffer)
+\begin{DoxyCompactList}\small\item\em Draws a preloaded XPM image at the specified coordinates. \end{DoxyCompactList}\item 
+int() \mbox{\hyperlink{group__gpu_gaa11ffc7226e6fc0f1cb3b7c4308ffff5}{vga\+\_\+draw\+\_\+xpm}} (xpm\+\_\+map\+\_\+t xpm, uint16\+\_\+t x, uint16\+\_\+t y, uint8\+\_\+t \texorpdfstring{$\ast$}{*}frame\+\_\+buffer)
+\begin{DoxyCompactList}\small\item\em Draws an XPM image at the specified coordinates. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+vbe\+\_\+mode\+\_\+info\+\_\+t \mbox{\hyperlink{gpu_8c_aba0c6fe9aaf017ddb07fa4806d5c0222}{vg\+\_\+mode\+\_\+info}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{gpu_8c_a36b87dc42923f704d16a629834a21b1e}{bytes\+\_\+per\+\_\+pixel}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{gpu_8c_a8c698380dc32cd8b5a19a84da1ab2ad9}{x\+\_\+res}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{gpu_8c_a1188c1e5fe37db7b55bdad91f71e26c0}{y\+\_\+res}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{gpu_8c_a0229abcfe4414f86dcf52c5ebf84311c}{frame\+\_\+size}}
+\item 
+bool \mbox{\hyperlink{gpu_8c_a1cee79c2bc69dc160d1158a06ddceee4}{frame\+\_\+start}} = true
+\item 
+uint8\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{gpu_8c_a9c4d5f857a98e5753d9a1b65a5b237e8}{main\+\_\+frame\+\_\+buffer}}
+\item 
+uint8\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{gpu_8c_aa0b878733cd01083e20d9c85310285b7}{secondary\+\_\+frame\+\_\+buffer}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{gpu_8c_a36b87dc42923f704d16a629834a21b1e}\label{gpu_8c_a36b87dc42923f704d16a629834a21b1e} 
+\index{gpu.c@{gpu.c}!bytes\_per\_pixel@{bytes\_per\_pixel}}
+\index{bytes\_per\_pixel@{bytes\_per\_pixel}!gpu.c@{gpu.c}}
+\doxysubsubsection{\texorpdfstring{bytes\_per\_pixel}{bytes\_per\_pixel}}
+{\footnotesize\ttfamily uint8\+\_\+t bytes\+\_\+per\+\_\+pixel}
+
+Bytes per pixel \Hypertarget{gpu_8c_a0229abcfe4414f86dcf52c5ebf84311c}\label{gpu_8c_a0229abcfe4414f86dcf52c5ebf84311c} 
+\index{gpu.c@{gpu.c}!frame\_size@{frame\_size}}
+\index{frame\_size@{frame\_size}!gpu.c@{gpu.c}}
+\doxysubsubsection{\texorpdfstring{frame\_size}{frame\_size}}
+{\footnotesize\ttfamily uint32\+\_\+t frame\+\_\+size}
+
+Size of the framebuffer \Hypertarget{gpu_8c_a1cee79c2bc69dc160d1158a06ddceee4}\label{gpu_8c_a1cee79c2bc69dc160d1158a06ddceee4} 
+\index{gpu.c@{gpu.c}!frame\_start@{frame\_start}}
+\index{frame\_start@{frame\_start}!gpu.c@{gpu.c}}
+\doxysubsubsection{\texorpdfstring{frame\_start}{frame\_start}}
+{\footnotesize\ttfamily bool frame\+\_\+start = true}
+
+Indicates if the current frame is the start frame \Hypertarget{gpu_8c_a9c4d5f857a98e5753d9a1b65a5b237e8}\label{gpu_8c_a9c4d5f857a98e5753d9a1b65a5b237e8} 
+\index{gpu.c@{gpu.c}!main\_frame\_buffer@{main\_frame\_buffer}}
+\index{main\_frame\_buffer@{main\_frame\_buffer}!gpu.c@{gpu.c}}
+\doxysubsubsection{\texorpdfstring{main\_frame\_buffer}{main\_frame\_buffer}}
+{\footnotesize\ttfamily uint8\+\_\+t\texorpdfstring{$\ast$}{*} main\+\_\+frame\+\_\+buffer}
+
+Pointer to the main framebuffer \Hypertarget{gpu_8c_aa0b878733cd01083e20d9c85310285b7}\label{gpu_8c_aa0b878733cd01083e20d9c85310285b7} 
+\index{gpu.c@{gpu.c}!secondary\_frame\_buffer@{secondary\_frame\_buffer}}
+\index{secondary\_frame\_buffer@{secondary\_frame\_buffer}!gpu.c@{gpu.c}}
+\doxysubsubsection{\texorpdfstring{secondary\_frame\_buffer}{secondary\_frame\_buffer}}
+{\footnotesize\ttfamily uint8\+\_\+t\texorpdfstring{$\ast$}{*} secondary\+\_\+frame\+\_\+buffer}
+
+Pointer to the secondary framebuffer \Hypertarget{gpu_8c_aba0c6fe9aaf017ddb07fa4806d5c0222}\label{gpu_8c_aba0c6fe9aaf017ddb07fa4806d5c0222} 
+\index{gpu.c@{gpu.c}!vg\_mode\_info@{vg\_mode\_info}}
+\index{vg\_mode\_info@{vg\_mode\_info}!gpu.c@{gpu.c}}
+\doxysubsubsection{\texorpdfstring{vg\_mode\_info}{vg\_mode\_info}}
+{\footnotesize\ttfamily vbe\+\_\+mode\+\_\+info\+\_\+t vg\+\_\+mode\+\_\+info}
+
+Video mode information \Hypertarget{gpu_8c_a8c698380dc32cd8b5a19a84da1ab2ad9}\label{gpu_8c_a8c698380dc32cd8b5a19a84da1ab2ad9} 
+\index{gpu.c@{gpu.c}!x\_res@{x\_res}}
+\index{x\_res@{x\_res}!gpu.c@{gpu.c}}
+\doxysubsubsection{\texorpdfstring{x\_res}{x\_res}}
+{\footnotesize\ttfamily uint16\+\_\+t x\+\_\+res}
+
+X resolution of the screen \Hypertarget{gpu_8c_a1188c1e5fe37db7b55bdad91f71e26c0}\label{gpu_8c_a1188c1e5fe37db7b55bdad91f71e26c0} 
+\index{gpu.c@{gpu.c}!y\_res@{y\_res}}
+\index{y\_res@{y\_res}!gpu.c@{gpu.c}}
+\doxysubsubsection{\texorpdfstring{y\_res}{y\_res}}
+{\footnotesize\ttfamily uint16\+\_\+t y\+\_\+res}
+
+Y resolution of the screen 

@@ -1,0 +1,30 @@
+\doxysection{mouse.\+h}
+\hypertarget{mouse_8h_source}{}\label{mouse_8h_source}\index{src/drivers/mouse/mouse.h@{src/drivers/mouse/mouse.h}}
+\mbox{\hyperlink{mouse_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ MOUSE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ MOUSE\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}../keyboard/kbc.h"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{extern}\ int32\_t\ \mbox{\hyperlink{mouse_8h_a99f6dd9e05ab5b5e95e9083b0c4ca79d}{kbd\_subscription\_id}};}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00020\ int(\mbox{\hyperlink{group__mouse_ga20285aed4b3ef45812cd967532dd09db}{mouse\_subscribe\_int}})(uint8\_t\ *bit\_no);}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00027\ int(\mbox{\hyperlink{group__mouse_gacc3d97e33f3dea8c4b626cac59e5d5a4}{mouse\_unsubscribe\_int}})(void);}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00034\ void(\mbox{\hyperlink{group__mouse_gad8f8ec7da847f2b278554aeef9652d55}{mouse\_int\_handler}})(void);}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00041\ void(\mbox{\hyperlink{group__mouse_gaed4404005e4c565ac36656307386e0ac}{mouse\_ih}})(void);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00048\ int(\mbox{\hyperlink{group__mouse_ga14db367991a7f78daae7b197742a432b}{mouse\_read\_packet}})(void);}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00058\ int(\mbox{\hyperlink{group__mouse_ga5d8468900d4d4e0a69c35b0b65567f8a}{mouse\_sync\_packets}})(uint8\_t\ *\mbox{\hyperlink{mouse_8c_ab234504ae156fa5b250e34cbb65a7807}{packet}},\ uint8\_t\ *\mbox{\hyperlink{main_8c_adbc7ba6354e62de69b8312b2ecc6a98f}{packet\_idx}},\ uint8\_t\ \mbox{\hyperlink{mouse_8c_aa930701390a0652cab793497401d4736}{packet\_byte}});}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00068\ int(\mbox{\hyperlink{group__mouse_ga1cab3b30437d4d8a81e4627dbdc42103}{mouse\_build\_packet}})(uint8\_t\ *\mbox{\hyperlink{mouse_8c_ab234504ae156fa5b250e34cbb65a7807}{packet}},\ uint8\_t\ *\mbox{\hyperlink{main_8c_adbc7ba6354e62de69b8312b2ecc6a98f}{packet\_idx}},\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{mouse_8c_ab234504ae156fa5b250e34cbb65a7807}{packet}}\ *\mbox{\hyperlink{main_8c_a26e83eca70c2b9169fbbb0eac7e32e32}{pp}});}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00076\ int(\mbox{\hyperlink{group__mouse_gae8beed6c3873a9c2d3f929061ee61d90}{mouse\_set\_data\_reporting}})(\textcolor{keywordtype}{bool}\ b);}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_MOUSE\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

@@ -1,0 +1,84 @@
+\doxysection{player.\+h}
+\hypertarget{player_8h_source}{}\label{player_8h_source}\index{src/model/level/player.h@{src/model/level/player.h}}
+\mbox{\hyperlink{player_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PLAYER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PLAYER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <lcom/lcf.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <math.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}assets/xpm/level/player/idle.xpm"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}assets/xpm/level/player/walking.xpm"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{config_8h}{config.h}}"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{gpu_8h}{drivers/video/gpu.h}}"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{animated__sprite_8h}{model/utils/animated\_sprite.h}}"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{keys_8h}{model/utils/keys.h}}"{}}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{sprite_8h}{model/utils/sprite.h}}"{}}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#define\ PLAYER\_HEALTH\ 3\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ PLAYER\_DEFAULT\_SPEED\ 3\ }}
+\DoxyCodeLine{00024\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structPlayer}{Player}}\ \mbox{\hyperlink{structPlayer}{Player}};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00029\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{player_8h_a3c730f37b1b3a893159bada67637fdb1ad8b36925d4e50e71d62254ccf715e4ad}{PLAYER\_IDLE}},\ \ \ \ \ }
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{player_8h_a3c730f37b1b3a893159bada67637fdb1a3c899dc88f25c085eff52ca322f90e79}{PLAYER\_WALKING}},\ \ }
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{player_8h_a3c730f37b1b3a893159bada67637fdb1ae6d97e23fc100ea5b6134860aed7041c}{PLAYER\_AIMING}},\ \ \ }
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{player_8h_a3c730f37b1b3a893159bada67637fdb1a616862bee744652f70f771af719e8bc1}{PLAYER\_SHOOTING}},\ }
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{player_8h_a3c730f37b1b3a893159bada67637fdb1aed4e91f6c691e38bbcbd93c173685340}{PLAYER\_DEAD}},\ \ \ \ \ }
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{player_8h_a3c730f37b1b3a893159bada67637fdb1af4bc343b5ebe87835dae7f6b99ee5a44}{PLAYER\_WIN}}\ \ \ \ \ \ \ }
+\DoxyCodeLine{00036\ \}\ \mbox{\hyperlink{player_8h_a3c730f37b1b3a893159bada67637fdb1}{PlayerState}};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \mbox{\hyperlink{player_8h_a224b9163917ac32fc95a60d8c1eec3aaaba595d8bca8bc5e67c37c0a9d89becfa}{UP}},}
+\DoxyCodeLine{00040\ \ \ \ \ \mbox{\hyperlink{player_8h_a224b9163917ac32fc95a60d8c1eec3aaa9b0b4a95b99523966e0e34ffdadac9da}{DOWN}},}
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{player_8h_a224b9163917ac32fc95a60d8c1eec3aaadb45120aafd37a973140edee24708065}{LEFT}},}
+\DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{player_8h_a224b9163917ac32fc95a60d8c1eec3aaaec8379af7490bb9eaaf579cf17876f38}{RIGHT}}}
+\DoxyCodeLine{00043\ \}\ \mbox{\hyperlink{player_8h_a224b9163917ac32fc95a60d8c1eec3aa}{Direction}};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00050\ \mbox{\hyperlink{structPlayer}{Player}}\ *\mbox{\hyperlink{player_8h_a15f56da3dddbcb8b909f9c8cf365a01f}{create\_player}}();}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00057\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{player_8h_a2cbe20d0f858f5cbe571c48535063c6a}{destroy\_player}}(\mbox{\hyperlink{structPlayer}{Player}}\ *player);}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00065\ \mbox{\hyperlink{structSprite}{Sprite}}\ *\mbox{\hyperlink{player_8h_a4e934a016908df7f938710f400751138}{player\_get\_sprite}}(\mbox{\hyperlink{structPlayer}{Player}}\ *player);}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00073\ uint16\_t\ \mbox{\hyperlink{player_8h_a4e68c8f0859e820a4fe371bdd3830032}{player\_get\_x}}(\mbox{\hyperlink{structPlayer}{Player}}\ *player);}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00081\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{player_8h_a7da494968254a2f1febdee1f9ae8d505}{player\_set\_x}}(\mbox{\hyperlink{structPlayer}{Player}}\ *player,\ uint16\_t\ x);}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00089\ uint16\_t\ \mbox{\hyperlink{player_8h_aea999e2c206fb7d11db0ccbb9eb982f3}{player\_get\_y}}(\mbox{\hyperlink{structPlayer}{Player}}\ *player);}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00097\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{player_8h_a6a8eb60da448fd668c6d6ea23a355015}{player\_set\_y}}(\mbox{\hyperlink{structPlayer}{Player}}\ *player,\ uint16\_t\ y);}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00105\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{player_8h_a3b9bcf2edae56697b4f2e5fffd6f998a}{player\_get\_xspeed}}(\mbox{\hyperlink{structPlayer}{Player}}\ *player);}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00113\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{player_8h_a05d053a4ae2d3c8b54eb7e6346a6b4f3}{player\_set\_xspeed}}(\mbox{\hyperlink{structPlayer}{Player}}\ *player,\ \textcolor{keywordtype}{double}\ xspeed);}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00121\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{player_8h_a90153d8455e4c96ebac9e559126bfb9a}{player\_get\_yspeed}}(\mbox{\hyperlink{structPlayer}{Player}}\ *player);}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00129\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{player_8h_a09d662de542404912dc2aeded552f299}{player\_set\_yspeed}}(\mbox{\hyperlink{structPlayer}{Player}}\ *player,\ \textcolor{keywordtype}{double}\ yspeed);}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00137\ uint16\_t\ \mbox{\hyperlink{player_8h_a77a58006b787a54c8b073d1e84420bd8}{player\_get\_width}}(\mbox{\hyperlink{structPlayer}{Player}}\ *player);}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00145\ uint16\_t\ \mbox{\hyperlink{player_8h_a18f459907550a183a32580edf7ccb39f}{player\_get\_height}}(\mbox{\hyperlink{structPlayer}{Player}}\ *player);}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00153\ \mbox{\hyperlink{structAnimatedSprite}{AnimatedSprite}}\ *\mbox{\hyperlink{player_8h_aff75a5b253924daedce8653c91cbb6e2}{player\_get\_animated\_sprite}}(\mbox{\hyperlink{structPlayer}{Player}}\ *player);}
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00161\ \mbox{\hyperlink{player_8h_a224b9163917ac32fc95a60d8c1eec3aa}{Direction}}\ \mbox{\hyperlink{player_8h_a0d646433b5ead7a62d389a878ac6ab41}{player\_get\_direction}}(\mbox{\hyperlink{structPlayer}{Player}}\ *player);}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00169\ \mbox{\hyperlink{player_8h_a3c730f37b1b3a893159bada67637fdb1}{PlayerState}}\ \mbox{\hyperlink{player_8h_a985dc52e3d0951aa2fbe5fdad6ff93f0}{player\_get\_state}}(\mbox{\hyperlink{structPlayer}{Player}}\ *player);}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00177\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{player_8h_af7e1b8b3540ee6cafcac5f31c15f1e2e}{player\_set\_state}}(\mbox{\hyperlink{structPlayer}{Player}}\ *player,\ \mbox{\hyperlink{player_8h_a3c730f37b1b3a893159bada67637fdb1}{PlayerState}}\ \mbox{\hyperlink{structPlayer_afb60fdad921bce05783ef2709e849c27}{state}});}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00185\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{player_8h_ac8f88a9ae8686858151a58703f1f8085}{player\_update\_state}}(\mbox{\hyperlink{structPlayer}{Player}}\ *player,\ \textcolor{keyword}{struct}\ \mbox{\hyperlink{mouse_8c_ab234504ae156fa5b250e34cbb65a7807}{packet}}\ \mbox{\hyperlink{main_8c_a26e83eca70c2b9169fbbb0eac7e32e32}{pp}});}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00193\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{player_8h_a8036860d36e4e05adbc91a802ed5e444}{player\_update\_speed}}(\mbox{\hyperlink{structPlayer}{Player}}\ *player,\ uint8\_t\ \mbox{\hyperlink{keyboard_8c_af4aead9dfdc0d2f7e93662387a21e0bc}{scan\_code}});}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00200\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{player_8h_a11324cf4b6eff0fad38a58958734fc55}{player\_lose\_health}}(\mbox{\hyperlink{structPlayer}{Player}}\ *player);}
+\DoxyCodeLine{00201\ }
+\DoxyCodeLine{00209\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{player_8h_a53b1eb7ca93d0d7fbe929e9e22e5f926}{draw\_player}}(\mbox{\hyperlink{structPlayer}{Player}}\ *player,\ \textcolor{keywordtype}{double}\ delta,\ uint8\_t\ *frame\_buffer);}
+\DoxyCodeLine{00210\ }
+\DoxyCodeLine{00211\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ PLAYER\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}
