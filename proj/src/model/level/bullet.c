@@ -31,14 +31,15 @@ Bullet *create_bullet(int x, int y, double angle) {
     return bullet;
 }
 
-void destroy_bullet(Bullet *bullet) {
+int destroy_bullet(Bullet *bullet) {
     if (bullet == NULL) {
         printf("destroy_bullet: NULL pointer provided\n");
-        return;
+        return 1;
     }
     
     destroy_sprite(bullet->sprite);
     free(bullet);
+    return 0;
 }
 
 /* Getter and setter section */
@@ -130,14 +131,16 @@ void bullet_set_active(Bullet *bullet, bool active) {
 
 /* Draw section */
 
-void draw_bullet(Bullet *bullet, uint8_t *frame_buffer) {
+int draw_bullet(Bullet *bullet, uint8_t *frame_buffer) {
     if (bullet == NULL) {
         printf("draw_bullet: NULL pointer provided\n");
-        return;
+        return 1;
     }
 
     if (draw_transparent_sprite(bullet->sprite, frame_buffer)) {
         printf("draw_bullet: draw_transparent_sprite failed\n");
-        return;
+        return 1;
     }
+
+    return 0;
 }

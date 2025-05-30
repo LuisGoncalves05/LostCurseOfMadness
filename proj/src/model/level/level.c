@@ -277,7 +277,10 @@ static void level_update_all_bullets(Level *level) {
     for (int i = 0; i < level->bullet_count;) {
         update_bullet(level->bullets[i], level);
         if (!bullet_get_active(level->bullets[i])) {
-            destroy_bullet(level->bullets[i]);
+            if (destroy_bullet(level->bullets[i])) {
+                printf("level_update_all_bullets: destroy_bullet failed\n");
+                return;
+            }
             level->bullet_count--;
             level->bullets[i] = level->bullets[level->bullet_count];
             level->bullets[level->bullet_count] = NULL;
@@ -480,7 +483,10 @@ static void draw_all_bullets(Level *level, uint8_t *frame_buffer) {
     for (int i = 0; i < level->bullet_count; i++) {
         Bullet *bullet = level->bullets[i];
         if (bullet_get_active(bullet)) {
-            draw_bullet(bullet, frame_buffer);
+            if (draw_bullet(bullet, frame_buffer)) {
+                printf("draw_all_bullets: draw_bullet failed\n");
+                return;
+            }
         }
     }
 }

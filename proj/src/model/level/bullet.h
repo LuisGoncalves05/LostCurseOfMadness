@@ -39,8 +39,9 @@ Bullet *create_bullet(int x, int y, double angle);
  * @brief Frees resources used by a bullet and destroys it.
  *
  * @param bullet Pointer to the Bullet to destroy.
+ * @return 0 on success, 1 on failure.
  */
-void destroy_bullet(Bullet *bullet);
+int destroy_bullet(Bullet *bullet);
 
 /**
  * @brief Gets the sprite associated with the bullet.
@@ -119,7 +120,8 @@ void bullet_set_active(Bullet *bullet, bool active);
  *
  * @param bullet Pointer to the Bullet to draw.
  * @param frame_buffer Pointer to the frame buffer where the bullet will be rendered.
+ * @return 0 on success, 1 on failure.
  */
-void draw_bullet(Bullet *bullet, uint8_t *frame_buffer);
+int draw_bullet(Bullet *bullet, uint8_t *frame_buffer);
 
 #endif /* BULLET_H */
