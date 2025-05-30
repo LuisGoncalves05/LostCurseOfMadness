@@ -60,8 +60,8 @@ static int initialize_maze(Maze *maze, uint8_t width, uint8_t height) {
         return 1;
     }
 
-    uint8_t w = width + (width % 2 == 0);
-    uint8_t h = height + (height % 2 == 0);
+    uint8_t w = width - (width % 2 == 0);
+    uint8_t h = height - (height % 2 == 0);
 
     maze->width = w > x_res / CELL_SIZE ? x_res / CELL_SIZE : w;
     maze->height = h > y_res / CELL_SIZE ? y_res / CELL_SIZE : h;
