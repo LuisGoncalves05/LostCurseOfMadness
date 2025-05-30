@@ -1,5 +1,5 @@
 <map id="Game" name="Game">
-<area shape="rect" id="Node000001" title=" " alt="" coords="486,397,547,423"/>
+<area shape="rect" id="Node000001" title="Represents a single Game instance." alt="" coords="486,397,547,423"/>
 <area shape="rect" id="Node000002" href="$structLevel.html" title=" " alt="" coords="196,309,253,335"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="267,337,368,371,486,400,485,405,367,376,265,342"/>
 <area shape="rect" id="Node000003" href="$structMaze.html" title=" " alt="" coords="5,211,63,236"/>
