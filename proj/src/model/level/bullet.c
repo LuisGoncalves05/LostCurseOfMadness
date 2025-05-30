@@ -6,7 +6,6 @@
 
 struct Bullet {
     Sprite *sprite; /**< Underlying sprite */
-    int dx, dy;     /**< Velocity components */
     bool active;    /**< Active flag */
 };
 
@@ -14,20 +13,29 @@ struct Bullet {
 
 Bullet *create_bullet(int x, int y, double angle) {
     Bullet *bullet = malloc(sizeof(Bullet));
-    if (!bullet)
+    if (bullet == NULL) {
+        printf("create_bullet: NULL pointer provided\n");
         return NULL;
+    }
 
-    bullet->sprite = create_sprite((xpm_map_t) bullet_xpm, x, y, BULLET_SPEED, BULLET_SPEED);
-    bullet->dx = (int) (cos(angle) * BULLET_SPEED);
-    bullet->dy = (int) (sin(angle) * BULLET_SPEED);
+    bullet->sprite = create_sprite((xpm_map_t) bullet_xpm, x, y, (int16_t) round(cos(angle) * BULLET_SPEED), (int16_t) round(sin(angle) * BULLET_SPEED));
+    
+    if (bullet->sprite == NULL) {
+        printf("create_bullet: create_sprite failed\n");
+        free(bullet);
+        return NULL;
+    }
     bullet->active = true;
 
     return bullet;
 }
 
 void destroy_bullet(Bullet *bullet) {
-    if (!bullet)
+    if (bullet == NULL) {
+        printf("destroy_bullet: NULL pointer provided\n");
         return;
+    }
+    
     destroy_sprite(bullet->sprite);
     free(bullet);
 }
@@ -35,32 +43,47 @@ void destroy_bullet(Bullet *bullet) {
 /* Getter and setter section */
 
 Sprite *bullet_get_sprite(Bullet *bullet) {
-    if (!bullet)
+    if (bullet == NULL) {
+        printf("bullet_get_sprite: NULL pointer provided\n");
         return NULL;
+    }
+
     return bullet->sprite;
 }
 
-int bullet_get_dx(Bullet *bullet) {
-    if (!bullet)
+double bullet_get_xspeed(Bullet *bullet) {
+    if (bullet == NULL) {
+        printf("bullet_get_xspeed: NULL pointer provided\n");
         return 0;
-    return bullet->dx;
+    }
+
+    return bullet->sprite->xspeed;
 }
 
-int bullet_get_dy(Bullet *bullet) {
-    if (!bullet)
+double bullet_get_yspeed(Bullet *bullet) {
+    if (bullet == NULL) {
+        printf("bullet_get_yspeed: NULL pointer provided\n");
         return 0;
-    return bullet->dy;
+    }
+
+    return bullet->sprite->yspeed;
 }
 
 bool bullet_get_active(Bullet *bullet) {
-    if (!bullet)
+    if (bullet == NULL) {
+        printf("bullet_get_active: NULL pointer provided\n");
         return false;
+    }
+
     return bullet->active;
 }
 
 void bullet_set_active(Bullet *bullet, bool active) {
-    if (!bullet)
+    if (bullet == NULL) {
+        printf("bullet_set_active: NULL pointer provided\n");
         return;
+    }
+
     bullet->active = active;
 }
 
@@ -71,7 +94,13 @@ void bullet_set_active(Bullet *bullet, bool active) {
 /* Draw section */
 
 void draw_bullet(Bullet *bullet, uint8_t *frame_buffer) {
-    if (!bullet)
+    if (bullet == NULL) {
+        printf("draw_bullet: NULL pointer provided\n");
         return;
-    draw_transparent_sprite(bullet->sprite, frame_buffer);
+    }
+
+    if (draw_transparent_sprite(bullet->sprite, frame_buffer)) {
+        printf("draw_bullet: draw_transparent_sprite failed\n");
+        return;
+    }
 }
