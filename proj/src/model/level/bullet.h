@@ -52,7 +52,7 @@ Sprite *bullet_get_sprite(Bullet *bullet);
  * @param bullet Pointer to the Bullet.
  * @return Velocity in the x-direction (pixels per tick).
  */
-int bullet_get_dx(Bullet *bullet);
+double bullet_get_xspeed(Bullet *bullet);
 
 /**
  * @brief Gets the vertical velocity component of the bullet.
@@ -60,7 +60,7 @@ int bullet_get_dx(Bullet *bullet);
  * @param bullet Pointer to the Bullet.
  * @return Velocity in the y-direction (pixels per tick).
  */
-int bullet_get_dy(Bullet *bullet);
+double bullet_get_yspeed(Bullet *bullet);
 
 /**
  * @brief Checks whether the bullet is currently active.
