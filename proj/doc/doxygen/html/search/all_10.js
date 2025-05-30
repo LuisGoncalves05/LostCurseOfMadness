@@ -9,7 +9,7 @@ var searchData=
   ['set_5fframe_5fbuffers_6',['set_frame_buffers',['../gpu_8h.html#ac7aece56d0d111161c91b4b9cddfaf40',1,'set_frame_buffers(uint16_t mode):&#160;gpu.c'],['../gpu_8c.html#ac7aece56d0d111161c91b4b9cddfaf40',1,'set_frame_buffers(uint16_t mode):&#160;gpu.c']]],
   ['set_5fgraphic_5fmode_7',['set_graphic_mode',['../gpu_8c.html#aa2ac3ebc7870950bab4c0fc90f113155',1,'set_graphic_mode(uint16_t mode):&#160;gpu.c'],['../gpu_8h.html#aa2ac3ebc7870950bab4c0fc90f113155',1,'set_graphic_mode(uint16_t mode):&#160;gpu.c']]],
   ['set_5fmob_5fcount_8',['set_mob_count',['../maze_8c.html#ad20bc65cad4929bc4138f5e5d21e2c17',1,'set_mob_count(Maze *maze, uint8_t mob_count):&#160;maze.c'],['../maze_8h.html#ad20bc65cad4929bc4138f5e5d21e2c17',1,'set_mob_count(Maze *maze, uint8_t mob_count):&#160;maze.c']]],
-  ['setup_9',['setup',['../main_8c.html#a2f0a779f1edbff60f92599d76a98dd29',1,'main.c']]],
+  ['setup_9',['setup',['../main_8c.html#a099d48038e444c2f3e69904477527798',1,'main.c']]],
   ['shooting_10',['shooting',['../structGame.html#a58c7fc1dfd9e12ede9466bf092792720',1,'Game']]],
   ['sprite_11',['sprite',['../structCursor.html#a9af89b0c6226cc9bdeee09a54845cb31',1,'Cursor::sprite'],['../structAnimatedSprite.html#ad5cc31f67d16ef37e61fb04ca9e69c3c',1,'AnimatedSprite::sprite'],['../structButton.html#a51a8770221b4166852ebc54e8736c3f9',1,'Button::sprite'],['../structBullet.html#a040bbfdb4d8e38dbd347309230e7bb50',1,'Bullet::sprite'],['../structSprite.html',1,'Sprite']]],
   ['sprite_2ec_12',['sprite.c',['../sprite_8c.html',1,'']]],

@@ -6,17 +6,17 @@
 #include "model/game.h"
 #include <lcom/lcf.h>
 
-uint8_t timer_mask;
-uint8_t keyboard_mask;
-uint8_t mouse_mask;
+uint8_t timer_mask;    /**< Timer subscription ID */
+uint8_t keyboard_mask; /**< Keyboard subscription ID */
+uint8_t mouse_mask;    /**< Mouse subscription ID */
 
-extern uint32_t interrupt_counter;
-extern uint8_t scan_code;
-extern uint8_t packet_byte;
-extern uint8_t packet[3];
-struct packet pp;
-uint8_t packet_idx = 0;
-int frame_counter = 0;
+extern uint32_t interrupt_counter; /**< Timer interrupt counter */
+extern uint8_t scan_code;          /**< Scan code read from keyboard */
+extern uint8_t packet_byte;        /**< Current Mouse packet byte */
+extern uint8_t packet[3];          /**< Mouse packet */
+struct packet pp;                  /**< Mouse packet structure */
+uint8_t packet_idx = 0;            /**< Index for the current Mouse packet byte */
+int frame_counter = 0;             /**< Frame counter for the game loop */
 
 int main(int argc, char *argv[]) {
     // sets the language of LCF messages (can be either EN-US or PT-PT)
@@ -42,7 +42,12 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 
-int(setup)() {
+/**
+ * @brief Sets up the necessary drivers for the main game loop.
+ *
+ * @return 0 on success, 1 on failure.
+ */
+int setup() {
     srand(time(NULL));
 
     if (set_frame_buffers(VIDEO_MODE) != 0)
@@ -61,7 +66,12 @@ int(setup)() {
     return 0;
 }
 
-int(reset)() {
+/**
+ * @brief Resets the drivers and cleans up resources after main game loop.
+ *
+ * @return 0 on success, 1 on failure.
+ */
+int reset() {
     if (vg_exit() != 0)
         return 1;
     if (timer_unsubscribe_int() != 0)
@@ -76,7 +86,14 @@ int(reset)() {
     return 0;
 }
 
-int(proj_main_loop)(int argc, char *argv[]) {
+/**
+ * @brief Main loop of the game, handling interrupts and game state.
+ *
+ * @param argc Argument count.
+ * @param argv Argument vector.
+ * @return 0 on success, 1 on failure.
+ */
+int proj_main_loop(int argc, char *argv[]) {
     if (setup() != 0)
         return 1;
 

@@ -19,5 +19,5 @@ var searchData=
   ['player_5fset_5fyspeed_16',['player_set_yspeed',['../player_8c.html#a09d662de542404912dc2aeded552f299',1,'player_set_yspeed(Player *player, double yspeed):&#160;player.c'],['../player_8h.html#a09d662de542404912dc2aeded552f299',1,'player_set_yspeed(Player *player, double yspeed):&#160;player.c']]],
   ['player_5fupdate_5fspeed_17',['player_update_speed',['../player_8c.html#a8036860d36e4e05adbc91a802ed5e444',1,'player_update_speed(Player *player, uint8_t scan_code):&#160;player.c'],['../player_8h.html#a8036860d36e4e05adbc91a802ed5e444',1,'player_update_speed(Player *player, uint8_t scan_code):&#160;player.c']]],
   ['player_5fupdate_5fstate_18',['player_update_state',['../player_8c.html#ac8f88a9ae8686858151a58703f1f8085',1,'player_update_state(Player *player, struct packet pp):&#160;player.c'],['../player_8h.html#ac8f88a9ae8686858151a58703f1f8085',1,'player_update_state(Player *player, struct packet pp):&#160;player.c']]],
-  ['proj_5fmain_5floop_19',['proj_main_loop',['../main_8c.html#a2a16f651eccbd248e1ad3b3b924b143b',1,'main.c']]]
+  ['proj_5fmain_5floop_19',['proj_main_loop',['../main_8c.html#a7a72220d8366dd84709e79ce415862e5',1,'main.c']]]
 ];
