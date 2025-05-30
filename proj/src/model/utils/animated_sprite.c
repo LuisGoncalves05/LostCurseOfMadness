@@ -4,8 +4,10 @@
 
 AnimatedSprite *create_animated_sprite(Sprite *sprite, uint32_t frames_per_sprite, uint32_t number_sprites, ...) {
     AnimatedSprite *anim_sprite = malloc(sizeof(AnimatedSprite));
-    if (!anim_sprite)
+    if (anim_sprite == NULL) {
+        printf("create_animated_sprite: malloc failed\n");
         return NULL;
+    }
 
     anim_sprite->sprite = sprite;
     anim_sprite->frames_per_sprite = frames_per_sprite;
@@ -14,6 +16,11 @@ AnimatedSprite *create_animated_sprite(Sprite *sprite, uint32_t frames_per_sprit
     anim_sprite->current_sprite = 0;
 
     anim_sprite->maps = malloc(number_sprites * sizeof(uint8_t *));
+    if (anim_sprite->maps == NULL) {
+        printf("create_animated_sprite: malloc failed\n");
+        free(anim_sprite);
+        return NULL;
+    }
     anim_sprite->maps[0] = sprite->map;
 
     va_list args_pointer;
@@ -23,6 +30,7 @@ AnimatedSprite *create_animated_sprite(Sprite *sprite, uint32_t frames_per_sprit
         xpm_image_t img;
         anim_sprite->maps[i] = xpm_load(tpm, XPM_INDEXED, &img);
         if (anim_sprite->maps[i] == NULL) {
+            printf("create_animated_sprite: xpm_load failed\n");
             for (int j = 0; j < i; j++) {
                 free(anim_sprite->maps[j]);
             }
@@ -32,18 +40,21 @@ AnimatedSprite *create_animated_sprite(Sprite *sprite, uint32_t frames_per_sprit
             return NULL;
         }
     }
-
     va_end(args_pointer);
+
     return anim_sprite;
 }
 
 int destroy_animated_sprite(AnimatedSprite *anim_sprite) {
-    if (anim_sprite == NULL)
+    if (anim_sprite == NULL) {
+        printf("destroy_animated_sprite: NULL pointer provided\n");
         return 1;
+    }
 
     free(anim_sprite->sprite);
-    for (int i = 0; i < (int) anim_sprite->number_sprites; i++)
+    for (int i = 0; i < (int) anim_sprite->number_sprites; i++) {
         free(anim_sprite->maps[i]);
+    }
 
     free(anim_sprite->maps);
     free(anim_sprite);
