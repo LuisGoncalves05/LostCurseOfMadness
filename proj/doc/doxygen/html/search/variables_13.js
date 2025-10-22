@@ -1,6 +1,0 @@
-var searchData=
-[
-  ['y_0',['y',['../structPoint.html#a2e1b5fb2b2a83571f5c0bc0f66a73cf7',1,'Point::y'],['../structButton.html#a0e057db96fd0683cd5236af8921671a6',1,'Button::y'],['../structSprite.html#aa256b3507dfcac3306a746b5eab5feff',1,'Sprite::y']]],
-  ['y_5fres_1',['y_res',['../gpu_8c.html#a1188c1e5fe37db7b55bdad91f71e26c0',1,'y_res:&#160;gpu.c'],['../game_8h.html#a1188c1e5fe37db7b55bdad91f71e26c0',1,'y_res:&#160;gpu.c'],['../bullet_8h.html#a1188c1e5fe37db7b55bdad91f71e26c0',1,'y_res:&#160;gpu.c'],['../level_8h.html#a1188c1e5fe37db7b55bdad91f71e26c0',1,'y_res:&#160;gpu.c'],['../maze_8h.html#a1188c1e5fe37db7b55bdad91f71e26c0',1,'y_res:&#160;gpu.c'],['../button_8h.html#a1188c1e5fe37db7b55bdad91f71e26c0',1,'y_res:&#160;gpu.c'],['../game__over_8h.html#a1188c1e5fe37db7b55bdad91f71e26c0',1,'y_res:&#160;gpu.c'],['../main__menu_8h.html#a1188c1e5fe37db7b55bdad91f71e26c0',1,'y_res:&#160;gpu.c'],['../victory_8h.html#a1188c1e5fe37db7b55bdad91f71e26c0',1,'y_res:&#160;gpu.c'],['../animated__sprite_8h.html#a1188c1e5fe37db7b55bdad91f71e26c0',1,'y_res:&#160;gpu.c'],['../cursor_8h.html#a1188c1e5fe37db7b55bdad91f71e26c0',1,'y_res:&#160;gpu.c'],['../sprite_8h.html#a1188c1e5fe37db7b55bdad91f71e26c0',1,'y_res:&#160;gpu.c']]],
-  ['yspeed_2',['yspeed',['../structSprite.html#a52f29d3656669660f637ee1c6d224f88',1,'Sprite']]]
-];
